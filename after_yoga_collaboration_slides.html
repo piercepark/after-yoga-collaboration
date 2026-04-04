@@ -127,6 +127,48 @@
       letter-spacing: 0.04em;
     }
 
+    /* ── 스크롤 인디케이터 ── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .scroll-indicator.visible {
+      opacity: 1;
+      animation: scrollBounce 1.6s ease-in-out infinite;
+    }
+    .scroll-indicator.hidden {
+      opacity: 0;
+    }
+    .scroll-indicator svg {
+      width: 20px; height: 20px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 4px rgba(255,112,67,0.5));
+    }
+    .scroll-indicator span {
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
     .nav-counter {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
@@ -884,6 +926,11 @@
 </div>
 
 <!-- NAV BAR -->
+<div class="scroll-indicator" id="scrollIndicator">
+  <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  <span>scroll</span>
+</div>
+
 <div class="nav-bar">
   <div class="nav-dots" id="navDots"></div>
   <div class="nav-hint">스와이프로 이동</div>
@@ -958,7 +1005,27 @@ function closeLightbox() {
     dotsWrap.querySelectorAll('.nav-dot').forEach((d, i) => {
       d.classList.toggle('active', i === current);
     });
+    updateScrollIndicator();
   }
+
+  const scrollIndicator = document.getElementById('scrollIndicator');
+
+  function updateScrollIndicator() {
+    const slide = slides[current];
+    const hasScroll = slide.scrollHeight > slide.clientHeight + 4;
+    const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 8;
+    if (hasScroll && !atBottom) {
+      scrollIndicator.classList.add('visible');
+      scrollIndicator.classList.remove('hidden');
+    } else {
+      scrollIndicator.classList.remove('visible');
+      scrollIndicator.classList.add('hidden');
+    }
+  }
+
+  slides.forEach(slide => {
+    slide.addEventListener('scroll', updateScrollIndicator);
+  });
 
   document.getElementById('deck').addEventListener('click', function(e) {
     if (e.target.closest('.nav-bar')) return;
