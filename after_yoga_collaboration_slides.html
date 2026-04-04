@@ -127,6 +127,11 @@
       letter-spacing: 0.04em;
     }
 
+    /* 스크롤이 필요한 슬라이드는 상단 정렬 */
+    .slide.scrollable {
+      justify-content: flex-start;
+    }
+
     /* ── 스크롤 인디케이터 ── */
     .scroll-indicator {
       position: absolute;
@@ -982,6 +987,7 @@ function closeLightbox() {
         slides[current].classList.add('active');
         slides[current].style.transform = '';
         slides[current].scrollTop = 0;
+        setTimeout(() => checkScrollable(slides[current]), 50);
       });
     });
 
@@ -1000,6 +1006,16 @@ function closeLightbox() {
   function next() { goTo(current + 1); }
   function prev() { goTo(current - 1); }
 
+  function checkScrollable(slide) {
+    if (slide.scrollHeight > slide.clientHeight + 4) {
+      slide.classList.add('scrollable');
+    } else {
+      slide.classList.remove('scrollable');
+    }
+    slide.scrollTop = 0;
+    updateScrollIndicator();
+  }
+
   function updateUI() {
     document.getElementById('currentNum').textContent = current + 1;
     dotsWrap.querySelectorAll('.nav-dot').forEach((d, i) => {
@@ -1013,7 +1029,7 @@ function closeLightbox() {
   function updateScrollIndicator() {
     const slide = slides[current];
     const hasScroll = slide.scrollHeight > slide.clientHeight + 4;
-    const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 8;
+    const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 20;
     if (hasScroll && !atBottom) {
       scrollIndicator.classList.add('visible');
       scrollIndicator.classList.remove('hidden');
@@ -1056,6 +1072,9 @@ function closeLightbox() {
   });
 
   document.getElementById('totalNum').textContent = total;
+
+  // 초기 슬라이드 scrollable 여부 체크
+  setTimeout(() => checkScrollable(slides[current]), 100);
 })();
 </script>
 
