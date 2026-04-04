@@ -934,6 +934,7 @@ function closeLightbox() {
       requestAnimationFrame(() => {
         slides[current].classList.add('active');
         slides[current].style.transform = '';
+        slides[current].scrollTop = 0;
       });
     });
 
