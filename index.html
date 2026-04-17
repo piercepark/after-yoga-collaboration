@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>애프터 요가&필라테스 — 협업 제안</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:      #0e0e0e;
+      --bg-elevated:  #161616;
+      --bg-overlay:   #1c1c1c;
+      --bg-subtle:    #242424;
+      --border:       rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --border-glow:  rgba(255,112,67,0.4);
+      --text-primary:   #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-tertiary:  #606060;
+      --accent:         #ff7043;
+      --accent-glow:    rgba(255,112,67,0.25);
+      --glow-sm:  0 0 8px rgba(255,112,67,0.3);
+      --glow-md:  0 0 20px rgba(255,112,67,0.25), 0 0 60px rgba(255,112,67,0.1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* ── 9:16 모바일 프레임 ── */
+    .phone-frame {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(100vw, 56.25vh);   /* 9:16 비율 유지 */
+      height: min(100vh, 177.78vw);
+      overflow: hidden;
+      background: var(--bg-base);
+    }
+
+    /* ── 슬라이드 컨테이너 ── */
+    .deck {
+      width: 100%; height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 72px;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.45s cubic-bezier(.4,0,.2,1), transform 0.45s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+      z-index: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    /* ── 하단 네비게이션 ── */
+    .nav-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .nav-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-hover);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .nav-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: var(--glow-sm);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    .nav-hint {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+
+    /* 스크롤이 필요한 슬라이드는 상단 정렬 */
+    .slide.scrollable {
+      justify-content: flex-start;
+    }
+
+    /* ── 스크롤 인디케이터 ── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .scroll-indicator.visible {
+      opacity: 1;
+      animation: scrollBounce 1.6s ease-in-out infinite;
+    }
+    .scroll-indicator.hidden {
+      opacity: 0;
+    }
+    .scroll-indicator svg {
+      width: 20px; height: 20px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 4px rgba(255,112,67,0.5));
+    }
+    .scroll-indicator span {
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
+    .nav-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+    .nav-counter span { color: var(--accent); }
+
+    /* ── 공통 타이포 ── */
+    .slide-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .slide-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ff7043 0%, #ff8a65 50%, #ffab91 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 100%;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── SLIDE 0: HERO ── */
+    .hero-glow {
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(400px, 100%); height: min(300px, 80vw);
+      background: radial-gradient(ellipse, rgba(255,112,67,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px 4px 8px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.3);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      z-index: 2;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(255,112,67,0.8);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 36px;
+      z-index: 2;
+    }
+    .hero-stat {
+      padding: 0 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: 4px; font-weight: 500;
+    }
+
+    /* ── SLIDE 1: OVERVIEW ── */
+    .overview-content {
+      width: 100%;
+      margin-top: 24px;
+      text-align: left;
+    }
+    .overview-p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .infra-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .infra-key {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      min-width: 52px;
+      flex-shrink: 0;
+    }
+    .infra-val {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ── TYPE CARDS ── */
+    .type-layout {
+      width: 100%;
+      text-align: left;
+    }
+    .type-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .type-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 36px; font-weight: 500;
+      color: var(--bg-subtle);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .type-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+    .type-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+    .type-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .cases-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .case {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .case-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+    .case-name {
+      font-size: 14px; font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+    .case-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .case-item {
+      font-size: 11px;
+      color: var(--text-secondary);
+      padding-left: 10px;
+      position: relative;
+      line-height: 1.5;
+      margin-bottom: 2px;
+      list-style: none;
+    }
+    .case-item::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .case-offer {
+      background: rgba(255,112,67,0.04);
+      border-color: rgba(255,112,67,0.15);
+    }
+
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .tag {
+      display: inline-flex;
+      padding: 3px 8px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .tag-accent {
+      background: rgba(255,112,67,0.1);
+      border-color: rgba(255,112,67,0.3);
+      color: var(--accent);
+    }
+
+    .cap-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .cap-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+
+    .type-featured .type-num { color: var(--accent); text-shadow: var(--glow-sm); }
+
+    /* ── CONTACT ── */
+    .contact-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-top: 24px;
+    }
+    .contact-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .contact-icon { font-size: 20px; margin-bottom: 6px; }
+    .contact-key {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+    .contact-val {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .cta-line {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+    .footer-line {
+      margin-top: 24px;
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── GALLERY SLIDES ── */
+    .gallery-slide {
+      padding: 32px 16px 72px;
+      justify-content: flex-start;
+      overflow-y: auto;
+    }
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    .gallery-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.25);
+      border-radius: 16px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .gallery-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .gallery-sub {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      width: 100%;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+    }
+    .gallery-item.wide {
+      grid-column: span 2;
+      aspect-ratio: 2 / 1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(20px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      font-size: 28px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      z-index: 510;
+      background: none; border: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── 소형 기기 대응 (max-width: 380px) ── */
+    @media (max-width: 380px) {
+      .slide { padding: 36px 16px 64px; }
+      .slide-title { font-size: 24px; }
+      .stat-num { font-size: 20px; }
+      .stat-num span { font-size: 20px; }
+      .type-num { font-size: 26px; }
+      .type-title { font-size: 18px; }
+      .gallery-title { font-size: 18px; }
+      .hero-stat { padding: 0 12px; }
+      .hero-stats { margin-top: 24px; }
+      .slide-sub { font-size: 12px; }
+    }
+
+    /* ── 세로 짧은 기기 대응 (max-height: 680px) ── */
+    @media (max-height: 680px) {
+      .slide { padding: 28px 20px 60px; }
+      .slide-title { font-size: 24px; margin-bottom: 10px; }
+      .hero-stats { margin-top: 20px; }
+      .overview-content { margin-top: 14px; }
+      .contact-col { margin-top: 14px; gap: 8px; }
+    }
+
+    /* ── 초소형 기기 대응 (max-width: 320px) ── */
+    @media (max-width: 320px) {
+      .slide { padding: 28px 12px 60px; }
+      .slide-title { font-size: 20px; }
+      .stat-num { font-size: 18px; }
+      .type-num { font-size: 22px; }
+      .hero-badge { font-size: 9px; }
+      .slide-sub { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone-frame">
+<div class="deck" id="deck">
+
+  <!-- SLIDE 0: HERO -->
+  <div class="slide active" data-index="0">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Partnership Proposal
+    </div>
+    <h1 class="slide-title" style="z-index:2;">
+      <div>함께 만드는</div>
+      <div class="gradient-text">건강한 일상</div>
+    </h1>
+    <p class="slide-sub" style="z-index:2;">
+      서울 3개 지점, 다수의 협업 파트너와 함께해온<br>
+      애프터 요가&amp;필라테스가 새로운 파트너십을 제안합니다.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-num"><span>3</span></div>
+        <div class="stat-label">서울 지점</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num"><span>3</span></div>
+        <div class="stat-label">협업 유형</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num"><span>5+</span></div>
+        <div class="stat-label">파트너 사례</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: OVERVIEW -->
+  <div class="slide" data-index="1">
+    <div class="slide-label">Overview</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      애프터 요가<span class="gradient-text">&amp;</span>필라테스
+    </h2>
+    <p class="slide-sub" style="font-size:13px;">단순한 피트니스 센터를 넘어, 지역 커뮤니티와 브랜드를 잇는 공간입니다.</p>
+    <div class="overview-content">
+      <p class="overview-p">성동구(서울숲), 강남구(매봉역), 중구(충무로역)에 위치한 3개 지점은 각각 독립적인 회원 커뮤니티와 SNS 채널을 운영하고 있습니다.</p>
+      <p class="overview-p">요가·필라테스 수업, 특강, 기업 출장 수업, 브랜드 이벤트까지 다양한 형태의 협업을 직접 기획·운영한 경험을 보유하고 있습니다.</p>
+      <div class="infra-row"><div class="infra-key">지점</div><div class="infra-val">서울숲점 · 매봉역점 · 충무로역점</div></div>
+      <div class="infra-row"><div class="infra-key">시설</div><div class="infra-val">전용 스튜디오 · 기구 완비 · 샤워실 · 무료 주차</div></div>
+      <div class="infra-row"><div class="infra-key">프로그램</div><div class="infra-val">요가 · 필라테스 · 1:1 PT · 인바디 측정</div></div>
+      <div class="infra-row"><div class="infra-key">SNS</div><div class="infra-val">지점별 인스타그램 채널 운영 중</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: TYPE 1 — Corporate -->
+  <div class="slide" data-index="2">
+    <div class="type-layout type-featured">
+      <div class="type-head">
+        <div class="type-num">01</div>
+        <div>
+          <div class="type-tag">Corporate</div>
+          <h2 class="type-title">기업·기관 임직원<br>복지 프로그램</h2>
+          <p class="type-desc">전문 강사가 직접 방문하거나 센터 스튜디오를 활용해 수업을 운영합니다.</p>
+        </div>
+      </div>
+      <div class="cases-col">
+        <div class="case">
+          <div class="case-eyebrow">case · 01</div>
+          <div class="case-name">서울옥션 강남센터</div>
+          <div class="case-sub">임직원 힐링 요가 출장 수업</div>
+          <ul style="list-style:none;padding:0;">
+            <li class="case-item">참여 인원 약 20명 (40~60대)</li>
+            <li class="case-item">강사 매칭 및 현장 커뮤니케이션 지원</li>
+          </ul>
+        </div>
+        <div class="case">
+          <div class="case-eyebrow">case · 02</div>
+          <div class="case-name">한국유방건강재단</div>
+          <div class="case-sub">핑크힐링데이 특별 프로그램</div>
+          <ul style="list-style:none;padding:0;">
+            <li class="case-item">유방암 환우 대상 · 요가·명상·영양 강의</li>
+            <li class="case-item">2025년 11~12월 운영 · 사회공헌 협업</li>
+          </ul>
+        </div>
+        <div class="case">
+          <div class="case-eyebrow">case · 03</div>
+          <div class="case-name">동국대학교</div>
+          <div class="case-sub">캠퍼스 콜라보 수업</div>
+          <ul style="list-style:none;padding:0;">
+            <li class="case-item">대학 캠퍼스 내 요가 수업 운영</li>
+            <li class="case-item">교육기관 대상 건강 복지 프로그램</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cap-col">
+        <div>
+          <div class="cap-label">수업 유형</div>
+          <div class="tags-row">
+            <span class="tag">힐링 요가</span>
+            <span class="tag">스트레칭 &amp; 코어</span>
+            <span class="tag">필라테스 기초</span>
+            <span class="tag">명상 &amp; 호흡</span>
+          </div>
+        </div>
+        <div>
+          <div class="cap-label">진행 방식</div>
+          <div class="tags-row">
+            <span class="tag tag-accent">출장 수업</span>
+            <span class="tag tag-accent">센터 이용</span>
+            <span class="tag tag-accent">1회성 / 정기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: TYPE 2 — Brand -->
+  <div class="slide" data-index="3">
+    <div class="type-layout type-featured">
+      <div class="type-head">
+        <div class="type-num">02</div>
+        <div>
+          <div class="type-tag">Brand</div>
+          <h2 class="type-title">브랜드<br>공동 마케팅</h2>
+          <p class="type-desc">센터 회원이라는 타깃 고객층에게 직접 닿는 캠페인을 기획하고 운영합니다.</p>
+        </div>
+      </div>
+      <div class="cases-col">
+        <div class="case">
+          <div class="case-eyebrow">case · 01</div>
+          <div class="case-name">Shokz (샥즈) × 서울숲점</div>
+          <div class="case-sub">Run the Season 러닝 캠페인</div>
+          <ul style="list-style:none;padding:0;">
+            <li class="case-item">브랜드 체험 이벤트 + 공동 프로모션</li>
+            <li class="case-item">SNS 콘텐츠 공동 제작</li>
+            <li class="case-item">계약서 기반 공식 협업</li>
+          </ul>
+        </div>
+        <div class="case case-offer">
+          <div class="case-eyebrow">what we offer</div>
+          <div class="case-name">브랜드에 드리는 가치</div>
+          <ul style="list-style:none;padding:0;">
+            <li class="case-item">센터 내 브랜드 체험존 운영</li>
+            <li class="case-item">공동 SNS 콘텐츠 · 크로스 프로모션</li>
+            <li class="case-item">이벤트·챌린지 기획 (회원 참여형)</li>
+            <li class="case-item">제품 체험 프로모션 (샘플링·할인)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: TYPE 3 — Guest Class -->
+  <div class="slide" data-index="4">
+    <div class="type-layout type-featured">
+      <div class="type-head">
+        <div class="type-num">03</div>
+        <div>
+          <div class="type-tag">Guest Class</div>
+          <h2 class="type-title">외부 강사·크리에이터<br>원데이 클래스</h2>
+          <p class="type-desc">센터의 공간과 회원 네트워크를 제공하며, 강사는 콘텐츠와 노하우를 가져옵니다.</p>
+        </div>
+      </div>
+      <div class="cases-col">
+        <div class="case">
+          <div class="case-eyebrow">case · 01</div>
+          <div class="case-name">박민경 강사</div>
+          <div class="case-sub">펑셔널 플로우 요가 특강 · 2025.12</div>
+          <ul style="list-style:none;padding:0;">
+            <li class="case-item">기능성 움직임 중심 특화 수업</li>
+            <li class="case-item">수강생 모집·홍보·사진 촬영 지원</li>
+          </ul>
+        </div>
+        <div class="case">
+          <div class="case-eyebrow">case · 02</div>
+          <div class="case-name">원더러스트</div>
+          <div class="case-sub">번지 요가 협업 · 2025.07</div>
+          <ul style="list-style:none;padding:0;">
+            <li class="case-item">특수 기구 활용 색다른 요가 체험</li>
+            <li class="case-item">신규 회원 유입 및 화제성 확보</li>
+          </ul>
+        </div>
+        <div class="case case-offer">
+          <div class="case-eyebrow">what we offer</div>
+          <div class="case-name">강사에게 드리는 것</div>
+          <ul style="list-style:none;padding:0;">
+            <li class="case-item">수강생 모집 및 SNS 홍보</li>
+            <li class="case-item">기구 완비 스튜디오 제공</li>
+            <li class="case-item">콘텐츠 촬영 협조</li>
+            <li class="case-item">정산 및 운영 지원</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: GALLERY — 샥즈 -->
+  <div class="slide gallery-slide" data-index="5">
+    <div class="gallery-header">
+      <div class="gallery-tag">Brand Collaboration</div>
+      <div class="gallery-title">Shokz × 서울숲점</div>
+      <div class="gallery-sub">Run the Season 러닝 캠페인 현장</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="images/img_01.png" alt="샥즈 01" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_02.png" alt="샥즈 02" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_03.png" alt="샥즈 03" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_04.png" alt="샥즈 04" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_05.png" alt="샥즈 05" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_06.png" alt="샥즈 06" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_07.png" alt="샥즈 07" onclick="openLightbox(this)"></div>
+      <div class="gallery-item wide"><img src="images/img_08.png" alt="샥즈 08" onclick="openLightbox(this)"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: GALLERY — 한국유방건강재단 -->
+  <div class="slide gallery-slide" data-index="6">
+    <div class="gallery-header">
+      <div class="gallery-tag">Corporate · Social</div>
+      <div class="gallery-title">한국유방건강재단</div>
+      <div class="gallery-sub">핑크힐링데이 특별 프로그램</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="images/img_09.png" alt="재단 01" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_10.png" alt="재단 02" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_11.png" alt="재단 03" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_12.png" alt="재단 04" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_13.png" alt="재단 05" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_14.png" alt="재단 06" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_15.png" alt="재단 07" onclick="openLightbox(this)"></div>
+      <div class="gallery-item wide"><img src="images/img_16.png" alt="재단 08" onclick="openLightbox(this)"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: GALLERY — 원더러스트 -->
+  <div class="slide gallery-slide" data-index="7">
+    <div class="gallery-header">
+      <div class="gallery-tag">Guest Class</div>
+      <div class="gallery-title">원더러스트 번지 요가</div>
+      <div class="gallery-sub">특수 기구 활용 원데이 체험 클래스</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/img_17.png" alt="원더러스트 01" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_18.png" alt="원더러스트 02" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_19.png" alt="원더러스트 03" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_20.png" alt="원더러스트 04" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_21.png" alt="원더러스트 05" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_22.png" alt="원더러스트 06" onclick="openLightbox(this)"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: GALLERY — 펑셔널 플로우 -->
+  <div class="slide gallery-slide" data-index="8">
+    <div class="gallery-header">
+      <div class="gallery-tag">Guest Class</div>
+      <div class="gallery-title">펑셔널 플로우 요가 특강</div>
+      <div class="gallery-sub">박민경 강사 · 수강생 후기</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/img_23.png" alt="펑셔널 01" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_24.png" alt="펑셔널 02" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_25.png" alt="펑셔널 03" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_26.png" alt="펑셔널 04" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_27.png" alt="펑셔널 05" onclick="openLightbox(this)"></div>
+      <div class="gallery-item"><img src="images/img_28.png" alt="펑셔널 06" onclick="openLightbox(this)"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: CONTACT -->
+  <div class="slide" data-index="9">
+    <div class="slide-label">Contact</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      <span class="gradient-text">함께 시작하기</span>
+    </h2>
+    <p class="cta-line">아이디어 단계부터 편하게 연락 주세요.<br>함께 만들어가는 건강한 라이프스타일을 기대합니다.</p>
+    <div class="contact-col">
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div class="contact-key">Phone</div>
+        <div class="contact-val">010-4463-2297</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div class="contact-key">서울숲점</div>
+        <div class="contact-val">서울 성동구 왕십리로 50, 스타벅스 건물 B1층</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">🏢</div>
+        <div class="contact-key">Branches</div>
+        <div class="contact-val">서울숲점 · 매봉역점 · 충무로역점</div>
+      </div>
+    </div>
+    <div class="footer-line">© 2026 After Yoga &amp; Pilates</div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- NAV BAR -->
+<div class="scroll-indicator" id="scrollIndicator">
+  <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  <span>scroll</span>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-dots" id="navDots"></div>
+  <div class="nav-hint">스와이프로 이동</div>
+  <div class="nav-counter"><span id="currentNum">1</span> / <span id="totalNum">10</span></div>
+</div>
+</div>
+
+<script>
+function openLightbox(img) {
+  event.stopPropagation();
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = img.src;
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const dotsWrap = document.getElementById('navDots');
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    d.dataset.idx = i;
+    d.addEventListener('click', function(e) {
+      e.stopPropagation();
+      goTo(parseInt(this.dataset.idx));
+    });
+    dotsWrap.appendChild(d);
+  }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total || idx === current) return;
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+
+    const dir = idx > current ? 1 : -1;
+    slides[current].classList.remove('active');
+    slides[current].style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+
+    current = idx;
+    slides[current].style.transform = dir > 0 ? 'translateX(40px)' : 'translateX(-40px)';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        slides[current].classList.add('active');
+        slides[current].style.transform = '';
+        slides[current].scrollTop = 0;
+        setTimeout(() => checkScrollable(slides[current]), 50);
+      });
+    });
+
+    setTimeout(() => {
+      slides.forEach((s, i) => {
+        if (i !== current) {
+          s.classList.remove('active');
+          s.style.transform = '';
+        }
+      });
+    }, 500);
+
+    updateUI();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function checkScrollable(slide) {
+    if (slide.scrollHeight > slide.clientHeight + 4) {
+      slide.classList.add('scrollable');
+    } else {
+      slide.classList.remove('scrollable');
+    }
+    slide.scrollTop = 0;
+    updateScrollIndicator();
+  }
+
+  function updateUI() {
+    document.getElementById('currentNum').textContent = current + 1;
+    dotsWrap.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    updateScrollIndicator();
+  }
+
+  const scrollIndicator = document.getElementById('scrollIndicator');
+
+  function updateScrollIndicator() {
+    const slide = slides[current];
+    const hasScroll = slide.scrollHeight > slide.clientHeight + 4;
+    const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 20;
+    if (hasScroll && !atBottom) {
+      scrollIndicator.classList.add('visible');
+      scrollIndicator.classList.remove('hidden');
+    } else {
+      scrollIndicator.classList.remove('visible');
+      scrollIndicator.classList.add('hidden');
+    }
+  }
+
+  slides.forEach(slide => {
+    slide.addEventListener('scroll', updateScrollIndicator);
+  });
+
+  document.getElementById('deck').addEventListener('click', function(e) {
+    if (e.target.closest('.nav-bar')) return;
+    if (e.target.closest('.gallery-item')) return;
+    if (e.target.closest('.lightbox')) return;
+    const x = e.clientX;
+    const w = window.innerWidth;
+    if (x < w * 0.3) prev();
+    else next();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'Escape') closeLightbox();
+      return;
+    }
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  let startX = 0;
+  document.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
+  document.addEventListener('touchend', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+  });
+
+  document.getElementById('totalNum').textContent = total;
+
+  // 초기 슬라이드 scrollable 여부 체크
+  setTimeout(() => checkScrollable(slides[current]), 100);
+})();
+</script>
+
+</body>
+</html>
