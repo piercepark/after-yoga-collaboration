@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>애프터 요가&필라테스 × 젝시믹스 — 임직원 혜택 제안</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:      #0e0e0e;
+      --bg-elevated:  #161616;
+      --bg-overlay:   #1c1c1c;
+      --bg-subtle:    #242424;
+      --border:       rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --border-glow:  rgba(255,112,67,0.4);
+      --text-primary:   #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-tertiary:  #606060;
+      --accent:         #ff7043;
+      --accent-glow:    rgba(255,112,67,0.25);
+      --glow-sm:  0 0 8px rgba(255,112,67,0.3);
+      --glow-md:  0 0 20px rgba(255,112,67,0.25), 0 0 60px rgba(255,112,67,0.1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; word-break: keep-all; overflow-wrap: break-word; line-break: strict; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    .phone-frame {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(100vw, 56.25vh);
+      height: min(100vh, 177.78vw);
+      overflow: hidden;
+      background: var(--bg-base);
+    }
+
+    .deck { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 72px;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.45s cubic-bezier(.4,0,.2,1), transform 0.45s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+      z-index: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .slide.scrollable { justify-content: flex-start; }
+
+    .nav-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-dots { display: flex; gap: 6px; }
+
+    .nav-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-hover);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .nav-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: var(--glow-sm);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    .nav-hint {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .scroll-indicator.visible {
+      opacity: 1;
+      animation: scrollBounce 1.6s ease-in-out infinite;
+    }
+    .scroll-indicator.hidden { opacity: 0; }
+    .scroll-indicator svg {
+      width: 20px; height: 20px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 4px rgba(255,112,67,0.5));
+    }
+    .scroll-indicator span {
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
+    .nav-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+    .nav-counter span { color: var(--accent); }
+
+    .slide-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .slide-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ff7043 0%, #ff8a65 50%, #ffab91 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 100%;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── HERO ── */
+    .hero-glow {
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(400px, 100%); height: min(300px, 80vw);
+      background: radial-gradient(ellipse, rgba(255,112,67,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px 4px 8px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.3);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      z-index: 2;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(255,112,67,0.8);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero-brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+    .brand-chip {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .brand-chip.accent {
+      color: var(--accent);
+      background: rgba(255,112,67,0.08);
+      border-color: rgba(255,112,67,0.3);
+    }
+    .brand-x {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 36px;
+      z-index: 2;
+    }
+    .hero-stat {
+      padding: 0 18px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: 4px; font-weight: 500;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview-content {
+      width: 100%;
+      margin-top: 24px;
+      text-align: left;
+    }
+    .overview-p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .infra-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .infra-key {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      min-width: 52px;
+      flex-shrink: 0;
+    }
+    .infra-val {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    /* ── BENEFIT CARDS ── */
+    .benefit-layout {
+      width: 100%;
+      text-align: left;
+    }
+    .benefit-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .benefit-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 36px; font-weight: 500;
+      color: var(--accent);
+      text-shadow: var(--glow-sm);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .benefit-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .benefit-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .benefit-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── 강조 박스 ── */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(255,112,67,0.08) 0%, rgba(255,112,67,0.02) 100%);
+      border: 1px solid rgba(255,112,67,0.25);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .highlight-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(255,112,67,0.15);
+    }
+    .highlight-row:last-child { border-bottom: none; }
+    .highlight-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .highlight-val {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      text-shadow: var(--glow-sm);
+    }
+    .highlight-val .small {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .info-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .info-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-card-title::before {
+      content: '';
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255,112,67,0.6);
+    }
+    .info-card-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 6px;
+    }
+    .info-list li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding-left: 12px;
+      position: relative;
+      line-height: 1.7;
+      margin-bottom: 2px;
+    }
+    .info-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .ratio-bar-wrap {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+    .ratio-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .ratio-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      min-width: 56px;
+      flex-shrink: 0;
+    }
+    .ratio-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-subtle);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+    }
+    .ratio-bar-yoga {
+      background: linear-gradient(90deg, #ff7043 0%, #ff8a65 100%);
+      height: 100%;
+    }
+    .ratio-bar-pilates {
+      background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.35) 100%);
+      height: 100%;
+    }
+    .ratio-percent {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-secondary);
+      min-width: 56px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .tag {
+      display: inline-flex;
+      padding: 3px 10px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .tag-accent {
+      background: rgba(255,112,67,0.1);
+      border-color: rgba(255,112,67,0.3);
+      color: var(--accent);
+    }
+
+    /* ── CONTACT ── */
+    .contact-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-top: 24px;
+    }
+    .contact-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .contact-icon { font-size: 20px; margin-bottom: 6px; }
+    .contact-key {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+    .contact-val {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .cta-line {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+    .footer-line {
+      margin-top: 24px;
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── SUMMARY 슬라이드 ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .summary-cell {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 96px;
+    }
+    .summary-cell-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0;
+    }
+    .summary-cell-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+    .summary-cell-desc {
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: auto;
+    }
+
+    /* ── GALLERY SLIDES ── */
+    .gallery-slide {
+      padding: 32px 16px 72px;
+      justify-content: flex-start;
+      overflow-y: auto;
+    }
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    .gallery-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.25);
+      border-radius: 16px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .gallery-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .gallery-sub {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      width: 100%;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+    .gallery-item.wide {
+      grid-column: span 2;
+      aspect-ratio: 2 / 1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(20px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      font-size: 28px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      z-index: 510;
+      background: none; border: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* 소형 기기 대응 */
+    @media (max-width: 380px) {
+      .slide { padding: 36px 16px 64px; }
+      .slide-title { font-size: 24px; }
+      .stat-num { font-size: 20px; }
+      .benefit-num { font-size: 26px; }
+      .benefit-title { font-size: 18px; }
+      .gallery-title { font-size: 18px; }
+      .hero-stat { padding: 0 12px; }
+      .hero-stats { margin-top: 24px; }
+      .slide-sub { font-size: 12px; }
+      .highlight-val { font-size: 18px; }
+    }
+    @media (max-height: 680px) {
+      .slide { padding: 28px 20px 60px; }
+      .slide-title { font-size: 24px; margin-bottom: 10px; }
+      .hero-stats { margin-top: 20px; }
+      .overview-content { margin-top: 14px; }
+      .contact-col { margin-top: 14px; gap: 8px; }
+    }
+    @media (max-width: 320px) {
+      .slide { padding: 28px 12px 60px; }
+      .slide-title { font-size: 20px; }
+      .stat-num { font-size: 18px; }
+      .benefit-num { font-size: 22px; }
+      .hero-badge { font-size: 9px; }
+      .slide-sub { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone-frame">
+<div class="deck" id="deck">
+
+  <!-- SLIDE 0: HERO -->
+  <div class="slide active" data-index="0">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Exclusive for XEXYMIX
+    </div>
+    <div class="hero-brand-row">
+      <div class="brand-chip">After</div>
+      <div class="brand-x">×</div>
+      <div class="brand-chip accent">XEXYMIX</div>
+    </div>
+    <h1 class="slide-title" style="z-index:2;">
+      <div>젝시믹스 임직원만을 위한</div>
+      <div class="gradient-text">전용 혜택 제안</div>
+    </h1>
+    <p class="slide-sub" style="z-index:2;">
+      애프터 요가&amp;필라테스가 젝시믹스 임직원분들께<br>
+      특별한 4가지 혜택을 제안드립니다.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-num"><span>10</span>%</div>
+        <div class="stat-label">가격 할인</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num"><span>20</span>%</div>
+        <div class="stat-label">횟수·기간 UP</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num"><span>4</span></div>
+        <div class="stat-label">전용 혜택</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: OVERVIEW -->
+  <div class="slide" data-index="1">
+    <div class="slide-label">Overview</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      애프터 요가<span class="gradient-text">&amp;</span>필라테스
+    </h2>
+    <p class="slide-sub" style="font-size:13px;">서울 3개 지점, 다수의 브랜드 협업 경험을 가진 요가·필라테스 전문 센터입니다.</p>
+    <div class="overview-content">
+      <p class="overview-p">성동구(서울숲), 강남구(매봉역), 중구(충무로역)에 위치한 3개 지점은 각각 독립적인 회원 커뮤니티와 SNS 채널을 운영하고 있습니다.</p>
+      <p class="overview-p">Shokz, 한국유방건강재단, 서울옥션, 동국대 등과의 협업 경험을 바탕으로 젝시믹스 임직원분들께 최적화된 혜택을 설계했습니다.</p>
+      <div class="infra-row"><div class="infra-key">지점</div><div class="infra-val">서울숲점 · 매봉역점 · 충무로역점</div></div>
+      <div class="infra-row"><div class="infra-key">시설</div><div class="infra-val">전용 스튜디오 · 기구 완비 · 샤워실 · 무료 주차</div></div>
+      <div class="infra-row"><div class="infra-key">프로그램</div><div class="infra-val">요가 · 필라테스 · 1:1 PT · 인바디 측정</div></div>
+      <div class="infra-row"><div class="infra-key">협업 사례</div><div class="infra-val">Shokz × Run the Season · 한국유방건강재단 핑크힐링데이</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: BENEFIT 01 — 가격·혜택 업그레이드 -->
+  <div class="slide" data-index="2">
+    <div class="benefit-layout">
+      <div class="benefit-head">
+        <div class="benefit-num">01</div>
+        <div>
+          <div class="benefit-tag">Price &amp; Upgrade</div>
+          <h2 class="benefit-title">가격은 10% 할인,<br>운동량은 20% 업그레이드</h2>
+          <p class="benefit-desc">젝시믹스 임직원분들께만 적용되는 듀얼 혜택. 같은 금액으로 더 오래, 더 많이 운동하실 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-row">
+          <div class="highlight-label">정상가 대비 결제 금액</div>
+          <div class="highlight-val">−10<span class="small">%</span></div>
+        </div>
+        <div class="highlight-row">
+          <div class="highlight-label">운동 횟수 / 이용 기간</div>
+          <div class="highlight-val">+20<span class="small">%</span></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">예시</div>
+        <ul class="info-list">
+          <li>3개월 회원권 구매 시 → <strong style="color:var(--text-primary);">실 결제 10% 할인 + 이용 기간 약 3.6개월로 연장</strong></li>
+          <li>20회권 구매 시 → <strong style="color:var(--text-primary);">실 결제 10% 할인 + 24회로 횟수 추가</strong></li>
+          <li>모든 회원권 종류(요가·필라테스·복합)에 동일 적용</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: BENEFIT 02 — 요가:필라테스 자유 비율 -->
+  <div class="slide" data-index="3">
+    <div class="benefit-layout">
+      <div class="benefit-head">
+        <div class="benefit-num">02</div>
+        <div>
+          <div class="benefit-tag">Flexible Mix</div>
+          <h2 class="benefit-title">요가 : 필라테스<br>비율을 원하는 대로</h2>
+          <p class="benefit-desc">한 가지 운동만 고르지 않으셔도 됩니다. 임직원 한 분 한 분의 컨디션과 목적에 맞춰 비율을 직접 정하실 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="ratio-bar-wrap">
+        <div class="ratio-row">
+          <div class="ratio-label">예시 A</div>
+          <div class="ratio-bar">
+            <div class="ratio-bar-yoga" style="width:100%;"></div>
+          </div>
+          <div class="ratio-percent">100 : 0</div>
+        </div>
+        <div class="ratio-row">
+          <div class="ratio-label">예시 B</div>
+          <div class="ratio-bar">
+            <div class="ratio-bar-yoga" style="width:70%;"></div>
+            <div class="ratio-bar-pilates" style="width:30%;"></div>
+          </div>
+          <div class="ratio-percent">70 : 30</div>
+        </div>
+        <div class="ratio-row">
+          <div class="ratio-label">예시 C</div>
+          <div class="ratio-bar">
+            <div class="ratio-bar-yoga" style="width:50%;"></div>
+            <div class="ratio-bar-pilates" style="width:50%;"></div>
+          </div>
+          <div class="ratio-percent">50 : 50</div>
+        </div>
+        <div class="ratio-row">
+          <div class="ratio-label">예시 D</div>
+          <div class="ratio-bar">
+            <div class="ratio-bar-pilates" style="width:100%;"></div>
+          </div>
+          <div class="ratio-percent">0 : 100</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">이런 분들께 좋습니다</div>
+        <ul class="info-list">
+          <li>코어·자세 교정은 필라테스로, 컨디셔닝·이완은 요가로 나누고 싶으신 분</li>
+          <li>월별 컨디션과 일정에 따라 운동 종류를 유연하게 바꾸고 싶으신 분</li>
+          <li>요가·필라테스 둘 다 경험해보고 싶으신 입문자</li>
+        </ul>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag tag-accent">자유 비율</span>
+        <span class="tag tag-accent">월별 조정 가능</span>
+        <span class="tag">요가</span>
+        <span class="tag">필라테스</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: BENEFIT 03 — 양도 가능 -->
+  <div class="slide" data-index="4">
+    <div class="benefit-layout">
+      <div class="benefit-head">
+        <div class="benefit-num">03</div>
+        <div>
+          <div class="benefit-tag">Free Transfer</div>
+          <h2 class="benefit-title">젝시믹스 직원 간<br>자유로운 양도</h2>
+          <p class="benefit-desc">출장·휴직·부서 이동 등으로 운동을 이어가기 어려우실 때, 양도 수수료 없이 동료에게 회원권을 넘기실 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">일반 회원 vs 젝시믹스 임직원</div>
+        <ul class="info-list">
+          <li>일반 회원 — 양도 시 수수료·서류·승인 절차 발생</li>
+          <li>젝시믹스 임직원 — <strong style="color:var(--accent);">사내 직원 간 양도는 수수료 면제, 간편 절차</strong></li>
+          <li>잔여 횟수·잔여 기간 그대로 인계</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">활용 예시</div>
+        <ul class="info-list">
+          <li>장기 출장으로 운동 공백이 길어질 때 동료에게 일시 양도</li>
+          <li>부서 이동·이사로 지점 이용이 어려워졌을 때 가까운 동료에게 인계</li>
+          <li>회원권 만료 전 잔여 횟수를 동료에게 선물</li>
+        </ul>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag tag-accent">수수료 면제</span>
+        <span class="tag tag-accent">간편 절차</span>
+        <span class="tag">잔여 기간 인계</span>
+        <span class="tag">잔여 횟수 인계</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: BENEFIT 04 — 원데이 클래스 -->
+  <div class="slide" data-index="5">
+    <div class="benefit-layout">
+      <div class="benefit-head">
+        <div class="benefit-num">04</div>
+        <div>
+          <div class="benefit-tag">Custom Class</div>
+          <h2 class="benefit-title">젝시믹스 임직원 전용<br>원데이 클래스 기획</h2>
+          <p class="benefit-desc">단순한 출장 수업이 아닌, 젝시믹스의 브랜드와 임직원 니즈를 반영한 맞춤형 원데이 클래스를 함께 설계합니다.</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">진행 방식</div>
+        <ul class="info-list">
+          <li>젝시믹스 측에서 원하는 컨셉·인원·시기 제안</li>
+          <li>저희가 강사·프로그램·운영 안을 1차 기획안으로 회신</li>
+          <li>피드백 반영 후 최종 기획 → 운영</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">컨셉 예시</div>
+        <ul class="info-list">
+          <li><strong style="color:var(--text-primary);">웰니스 데이</strong> — 임직원 힐링 요가 + 명상 + 호흡 워크샵</li>
+          <li><strong style="color:var(--text-primary);">코어 부스터</strong> — 데스크워커를 위한 필라테스 자세 교정 클래스</li>
+          <li><strong style="color:var(--text-primary);">신제품 런칭 콜라보</strong> — 젝시믹스 신제품 체험 + 요가 클래스 결합</li>
+          <li><strong style="color:var(--text-primary);">팀 빌딩</strong> — 부서·팀 단위 그룹 클래스 (출장/센터 모두 가능)</li>
+        </ul>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag tag-accent">맞춤 기획</span>
+        <span class="tag tag-accent">컨셉 자유</span>
+        <span class="tag">출장 수업</span>
+        <span class="tag">센터 이용</span>
+        <span class="tag">1회성 / 정기</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: SUMMARY -->
+  <div class="slide" data-index="6">
+    <div class="slide-label">Summary</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      <span class="gradient-text">4가지 혜택</span> 한눈에
+    </h2>
+    <p class="slide-sub" style="font-size:13px;">젝시믹스 임직원분들께만 드리는 전용 패키지입니다.</p>
+
+    <div class="summary-grid">
+      <div class="summary-cell">
+        <div class="summary-cell-num">01</div>
+        <div class="summary-cell-title">10% 할인 +<br>20% 업그레이드</div>
+        <div class="summary-cell-desc">결제는 적게, 운동은 더 오래</div>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-cell-num">02</div>
+        <div class="summary-cell-title">요가 : 필라테스<br>자유 비율</div>
+        <div class="summary-cell-desc">컨디션·목적 따라 자유 선택</div>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-cell-num">03</div>
+        <div class="summary-cell-title">직원 간<br>자유 양도</div>
+        <div class="summary-cell-desc">수수료 없이 동료에게 인계</div>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-cell-num">04</div>
+        <div class="summary-cell-title">전용<br>원데이 클래스</div>
+        <div class="summary-cell-desc">컨셉 제안 시 맞춤 기획</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: GALLERY — Shokz (Brand Collab) -->
+  <div class="slide gallery-slide" data-index="7">
+    <div class="gallery-header">
+      <div class="gallery-tag">Brand Collaboration</div>
+      <div class="gallery-title">Shokz × 서울숲점</div>
+      <div class="gallery-sub">Run the Season 러닝 캠페인 현장</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="images/img_01.png" alt="샥즈 01" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_02.png" alt="샥즈 02" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_03.png" alt="샥즈 03" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_04.png" alt="샥즈 04" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_05.png" alt="샥즈 05" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_06.png" alt="샥즈 06" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_07.png" alt="샥즈 07" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item wide"><img src="images/img_08.png" alt="샥즈 08" onclick="openLightbox(this, event)"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 8: GALLERY — 원더러스트 (Guest Class) -->
+  <div class="slide gallery-slide" data-index="8">
+    <div class="gallery-header">
+      <div class="gallery-tag">Guest Class</div>
+      <div class="gallery-title">원더러스트 원데이 체험</div>
+      <div class="gallery-sub">특수 기구 활용 원데이 체험 클래스</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/img_17.png" alt="원더러스트 01" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_18.png" alt="원더러스트 02" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_19.png" alt="원더러스트 03" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_20.png" alt="원더러스트 04" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_21.png" alt="원더러스트 05" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_22.png" alt="원더러스트 06" onclick="openLightbox(this, event)"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: GALLERY — 펑셔널 플로우 (Guest Class) -->
+  <div class="slide gallery-slide" data-index="9">
+    <div class="gallery-header">
+      <div class="gallery-tag">Guest Class</div>
+      <div class="gallery-title">펑셔널 플로우 요가 특강</div>
+      <div class="gallery-sub">박민경 강사 · 수강생 후기</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/img_23.png" alt="펑셔널 01" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_24.png" alt="펑셔널 02" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_25.png" alt="펑셔널 03" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_26.png" alt="펑셔널 04" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_27.png" alt="펑셔널 05" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_28.png" alt="펑셔널 06" onclick="openLightbox(this, event)"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 10: GALLERY — 한국유방건강재단 -->
+  <div class="slide gallery-slide" data-index="10">
+    <div class="gallery-header">
+      <div class="gallery-tag">Corporate · Social</div>
+      <div class="gallery-title">한국유방건강재단</div>
+      <div class="gallery-sub">핑크힐링데이 특별 프로그램</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide"><img src="images/img_09.png" alt="재단 01" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_10.png" alt="재단 02" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_11.png" alt="재단 03" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_12.png" alt="재단 04" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_13.png" alt="재단 05" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_14.png" alt="재단 06" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item"><img src="images/img_15.png" alt="재단 07" onclick="openLightbox(this, event)"></div>
+      <div class="gallery-item wide"><img src="images/img_16.png" alt="재단 08" onclick="openLightbox(this, event)"></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 11: CONTACT -->
+  <div class="slide" data-index="11">
+    <div class="slide-label">Contact</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      <span class="gradient-text">함께 시작하기</span>
+    </h2>
+    <p class="cta-line">규모·시기·컨셉 자유롭게 말씀 주세요.<br>젝시믹스 임직원분들의 건강한 일상을 함께 만들어가겠습니다.</p>
+    <div class="contact-col">
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div class="contact-key">Phone</div>
+        <div class="contact-val">010-4463-2297</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div class="contact-key">서울숲점</div>
+        <div class="contact-val">서울 성동구 왕십리로 50, 스타벅스 건물 B1층</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">🏢</div>
+        <div class="contact-key">Branches</div>
+        <div class="contact-val">서울숲점 · 매봉역점 · 충무로역점</div>
+      </div>
+    </div>
+    <div class="footer-line">© 2026 After Yoga &amp; Pilates × XEXYMIX</div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- NAV BAR -->
+<div class="scroll-indicator" id="scrollIndicator">
+  <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  <span>scroll</span>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-dots" id="navDots"></div>
+  <div class="nav-hint">스와이프로 이동</div>
+  <div class="nav-counter"><span id="currentNum">1</span> / <span id="totalNum">12</span></div>
+</div>
+</div>
+
+<script>
+function openLightbox(img, e) {
+  if (e) e.stopPropagation();
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = img.src;
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const dotsWrap = document.getElementById('navDots');
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    d.dataset.idx = i;
+    d.addEventListener('click', function(e) {
+      e.stopPropagation();
+      goTo(parseInt(this.dataset.idx));
+    });
+    dotsWrap.appendChild(d);
+  }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total || idx === current) return;
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+
+    const dir = idx > current ? 1 : -1;
+    slides[current].classList.remove('active');
+    slides[current].style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+
+    current = idx;
+    slides[current].style.transform = dir > 0 ? 'translateX(40px)' : 'translateX(-40px)';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        slides[current].classList.add('active');
+        slides[current].style.transform = '';
+        slides[current].scrollTop = 0;
+        setTimeout(() => checkScrollable(slides[current]), 50);
+      });
+    });
+
+    setTimeout(() => {
+      slides.forEach((s, i) => {
+        if (i !== current) {
+          s.classList.remove('active');
+          s.style.transform = '';
+        }
+      });
+    }, 500);
+
+    updateUI();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function checkScrollable(slide) {
+    if (slide.scrollHeight > slide.clientHeight + 4) {
+      slide.classList.add('scrollable');
+    } else {
+      slide.classList.remove('scrollable');
+    }
+    slide.scrollTop = 0;
+    updateScrollIndicator();
+  }
+
+  function updateUI() {
+    document.getElementById('currentNum').textContent = current + 1;
+    dotsWrap.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    updateScrollIndicator();
+  }
+
+  const scrollIndicator = document.getElementById('scrollIndicator');
+
+  function updateScrollIndicator() {
+    const slide = slides[current];
+    const hasScroll = slide.scrollHeight > slide.clientHeight + 4;
+    const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 20;
+    if (hasScroll && !atBottom) {
+      scrollIndicator.classList.add('visible');
+      scrollIndicator.classList.remove('hidden');
+    } else {
+      scrollIndicator.classList.remove('visible');
+      scrollIndicator.classList.add('hidden');
+    }
+  }
+
+  slides.forEach(slide => {
+    slide.addEventListener('scroll', updateScrollIndicator);
+  });
+
+  document.getElementById('deck').addEventListener('click', function(e) {
+    if (e.target.closest('.nav-bar')) return;
+    if (e.target.closest('.gallery-item')) return;
+    if (e.target.closest('.lightbox')) return;
+    const x = e.clientX;
+    const w = window.innerWidth;
+    if (x < w * 0.3) prev();
+    else next();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'Escape') closeLightbox();
+      return;
+    }
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  let startX = 0;
+  document.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
+  document.addEventListener('touchend', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+  });
+
+  document.getElementById('totalNum').textContent = total;
+
+  setTimeout(() => checkScrollable(slides[current]), 100);
+})();
+</script>
+
+</body>
+</html>
