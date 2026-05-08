@@ -21,4 +21,4 @@ echo "🚀 GitHub에 업로드 중..."
 git push
 
 echo "✅ 완료! 1~2분 후 링크에서 확인하세요."
-echo "🔗 https://piercepark.github.io/after-yoga-collaboration/after_yoga_collaboration_slides.html"
+echo "🔗 https://piercepark.github.io/after-yoga-collaboration/"
