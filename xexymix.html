@@ -307,6 +307,40 @@
       margin-top: 4px; font-weight: 500;
     }
 
+    .hero-trusted {
+      margin-top: 24px;
+      text-align: center;
+      z-index: 2;
+    }
+    .trusted-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+      position: relative;
+      display: inline-block;
+      padding: 0 12px;
+    }
+    .trusted-label::before,
+    .trusted-label::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 24px;
+      height: 1px;
+      background: var(--border);
+    }
+    .trusted-label::before { right: 100%; }
+    .trusted-label::after  { left: 100%; }
+    .trusted-line {
+      font-size: 11px;
+      color: var(--text-secondary);
+      letter-spacing: -0.01em;
+      font-weight: 500;
+    }
+
     /* ── OVERVIEW ── */
     .overview-content {
       width: 100%;
@@ -779,6 +813,10 @@
         <div class="stat-label">전용 혜택</div>
       </div>
     </div>
+    <div class="hero-trusted">
+      <div class="trusted-label">Trusted by</div>
+      <div class="trusted-line">Shokz · 한국유방건강재단 · 서울옥션 · 동국대</div>
+    </div>
   </div>
 
   <!-- SLIDE 1: OVERVIEW -->
@@ -787,14 +825,14 @@
     <h2 class="slide-title" style="font-size:26px;">
       애프터 요가<span class="gradient-text">&amp;</span>필라테스
     </h2>
-    <p class="slide-sub" style="font-size:13px;">서울 3개 지점, 다수의 브랜드 협업 경험을 가진 요가·필라테스 전문 센터입니다.</p>
+    <p class="slide-sub" style="font-size:13px;">서울 3개 지점, 글로벌 브랜드부터 공공기관까지 협업해온 요가·필라테스 전문 센터입니다.</p>
     <div class="overview-content">
       <p class="overview-p">성동구(서울숲), 강남구(매봉역), 중구(충무로역)에 위치한 3개 지점은 각각 독립적인 회원 커뮤니티와 SNS 채널을 운영하고 있습니다.</p>
-      <p class="overview-p">Shokz, 한국유방건강재단, 서울옥션, 동국대 등과의 협업 경험을 바탕으로 젝시믹스 임직원분들께 최적화된 혜택을 설계했습니다.</p>
+      <p class="overview-p">글로벌 브랜드 · 공공기관 · 대기업 · 교육기관 — 4개 영역의 협업 운영 경험을 바탕으로 젝시믹스 임직원분들께 최적화된 혜택을 설계했습니다.</p>
       <div class="infra-row"><div class="infra-key">지점</div><div class="infra-val">서울숲점 · 매봉역점 · 충무로역점</div></div>
       <div class="infra-row"><div class="infra-key">시설</div><div class="infra-val">전용 스튜디오 · 기구 완비 · 샤워실 · 무료 주차</div></div>
       <div class="infra-row"><div class="infra-key">프로그램</div><div class="infra-val">요가 · 필라테스 · 1:1 PT · 인바디 측정</div></div>
-      <div class="infra-row"><div class="infra-key">협업 사례</div><div class="infra-val">Shokz × Run the Season · 한국유방건강재단 핑크힐링데이</div></div>
+      <div class="infra-row"><div class="infra-key">협업 파트너</div><div class="infra-val">Shokz · 한국유방건강재단 · 서울옥션 · 동국대 외</div></div>
     </div>
   </div>
 
