@@ -299,6 +299,14 @@
       letter-spacing: -0.04em; line-height: 1;
     }
     .stat-num span { color: var(--accent); }
+    .stat-unit {
+      color: var(--text-secondary);
+      font-size: 0.64em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-left: 2px;
+      vertical-align: baseline;
+    }
     .stat-label {
       font-size: 10px;
       letter-spacing: 0.06em;
@@ -504,6 +512,10 @@
       position: relative;
       line-height: 1.7;
       margin-bottom: 2px;
+    }
+    .info-list u {
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
     }
     .info-list li::before {
       content: '·';
@@ -996,15 +1008,15 @@
     </p>
     <div class="hero-stats">
       <div class="hero-stat">
-        <div class="stat-num"><span>10</span>%</div>
+        <div class="stat-num"><span>10</span><span class="stat-unit">%</span></div>
         <div class="stat-label">가격 할인</div>
       </div>
       <div class="hero-stat">
-        <div class="stat-num"><span>20</span>%</div>
+        <div class="stat-num"><span>20</span><span class="stat-unit">%</span></div>
         <div class="stat-label">횟수·기간 UP</div>
       </div>
       <div class="hero-stat">
-        <div class="stat-num"><span>39,000</span>원</div>
+        <div class="stat-num"><span>39,000</span><span class="stat-unit">원</span></div>
         <div class="stat-label">패시브 체험</div>
       </div>
     </div>
