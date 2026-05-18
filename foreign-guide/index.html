@@ -227,6 +227,49 @@
   .gal.wide { grid-column: span 2; }
   .gal.big  { grid-row: span 2; grid-column: span 2; }
 
+  /* ── STRETCHING PROGRAM GRID (5 cards) ── */
+  .stretch-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .stretch-card {
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+  }
+  .stretch-card-img {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: #ddd;
+  }
+  .stretch-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .stretch-card-body {
+    padding: 12px 12px 14px;
+  }
+  .stretch-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    margin-bottom: 4px;
+  }
+  .stretch-card-desc {
+    font-size: 11.5px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+
   /* ── PROGRAM HEADER IMAGE ── */
   .program-cover {
     aspect-ratio: 16 / 6;
@@ -641,6 +684,71 @@
     margin-left: 6px;
     vertical-align: 1px;
   }
+
+  /* ── Pre-sale banner ── */
+  .presale-banner {
+    background: #fff4ec;
+    border: 1.5px solid #d97706;
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .presale-banner .ps-icon {
+    width: 32px; height: 32px;
+    border-radius: 8px;
+    background: #d97706;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .presale-banner .ps-text {
+    flex: 1;
+    min-width: 220px;
+  }
+  .presale-banner .ps-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #92400e;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+  .presale-banner .ps-sub {
+    font-size: 12px;
+    color: #b45309;
+    line-height: 1.5;
+  }
+  .price-was {
+    display: block;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-decoration: line-through;
+    text-decoration-color: #d97706;
+    margin-top: 1px;
+    font-family: 'DM Mono', monospace;
+    font-weight: 400;
+  }
+  .badge-promo {
+    display: inline-block;
+    background: #d97706;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: 1px;
+  }
   .pricing-note {
     margin-top: 16px;
     padding: 14px 20px;
@@ -948,6 +1056,9 @@
     .gal.tall { grid-row: span 2; }
     .gal.wide { grid-column: span 2; }
     .program-cover { margin: -22px -22px 16px; aspect-ratio: 16 / 8; }
+    .stretch-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .stretch-card-title { font-size: 12px; }
+    .stretch-card-desc { font-size: 10.5px; }
     .footer {
       flex-direction: column;
       align-items: flex-start;
@@ -979,7 +1090,7 @@
     <div class="hero-eyebrow">English Guide · Seongdong-gu, Seoul</div>
     <h1>A yoga &amp; pilates studio<br><span class="light">built around you.</span></h1>
     <p class="hero-sub">
-      Boutique group classes, small-group reformer pilates, and 1:1 PT — all in one studio near Seoulsup Station. This page covers everything you need to know in English before your first visit.
+      Boutique yoga, small-group reformer pilates, and 1-on-1 passive stretching care by licensed physical therapists — all under one roof near Seoulsup Station. This page covers everything you need to know in English before your first visit.
     </p>
     <div class="hero-cta-row">
       <a href="#schedule" class="btn-primary">
@@ -1012,7 +1123,7 @@
     <div class="hero-strip">
       <div class="hero-strip-img"><img src="images/11.png" alt="Group yoga class at After Yoga &amp; Pilates" loading="lazy"></div>
       <div class="hero-strip-img"><img src="images/02.png" alt="Reformer pilates session" loading="lazy"></div>
-      <div class="hero-strip-img"><img src="images/04.png" alt="Aerial flying yoga class" loading="lazy"></div>
+      <div class="hero-strip-img"><img src="images/stretching.png" alt="1-on-1 passive stretching care by licensed physical therapist" loading="lazy"></div>
     </div>
   </header>
 
@@ -1020,9 +1131,9 @@
   <section class="section" id="about">
     <div class="section-head">
       <div class="section-label">01 · About</div>
-      <h2 class="section-title">One studio, two complementary practices.</h2>
+      <h2 class="section-title">Three practices, one studio.</h2>
       <p class="section-lead">
-        We offer yoga and small-group reformer pilates under one roof — so you can build flexibility and strength in parallel, without two memberships at two studios. All classes are taught by experienced Korean instructors with English-friendly cueing.
+        Yoga, small-group reformer pilates, and 1-on-1 passive stretching care — all under one roof. You can build flexibility, strength, and recovery in parallel, without three separate memberships. Group classes are taught by experienced Korean instructors with English-friendly cueing, and stretching sessions are led by licensed physical therapists.
       </p>
     </div>
 
@@ -1031,8 +1142,8 @@
         <div class="feature-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 22V8"/><path d="M5 12l7-4 7 4"/><path d="M5 22V12"/><path d="M19 22V12"/></svg>
         </div>
-        <div class="feature-title">Yoga + Pilates Together</div>
-        <div class="feature-text">Combo membership lets you mix yoga and pilates classes freely, with a 2:1 ratio you can adjust per visit.</div>
+        <div class="feature-title">Yoga + Pilates + Stretching</div>
+        <div class="feature-text">Three programs sharing one space. Mix group classes (yoga &amp; reformer pilates) with 1-on-1 passive stretching care depending on what your body needs.</div>
       </div>
       <div class="feature-card">
         <div class="feature-icon">
@@ -1069,6 +1180,14 @@
         <div class="feature-title">StudioMate App</div>
         <div class="feature-text">Book and cancel classes from your phone. Classes open 3 days in advance.</div>
       </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7z"/></svg>
+        </div>
+        <div class="feature-title">Licensed PTs On Site</div>
+        <div class="feature-text">Stretching sessions are 1-on-1 with licensed physical therapists from Bareun Stretching — designed by a national-team manual therapist and audited by physicians.</div>
+      </div>
     </div>
   </section>
 
@@ -1085,9 +1204,10 @@
       <div class="gal tall"><img src="images/05.png" alt="Aerial flying yoga inversion" loading="lazy"></div>
       <div class="gal"><img src="images/02.png" alt="Reformer pilates studio" loading="lazy"></div>
       <div class="gal"><img src="images/14.png" alt="Bungee fitness class" loading="lazy"></div>
+      <div class="gal wide"><img src="images/stretching.png" alt="1-on-1 passive stretching by licensed physical therapist" loading="lazy"></div>
       <div class="gal"><img src="images/03.png" alt="One-on-one yoga adjustment" loading="lazy"></div>
-      <div class="gal wide"><img src="images/15.png" alt="Partner yoga stretching" loading="lazy"></div>
       <div class="gal"><img src="images/13.png" alt="Yoga wheel and aerial work" loading="lazy"></div>
+      <div class="gal wide"><img src="images/15.png" alt="Partner yoga stretching" loading="lazy"></div>
     </div>
   </section>
 
@@ -1095,9 +1215,9 @@
   <section class="section" id="programs">
     <div class="section-head">
       <div class="section-label">02 · Programs</div>
-      <h2 class="section-title">Yoga &amp; pilates, organized by what you're after.</h2>
+      <h2 class="section-title">Yoga, pilates &amp; stretching — pick by what you need.</h2>
       <p class="section-lead">
-        Yoga classes rotate biweekly to keep things fresh — odd weeks differ from even weeks. Pilates is grouped into 4 tracks so you can pick by goal.
+        Yoga classes rotate biweekly to keep training fresh — odd weeks differ from even weeks. Pilates is grouped into 4 tracks. Stretching runs as 1-on-1 sessions, booked separately.
       </p>
     </div>
 
@@ -1149,6 +1269,55 @@
         <div class="class-chip t-posture"><div class="chip-name">Track 2</div><div class="chip-tag">Core Strengthening</div></div>
         <div class="class-chip t-core"><div class="chip-name">Track 3</div><div class="chip-tag">Hip-up &amp; Lower Body</div></div>
         <div class="class-chip t-cardio"><div class="chip-name">Track 4</div><div class="chip-tag">Diet &amp; Cardio</div></div>
+      </div>
+    </div>
+
+    <!-- Stretching -->
+    <div class="program-block">
+      <div class="program-cover"><img src="images/stretching.png" alt="1-on-1 passive stretching care"></div>
+      <div class="program-head">
+        <div class="program-title">Stretching · 1-on-1 · ~50 min<small>Lying-down passive stretching by licensed physical therapists (Bareun Stretching)</small></div>
+        <span class="program-link" style="cursor:default;">Booked separately</span>
+      </div>
+      <div class="stretch-grid">
+        <div class="stretch-card">
+          <div class="stretch-card-img"><img src="images/stretching/02.png" alt="Posture and tech neck care"></div>
+          <div class="stretch-card-body">
+            <div class="stretch-card-title">Posture &amp; Tech Neck</div>
+            <div class="stretch-card-desc">Forward head, rounded shoulders, desk-bound tension.</div>
+          </div>
+        </div>
+        <div class="stretch-card">
+          <div class="stretch-card-img"><img src="images/stretching/04.png" alt="Hip and lower-back mobility care"></div>
+          <div class="stretch-card-body">
+            <div class="stretch-card-title">Hip &amp; Lower-Back Mobility</div>
+            <div class="stretch-card-desc">Tight hips, lower-back relief, pelvis alignment.</div>
+          </div>
+        </div>
+        <div class="stretch-card">
+          <div class="stretch-card-img"><img src="images/stretching/01.png" alt="Full-body conditioning and fascia release"></div>
+          <div class="stretch-card-body">
+            <div class="stretch-card-title">Full-body Conditioning</div>
+            <div class="stretch-card-desc">Fascia release · deep relaxation · fatigue recovery.</div>
+          </div>
+        </div>
+        <div class="stretch-card">
+          <div class="stretch-card-img"><img src="images/stretching/03.png" alt="Growth support stretching for kids and teens"></div>
+          <div class="stretch-card-body">
+            <div class="stretch-card-title">Growth Support · Kids</div>
+            <div class="stretch-card-desc">Flexibility &amp; posture care for growing children.</div>
+          </div>
+        </div>
+        <div class="stretch-card">
+          <div class="stretch-card-img"><img src="images/stretching/05.png" alt="Postpartum pelvis and body recovery care"></div>
+          <div class="stretch-card-body">
+            <div class="stretch-card-title">Postpartum Care</div>
+            <div class="stretch-card-desc">Pelvis &amp; body recovery after childbirth.</div>
+          </div>
+        </div>
+      </div>
+      <div class="legend-row" style="font-size:12px;">
+        Designed by Bareun Stretching — a manual-therapy team trained on national athletes and audited by physicians. All sessions are 1-on-1 with a licensed Korean physical therapist.
       </div>
     </div>
   </section>
@@ -1214,6 +1383,7 @@
       <button class="pricing-tab active" data-tab="yoga">Yoga</button>
       <button class="pricing-tab" data-tab="pilates">Pilates</button>
       <button class="pricing-tab" data-tab="combo">Combo (Yoga + Pilates)</button>
+      <button class="pricing-tab" data-tab="stretching">Stretching (1:1)</button>
     </div>
 
     <!-- YOGA TABLE -->
@@ -1284,6 +1454,50 @@
       </div>
     </div>
 
+    <!-- STRETCHING TABLE -->
+    <div class="pricing-table" data-tab-content="stretching" style="display:none; border:none; box-shadow:none; padding:0; background:transparent;">
+      <div class="presale-banner">
+        <div class="ps-icon">MAY</div>
+        <div class="ps-text">
+          <div class="ps-title">May 2026 Pre-Sale · Limited 30 slots</div>
+          <div class="ps-sub">Member-priority pricing through <strong>May 31</strong> only. Rates return to regular on June 1.</div>
+        </div>
+      </div>
+
+      <div class="pricing-table" style="margin:0;">
+        <div class="pricing-head">
+          <div>Plan</div>
+          <div style="text-align:right;">Sessions</div>
+          <div style="text-align:right;">Per session</div>
+          <div style="text-align:right;">Total</div>
+        </div>
+        <div class="pricing-row">
+          <div class="p-plan">First Trial <span class="badge-promo">-70%</span><small>1-on-1 · ~50 min</small></div>
+          <div class="p-classes">1</div>
+          <div class="p-per">₩39,000<span class="price-was">₩130,000</span></div>
+          <div class="p-total">₩39,000</div>
+        </div>
+        <div class="pricing-row">
+          <div class="p-plan">5-pack <span class="badge-promo">-15%</span><small>Easy entry pack</small></div>
+          <div class="p-classes">5</div>
+          <div class="p-per">₩110,000</div>
+          <div class="p-total">₩550,000<span class="price-was">₩650,000</span></div>
+        </div>
+        <div class="pricing-row featured">
+          <div class="p-plan">10-pack <span class="badge-best">BEST</span> <span class="badge-promo">-32%</span><small>+ 10 free yoga classes bonus</small></div>
+          <div class="p-classes">10 +10</div>
+          <div class="p-per">₩89,000</div>
+          <div class="p-total">₩890,000<span class="price-was">₩1,300,000</span></div>
+        </div>
+        <div class="pricing-row">
+          <div class="p-plan">Family 30-pack <span class="badge-promo">-32%</span><small>12 months · share with family · +2 bonus</small></div>
+          <div class="p-classes">30 +2</div>
+          <div class="p-per">₩88,000</div>
+          <div class="p-total">₩2,640,000<span class="price-was">₩3,900,000</span></div>
+        </div>
+      </div>
+    </div>
+
     <!-- COMBO TABLE -->
     <div class="pricing-table" data-tab-content="combo" style="display:none;">
       <div class="pricing-head">
@@ -1319,7 +1533,9 @@
     </div>
 
     <div class="pricing-note">
-      <strong>Trial fee · ₩30,000 (1 class)</strong> — fully credited toward your membership when you sign up. Pricing above is the standard rate; additional first-visit benefits may apply. Holding (pause) and refund policies follow studio rules — ask us anytime.
+      <strong>Yoga / Pilates / Combo trial · ₩30,000 (1 class)</strong> — fully credited toward your membership when you sign up.<br>
+      <strong>Stretching trial · ₩39,000 (1 session, 1-on-1)</strong> — pre-paid; deducted from your session pack if you continue.<br>
+      <strong style="color:#92400e;">Stretching pre-sale rates above apply through May 31, 2026 only</strong> (limited 30 slots; member-priority). Regular rates resume June 1. Holding (pause) and refund policies follow studio rules. All prices include VAT where applicable.
     </div>
 
     <div class="pricing-extra">
@@ -1379,7 +1595,15 @@
       </details>
       <details class="faq">
         <summary>Can I pause my membership?</summary>
-        <div class="faq-body">Long-term plans (3+ months) can be held (paused) once per membership for up to 30 days. Class packs (5 / 10 classes) cannot be held. Refunds follow the studio's standard pro-rated policy.</div>
+        <div class="faq-body">Long-term plans (3+ months) can be held (paused) once per membership for up to 30 days. Class packs (5 / 10 classes) and stretching session packs cannot be held. Refunds follow the studio's standard pro-rated policy.</div>
+      </details>
+      <details class="faq">
+        <summary>What is Passive Stretching — and who is it for?</summary>
+        <div class="faq-body">Passive stretching is a 1-on-1 lying-down therapy where a licensed physical therapist moves your body through guided stretches — you stay relaxed the whole time. It sits between medical treatment and exercise. Great for desk-bound tension (tech neck, rounded shoulders), tight hips, recovery from training, or simply unwinding deeply. Designed by <strong>Bareun Stretching</strong>, a manual-therapy team trained on national athletes and audited by physicians.</div>
+      </details>
+      <details class="faq">
+        <summary>How is the stretching service booked?</summary>
+        <div class="faq-body">Stretching runs separately from group classes — by appointment only, not through the StudioMate app. Just message us with a preferred day/time and we'll find an open slot. A ₩39,000 trial session lets you experience it first; if you continue, it's credited toward your 5 / 10 / Family 30-session pack. <strong>May 2026 pre-sale rates apply through May 31 only (limited 30 slots).</strong></div>
       </details>
     </div>
   </section>
@@ -1439,15 +1663,15 @@
     <!-- CTA -->
     <div class="cta-strip">
       <div class="cta-eyebrow">How to Book Your Trial</div>
-      <div class="cta-title">Three steps to your first class.</div>
-      <div class="cta-sub">Trial class is <strong style="color:white;">₩30,000</strong> — fully credited toward your membership when you sign up. Includes a free InBody check.</div>
+      <div class="cta-title">Three steps to your first visit.</div>
+      <div class="cta-sub">Group class trial <strong style="color:white;">₩30,000</strong> (with free InBody) — credited toward your membership.<br>1-on-1 stretching trial <strong style="color:white;">₩39,000</strong> — <span style="color:#fbbf24;">May 2026 pre-sale</span> rates apply (limited 30 slots).</div>
 
       <div class="how-steps">
         <div class="how-step">
           <div class="how-num">01</div>
           <div class="how-text">
-            <div class="how-title">Check the schedule</div>
-            <div class="how-desc">Browse the May yoga &amp; pilates timetables above and pick a class that fits your time.</div>
+            <div class="how-title">Pick what you'd like</div>
+            <div class="how-desc">Browse the May yoga &amp; pilates timetables, or tell us you'd like a 1-on-1 stretching session.</div>
           </div>
         </div>
         <div class="how-step">
