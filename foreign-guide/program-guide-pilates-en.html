@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>After Pilates — Program Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --text-primary: #0d0d0d;
+    --text-secondary: #4a4a4a;
+    --text-muted: #5e5e5e;
+    --border: #c8c4ba;
+    --c-pt1-bg: #bedfbe; --c-pt1-tx: #1f4828;
+    --c-pt2-bg: #bdc8ec; --c-pt2-tx: #1f3268;
+    --c-pt3-bg: #b099dc; --c-pt3-tx: #3a2562;
+    --c-pt4-bg: #f0bdca; --c-pt4-tx: #5e2535;
+  }
+
+  html, body {
+    width: 210mm;
+    margin: 0; padding: 0;
+    font-size: 8.5pt;
+    font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 8mm 9mm;
+    background: var(--surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    flex-shrink: 0;
+    margin-bottom: 4mm;
+    padding-bottom: 3.5mm;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2mm;
+  }
+  h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18pt;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .badge {
+    background: var(--text-primary);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    padding: 3px 9px;
+    border-radius: 100px;
+    white-space: nowrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .subtitle {
+    font-size: 7pt;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ── BODY ── */
+  .page-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* ── TRACK BLOCK ── */
+  .track-block {
+    flex: 1;
+    min-height: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 3mm;
+    display: flex;
+    flex-direction: column;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .track-block:last-of-type { margin-bottom: 0; }
+
+  .track-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 8px;
+    border-bottom: 1px solid var(--border);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .track-header.th1 { background: var(--c-pt1-bg); }
+  .track-header.th2 { background: var(--c-pt2-bg); }
+  .track-header.th3 { background: var(--c-pt3-bg); }
+  .track-header.th4 { background: var(--c-pt4-bg); }
+
+  .track-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .tn1 { background: var(--c-pt1-tx); color: #fff; }
+  .tn2 { background: var(--c-pt2-tx); color: #fff; }
+  .tn3 { background: var(--c-pt3-tx); color: #fff; }
+  .tn4 { background: var(--c-pt4-tx); color: #fff; }
+
+  .track-title {
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .track-subtitle {
+    font-size: 6.2pt;
+    color: var(--text-secondary);
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .track-content {
+    flex: 1;
+    padding: 6px 10px 7px;
+    background: #fdfdfc;
+    display: flex;
+    gap: 6mm;
+    align-items: flex-start;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .track-main {
+    flex: 1;
+  }
+  .track-desc {
+    font-size: 6.8pt;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 4px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .track-points {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+  .track-point {
+    font-size: 6pt;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1.5px 5px;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .track-schedule {
+    width: 42mm;
+    flex-shrink: 0;
+  }
+  .sch-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 5.8pt;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .sch-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 6.2pt;
+    padding: 2px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
+    font-family: 'DM Mono', monospace;
+  }
+  .sch-item:last-child { border-bottom: none; }
+  .sch-day { color: var(--text-primary); font-weight: 600; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    flex-shrink: 0;
+    margin: 3mm 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── BOTTOM ROW ── */
+  .bottom-row {
+    display: flex;
+    gap: 3mm;
+    flex-shrink: 0;
+  }
+
+  .benefit-card {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .benefit-header {
+    background: var(--text-primary);
+    color: #fff;
+    padding: 4px 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .benefit-body {
+    padding: 5px 8px;
+    background: #fafaf8;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .benefit-item {
+    font-size: 6.2pt;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .benefit-item::before {
+    content: '· ';
+    color: var(--text-muted);
+  }
+
+  .price-card {
+    width: 60mm;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .price-header {
+    background: var(--text-primary);
+    color: #fff;
+    padding: 4px 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .price-body {
+    padding: 5px 8px;
+    background: #fafaf8;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-dur {
+    font-size: 6.5pt;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'DM Mono', monospace;
+  }
+  .price-detail { font-size: 5.8pt; color: var(--text-muted); }
+  .price-val {
+    font-size: 7pt;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'DM Mono', monospace;
+  }
+  .price-note {
+    font-size: 5.5pt;
+    color: var(--text-muted);
+    margin-top: 3px;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    flex-shrink: 0;
+    margin-top: 3mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 6.5pt;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  @media print {
+    @page { size: A4 portrait; margin: 0; }
+    html, body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+    * { box-shadow: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="header-top">
+      <div>
+        <div class="eyebrow">After Yoga &amp; Pilates — Seoulsup</div>
+        <h1>Pilates Program Guide</h1>
+      </div>
+      <span class="badge">50 min · 4 focused tracks</span>
+    </div>
+    <p class="subtitle">
+      All classes are 50 minutes · Group mat-based pilates (max 15 per session) · Same schedule every week · Reservations via StudioMate app, 3 days in advance · 010-4463-2297
+    </p>
+  </header>
+
+  <!-- BODY -->
+  <main class="page-body">
+
+    <!-- TRACK 1: Posture Correction -->
+    <div class="track-block">
+      <div class="track-header th1">
+        <span class="track-num tn1">Track 1</span>
+        <span class="track-title">Posture Correction</span>
+        <span class="track-subtitle">체형교정</span>
+      </div>
+      <div class="track-content">
+        <div class="track-main">
+          <div class="track-desc">
+            Designed to realign the body through targeted exercises that address imbalances caused by sedentary lifestyles, prolonged sitting, or uneven muscle use. Each class methodically works through the spine, shoulders, and hips to restore natural posture and reduce discomfort.
+          </div>
+          <div class="track-points">
+            <span class="track-point">Spinal alignment</span>
+            <span class="track-point">Shoulder & neck relief</span>
+            <span class="track-point">Hip & pelvis correction</span>
+            <span class="track-point">Ideal for desk workers</span>
+            <span class="track-point">Beginner-friendly</span>
+          </div>
+        </div>
+        <div class="track-schedule">
+          <div class="sch-label">Class Schedule</div>
+          <div class="sch-item"><span class="sch-day">Mon</span><span>7:00 PM — Yebin T</span></div>
+          <div class="sch-item"><span class="sch-day">Tue</span><span>10:30 AM — Seo Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Wed</span><span>9:00 PM — Yebin T</span></div>
+          <div class="sch-item"><span class="sch-day">Thu</span><span>6:40 PM — Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Fri</span><span>1:00 PM — Heeone T</span></div>
+          <div class="sch-item"><span class="sch-day">Fri</span><span>8:00 PM — Mijeong T</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRACK 2: Core -->
+    <div class="track-block">
+      <div class="track-header th2">
+        <span class="track-num tn2">Track 2</span>
+        <span class="track-title">Core Strengthening</span>
+        <span class="track-subtitle">코어</span>
+      </div>
+      <div class="track-content">
+        <div class="track-main">
+          <div class="track-desc">
+            Focuses on building deep core strength — the foundation of all movement. Progressive sequences target the transverse abdominis, obliques, and stabilising muscles of the lower back, improving everything from everyday posture to athletic performance.
+          </div>
+          <div class="track-points">
+            <span class="track-point">Deep core activation</span>
+            <span class="track-point">Lower back stability</span>
+            <span class="track-point">Flat abdomen effect</span>
+            <span class="track-point">Injury prevention</span>
+            <span class="track-point">All levels</span>
+          </div>
+        </div>
+        <div class="track-schedule">
+          <div class="sch-label">Class Schedule</div>
+          <div class="sch-item"><span class="sch-day">Mon</span><span>1:00 PM — Heeone T</span></div>
+          <div class="sch-item"><span class="sch-day">Tue</span><span>6:40 PM — Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Tue</span><span>7:40 PM — Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Wed</span><span>11:30 AM — Heeone T</span></div>
+          <div class="sch-item"><span class="sch-day">Thu</span><span>12:00 PM — Seo Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Thu</span><span>8:40 PM — Minjung T</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRACK 3: Hip-up -->
+    <div class="track-block">
+      <div class="track-header th3">
+        <span class="track-num tn3">Track 3</span>
+        <span class="track-title">Hip-up &amp; Lower Body</span>
+        <span class="track-subtitle">힙업</span>
+      </div>
+      <div class="track-content">
+        <div class="track-main">
+          <div class="track-desc">
+            Targets the glutes, outer thighs, and lower body with pilates-based movements designed to lift, tone, and sculpt. Classes combine small isometric holds with dynamic exercises for maximum muscle activation. Very popular for visible body shaping results.
+          </div>
+          <div class="track-points">
+            <span class="track-point">Glute activation</span>
+            <span class="track-point">Thigh & hip toning</span>
+            <span class="track-point">Visible shaping effect</span>
+            <span class="track-point">Knee-friendly</span>
+            <span class="track-point">Most popular track</span>
+          </div>
+        </div>
+        <div class="track-schedule">
+          <div class="sch-label">Class Schedule</div>
+          <div class="sch-item"><span class="sch-day">Mon</span><span>11:30 AM — Heeone T</span></div>
+          <div class="sch-item"><span class="sch-day">Mon</span><span>8:00 PM — Yebin T</span></div>
+          <div class="sch-item"><span class="sch-day">Tue</span><span>12:00 PM — Seo Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Tue</span><span>8:40 PM — Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Wed</span><span>1:00 PM — Heeone T</span></div>
+          <div class="sch-item"><span class="sch-day">Wed</span><span>7:00 PM — Yebin T</span></div>
+          <div class="sch-item"><span class="sch-day">Thu</span><span>10:30 AM — Seo Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Thu</span><span>7:40 PM — Minjung T</span></div>
+          <div class="sch-item"><span class="sch-day">Fri</span><span>7:00 PM — Mijeong T</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRACK 4: Diet -->
+    <div class="track-block">
+      <div class="track-header th4">
+        <span class="track-num tn4">Track 4</span>
+        <span class="track-title">Diet &amp; Cardio Pilates</span>
+        <span class="track-subtitle">다이어트</span>
+      </div>
+      <div class="track-content">
+        <div class="track-main">
+          <div class="track-desc">
+            The most high-energy pilates track — designed to raise the heart rate while maintaining the precision and control pilates is known for. Full-body circuits and cardio-infused sequences maximise calorie burn and fat reduction, while still building lean, defined muscle.
+          </div>
+          <div class="track-points">
+            <span class="track-point">Calorie burning</span>
+            <span class="track-point">Full-body circuit</span>
+            <span class="track-point">Cardio + pilates fusion</span>
+            <span class="track-point">Fat reduction</span>
+            <span class="track-point">Energising</span>
+          </div>
+        </div>
+        <div class="track-schedule">
+          <div class="sch-label">Class Schedule</div>
+          <div class="sch-item"><span class="sch-day">Mon</span><span>9:00 PM — Yebin T</span></div>
+          <div class="sch-item"><span class="sch-day">Wed</span><span>8:00 PM — Yebin T</span></div>
+          <div class="sch-item"><span class="sch-day">Fri</span><span>11:30 AM — Heeone T</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BOTTOM ROW -->
+    <div class="bottom-row">
+
+      <div class="benefit-card">
+        <div class="benefit-header">WHY AFTER PILATES</div>
+        <div class="benefit-body">
+          <div class="benefit-item">4 distinct tracks — choose your goal, not just a class</div>
+          <div class="benefit-item">Professional mat pilates — no bulky equipment, just your body</div>
+          <div class="benefit-item">Consistent weekly schedule — easy to build a routine</div>
+          <div class="benefit-item">Small groups (max 15) with individual form correction</div>
+          <div class="benefit-item">Combine with Yoga using our Combo Membership for full-body results</div>
+          <div class="benefit-item">Free trial class — fee applied toward membership on signup</div>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-header">PILATES MEMBERSHIP</div>
+        <div class="price-body">
+          <div class="price-row">
+            <div><div class="price-dur">3.5 months</div><div class="price-detail">32 classes incl.</div></div>
+            <div class="price-val">₩770,000</div>
+          </div>
+          <div class="price-row">
+            <div><div class="price-dur">7 months</div><div class="price-detail">64 classes incl.</div></div>
+            <div class="price-val">₩1,150,000</div>
+          </div>
+          <div class="price-row">
+            <div><div class="price-dur">14 months</div><div class="price-detail">128 classes incl.</div></div>
+            <div class="price-val">₩1,820,000</div>
+          </div>
+          <div class="price-row">
+            <div><div class="price-dur">28 months</div><div class="price-detail">256 classes incl.</div></div>
+            <div class="price-val">₩3,070,000</div>
+          </div>
+          <div class="price-note">
+            Trial class ₩30,000 (credited on signup)<br>
+            All plans include bonus sessions · Prices incl. VAT
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <span>After Yoga &amp; Pilates &nbsp;·&nbsp; Pilates Program Guide</span>
+    <span>Seoulsup &nbsp;·&nbsp; 010-4463-2297</span>
+  </footer>
+
+</div>
+</body>
+</html>

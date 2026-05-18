@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFTER YOGA & PILATES — Studio Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f5f3ee;
+  --surface: #ffffff;
+  --text-primary: #0d0d0d;
+  --text-secondary: #4a4a4a;
+  --text-muted: #5e5e5e;
+  --accent: #1a1a1a;
+  --accent-green: #059669;
+  --accent-blue: #3b82f6;
+  --accent-amber: #d97706;
+  --accent-red: #e8453c;
+  --accent-purple: #7c3aed;
+  --border: #c8c4ba;
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --shadow-file: 0 2px 8px rgba(0,0,0,0.06), 0 12px 40px rgba(0,0,0,0.08);
+  --font-en: 'DM Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+  --font-kr: 'Noto Sans KR', sans-serif;
+}
+
+html, body {
+  font-family: var(--font-en), var(--font-kr);
+  background: var(--bg);
+  color: var(--text-primary);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* ── Slide Container ── */
+.deck {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 72px 96px 88px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ── Navigation ── */
+.nav-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 36px;
+  background: rgba(245,243,238,0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border);
+  z-index: 100;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.nav-bar button {
+  font-family: var(--font-en);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-bar button:hover {
+  background: var(--text-primary);
+  color: white;
+  border-color: var(--text-primary);
+}
+.nav-bar button:disabled {
+  opacity: 0.3;
+  cursor: default;
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+.progress-dots {
+  display: flex; gap: 7px;
+}
+.dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.dot.active {
+  background: var(--text-primary);
+  width: 28px;
+  border-radius: 5px;
+}
+
+/* ── Shared Card Styles ── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-file);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.section-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+.slide-number {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  position: absolute;
+  top: 32px; right: 44px;
+}
+
+/* ── Slide 1: Cover ── */
+.cover-content {
+  text-align: center;
+  max-width: 760px;
+}
+.cover-logo {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 36px;
+}
+.cover-title {
+  font-family: var(--font-en);
+  font-size: clamp(52px, 6vw, 80px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+.cover-subtitle {
+  font-size: 22px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-weight: 400;
+}
+.cover-divider {
+  width: 52px; height: 3px;
+  background: var(--text-primary);
+  margin: 32px auto;
+  border-radius: 2px;
+}
+.cover-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+/* ── Slide 2: About ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  max-width: 980px;
+  width: 100%;
+}
+.about-card {
+  padding: 32px 28px;
+}
+.about-card .icon {
+  width: 50px; height: 50px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 18px;
+  font-size: 26px;
+}
+.about-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.about-card p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* ── Slide 3: Programs ── */
+.programs-wrap {
+  max-width: 1040px;
+  width: 100%;
+}
+.programs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+.program-card {
+  padding: 32px 30px;
+}
+.program-card .tag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 5px 12px;
+  border-radius: 7px;
+  margin-bottom: 16px;
+}
+.program-card h3 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.program-card .duration {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.program-card ul {
+  list-style: none;
+  padding: 0;
+}
+.program-card li {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  padding-left: 20px;
+  position: relative;
+  font-weight: 400;
+}
+.program-card li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px;
+  width: 7px; height: 7px;
+  border-radius: 2px;
+}
+.yoga li::before { background: var(--accent-blue); }
+.pilates li::before { background: var(--accent-green); }
+.yoga .tag { background: #eff6ff; color: var(--accent-blue); }
+.pilates .tag { background: #ecfdf5; color: var(--accent-green); }
+
+/* ── Slide 4: Schedule ── */
+.schedule-wrap {
+  max-width: 980px;
+  width: 100%;
+}
+.schedule-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-top: 22px;
+}
+.sched-card {
+  padding: 28px 24px;
+  text-align: center;
+}
+.sched-card .num {
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.sched-card .unit {
+  font-size: 16px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+.sched-card .desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  margin-top: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.rotation-note {
+  margin-top: 20px;
+  padding: 20px 26px;
+  border-radius: var(--radius-md);
+  background: #fefce8;
+  border: 1.5px solid #fde68a;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 16px;
+  color: #92400e;
+  font-weight: 400;
+}
+.rotation-note .emoji { font-size: 22px; flex-shrink: 0; }
+
+/* ── Slide 5: Membership ── */
+.membership-wrap {
+  max-width: 1040px;
+  width: 100%;
+}
+.plan-types {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 20px;
+}
+.plan-type-card {
+  padding: 24px 16px;
+  text-align: center;
+}
+.plan-type-card h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.plan-type-card p {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.duration-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  justify-content: center;
+}
+.dur-badge {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 9px 20px;
+  border-radius: 9px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+}
+.dur-badge.highlight {
+  background: var(--text-primary);
+  color: white;
+  border-color: var(--text-primary);
+}
+
+.session-note {
+  margin-top: 18px;
+  padding: 18px 22px;
+  border-radius: var(--radius-md);
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+  font-size: 15px;
+  color: #166534;
+  line-height: 1.65;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* ── Slide 6: Pricing ── */
+.pricing-wrap {
+  max-width: 1100px;
+  width: 100%;
+}
+.price-tabs {
+  display: flex;
+  gap: 9px;
+  margin-top: 18px;
+  margin-bottom: 20px;
+}
+.price-tab {
+  font-family: var(--font-en);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 22px;
+  border-radius: 9px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.price-tab.active {
+  background: var(--text-primary);
+  color: white;
+  border-color: var(--text-primary);
+}
+.price-tab.pass-tab.active {
+  background: var(--accent-blue);
+  border-color: var(--accent-blue);
+}
+.price-tab.pt-tab.active {
+  background: var(--accent-purple);
+  border-color: var(--accent-purple);
+}
+
+.price-table-wrap { display: none; }
+.price-table-wrap.active { display: block; }
+
+.price-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-file);
+  border: 1px solid var(--border);
+}
+.price-table th {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 16px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: #fafaf8;
+}
+.price-table td {
+  font-size: 16px;
+  padding: 16px 20px;
+  text-align: center;
+  border-bottom: 1px solid #f0eeea;
+  font-weight: 400;
+}
+.price-table tr:last-child td { border-bottom: none; }
+.price-table .plan-name {
+  font-weight: 600;
+  text-align: left;
+}
+.price-table .per-class {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--accent-green);
+}
+.price-table .per-class.purple {
+  color: var(--accent-purple);
+}
+.price-table .total-price {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.price-table .best-value {
+  position: relative;
+}
+.price-table .best-value td {
+  background: #fefce8;
+}
+.best-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--accent-amber);
+  color: white;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.pt-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--accent-purple);
+  color: white;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.price-footer {
+  margin-top: 14px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.price-footer-item {
+  font-size: 14px;
+  color: var(--text-secondary);
+  padding: 11px 20px;
+  background: var(--surface);
+  border-radius: 9px;
+  border: 1px solid var(--border);
+  font-weight: 400;
+}
+.price-footer-item strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* PT note banner */
+.pt-note {
+  margin-bottom: 14px;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  background: #f5f3ff;
+  border: 1.5px solid #ddd6fe;
+  font-size: 14px;
+  color: #5b21b6;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* ── Slide 7: Booking ── */
+.booking-wrap {
+  max-width: 880px;
+  width: 100%;
+}
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-top: 22px;
+}
+.step-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 28px;
+}
+.step-num {
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  background: var(--text-primary);
+  color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.step-text h4 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.step-text p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+.app-highlight {
+  margin-top: 18px;
+  padding: 22px 28px;
+  border-radius: var(--radius-md);
+  background: #eff6ff;
+  border: 1.5px solid #bfdbfe;
+  text-align: center;
+}
+.app-highlight .name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-blue);
+  margin-bottom: 5px;
+}
+.app-highlight .desc {
+  font-size: 15px;
+  color: #1e40af;
+  font-weight: 400;
+}
+
+/* ── Slide 8: Facilities ── */
+.facilities-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 960px;
+  width: 100%;
+  margin-top: 22px;
+}
+.facility-card {
+  padding: 32px 24px;
+  text-align: center;
+}
+.facility-card .emoji {
+  font-size: 40px;
+  margin-bottom: 14px;
+}
+.facility-card h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.facility-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ── Slide 9: Closing ── */
+.closing-content {
+  text-align: center;
+  max-width: 680px;
+}
+.closing-title {
+  font-size: clamp(40px, 5vw, 60px);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+.closing-sub {
+  font-size: 20px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-weight: 400;
+  margin-bottom: 36px;
+}
+.closing-links {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.closing-link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 12px 20px;
+  border-radius: 9px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+}
+.closing-link strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ── Slide Title ── */
+.slide-title {
+  text-align: center;
+  margin-bottom: 6px;
+}
+.slide-title h2 {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.slide-title p {
+  font-size: 18px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-top: 7px;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .slide { padding: 48px 40px 80px; }
+  .about-grid { grid-template-columns: 1fr; }
+  .programs-grid { grid-template-columns: 1fr; }
+  .schedule-info { grid-template-columns: 1fr; }
+  .plan-types { grid-template-columns: 1fr 1fr; }
+  .facilities-grid { grid-template-columns: 1fr; }
+  .duration-row { flex-wrap: wrap; justify-content: center; }
+  .price-footer { flex-direction: column; align-items: center; }
+  .closing-links { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 600px) {
+  .slide { padding: 28px 24px 72px; }
+  .nav-bar { padding: 14px 24px; }
+  .price-table th, .price-table td { padding: 12px 10px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- Slide 1: Cover -->
+  <div class="slide active" data-slide="0">
+    <div class="cover-content">
+      <div class="cover-logo">After Yoga & Pilates</div>
+      <h1 class="cover-title">Welcome to<br>Our Studio</h1>
+      <div class="cover-divider"></div>
+      <p class="cover-subtitle">
+        A combined yoga & pilates studio in Seoul Forest.<br>
+        Let us walk you through everything you need to know.
+      </p>
+      <div class="cover-tag">Seoul Forest Branch · 서울숲점</div>
+    </div>
+  </div>
+
+  <!-- Slide 2: About -->
+  <div class="slide" data-slide="1">
+    <span class="slide-number">02 / 09</span>
+    <div class="slide-title">
+      <div class="section-label">About Us</div>
+      <h2>What We Offer</h2>
+    </div>
+    <div class="about-grid" style="margin-top: 26px;">
+      <div class="card about-card">
+        <div class="icon" style="background:#eff6ff;">🧘</div>
+        <h3>Yoga Studio</h3>
+        <p>Spacious room for up to 20 people. Traditional, modern, bungee & flying yoga available. Store your mat or use ours.</p>
+      </div>
+      <div class="card about-card">
+        <div class="icon" style="background:#ecfdf5;">💪</div>
+        <h3>Pilates Room</h3>
+        <p>6-to-1 small group sessions with full equipment. Instructors give close attention to each person.</p>
+      </div>
+      <div class="card about-card">
+        <div class="icon" style="background:#fef3c7;">🔄</div>
+        <h3>Combined Training</h3>
+        <p>Many members do both yoga and pilates. The two programs complement each other perfectly.</p>
+      </div>
+      <div class="card about-card">
+        <div class="icon" style="background:#fdf2f8;">✨</div>
+        <h3>All Levels Welcome</h3>
+        <p>Most members start as beginners. Instructors explain slowly and clearly — go at your own pace.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Programs -->
+  <div class="slide" data-slide="2">
+    <span class="slide-number">03 / 09</span>
+    <div class="slide-title">
+      <div class="section-label">Programs</div>
+      <h2>Yoga & Pilates</h2>
+    </div>
+    <div class="programs-wrap">
+      <div class="programs-grid">
+        <div class="card program-card yoga">
+          <span class="tag">Yoga</span>
+          <h3>Yoga Programs</h3>
+          <p class="duration">60 min per class · Up to 20 people</p>
+          <ul>
+            <li>Traditional & modern yoga</li>
+            <li>Bungee yoga</li>
+            <li>Flying (aerial) yoga</li>
+            <li>Programs rotate every other week</li>
+            <li>Weeks 1, 3, 5 ≠ Weeks 2, 4</li>
+          </ul>
+        </div>
+        <div class="card program-card pilates">
+          <span class="tag">Pilates</span>
+          <h3>Pilates Programs</h3>
+          <p class="duration">50 min per class · 6 people max</p>
+          <ul>
+            <li>Posture correction</li>
+            <li>Core strengthening</li>
+            <li>Glute-focused training</li>
+            <li>Weight management</li>
+            <li>Full equipment-based sessions</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Schedule -->
+  <div class="slide" data-slide="3">
+    <span class="slide-number">04 / 09</span>
+    <div class="slide-title">
+      <div class="section-label">Schedule</div>
+      <h2>How Classes Work</h2>
+    </div>
+    <div class="schedule-wrap">
+      <div class="schedule-info">
+        <div class="card sched-card">
+          <div class="num">AM</div>
+          <div class="unit">Morning Sessions</div>
+          <div class="desc">Great if you're free early — start your day with energy</div>
+        </div>
+        <div class="card sched-card">
+          <div class="num">PM</div>
+          <div class="unit">Evening Sessions</div>
+          <div class="desc">Unwind after work — release stress and recharge</div>
+        </div>
+        <div class="card sched-card">
+          <div class="num">2~3×</div>
+          <div class="unit">Per Week</div>
+          <div class="desc">Average sessions included — use them freely anytime</div>
+        </div>
+      </div>
+      <div class="rotation-note">
+        <span class="emoji">🔁</span>
+        <span><strong>Yoga rotation:</strong> Programs change every other week. Weeks 1, 3, 5 have different classes from weeks 2, 4 — so training stays fresh and balanced.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Membership -->
+  <div class="slide" data-slide="4">
+    <span class="slide-number">05 / 09</span>
+    <div class="slide-title">
+      <div class="section-label">Membership</div>
+      <h2>Plans & Options</h2>
+    </div>
+    <div class="membership-wrap">
+      <div class="plan-types">
+        <div class="card plan-type-card">
+          <h4>🧘 Yoga Only</h4>
+          <p>All yoga classes included</p>
+        </div>
+        <div class="card plan-type-card">
+          <h4>💪 Pilates Only</h4>
+          <p>All pilates classes included</p>
+        </div>
+        <div class="card plan-type-card">
+          <h4>🔄 Combined</h4>
+          <p>Yoga + Pilates (2:1 ratio)</p>
+        </div>
+        <div class="card plan-type-card" style="border: 1.5px solid #ddd6fe;">
+          <h4>🎯 1:1 PT</h4>
+          <p>Private session pass (횟수권)</p>
+        </div>
+      </div>
+      <div class="duration-row">
+        <span class="dur-badge">3 months</span>
+        <span class="dur-badge">6 months</span>
+        <span class="dur-badge highlight">12 months</span>
+        <span class="dur-badge">24 months</span>
+      </div>
+      <div class="session-note">
+        ✅ Every membership plan includes <strong>bonus sessions & extended duration</strong> beyond the base period.<br>
+        Your membership expires when either the period or sessions run out — whichever comes first.
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: Pricing -->
+  <div class="slide" data-slide="5">
+    <span class="slide-number">06 / 09</span>
+    <div class="slide-title">
+      <div class="section-label">Pricing</div>
+      <h2>Membership Pricing</h2>
+    </div>
+    <div class="pricing-wrap">
+      <div class="price-tabs">
+        <button class="price-tab active" onclick="showPriceTab('yoga', this)">Yoga</button>
+        <button class="price-tab" onclick="showPriceTab('pilates', this)">Pilates</button>
+        <button class="price-tab" onclick="showPriceTab('combined', this)">Combined</button>
+        <button class="price-tab pass-tab" onclick="showPriceTab('pass', this)">Session Pass</button>
+        <button class="price-tab pt-tab" onclick="showPriceTab('pt', this)">1:1 PT</button>
+      </div>
+
+      <!-- Yoga -->
+      <div class="price-table-wrap active" id="tab-yoga">
+        <table class="price-table">
+          <thead>
+            <tr><th>Plan</th><th>Total Period</th><th>Sessions</th><th>Per Class</th><th>Total</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="plan-name">3 months</td><td>3.5 mo</td><td>32</td><td class="per-class">₩23,000</td><td class="total-price">₩720,000</td></tr>
+            <tr><td class="plan-name">6 months</td><td>7 mo</td><td>64</td><td class="per-class">₩17,000</td><td class="total-price">₩1,060,000</td></tr>
+            <tr class="best-value"><td class="plan-name">12 months <span class="best-badge">BEST</span></td><td>14 mo</td><td>128</td><td class="per-class">₩13,000</td><td class="total-price">₩1,630,000</td></tr>
+            <tr><td class="plan-name">24 months</td><td>28 mo</td><td>256</td><td class="per-class">₩11,000</td><td class="total-price">₩2,690,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pilates -->
+      <div class="price-table-wrap" id="tab-pilates">
+        <table class="price-table">
+          <thead>
+            <tr><th>Plan</th><th>Total Period</th><th>Sessions</th><th>Per Class</th><th>Total</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="plan-name">3 months</td><td>3.5 mo</td><td>32</td><td class="per-class">₩24,000</td><td class="total-price">₩770,000</td></tr>
+            <tr><td class="plan-name">6 months</td><td>7 mo</td><td>64</td><td class="per-class">₩18,000</td><td class="total-price">₩1,150,000</td></tr>
+            <tr class="best-value"><td class="plan-name">12 months <span class="best-badge">BEST</span></td><td>14 mo</td><td>128</td><td class="per-class">₩14,000</td><td class="total-price">₩1,820,000</td></tr>
+            <tr><td class="plan-name">24 months</td><td>28 mo</td><td>256</td><td class="per-class">₩12,000</td><td class="total-price">₩3,070,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Combined -->
+      <div class="price-table-wrap" id="tab-combined">
+        <table class="price-table">
+          <thead>
+            <tr><th>Plan</th><th>Total Period</th><th>Sessions</th><th>Per Class</th><th>Total</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="plan-name">3 months</td><td>3.5 mo</td><td>32 (Y·21 / P·11)</td><td class="per-class">₩23,000</td><td class="total-price">₩750,000</td></tr>
+            <tr><td class="plan-name">6 months</td><td>7 mo</td><td>64 (Y·43 / P·21)</td><td class="per-class">₩17,000</td><td class="total-price">₩1,110,000</td></tr>
+            <tr class="best-value"><td class="plan-name">12 months <span class="best-badge">BEST</span></td><td>14 mo</td><td>128 (Y·85 / P·43)</td><td class="per-class">₩13,000</td><td class="total-price">₩1,710,000</td></tr>
+            <tr><td class="plan-name">24 months</td><td>28 mo</td><td>256 (Y·171 / P·85)</td><td class="per-class">₩11,000</td><td class="total-price">₩2,900,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Session Pass (횟수권) -->
+      <div class="price-table-wrap" id="tab-pass">
+        <div class="pt-note" style="background:#f0f9ff; border-color:#bae6fd; color:#0369a1;">
+          🎟️ <strong>Group Class Session Passes</strong> — No long-term commitment. Use within the validity period. No holding or transfer allowed.
+        </div>
+        <table class="price-table">
+          <thead>
+            <tr><th>Pass Type</th><th>Sessions</th><th>Valid Period</th><th>Per Class</th><th>Total</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="plan-name">Yoga 5-pass</td><td>5</td><td>30 days</td><td class="per-class" style="color:#3b82f6;">₩30,000</td><td class="total-price">₩150,000</td></tr>
+            <tr><td class="plan-name">Pilates 5-pass</td><td>5</td><td>30 days</td><td class="per-class" style="color:#3b82f6;">₩30,800</td><td class="total-price">₩154,000</td></tr>
+            <tr><td class="plan-name">Yoga 10-pass <span class="best-badge" style="background:#3b82f6;">MAIN</span></td><td>10</td><td>60 days</td><td class="per-class" style="color:#3b82f6;">₩28,000</td><td class="total-price">₩280,000</td></tr>
+            <tr><td class="plan-name">Pilates 10-pass <span class="best-badge" style="background:#3b82f6;">MAIN</span></td><td>10</td><td>60 days</td><td class="per-class" style="color:#3b82f6;">₩28,900</td><td class="total-price">₩289,000</td></tr>
+          </tbody>
+        </table>
+        <div class="session-note" style="margin-top:12px; background:#fefce8; border-color:#fde68a; color:#854d0e; font-size:14px;">
+          💡 Upgrading to a 32-session membership saves up to ₩5,000 per class (≈18% off).
+        </div>
+      </div>
+
+      <!-- 1:1 PT -->
+      <div class="price-table-wrap" id="tab-pt">
+        <div class="pt-note">
+          🎯 <strong>Private 1:1 Sessions</strong> — Book any time within the validity period. VAT included in all prices.
+        </div>
+        <table class="price-table">
+          <thead>
+            <tr><th>Sessions</th><th>Valid Period</th><th>Per Session</th><th>Total (VAT incl.)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="plan-name">10 sessions</td><td>60 days</td><td class="per-class purple">₩77,000</td><td class="total-price">₩847,000</td></tr>
+            <tr><td class="plan-name">20 sessions</td><td>120 days</td><td class="per-class purple">₩74,000</td><td class="total-price">₩1,628,000</td></tr>
+            <tr class="best-value"><td class="plan-name">30 sessions <span class="pt-badge">POPULAR</span></td><td>180 days</td><td class="per-class purple">₩70,000</td><td class="total-price">₩2,310,000</td></tr>
+            <tr><td class="plan-name">50 sessions</td><td>240 days</td><td class="per-class purple">₩64,000</td><td class="total-price">₩3,520,000</td></tr>
+            <tr><td class="plan-name">60 sessions</td><td>300 days</td><td class="per-class purple">₩60,000</td><td class="total-price">₩3,960,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="price-footer">
+        <div class="price-footer-item"><strong>Trial Class</strong> — ₩30,000 / 1 session (deducted when you register)</div>
+        <div class="price-footer-item"><strong>Bonus included</strong> — All membership plans come with extra sessions & extended period</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: Booking -->
+  <div class="slide" data-slide="6">
+    <span class="slide-number">07 / 09</span>
+    <div class="slide-title">
+      <div class="section-label">Booking</div>
+      <h2>How to Reserve Classes</h2>
+    </div>
+    <div class="booking-wrap">
+      <div class="steps-list">
+        <div class="card step-card">
+          <span class="step-num">1</span>
+          <div class="step-text">
+            <h4>Download Studio Mate</h4>
+            <p>Scan the QR code at the front desk, install the app, and sign up</p>
+          </div>
+        </div>
+        <div class="card step-card">
+          <span class="step-num">2</span>
+          <div class="step-text">
+            <h4>Check Your Membership</h4>
+            <p>Your plan, remaining sessions, and expiry date — all visible in the app</p>
+          </div>
+        </div>
+        <div class="card step-card">
+          <span class="step-num">3</span>
+          <div class="step-text">
+            <h4>Book & Manage Classes</h4>
+            <p>Browse the schedule, reserve classes, and get reminders before each session</p>
+          </div>
+        </div>
+        <div class="card step-card">
+          <span class="step-num">4</span>
+          <div class="step-text">
+            <h4>Cancel If Needed</h4>
+            <p>Cancellation rules and limits are shown in the app — check before canceling</p>
+          </div>
+        </div>
+      </div>
+      <div class="app-highlight">
+        <div class="name">📱 Studio Mate</div>
+        <div class="desc">Your all-in-one app for booking, schedules, and reminders</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Facilities -->
+  <div class="slide" data-slide="7">
+    <span class="slide-number">08 / 09</span>
+    <div class="slide-title">
+      <div class="section-label">Facilities</div>
+      <h2>What's Available</h2>
+    </div>
+    <div class="facilities-grid">
+      <div class="card facility-card">
+        <div class="emoji">🚿</div>
+        <h4>Showers</h4>
+        <p>Available before and after class</p>
+      </div>
+      <div class="card facility-card">
+        <div class="emoji">🪞</div>
+        <h4>Changing Rooms</h4>
+        <p>Comfortable space to get ready</p>
+      </div>
+      <div class="card facility-card">
+        <div class="emoji">🧘</div>
+        <h4>Mat Storage</h4>
+        <p>Store your personal mat or use ours</p>
+      </div>
+      <div class="card facility-card">
+        <div class="emoji">🏋️</div>
+        <h4>Full Equipment</h4>
+        <p>Reformer, Cadillac, Chair, Barrel & more</p>
+      </div>
+      <div class="card facility-card">
+        <div class="emoji">🤸</div>
+        <h4>Aerial Setup</h4>
+        <p>Hammocks for bungee & flying yoga</p>
+      </div>
+      <div class="card facility-card">
+        <div class="emoji">📍</div>
+        <h4>Seoul Forest Area</h4>
+        <p>Easy access near Seoul Forest Station</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9: Closing -->
+  <div class="slide" data-slide="8">
+    <div class="closing-content">
+      <div class="section-label">Thank You</div>
+      <h2 class="closing-title">Ready to Start<br>Your Journey?</h2>
+      <p class="closing-sub">
+        We hope you enjoy training here and make great memories with us.<br>
+        If you need anything at all, just let us know.
+      </p>
+      <div class="closing-links">
+        <div class="closing-link"><strong>Website</strong> — afteryogapilates.com</div>
+        <div class="closing-link"><strong>Book a Trial</strong> — Ask staff</div>
+        <div class="closing-link"><strong>Instagram</strong> — @afteryogapilates</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <button id="prevBtn" onclick="changeSlide(-1)" disabled>← Prev</button>
+  <div class="progress-dots" id="dots"></div>
+  <button id="nextBtn" onclick="changeSlide(1)">Next →</button>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+const dotsWrap = document.getElementById('dots');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+
+// Build dots
+for (let i = 0; i < total; i++) {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goToSlide(i);
+  dotsWrap.appendChild(dot);
+}
+
+function goToSlide(n) {
+  slides[current].classList.remove('active');
+  dotsWrap.children[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  dotsWrap.children[current].classList.add('active');
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === total - 1;
+}
+
+function changeSlide(dir) {
+  const next = current + dir;
+  if (next >= 0 && next < total) goToSlide(next);
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
+  if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
+});
+
+// Touch swipe
+let touchStartX = 0;
+document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+document.addEventListener('touchend', (e) => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+});
+
+// Price tabs
+function showPriceTab(plan, btn) {
+  document.querySelectorAll('.price-table-wrap').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.price-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + plan).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>

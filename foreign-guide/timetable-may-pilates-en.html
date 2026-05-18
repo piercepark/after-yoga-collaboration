@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>May 2026 — After Pilates Timetable</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --text-primary: #0d0d0d;
+    --text-secondary: #4a4a4a;
+    --text-muted: #5e5e5e;
+    --border: #c8c4ba;
+    --c-pt1-bg: #bedfbe; --c-pt1-tx: #1f4828;
+    --c-pt2-bg: #bdc8ec; --c-pt2-tx: #1f3268;
+    --c-pt3-bg: #b099dc; --c-pt3-tx: #3a2562;
+    --c-pt4-bg: #f0bdca; --c-pt4-tx: #5e2535;
+  }
+
+  html, body {
+    width: 210mm;
+    margin: 0; padding: 0;
+    font-size: 8.5pt;
+    font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 5mm 6mm;
+    background: var(--surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── HEADER ── */
+  .page-header { flex-shrink: 0; margin-bottom: 2mm; }
+
+  .header-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.5mm;
+  }
+
+  h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15pt;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  h1 span {
+    font-size: 9pt;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+
+  .badge {
+    background: var(--text-primary);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 100px;
+    white-space: nowrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .subtitle {
+    font-size: 6.5pt;
+    color: var(--text-secondary);
+    margin: 0 0 1.5mm 0;
+    line-height: 1.5;
+  }
+
+  .week-guide {
+    font-size: 6pt;
+    color: var(--text-muted);
+    margin: 0 0 1.5mm 0;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2mm;
+    align-items: center;
+  }
+  .leg {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 6pt; color: var(--text-secondary);
+  }
+  .leg-dot {
+    width: 8px; height: 8px; border-radius: 2px;
+    flex-shrink: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .leg-dot.pt1 { background: var(--c-pt1-bg); border: 1px solid #a0c8a0; }
+  .leg-dot.pt2 { background: var(--c-pt2-bg); border: 1px solid #a0b0dd; }
+  .leg-dot.pt3 { background: var(--c-pt3-bg); border: 1px solid #a090cc; }
+  .leg-dot.pt4 { background: var(--c-pt4-bg); border: 1px solid #dda0b0; }
+
+  /* ── BODY ── */
+  .page-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .table-wrap {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: 1px solid var(--border);
+  }
+
+  thead th {
+    background: var(--text-primary);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 4px 3px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  thead th.th-time {
+    width: 20mm;
+    font-family: 'DM Mono', monospace;
+    font-size: 6pt;
+    background: #2a2a2a;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  thead th.th-week {
+    width: 11mm;
+    background: #3a3a3a;
+    font-size: 6pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .sec-row td {
+    background: #f0eeea;
+    color: var(--text-secondary);
+    font-size: 6pt;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  td { border: 1px solid var(--border); vertical-align: middle; }
+
+  .tc {
+    text-align: center;
+    padding: 3px 3px;
+    background: #fafaf8;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .tc .t {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 7pt;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+  .tc .dur {
+    display: block;
+    font-size: 5.5pt;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  .wc-every {
+    text-align: center;
+    padding: 3px 2px;
+    font-size: 5.8pt;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    background: #fdfdfc;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cc {
+    padding: 2px 2px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .cb {
+    display: block;
+    padding: 2px 3px;
+    border-radius: 3px;
+    font-size: 7pt;
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .inst {
+    display: block;
+    font-size: 5.8pt;
+    color: var(--text-secondary);
+    margin-top: 1px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  .c-pt1 { background: var(--c-pt1-bg); color: var(--c-pt1-tx); }
+  .c-pt2 { background: var(--c-pt2-bg); color: var(--c-pt2-tx); }
+  .c-pt3 { background: var(--c-pt3-bg); color: var(--c-pt3-tx); }
+  .c-pt4 { background: var(--c-pt4-bg); color: var(--c-pt4-tx); }
+
+  .cc.empty { background: #fafafa; }
+
+  /* ── NOTE STRIP ── */
+  .note-strip {
+    margin-top: 5px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: stretch;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .note-label {
+    background: var(--text-primary);
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 7pt;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .note-content {
+    flex: 1;
+    border-left: 1px solid var(--border);
+    padding: 5px 12px;
+    background: #fcfbfa;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .note-item {
+    font-size: 6pt;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .note-item strong {
+    display: block;
+    font-size: 6.2pt;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+  }
+  .note-rules {
+    border-left: 1px solid var(--border);
+    padding: 5px 10px;
+    background: #f9f8f5;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .note-rules .r-title {
+    font-size: 6pt; font-weight: 700; color: var(--text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 3px; font-family: 'DM Mono', monospace;
+  }
+  .note-rules .r-list {
+    font-size: 5.8pt; color: var(--text-muted); line-height: 1.8;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    flex-shrink: 0;
+    margin-top: 1.5mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 6.5pt;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  @media print {
+    @page { size: A4 portrait; margin: 0; }
+    html, body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+    * { box-shadow: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="header-top">
+      <h1>After Pilates Timetable <span>May 2026</span></h1>
+      <span class="badge">May 1 – 31, 2026</span>
+    </div>
+    <p class="subtitle">
+      Reservations open 3 days in advance via StudioMate app &nbsp;·&nbsp; 010-4463-2297 &nbsp;·&nbsp; Classes: 50 min &nbsp;·&nbsp; No weekend classes &nbsp;·&nbsp; Late arrivals not permitted
+    </p>
+    <p class="week-guide">
+      Same schedule every week — no week rotation &nbsp;·&nbsp; Closed: May 1 (Labor Day), May 5 (Children's Day)
+    </p>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot pt1"></div>Track 1 · Posture Correction</div>
+      <div class="leg"><div class="leg-dot pt2"></div>Track 2 · Core</div>
+      <div class="leg"><div class="leg-dot pt3"></div>Track 3 · Hip-up</div>
+      <div class="leg"><div class="leg-dot pt4"></div>Track 4 · Diet / Cardio</div>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <main class="page-body">
+    <div class="table-wrap">
+      <table>
+        <colgroup>
+          <col style="width:19mm">
+          <col style="width:10mm">
+          <col><col><col><col><col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="th-time">TIME</th>
+            <th class="th-week">WEEK</th>
+            <th>MON</th>
+            <th>TUE</th>
+            <th>WED</th>
+            <th>THU</th>
+            <th>FRI</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- ── MORNING ── -->
+          <tr class="sec-row">
+            <td colspan="7">▸ Morning Classes</td>
+          </tr>
+
+          <!-- 10:30 AM -->
+          <tr>
+            <td class="tc"><span class="t">10:30 AM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt1">Posture Correction</span><span class="inst">Seo Minjung T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Seo Minjung T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 11:30 AM -->
+          <tr>
+            <td class="tc"><span class="t">11:30 AM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Heeone T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt2">Core</span><span class="inst">Heeone T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt4">Diet</span><span class="inst">Heeone T</span></td>
+          </tr>
+
+          <!-- 12:00 PM -->
+          <tr>
+            <td class="tc"><span class="t">12:00 PM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Seo Minjung T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt2">Core</span><span class="inst">Seo Minjung T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 1:00 PM -->
+          <tr>
+            <td class="tc"><span class="t">1:00 PM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc"><span class="cb c-pt2">Core</span><span class="inst">Heeone T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Heeone T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt1">Posture Correction</span><span class="inst">Heeone T</span></td>
+          </tr>
+
+          <!-- ── EVENING ── -->
+          <tr class="sec-row">
+            <td colspan="7">▸ Evening Classes</td>
+          </tr>
+
+          <!-- 6:40 PM -->
+          <tr>
+            <td class="tc"><span class="t">6:40 PM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt2">Core</span><span class="inst">Minjung T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt2">Core</span><span class="inst">Minjung T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 7:00 PM -->
+          <tr>
+            <td class="tc"><span class="t">7:00 PM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc"><span class="cb c-pt1">Posture Correction</span><span class="inst">Yebin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Yebin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Mijeong T</span></td>
+          </tr>
+
+          <!-- 7:40 PM -->
+          <tr>
+            <td class="tc"><span class="t">7:40 PM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt2">Core</span><span class="inst">Minjung T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Minjung T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 8:00 PM -->
+          <tr>
+            <td class="tc"><span class="t">8:00 PM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Yebin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt4">Diet</span><span class="inst">Yebin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt1">Posture Correction</span><span class="inst">Mijeong T</span></td>
+          </tr>
+
+          <!-- 8:40 PM -->
+          <tr>
+            <td class="tc"><span class="t">8:40 PM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt3">Hip-up</span><span class="inst">Minjung T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt1">Posture Correction</span><span class="inst">Minjung T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 9:00 PM -->
+          <tr>
+            <td class="tc"><span class="t">9:00 PM</span><span class="dur">50 min</span></td>
+            <td class="wc-every">Every Wk</td>
+            <td class="cc"><span class="cb c-pt4">Diet</span><span class="inst">Yebin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-pt1">Posture Correction</span><span class="inst">Yebin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div><!-- /table-wrap -->
+
+    <!-- NOTE STRIP -->
+    <div class="note-strip">
+      <div class="note-label">INFO</div>
+      <div class="note-content">
+        <div class="note-item">
+          <strong>Instructors</strong>
+          Morning: Seo Minjung T (Tue/Thu) · Heeone T (Mon/Wed/Fri)<br>
+          Evening: Minjung T (Tue/Thu) · Yebin T (Mon/Wed) · Mijeong T (Fri)
+        </div>
+        <div class="note-item">
+          <strong>Tracks</strong>
+          Track 1 Posture &nbsp;·&nbsp; Track 2 Core<br>
+          Track 3 Hip-up &nbsp;·&nbsp; Track 4 Diet
+        </div>
+        <div class="note-item">
+          <strong>Schedule</strong>
+          No Sat / Sun classes<br>
+          Same schedule every week
+        </div>
+      </div>
+      <div class="note-rules">
+        <div class="r-title">Class Rules</div>
+        <div class="r-list">
+          · Classes start on time<br>
+          · Late arrivals not permitted<br>
+          · No phones inside studio
+        </div>
+      </div>
+    </div><!-- /note-strip -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <span>After Yoga &amp; Pilates &nbsp;·&nbsp; May 2026 Pilates Timetable</span>
+    <span>Seoulsup · 010-4463-2297</span>
+  </footer>
+
+</div>
+</body>
+</html>

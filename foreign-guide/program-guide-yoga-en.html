@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>After Yoga — Program Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --text-primary: #0d0d0d;
+    --text-secondary: #4a4a4a;
+    --text-muted: #5e5e5e;
+    --border: #c8c4ba;
+    --c-lv1-bg: #c9e3c9; --c-lv1-tx: #1f4a30;
+    --c-lv2-bg: #c5d2ec; --c-lv2-tx: #1f3568;
+    --c-lv3-bg: #d3c8f0; --c-lv3-tx: #3a2560;
+    --c-lv4-bg: #f0c9d3; --c-lv4-tx: #5a2535;
+  }
+
+  html, body {
+    width: 210mm;
+    margin: 0; padding: 0;
+    font-size: 8.5pt;
+    font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 8mm 9mm;
+    background: var(--surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    flex-shrink: 0;
+    margin-bottom: 4mm;
+    padding-bottom: 3.5mm;
+    border-bottom: 1.5px solid var(--border);
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 2mm;
+  }
+  h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18pt;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+  }
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .badge {
+    background: var(--text-primary);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    padding: 3px 9px;
+    border-radius: 100px;
+    white-space: nowrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .subtitle {
+    font-size: 7pt;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ── BODY ── */
+  .page-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* ── GROUP BLOCK ── */
+  .group-block {
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION LABEL ── */
+  .sec-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 6pt;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 2mm;
+    flex-shrink: 0;
+  }
+
+  /* ── CLASS GRID ── */
+  .class-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5mm;
+  }
+
+  .class-card {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+    background: var(--surface);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .card-color-bar {
+    height: 4px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .bar-lv1 { background: var(--c-lv1-bg); }
+  .bar-lv2 { background: var(--c-lv2-bg); }
+  .bar-lv3 { background: var(--c-lv3-bg); }
+  .bar-lv4 { background: var(--c-lv4-bg); }
+
+  .card-body {
+    padding: 4px 6px 5px;
+  }
+  .card-tag {
+    display: inline-block;
+    font-size: 6pt;
+    font-weight: 700;
+    padding: 1.5px 5px;
+    border-radius: 3px;
+    margin-bottom: 3px;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .tag-lv1 { background: var(--c-lv1-bg); color: var(--c-lv1-tx); }
+  .tag-lv2 { background: var(--c-lv2-bg); color: var(--c-lv2-tx); }
+  .tag-lv3 { background: var(--c-lv3-bg); color: var(--c-lv3-tx); }
+  .tag-lv4 { background: var(--c-lv4-bg); color: var(--c-lv4-tx); }
+
+  .card-name {
+    font-size: 8pt;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .card-desc {
+    font-size: 6.2pt;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    flex-shrink: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── BENEFIT + PRICE STRIP ── */
+  .bottom-row {
+    display: flex;
+    gap: 3mm;
+    flex-shrink: 0;
+  }
+
+  .benefit-card {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .benefit-header {
+    background: var(--text-primary);
+    color: #fff;
+    padding: 4px 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .benefit-body {
+    padding: 5px 8px;
+    background: #fafaf8;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    font-size: 6.2pt;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .benefit-item::before {
+    content: '·';
+    color: var(--text-muted);
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+
+  .price-card {
+    width: 60mm;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .price-header {
+    background: var(--text-primary);
+    color: #fff;
+    padding: 4px 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .price-body {
+    padding: 5px 8px;
+    background: #fafaf8;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2px 0;
+    border-bottom: 1px solid var(--border);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .price-row:last-child { border-bottom: none; }
+  .price-dur {
+    font-size: 6.5pt;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-family: 'DM Mono', monospace;
+  }
+  .price-detail {
+    font-size: 5.8pt;
+    color: var(--text-muted);
+  }
+  .price-val {
+    font-size: 7pt;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-family: 'DM Mono', monospace;
+  }
+  .price-note {
+    font-size: 5.5pt;
+    color: var(--text-muted);
+    margin-top: 3px;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    flex-shrink: 0;
+    margin-top: 3mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 6.5pt;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  @media print {
+    @page { size: A4 portrait; margin: 0; }
+    html, body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+    * { box-shadow: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="header-top">
+      <div>
+        <div class="eyebrow">After Yoga &amp; Pilates — Seoulsup</div>
+        <h1>Yoga Program Guide</h1>
+      </div>
+      <span class="badge">60 min · All levels welcome</span>
+    </div>
+    <p class="subtitle">
+      All classes are 60 minutes · Group classes (max 15 per session) · Reservations via StudioMate app, 3 days in advance · 010-4463-2297
+    </p>
+  </header>
+
+  <!-- BODY -->
+  <main class="page-body">
+
+    <!-- GROUP 1: Stretch / Calm -->
+    <div class="group-block">
+      <div class="sec-label">🟢 Stretch · Relax · Calm</div>
+      <div class="class-grid">
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv1"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv1">Healing</span>
+            <div class="card-name">Healing Yoga</div>
+            <div class="card-desc">Gentle stretching and breathing to release daily tension. Perfect for beginners and those seeking relaxation.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv1"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv1">Emboring</span>
+            <div class="card-name">Emboring</div>
+            <div class="card-desc">Slow, mindful movement combining elements of Yin and restorative yoga. Deep muscle release and inner calm.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv1"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv1">Core Therapy</span>
+            <div class="card-name">Core Therapy</div>
+            <div class="card-desc">Therapeutic core activation with a focus on alignment and breath. Low-impact, safe for all levels.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv1"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv1">Today's Pose</span>
+            <div class="card-name">Today's Pose</div>
+            <div class="card-desc">Each session focuses on one signature pose with step-by-step guidance. Great for learning proper form.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GROUP 2: Posture / Balance -->
+    <div class="group-block">
+      <div class="sec-label">🔵 Posture · Balance · Flexibility</div>
+      <div class="class-grid">
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Hatha</span>
+            <div class="card-name">Hatha Yoga</div>
+            <div class="card-desc">Classic yoga postures held with steady breath. Builds strength, flexibility, and body awareness systematically.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Pelvic Therapy</span>
+            <div class="card-name">Pelvic Therapy</div>
+            <div class="card-desc">Targeted movement for pelvic floor and hip alignment. Effective for posture correction and low-back relief.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Balance</span>
+            <div class="card-name">Balance Yoga</div>
+            <div class="card-desc">Standing and balancing poses to improve coordination, joint stability, and proprioception.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Spine Therapy</span>
+            <div class="card-name">Spine Therapy</div>
+            <div class="card-desc">Focused on spinal mobility and decompression. Ideal for office workers and those with back discomfort.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Evolution Flow</span>
+            <div class="card-name">Evolution Flow</div>
+            <div class="card-desc">Smooth transitions between postures with an emphasis on spinal articulation and body-mind connection.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GROUP 3: Core / Strength -->
+    <div class="group-block">
+      <div class="sec-label">🟣 Core · Strength</div>
+      <div class="class-grid">
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv3"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv3">Healing Vinyasa</span>
+            <div class="card-name">Healing Vinyasa</div>
+            <div class="card-desc">A gentler vinyasa flow that links breath and movement. Builds strength without overexertion.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv3"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv3">Hip-up Pilates</span>
+            <div class="card-name">Hip-up Pilates</div>
+            <div class="card-desc">Pilates-based hip and glute work woven into a yoga frame. Lifts and tones the lower body with controlled, low-impact movement.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv3"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv3">Core Yoga</span>
+            <div class="card-name">Core Yoga</div>
+            <div class="card-desc">Yoga poses selected specifically to activate deep core muscles. Builds a stable center for all movement.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv3"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv3">Mat Pilates</span>
+            <div class="card-name">Mat Pilates</div>
+            <div class="card-desc">Pilates-based floor work focusing on core, posture, and controlled breathing. No equipment needed.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GROUP 4: Cardio / Aerial -->
+    <div class="group-block">
+      <div class="sec-label">🔴 Cardio · Fat Burn · Aerial</div>
+      <div class="class-grid">
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Vinyasa</span>
+            <div class="card-name">Vinyasa Flow</div>
+            <div class="card-desc">Dynamic flow linking poses with breath. Elevates heart rate, burns calories, and builds lean muscle.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Vinyasa Basic</span>
+            <div class="card-name">Vinyasa Basic</div>
+            <div class="card-desc">Introduction to vinyasa for those new to dynamic yoga. Learn sun salutations and foundational flows.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Ashtanga</span>
+            <div class="card-name">Ashtanga</div>
+            <div class="card-desc">Traditional sequential yoga series. Builds heat, strength, and focus through a fixed, progressive sequence.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Flying A / G</span>
+            <div class="card-name">Flying (Aerial Yoga)</div>
+            <div class="card-desc">Supported by a silk hammock — decompress the spine, improve flexibility, and defy gravity. Truly unique experience.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Bungee</span>
+            <div class="card-name">Bungee Fitness</div>
+            <div class="card-desc">High-energy cardio using a bungee harness. Full-body workout that's equal parts fun and effective fat-burning.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- BOTTOM ROW: Benefits + Price -->
+    <div class="bottom-row">
+
+      <div class="benefit-card">
+        <div class="benefit-header">WHY AFTER YOGA</div>
+        <div class="benefit-body">
+          <div class="benefit-item">Expert instructors with professional certifications in each discipline</div>
+          <div class="benefit-item">Small group classes (max 15) for personalised attention</div>
+          <div class="benefit-item">18+ class types to keep your practice fresh and progressive</div>
+          <div class="benefit-item">Flexible scheduling — morning &amp; evening slots, Mon–Fri + Sat</div>
+          <div class="benefit-item">Combo membership: combine Yoga + Pilates in one pass</div>
+          <div class="benefit-item">Free trial class — fee applied toward membership on signup</div>
+        </div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-header">YOGA MEMBERSHIP</div>
+        <div class="price-body">
+          <div class="price-row">
+            <div><div class="price-dur">3.5 months</div><div class="price-detail">32 classes incl.</div></div>
+            <div class="price-val">₩720,000</div>
+          </div>
+          <div class="price-row">
+            <div><div class="price-dur">7 months</div><div class="price-detail">64 classes incl.</div></div>
+            <div class="price-val">₩1,060,000</div>
+          </div>
+          <div class="price-row">
+            <div><div class="price-dur">14 months</div><div class="price-detail">128 classes incl.</div></div>
+            <div class="price-val">₩1,630,000</div>
+          </div>
+          <div class="price-row">
+            <div><div class="price-dur">28 months</div><div class="price-detail">256 classes incl.</div></div>
+            <div class="price-val">₩2,690,000</div>
+          </div>
+          <div class="price-note">
+            Trial class ₩30,000 (credited on signup)<br>
+            All plans include bonus sessions · Prices incl. VAT
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <span>After Yoga &amp; Pilates &nbsp;·&nbsp; Yoga Program Guide</span>
+    <span>Seoulsup &nbsp;·&nbsp; 010-4463-2297</span>
+  </footer>
+
+</div>
+</body>
+</html>

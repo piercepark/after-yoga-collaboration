@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>After Yoga &amp; Pilates · Seoulsup — Foreign Member Guide</title>
+<meta name="description" content="A complete English guide to After Yoga &amp; Pilates Seoulsup — timetables, programs, pricing, and everything you need to know before joining.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --text-primary: #0d0d0d;
+    --text-secondary: #4a4a4a;
+    --text-muted: #5e5e5e;
+    --border: #d4d0c5;
+    --accent: #059669;
+    --accent-soft: #e6f5ee;
+    --accent-blue: #3b82f6;
+    --accent-amber: #d97706;
+    --accent-purple: #7c3aed;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 22px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.05);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.06), 0 12px 36px rgba(0,0,0,0.08);
+    --shadow-hover: 0 4px 12px rgba(0,0,0,0.08), 0 20px 56px rgba(0,0,0,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text-primary);
+    font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 64px 0 48px;
+    text-align: left;
+  }
+  .hero-brand {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 18px;
+  }
+  .hero h1 .light {
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 580px;
+    font-weight: 400;
+  }
+
+  /* ── QUICK BAR ── */
+  .quick-bar {
+    margin: 32px 0 56px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .quick-cell {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+  }
+  .quick-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .quick-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+  .quick-value a {
+    color: var(--accent);
+  }
+  .quick-value a:hover { text-decoration: underline; }
+
+  /* ── SECTION HEADER ── */
+  .section {
+    margin-bottom: 44px;
+  }
+  .section-head {
+    margin-bottom: 18px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .section-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* ── CARD GRID ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .card-grid.full {
+    grid-template-columns: 1fr;
+  }
+
+  .file-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .file-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .file-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    background: #fafaf8;
+  }
+  .file-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .file-icon.green { background: #d1fae5; color: #059669; }
+  .file-icon.blue { background: #dbeafe; color: #2563eb; }
+  .file-icon.amber { background: #fef3c7; color: #d97706; }
+  .file-icon.purple { background: #ede9fe; color: #7c3aed; }
+  .file-icon.rose { background: #ffe4e6; color: #e11d48; }
+
+  .file-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  .file-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+  .file-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .file-body {
+    padding: 16px 18px 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .file-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .file-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.55;
+  }
+  .file-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+  .file-action svg {
+    transition: transform 0.2s ease;
+  }
+  .file-card:hover .file-action svg {
+    transform: translateX(3px);
+  }
+
+  /* ── HIGHLIGHT BAR ── */
+  .highlight-bar {
+    background: var(--accent-soft);
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: 18px 22px;
+    margin: 0 0 44px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .highlight-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .highlight-text {
+    flex: 1;
+    min-width: 240px;
+  }
+  .highlight-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .highlight-sub {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .highlight-btn {
+    background: var(--accent);
+    color: white;
+    padding: 11px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.2s ease, transform 0.2s ease;
+    white-space: nowrap;
+  }
+  .highlight-btn:hover {
+    background: #047857;
+    transform: translateY(-1px);
+  }
+
+  /* ── PRICING ROW ── */
+  .pricing-summary {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .pricing-row {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: baseline;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .pricing-row:last-child { border-bottom: none; }
+  .price-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+  .price-name small {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+  .price-per {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .price-total {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .pricing-note {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--border);
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin: 56px 0 48px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+  }
+  .footer-brand {
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+  .footer-links {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .footer-links a {
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+  }
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .hero { padding: 44px 0 36px; }
+    .hero h1 { font-size: 32px; }
+    .hero-sub { font-size: 15px; }
+    .quick-bar {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin: 24px 0 40px;
+    }
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+    .section-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .highlight-bar {
+      padding: 16px 18px;
+    }
+    .highlight-btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ── HERO ── -->
+  <header class="hero">
+    <div class="hero-brand">After Yoga &amp; Pilates · Seoulsup</div>
+    <h1>Your English guide<br><span class="light">to our studio.</span></h1>
+    <p class="hero-sub">
+      Everything you need before joining — class schedules, program details, pricing, and answers to common questions. Designed for our foreign members in Seoul.
+    </p>
+  </header>
+
+  <!-- ── QUICK BAR ── -->
+  <div class="quick-bar">
+    <div class="quick-cell">
+      <div class="quick-label">Location</div>
+      <div class="quick-value">B1, Starbucks Bldg.<br>50 Wangsimni-ro, Seongdong-gu</div>
+    </div>
+    <div class="quick-cell">
+      <div class="quick-label">Nearest Station</div>
+      <div class="quick-value">Seoulsup Station<br>(Suin-Bundang Line) · Exit 2</div>
+    </div>
+    <div class="quick-cell">
+      <div class="quick-label">Contact</div>
+      <div class="quick-value"><a href="tel:+82-10-4463-2297">010-4463-2297</a><br><a href="https://www.instagram.com/afteryogapilates/" target="_blank" rel="noopener">@afteryogapilates</a></div>
+    </div>
+  </div>
+
+  <!-- ── HIGHLIGHT — TRIAL CTA ── -->
+  <div class="highlight-bar">
+    <div class="highlight-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+    </div>
+    <div class="highlight-text">
+      <div class="highlight-title">Book a Trial Class · ₩30,000</div>
+      <div class="highlight-sub">Includes free InBody check &amp; studio tour. Trial fee is fully credited toward your membership when you sign up.</div>
+    </div>
+    <a href="https://m.site.naver.com/1PkbS" target="_blank" rel="noopener" class="highlight-btn">Reserve →</a>
+  </div>
+
+  <!-- ── SECTION 1 · TIMETABLES ── -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">01 · May 2026 Timetables</div>
+      <div class="section-sub">Updated monthly · biweekly rotation for yoga</div>
+    </div>
+    <div class="card-grid">
+
+      <a href="timetable-may-yoga-en.html" class="file-card">
+        <div class="file-header">
+          <div class="file-icon green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="file-meta">
+            <div class="file-name">timetable-may-yoga.html</div>
+            <div class="file-sub">A4 · color-coded</div>
+          </div>
+        </div>
+        <div class="file-body">
+          <div>
+            <div class="file-title">Yoga Timetable</div>
+            <div class="file-desc">All May yoga classes — Hatha, Vinyasa, Ashtanga, Flying, Bungee, plus biweekly Saturday specials with Eunho T.</div>
+          </div>
+          <div class="file-action">Open <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </a>
+
+      <a href="timetable-may-pilates-en.html" class="file-card">
+        <div class="file-header">
+          <div class="file-icon purple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="file-meta">
+            <div class="file-name">timetable-may-pilates.html</div>
+            <div class="file-sub">A4 · 4-track system</div>
+          </div>
+        </div>
+        <div class="file-body">
+          <div>
+            <div class="file-title">Pilates Timetable</div>
+            <div class="file-desc">All May pilates classes organized by track — Posture Correction, Core, Hip-up, and Diet. Same schedule every week.</div>
+          </div>
+          <div class="file-action">Open <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── SECTION 2 · PROGRAM GUIDES ── -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">02 · Program Guides</div>
+      <div class="section-sub">What each class is and who it's for</div>
+    </div>
+    <div class="card-grid">
+
+      <a href="program-guide-yoga-en.html" class="file-card">
+        <div class="file-header">
+          <div class="file-icon green">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="file-meta">
+            <div class="file-name">program-guide-yoga.html</div>
+            <div class="file-sub">All yoga styles explained</div>
+          </div>
+        </div>
+        <div class="file-body">
+          <div>
+            <div class="file-title">Yoga Program Guide</div>
+            <div class="file-desc">Hatha, Vinyasa, Ashtanga, Healing, Flying, Bungee and more — color-coded by intensity and goal, with a one-glance description of each.</div>
+          </div>
+          <div class="file-action">Open <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </a>
+
+      <a href="program-guide-pilates-en.html" class="file-card">
+        <div class="file-header">
+          <div class="file-icon purple">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="file-meta">
+            <div class="file-name">program-guide-pilates.html</div>
+            <div class="file-sub">4 tracks, instructor times</div>
+          </div>
+        </div>
+        <div class="file-body">
+          <div>
+            <div class="file-title">Pilates Program Guide</div>
+            <div class="file-desc">Each pilates track explained — Posture Correction, Core, Hip-up, and Diet/Cardio — with full weekly schedule and instructor info.</div>
+          </div>
+          <div class="file-action">Open <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── SECTION 3 · STUDIO INFO ── -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">03 · The Studio</div>
+      <div class="section-sub">Facilities, membership, and how it works</div>
+    </div>
+    <div class="card-grid">
+
+      <a href="studio-guide-en.html" class="file-card">
+        <div class="file-header">
+          <div class="file-icon blue">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="file-meta">
+            <div class="file-name">studio-guide.html</div>
+            <div class="file-sub">Full presentation</div>
+          </div>
+        </div>
+        <div class="file-body">
+          <div>
+            <div class="file-title">Studio Guide</div>
+            <div class="file-desc">Full overview of the studio — programs, schedule, membership plans, facilities, and what makes the experience different.</div>
+          </div>
+          <div class="file-action">Open <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </a>
+
+      <a href="studio-handout-en.html" class="file-card">
+        <div class="file-header">
+          <div class="file-icon amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="file-meta">
+            <div class="file-name">studio-handout.html</div>
+            <div class="file-sub">Quick one-page summary</div>
+          </div>
+        </div>
+        <div class="file-body">
+          <div>
+            <div class="file-title">Quick Handout</div>
+            <div class="file-desc">A short, scannable one-pager covering the essentials — programs, schedule, and pricing — for a faster overview.</div>
+          </div>
+          <div class="file-action">Open <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── SECTION 4 · Q&A ── -->
+  <section class="section">
+    <div class="section-head">
+      <div class="section-title">04 · Q &amp; A</div>
+      <div class="section-sub">14 common questions answered</div>
+    </div>
+    <div class="card-grid full">
+
+      <a href="member-qa-en.html" class="file-card">
+        <div class="file-header">
+          <div class="file-icon rose">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="file-meta">
+            <div class="file-name">member-qa.html</div>
+            <div class="file-sub">For new foreign members</div>
+          </div>
+        </div>
+        <div class="file-body">
+          <div>
+            <div class="file-title">Frequently Asked Questions</div>
+            <div class="file-desc">14 quick answers about classes, booking, the StudioMate app, biweekly rotation, language, membership, and more — the fastest way to get oriented before your first visit.</div>
+          </div>
+          <div class="file-action">Open <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-brand">After Yoga &amp; Pilates · Seoulsup © 2026</div>
+    <div class="footer-links">
+      <a href="https://m.site.naver.com/1PkbS" target="_blank" rel="noopener">Reserve Trial</a>
+      <a href="https://naver.me/x9BSBAKN" target="_blank" rel="noopener">Naver Map</a>
+      <a href="https://www.instagram.com/afteryogapilates/" target="_blank" rel="noopener">Instagram</a>
+      <a href="tel:+82-10-4463-2297">010-4463-2297</a>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>

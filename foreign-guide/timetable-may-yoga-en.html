@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>May 2026 — After Yoga Timetable</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f3ee;
+    --surface: #ffffff;
+    --text-primary: #0d0d0d;
+    --text-secondary: #4a4a4a;
+    --text-muted: #5e5e5e;
+    --border: #c8c4ba;
+    --c-lv1-bg: #c9e3c9; --c-lv1-tx: #1f4a30;
+    --c-lv2-bg: #c5d2ec; --c-lv2-tx: #1f3568;
+    --c-lv3-bg: #d3c8f0; --c-lv3-tx: #3a2560;
+    --c-lv4-bg: #f0c9d3; --c-lv4-tx: #5a2535;
+  }
+
+  html, body {
+    width: 210mm;
+    margin: 0; padding: 0;
+    font-size: 8.5pt;
+    font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 5mm 6mm;
+    background: var(--surface);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ── HEADER ── */
+  .page-header { flex-shrink: 0; margin-bottom: 2mm; }
+
+  .header-top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.5mm;
+  }
+
+  h1 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15pt;
+    font-weight: 700;
+    margin: 0;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  h1 span {
+    font-size: 9pt;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0;
+    margin-left: 6px;
+  }
+
+  .badge {
+    background: var(--text-primary);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 6.5pt;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 100px;
+    white-space: nowrap;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .subtitle {
+    font-size: 6.5pt;
+    color: var(--text-secondary);
+    margin: 0 0 1.5mm 0;
+    line-height: 1.5;
+  }
+
+  .week-guide {
+    font-size: 6pt;
+    color: var(--text-muted);
+    margin: 0 0 1.5mm 0;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 2mm;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .leg {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 6pt; color: var(--text-secondary);
+    font-family: 'DM Sans', sans-serif;
+  }
+  .leg-dot {
+    width: 8px; height: 8px; border-radius: 2px;
+    flex-shrink: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .leg-dot.lv1 { background: var(--c-lv1-bg); border: 1px solid #b0d4b8; }
+  .leg-dot.lv2 { background: var(--c-lv2-bg); border: 1px solid #b0bedd; }
+  .leg-dot.lv3 { background: var(--c-lv3-bg); border: 1px solid #c0b0dd; }
+  .leg-dot.lv4 { background: var(--c-lv4-bg); border: 1px solid #ddb0bd; }
+
+  /* ── BODY ── */
+  .page-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    flex: 1;
+    min-width: 0;
+    min-height: 0;
+  }
+
+  table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    border: 1px solid var(--border);
+  }
+
+  thead th {
+    background: var(--text-primary);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 7pt;
+    font-weight: 700;
+    padding: 4px 3px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  thead th.th-time {
+    width: 22mm;
+    font-family: 'DM Mono', monospace;
+    font-size: 6pt;
+    background: #2a2a2a;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  thead th.th-week {
+    width: 12mm;
+    background: #3a3a3a;
+    font-size: 6pt;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Section divider rows */
+  .sec-row td {
+    background: #f0eeea;
+    color: var(--text-secondary);
+    font-size: 6pt;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  td { border: 1px solid var(--border); vertical-align: middle; }
+
+  /* Time cell */
+  .tc {
+    text-align: center;
+    padding: 3px 3px;
+    background: #fafaf8;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .tc .t {
+    display: block;
+    font-family: 'DM Mono', monospace;
+    font-size: 7pt;
+    font-weight: 500;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+  .tc .dur {
+    display: block;
+    font-size: 5.5pt;
+    color: var(--text-muted);
+    margin-top: 1px;
+  }
+
+  /* Week cell */
+  .wc {
+    text-align: center;
+    padding: 3px 2px;
+    font-size: 5.8pt;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    background: #fdfdfc;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Class cell */
+  .cc {
+    padding: 2px 2px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .cb {
+    display: block;
+    padding: 2px 3px;
+    border-radius: 3px;
+    font-size: 7pt;
+    font-weight: 700;
+    line-height: 1.2;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .inst {
+    display: block;
+    font-size: 5.8pt;
+    color: var(--text-secondary);
+    margin-top: 1px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+  }
+
+  .c-lv1 { background: var(--c-lv1-bg); color: var(--c-lv1-tx); }
+  .c-lv2 { background: var(--c-lv2-bg); color: var(--c-lv2-tx); }
+  .c-lv3 { background: var(--c-lv3-bg); color: var(--c-lv3-tx); }
+  .c-lv4 { background: var(--c-lv4-bg); color: var(--c-lv4-tx); }
+
+  /* empty cell */
+  .cc.empty { background: #fafafa; }
+
+  /* ── SATURDAY STRIP ── */
+  .sat-strip {
+    margin-top: 5px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: stretch;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sat-label {
+    background: var(--text-primary);
+    color: #fff;
+    padding: 6px 7px;
+    font-size: 7.5pt;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sat-group {
+    flex: 1;
+    border-left: 1px solid var(--border);
+    padding: 5px 10px;
+    background: #fcfbfa;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sat-wk-badge {
+    font-size: 6pt;
+    font-weight: 700;
+    color: #fff;
+    background: #5a6a80;
+    padding: 2px 6px;
+    margin-bottom: 5px;
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sat-classes { display: flex; gap: 10px; }
+  .sat-item { }
+  .si-time {
+    font-size: 5.8pt;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+    margin-bottom: 2px;
+  }
+  .si-class {
+    font-size: 6.5pt;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 3px;
+    display: inline-block;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .si-inst {
+    font-size: 5.5pt;
+    color: var(--text-muted);
+    margin-top: 1px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .sat-rules {
+    border-left: 1px solid var(--border);
+    padding: 5px 10px;
+    background: #f9f8f5;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sat-rules .r-title {
+    font-size: 6pt; font-weight: 700; color: var(--text-muted);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-bottom: 3px; font-family: 'DM Mono', monospace;
+  }
+  .sat-rules .r-list {
+    font-size: 5.8pt; color: var(--text-muted); line-height: 1.8;
+  }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    flex-shrink: 0;
+    margin-top: 1.5mm;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 6.5pt;
+    color: var(--text-muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  @media print {
+    @page { size: A4 portrait; margin: 0; }
+    html, body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+    * { box-shadow: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="header-top">
+      <h1>After Yoga Timetable <span>May 2026</span></h1>
+      <span class="badge">May 1 – 31, 2026</span>
+    </div>
+    <p class="subtitle">
+      Reservations open 3 days in advance via StudioMate app &nbsp;·&nbsp; 010-4463-2297 &nbsp;·&nbsp; Classes: 60 min (Mon 10:30 Hatha: 80 min) &nbsp;·&nbsp; Late arrivals not permitted
+    </p>
+    <p class="week-guide">
+      Week 2: May 4–9 &nbsp;·&nbsp; Week 3: May 11–16 &nbsp;·&nbsp; Week 4: May 18–23 &nbsp;·&nbsp; Week 5: May 25–30 &nbsp;·&nbsp; Closed: May 1 (Labor Day), May 5 (Children's Day)
+    </p>
+    <div class="legend">
+      <div class="leg"><div class="leg-dot lv1"></div>Stretch / Relax / Calm</div>
+      <div class="leg"><div class="leg-dot lv2"></div>Posture / Balance / Flexibility</div>
+      <div class="leg"><div class="leg-dot lv3"></div>Core / Strength</div>
+      <div class="leg"><div class="leg-dot lv4"></div>Cardio / Fat Burn</div>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <main class="page-body">
+    <div class="table-wrap">
+      <table>
+        <colgroup>
+          <col style="width:20mm">
+          <col style="width:11mm">
+          <col><col><col><col><col>
+        </colgroup>
+        <thead>
+          <tr>
+            <th class="th-time">TIME</th>
+            <th class="th-week">WEEK</th>
+            <th>MON</th>
+            <th>TUE</th>
+            <th>WED</th>
+            <th>THU</th>
+            <th>FRI</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- ── AM SECTION ── -->
+          <tr class="sec-row">
+            <td colspan="7">▸ Morning Classes</td>
+          </tr>
+
+          <!-- 10:00 AM — Bungee (Tue) -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">10:00 AM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 10:30 AM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">10:30 AM</span><span class="dur">60 / 80 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc"><span class="cb c-lv2">Hatha (80m)</span><span class="inst">Ria T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Frida T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Hatha</span><span class="inst">Frida T</span></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc"><span class="cb c-lv2">Hatha (80m)</span><span class="inst">Ria T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Frida T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Hatha</span><span class="inst">Frida T</span></td>
+          </tr>
+
+          <!-- 11:30 AM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">11:30 AM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv3">Healing Vinyasa</span><span class="inst">Nahyun T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Ashtanga</span><span class="inst">Ria T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv3">Core Yoga</span><span class="inst">Nahyun T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Pelvic Therapy</span><span class="inst">Ria T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 12:10 PM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">12:10 PM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc"><span class="cb c-lv1">Core Therapy</span><span class="inst">Ria T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Flying A</span><span class="inst">Frida T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv3">Mat Pilates</span><span class="inst">Frida T</span></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc"><span class="cb c-lv2">Balance</span><span class="inst">Ria T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Pelvic Therapy</span><span class="inst">Frida T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv3">Mat Pilates</span><span class="inst">Frida T</span></td>
+          </tr>
+
+          <!-- 1:00 PM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">1:00 PM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv1">Healing</span><span class="inst">Ria T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv1">Emboring</span><span class="inst">Ria T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- ── PM SECTION ── -->
+          <tr class="sec-row">
+            <td colspan="7">▸ Evening Classes</td>
+          </tr>
+
+          <!-- 6:40 PM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">6:40 PM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Kyungjin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Today's Pose</span><span class="inst">Mona T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Noah T</span></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc"><span class="cb c-lv1">Healing</span><span class="inst">Kyungjin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Flying G</span><span class="inst">Mona T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Balance</span><span class="inst">Noah T</span></td>
+          </tr>
+
+          <!-- 7:00 PM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">7:00 PM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Hatha</span><span class="inst">Sunha T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Flying A</span><span class="inst">Marisa T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Flying A</span><span class="inst">Sunha T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv3">Hip-up Pilates</span><span class="inst">Marisa T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 8:00 PM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">8:00 PM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc"><span class="cb c-lv2">Spine Therapy</span><span class="inst">Kyungjin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Flying G</span><span class="inst">Mona T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv1">Healing</span><span class="inst">Noah T</span></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Kyungjin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv1">Emboring</span><span class="inst">Mona T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Vinyasa Basic</span><span class="inst">Noah T</span></td>
+          </tr>
+
+          <!-- 8:20 PM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">8:20 PM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Evolution Flow</span><span class="inst">Sunha T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Hatha</span><span class="inst">Marisa T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv2">Hatha</span><span class="inst">Sunha T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Flying G</span><span class="inst">Marisa T</span></td>
+            <td class="cc empty"></td>
+          </tr>
+
+          <!-- 9:10 PM -->
+          <tr>
+            <td class="tc" rowspan="2"><span class="t">9:10 PM</span><span class="dur">60 min</span></td>
+            <td class="wc">Wk 3,5</td>
+            <td class="cc"><span class="cb c-lv2">Pelvic Therapy</span><span class="inst">Kyungjin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+          </tr>
+          <tr>
+            <td class="wc">Wk 2,4</td>
+            <td class="cc"><span class="cb c-lv4">Ashtanga Basic</span><span class="inst">Kyungjin T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
+            <td class="cc empty"></td>
+            <td class="cc empty"></td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div><!-- /table-wrap -->
+
+    <!-- SATURDAY STRIP -->
+    <div class="sat-strip">
+      <div class="sat-label">SAT</div>
+
+      <!-- Week 2: May 9 -->
+      <div class="sat-group">
+        <div class="sat-wk-badge">Week 2 · May 9 (Sat)</div>
+        <div class="sat-classes">
+          <div class="sat-item">
+            <div class="si-time">10:30 – 11:30</div>
+            <div class="si-class c-lv2">Hatha Chakra</div>
+            <div class="si-inst">Eunho T</div>
+          </div>
+          <div class="sat-item">
+            <div class="si-time">11:40 – 12:40</div>
+            <div class="si-class c-lv4">Ashtanga Vinyasa</div>
+            <div class="si-inst">Eunho T</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Week 4: May 23 -->
+      <div class="sat-group">
+        <div class="sat-wk-badge">Week 4 · May 23 (Sat)</div>
+        <div class="sat-classes">
+          <div class="sat-item">
+            <div class="si-time">10:30 – 11:30</div>
+            <div class="si-class c-lv2">Iyengar Hatha</div>
+            <div class="si-inst">Eunho T</div>
+          </div>
+          <div class="sat-item">
+            <div class="si-time">11:40 – 12:40</div>
+            <div class="si-class c-lv1">Aroma Singing Bowl</div>
+            <div class="si-inst">Eunho T</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rules -->
+      <div class="sat-rules">
+        <div class="r-title">Class Rules</div>
+        <div class="r-list">
+          · Classes start on time<br>
+          · Late arrivals not permitted<br>
+          · No phones inside studio
+        </div>
+      </div>
+    </div><!-- /sat-strip -->
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="page-footer">
+    <span>After Yoga &amp; Pilates &nbsp;·&nbsp; May 2026 Yoga Timetable</span>
+    <span>Seoulsup · 010-4463-2297</span>
+  </footer>
+
+</div>
+</body>
+</html>
