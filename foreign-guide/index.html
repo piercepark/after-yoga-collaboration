@@ -179,6 +179,74 @@
     transform: translateY(-1px);
   }
 
+  /* ── HERO STRIP ── */
+  .hero-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 40px;
+  }
+  .hero-strip-img {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+  }
+  .hero-strip-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .hero-strip-img:hover img { transform: scale(1.04); }
+
+  /* ── GALLERY MOSAIC ── */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 140px;
+    gap: 8px;
+  }
+  .gal {
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border-soft);
+    box-shadow: var(--shadow-sm);
+  }
+  .gal img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .gal:hover img { transform: scale(1.05); }
+  .gal.tall { grid-row: span 2; }
+  .gal.wide { grid-column: span 2; }
+  .gal.big  { grid-row: span 2; grid-column: span 2; }
+
+  /* ── PROGRAM HEADER IMAGE ── */
+  .program-cover {
+    aspect-ratio: 16 / 6;
+    margin: -28px -30px 20px;
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .program-cover img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .program-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.20) 100%);
+  }
+
   /* ── QUICK BAR ── */
   .quick-bar {
     margin: 40px 0 0;
@@ -874,6 +942,12 @@
     .cta-title { font-size: 22px; }
     .how-steps { grid-template-columns: 1fr; gap: 10px; }
     .how-cta-row a { width: 100%; justify-content: center; }
+    .hero-strip { grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 28px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 110px; }
+    .gal.big { grid-column: span 2; }
+    .gal.tall { grid-row: span 2; }
+    .gal.wide { grid-column: span 2; }
+    .program-cover { margin: -22px -22px 16px; aspect-ratio: 16 / 8; }
     .footer {
       flex-direction: column;
       align-items: flex-start;
@@ -934,6 +1008,12 @@
         <div class="quick-value"><a href="tel:+82-10-4463-2297">010-4463-2297</a></div>
       </div>
     </div>
+
+    <div class="hero-strip">
+      <div class="hero-strip-img"><img src="images/11.png" alt="Group yoga class at After Yoga &amp; Pilates" loading="lazy"></div>
+      <div class="hero-strip-img"><img src="images/02.png" alt="Reformer pilates session" loading="lazy"></div>
+      <div class="hero-strip-img"><img src="images/04.png" alt="Aerial flying yoga class" loading="lazy"></div>
+    </div>
   </header>
 
   <!-- ── ABOUT ── -->
@@ -992,6 +1072,25 @@
     </div>
   </section>
 
+  <!-- ── GALLERY ── -->
+  <section class="section" id="gallery">
+    <div class="section-head">
+      <div class="section-label">Inside the Studio</div>
+      <h2 class="section-title">A look around before you arrive.</h2>
+      <p class="section-lead">Group yoga, small-group reformer pilates, and aerial classes — all under one roof in Seongdong-gu.</p>
+    </div>
+
+    <div class="gallery">
+      <div class="gal big"><img src="images/07.png" alt="Large group yoga class" loading="lazy"></div>
+      <div class="gal tall"><img src="images/05.png" alt="Aerial flying yoga inversion" loading="lazy"></div>
+      <div class="gal"><img src="images/02.png" alt="Reformer pilates studio" loading="lazy"></div>
+      <div class="gal"><img src="images/14.png" alt="Bungee fitness class" loading="lazy"></div>
+      <div class="gal"><img src="images/03.png" alt="One-on-one yoga adjustment" loading="lazy"></div>
+      <div class="gal wide"><img src="images/15.png" alt="Partner yoga stretching" loading="lazy"></div>
+      <div class="gal"><img src="images/13.png" alt="Yoga wheel and aerial work" loading="lazy"></div>
+    </div>
+  </section>
+
   <!-- ── PROGRAMS ── -->
   <section class="section" id="programs">
     <div class="section-head">
@@ -1004,6 +1103,7 @@
 
     <!-- Yoga -->
     <div class="program-block">
+      <div class="program-cover"><img src="images/08.png" alt="Yoga mat class at After Yoga &amp; Pilates" loading="lazy"></div>
       <div class="program-head">
         <div class="program-title">Yoga · 60 min<small>Mon Hatha: 80 min · Class capacity varies by style</small></div>
         <a href="program-guide-yoga-en.html" class="program-link">Full guide
@@ -1037,6 +1137,7 @@
 
     <!-- Pilates -->
     <div class="program-block">
+      <div class="program-cover"><img src="images/01.png" alt="Reformer pilates session" loading="lazy"></div>
       <div class="program-head">
         <div class="program-title">Pilates · 50 min<small>Small group reformer · 4 tracks · Mon–Fri only</small></div>
         <a href="program-guide-pilates-en.html" class="program-link">Full guide
