@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>젝시믹스 임직원 혜택 적용가 — 애프터 요가&필라테스</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:      #0e0e0e;
+      --bg-elevated:  #161616;
+      --bg-overlay:   #1c1c1c;
+      --bg-subtle:    #242424;
+      --border:       rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --text-primary:   #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-tertiary:  #606060;
+      --accent:         #ff7043;
+      --accent-soft:    #ff8a65;
+      --glow-sm:  0 0 8px rgba(255,112,67,0.3);
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+    }
+
+    html, body {
+      width: 100%;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    .page {
+      max-width: 460px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+      position: relative;
+    }
+
+    /* ── HEADER ── */
+    .hero {
+      text-align: center;
+      padding: 8px 0 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px; height: 200px;
+      background: radial-gradient(ellipse, rgba(255,112,67,0.14) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px 4px 8px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.3);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(255,112,67,0.8);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero-title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ff7043 0%, #ff8a65 50%, #ffab91 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── 적용 기준 ── */
+    .rule-box {
+      background: linear-gradient(135deg, rgba(255,112,67,0.08) 0%, rgba(255,112,67,0.02) 100%);
+      border: 1px solid rgba(255,112,67,0.25);
+      border-radius: 14px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+    }
+    .rule-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin-bottom: 10px;
+    }
+    .rule-body {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+    .rule-body strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .rule-body .pct {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── 섹션 헤더 ── */
+    .section {
+      margin-bottom: 28px;
+    }
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      font-weight: 500;
+    }
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+    .section-note {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-bottom: 10px;
+      line-height: 1.55;
+    }
+
+    /* ── 가격 카드 ── */
+    .price-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      transition: border-color 0.2s;
+    }
+    .price-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .pc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border);
+    }
+    .pc-name {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+    }
+    .pc-savings {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.25);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .pc-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pc-row {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 10px;
+      align-items: baseline;
+    }
+    .pc-key {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .pc-row.normal .pc-val {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      text-decoration: line-through;
+      text-decoration-color: rgba(255,255,255,0.18);
+      text-decoration-thickness: 1px;
+    }
+    .pc-row.xex .pc-val {
+      font-size: 13.5px;
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .pc-row.xex .pc-val .price {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .pc-row.xex .pc-val .meta {
+      color: var(--text-secondary);
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    .pc-mix {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-left: 6px;
+    }
+
+    /* ── 보너스 박스 ── */
+    .bonus-banner {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      margin: 36px 0 16px;
+    }
+    .bonus-banner-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,112,67,0.5), transparent);
+    }
+    .bonus-banner-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: var(--accent-soft);
+      text-shadow: 0 0 10px rgba(255,112,67,0.4);
+    }
+
+    .bonus-card {
+      background: linear-gradient(135deg, rgba(255,112,67,0.1) 0%, rgba(255,112,67,0.03) 100%);
+      border: 1px solid rgba(255,112,67,0.3);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 24px;
+    }
+    .bonus-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .bonus-card-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+    .bonus-list {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bonus-list li {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.6;
+    }
+    .bonus-list li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .bonus-list .hl {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .bonus-list strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* ── 푸터 ── */
+    .footer-notes {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-notes-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 10px;
+    }
+    .footer-notes ul {
+      list-style: none;
+      padding: 0;
+    }
+    .footer-notes li {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      padding-left: 12px;
+      position: relative;
+      line-height: 1.7;
+      margin-bottom: 4px;
+    }
+    .footer-notes li::before {
+      content: '·';
+      position: absolute;
+      left: 2px;
+      color: var(--text-tertiary);
+    }
+
+    .brand-line {
+      margin-top: 24px;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 380px) {
+      .page { padding: 24px 16px 48px; }
+      .hero-title { font-size: 20px; }
+      .pc-row { grid-template-columns: 56px 1fr; gap: 8px; }
+      .pc-row.xex .pc-val { font-size: 12.5px; }
+      .pc-row.xex .pc-val .meta { font-size: 11.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Exclusive for XEXYMIX
+    </div>
+    <h1 class="hero-title">
+      젝시믹스 임직원<br>
+      <span class="gradient-text">혜택 적용가</span>
+    </h1>
+    <p class="hero-sub">
+      애프터 요가&amp;필라테스 서울숲점<br>
+      회원권별 임직원 전용 가격 · 횟수 · 기간
+    </p>
+  </header>
+
+  <!-- RULE -->
+  <div class="rule-box">
+    <div class="rule-title">APPLIED RULE</div>
+    <div class="rule-body">
+      일반 회원이 받는 <strong>서비스 포함 조건</strong>을 기준으로,<br>
+      결제 금액 <span class="pct">−10%</span> · 횟수·기간 <span class="pct">+20%</span> 추가 적용
+    </div>
+  </div>
+
+  <!-- 요가 -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">요가 회원권</h2>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">3개월권</div>
+        <div class="pc-savings">−72,000원 / +6회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">720,000원 · 3.5개월 · 32회</div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">648,000원</span> <span class="meta">· 4.2개월 · 38회</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">6개월권</div>
+        <div class="pc-savings">−106,000원 / +13회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">1,060,000원 · 7개월 · 64회</div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">954,000원</span> <span class="meta">· 8.4개월 · 77회</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">12개월권</div>
+        <div class="pc-savings">−163,000원 / +26회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">1,630,000원 · 14개월 · 128회</div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">1,467,000원</span> <span class="meta">· 16.8개월 · 154회</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">24개월권</div>
+        <div class="pc-savings">−269,000원 / +51회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">2,690,000원 · 28개월 · 256회</div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">2,421,000원</span> <span class="meta">· 33.6개월 · 307회</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 필라테스 -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">필라테스 회원권</h2>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">3개월권</div>
+        <div class="pc-savings">−77,000원 / +6회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">770,000원 · 3.5개월 · 32회</div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">693,000원</span> <span class="meta">· 4.2개월 · 38회</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">6개월권</div>
+        <div class="pc-savings">−115,000원 / +13회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">1,150,000원 · 7개월 · 64회</div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">1,035,000원</span> <span class="meta">· 8.4개월 · 77회</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">12개월권</div>
+        <div class="pc-savings">−182,000원 / +26회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">1,820,000원 · 14개월 · 128회</div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">1,638,000원</span> <span class="meta">· 16.8개월 · 154회</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">24개월권</div>
+        <div class="pc-savings">−307,000원 / +51회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">3,070,000원 · 28개월 · 256회</div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">2,763,000원</span> <span class="meta">· 33.6개월 · 307회</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 복합권 -->
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">복합권 <span style="font-size:12px;font-weight:500;color:var(--text-tertiary);letter-spacing:0;">요가 + 필라테스</span></h2>
+    </div>
+    <div class="section-note">요가 : 필라테스 = 2 : 1 비율 기본 (조정 가능)</div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">3개월권</div>
+        <div class="pc-savings">−75,000원 / +6회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">750,000원 · 3.5개월 · 32회 <span class="pc-mix">(요가 21·필라 11)</span></div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">675,000원</span> <span class="meta">· 4.2개월 · 38회 (요가 25·필라 13)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">6개월권</div>
+        <div class="pc-savings">−111,000원 / +13회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">1,110,000원 · 7개월 · 64회 <span class="pc-mix">(요가 43·필라 21)</span></div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">999,000원</span> <span class="meta">· 8.4개월 · 77회 (요가 52·필라 25)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">12개월권</div>
+        <div class="pc-savings">−171,000원 / +26회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">1,710,000원 · 14개월 · 128회 <span class="pc-mix">(요가 85·필라 43)</span></div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">1,539,000원</span> <span class="meta">· 16.8개월 · 154회 (요가 102·필라 52)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price-card">
+      <div class="pc-head">
+        <div class="pc-name">24개월권</div>
+        <div class="pc-savings">−290,000원 / +51회</div>
+      </div>
+      <div class="pc-rows">
+        <div class="pc-row normal">
+          <div class="pc-key">일반</div>
+          <div class="pc-val">2,900,000원 · 28개월 · 256회 <span class="pc-mix">(요가 171·필라 85)</span></div>
+        </div>
+        <div class="pc-row xex">
+          <div class="pc-key">임직원</div>
+          <div class="pc-val"><span class="price">2,610,000원</span> <span class="meta">· 33.6개월 · 307회 (요가 205·필라 102)</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BONUS -->
+  <div class="bonus-banner">
+    <span class="bonus-banner-line"></span>
+    <span class="bonus-banner-text">ONE MORE THING</span>
+    <span class="bonus-banner-line"></span>
+  </div>
+
+  <div class="bonus-card">
+    <div class="bonus-card-tag">Passive Stretching</div>
+    <div class="bonus-card-title">패시브스트레칭 전용 혜택</div>
+    <ul class="bonus-list">
+      <li>1회 체험 <strong>39,000원</strong> <span class="hl">(정가 대비 70% 할인)</span></li>
+      <li>정규 등록 시 <strong>20% 할인</strong></li>
+      <li>정규 등록 1회당 <strong>요가 그룹수업 1회 무료 추가</strong></li>
+      <li>예: 패시브 10회 등록 시 → 요가 그룹수업 10회 무료</li>
+    </ul>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-notes">
+    <div class="footer-notes-title">참고 사항</div>
+    <ul>
+      <li>적용 범위: 요가 · 필라테스 · 복합권 정기 그룹수업 회원권</li>
+      <li>0.2개월 ≈ 6일 (예: 4.2개월 = 4개월 6일, 33.6개월 = 33개월 18일)</li>
+      <li>횟수권(10·5회권) · 1:1 PT는 본 혜택 적용 외 — 별도 문의</li>
+      <li>패시브스트레칭은 위 회원권과 별도 운영되는 보너스 혜택</li>
+    </ul>
+  </div>
+
+  <div class="brand-line">After Yoga &amp; Pilates × XEXYMIX</div>
+
+</div>
+
+</body>
+</html>
