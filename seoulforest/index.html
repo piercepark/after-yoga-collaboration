@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>애프터 요가&필라테스 서울숲점 — 센터 소개 · 체험 안내</title>
 <meta property="og:title" content="애프터 요가&필라테스 서울숲점 — 무료 체험 안내">
-<meta property="og:description" content="서울숲역 · 요가 · 필라테스 · 1:1 PT — 커뮤니티 회원 전용 무료 1회 체험">
+<meta property="og:description" content="서울숲역 · 요가 · 필라테스 · 물리치료사 1:1 스트레칭 — 커뮤니티 회원 안내">
 <meta property="og:image" content="img/exterior.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -159,7 +159,7 @@
     <div class="hero-inner">
       <div class="badge"><span class="dot"></span>커뮤니티 회원 전용 · 무료 체험</div>
       <h1>애프터 요가<span class="grad">&amp;</span>필라테스<br>서울숲점</h1>
-      <p>서울숲역 · 요가 · 필라테스 · 1:1 PT</p>
+      <p>서울숲역 · 요가 · 필라테스 · 1:1 전문 스트레칭</p>
       <div class="hero-chips">
         <span class="chip"><b>무료</b> 1회 체험</span>
         <span class="chip">🚇 서울숲역</span>
@@ -272,6 +272,42 @@
     </div>
   </section>
 
+  <!-- 애프터스트레칭 (1:1 전문 스트레칭) -->
+  <section class="section">
+    <div class="eyebrow">1:1 Stretching</div>
+    <h2 class="h2">물리치료사 1:1<br>전문 스트레칭</h2>
+    <p class="lead" style="margin-bottom:22px;">같은 건물에서 함께 운영하는 <b style="color:var(--text)">애프터스트레칭</b>입니다. 물리치료사가 1:1로 굳은 근육과 관절 가동범위를 풀어주는 패시브 스트레칭 — 구기 종목으로 몸을 많이 쓰는 분들의 <b style="color:var(--text)">회복·부상 예방</b>에 특히 잘 맞습니다.</p>
+
+    <div class="trial">
+      <div class="kicker">1회 체험 · 50분 1:1</div>
+      <div class="price-flip">
+        <span class="price-now" style="font-size:38px;">35,000<span class="won">원</span></span>
+      </div>
+      <div class="note">물리치료사 1:1 · 예약제</div>
+
+      <div class="trial-grid">
+        <div class="tg">
+          <div class="k">체험 시간</div>
+          <div class="v">50분<small>1:1 패시브 스트레칭</small></div>
+        </div>
+        <div class="tg">
+          <div class="k">운영 시간</div>
+          <div class="v">평일 12:00~21:00<small>토·일 휴무</small></div>
+        </div>
+        <div class="tg full">
+          <div class="k">예약 방법</div>
+          <div class="v">요가&필라테스와 같은 번호 <b>010-4463-2297</b> (카톡/문자)로 예약·문의<small>원하시는 시간에 맞춰 1:1로 배정해 드립니다.</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gal" style="margin-top:18px;">
+      <div class="gi wide"><img loading="lazy" src="img/bareun-session.jpg" alt="물리치료사 1:1 스트레칭 세션"><div class="cap">물리치료사 1:1 세션</div></div>
+      <div class="gi"><img loading="lazy" src="img/bareun-room.jpg" alt="전용 스트레칭룸"><div class="cap">전용 스트레칭룸</div></div>
+      <div class="gi"><img loading="lazy" src="img/bareun-room2.jpg" alt="스트레칭룸 전경"><div class="cap">스트레칭룸 전경</div></div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section class="section">
     <div class="eyebrow">Contact</div>
@@ -321,8 +357,10 @@
 
 <script>
   var lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg');
-  document.getElementById('gal').addEventListener('click',function(e){
-    var img=e.target.closest('.gi') && e.target.closest('.gi').querySelector('img');
+  document.addEventListener('click',function(e){
+    var gi=e.target.closest('.gi');
+    if(!gi) return;
+    var img=gi.querySelector('img');
     if(!img) return;
     lbImg.src=img.src; lb.classList.add('open');
   });
