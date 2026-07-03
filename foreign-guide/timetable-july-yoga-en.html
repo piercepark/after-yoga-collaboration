@@ -2,139 +2,202 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>July 2026 — After Yoga Timetable</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f5f3ee;
+    --bg: #d9d6d0;
     --surface: #ffffff;
-    --text-primary: #0d0d0d;
-    --text-secondary: #4a4a4a;
-    --text-muted: #5e5e5e;
-    --border: #c8c4ba;
-    --c-lv1-bg: #c9e3c9; --c-lv1-tx: #1f4a30;
-    --c-lv2-bg: #c5d2ec; --c-lv2-tx: #1f3568;
-    --c-lv3-bg: #d3c8f0; --c-lv3-tx: #3a2560;
-    --c-lv4-bg: #f0c9d3; --c-lv4-tx: #5a2535;
+    --hd-bar: #fafaf8;
+    --leg-bar: #fdfdfc;
+    --sub-hd: #f0eeea;
+    --sec-row: #4a5568;
+    --sat-wk: #5a6a80;
+    --sat-bg: #fcfbfa;
+    --time-bg: #fafaf8;
+    --text-primary: #1a1a1a;
+    --text-secondary: #7a7a7a;
+    --text-muted: #a0a0a0;
+    --border: #b8b3a8;
+
+    --lv1-bg: #ddeedd; --lv1-text: #3a6b4a;
+    --lv2-bg: #dde4f5; --lv2-text: #3a4f80;
+    --lv3-bg: #e4ddf5; --lv3-text: #553a7a;
+    --lv4-bg: #f5dde4; --lv4-text: #7a3a4f;
   }
+
+  .c-lv1 { background: var(--lv1-bg); color: var(--lv1-text); }
+  .c-lv2 { background: var(--lv2-bg); color: var(--lv2-text); }
+  .c-lv3 { background: var(--lv3-bg); color: var(--lv3-text); }
+  .c-lv4 { background: var(--lv4-bg); color: var(--lv4-text); }
 
   html, body {
     width: 210mm;
-    margin: 0; padding: 0;
+    margin: 0;
+    padding: 0;
     font-size: 8.5pt;
     font-family: 'DM Sans', 'Noto Sans KR', sans-serif;
     background: var(--bg);
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    color: var(--text-primary);
   }
 
   .page {
     width: 210mm;
     height: 297mm;
     margin: 0 auto;
-    padding: 5mm 6mm;
-    background: var(--surface);
+    padding: 7mm 8mm 9.5mm;
+    background: white;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
   }
 
-  /* ── HEADER ── */
   .page-header { flex-shrink: 0; margin-bottom: 2mm; }
+  .page-body   { flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  .page-footer {
+    flex-shrink: 0;
+    margin-top: 2.2mm;
+    padding-bottom: 1mm;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4mm;
+    font-size: 6.5pt;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .page-footer span { white-space: nowrap; }
 
   .header-top {
     display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    margin-bottom: 1.5mm;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.2mm;
   }
-
-  h1 {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15pt;
-    font-weight: 700;
-    margin: 0;
-    color: var(--text-primary);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+  .header-top .title-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5mm;
+    width: 100%;
   }
-  h1 span {
-    font-size: 9pt;
-    font-weight: 400;
-    color: var(--text-secondary);
-    letter-spacing: 0;
-    margin-left: 6px;
+  .title-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3mm;
   }
-
-  .badge {
-    background: var(--text-primary);
-    color: #fff;
+  .eyebrow {
     font-family: 'DM Mono', monospace;
     font-size: 6.5pt;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 100px;
-    white-space: nowrap;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    color: var(--text-muted);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
   }
-
+  h1 { font-size: 15pt; font-weight: 700; margin: 0; letter-spacing: -0.025em; }
+  .header-badge {
+    background: var(--text-primary);
+    color: white;
+    padding: 1.2mm 3mm;
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 6.5pt;
+    font-weight: 600;
+  }
   .subtitle {
     font-size: 6.5pt;
     color: var(--text-secondary);
-    margin: 0 0 1.5mm 0;
-    line-height: 1.5;
+    margin: 0 0 1mm 0;
+    text-align: center;
+  }
+  .alert-text {
+    color: #b4232f;
+    font-weight: 800;
+  }
+
+  .header-info {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 49mm;
+    gap: 1.5mm;
+    align-items: stretch;
+    margin-bottom: 1.6mm;
   }
 
   .week-guide {
-    font-size: 6pt;
-    color: var(--text-muted);
-    margin: 0 0 1.5mm 0;
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* ── LEGEND ── */
-  .legend {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 2mm;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "title list"
+      "note note";
     align-items: center;
-    flex-wrap: wrap;
+    gap: 1.2mm 2mm;
+    padding: 1.7mm 2mm;
+    margin: 0;
+    background: #f4f7fb;
+    border: 1.4px solid #7e95b6;
+    border-radius: 5px;
   }
-  .leg {
-    display: flex; align-items: center; gap: 4px;
-    font-size: 6pt; color: var(--text-secondary);
-    font-family: 'DM Sans', sans-serif;
+  .week-title {
+    grid-area: title;
+    font-size: 8.5pt;
+    font-weight: 800;
+    color: #213047;
+    white-space: nowrap;
   }
-  .leg-dot {
-    width: 8px; height: 8px; border-radius: 2px;
-    flex-shrink: 0;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  .week-list {
+    grid-area: list;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 1mm;
   }
-  .leg-dot.lv1 { background: var(--c-lv1-bg); border: 1px solid #b0d4b8; }
-  .leg-dot.lv2 { background: var(--c-lv2-bg); border: 1px solid #b0bedd; }
-  .leg-dot.lv3 { background: var(--c-lv3-bg); border: 1px solid #c0b0dd; }
-  .leg-dot.lv4 { background: var(--c-lv4-bg); border: 1px solid #ddb0bd; }
-
-  /* ── BODY ── */
-  .page-body {
-    flex: 1;
-    min-height: 0;
+  .week-chip {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.8mm;
+    min-width: 0;
+    padding: 1.1mm 1.2mm;
+    background: white;
+    border: 1px solid #c5cfdd;
+    border-radius: 4px;
+    color: #4c5b70;
+    font-size: 7pt;
+    line-height: 1.1;
+  }
+  .week-chip b {
+    color: #1f2c3f;
+    font-size: 8pt;
+    white-space: nowrap;
+  }
+  .week-note {
+    grid-area: note;
+    justify-self: start;
+    padding: 0.6mm 1.2mm;
+    background: #213047;
+    color: white;
+    border-radius: 4px;
+    font-size: 6.4pt;
+    font-weight: 700;
+    white-space: nowrap;
   }
 
-  /* ── TABLE ── */
-  .table-wrap {
-    flex: 1;
-    min-width: 0;
-    min-height: 0;
+  .legend {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm 2mm;
+    align-content: center;
+    padding: 1.1mm 1.5mm;
+    margin: 0;
+    background: var(--leg-bar);
+    border: 1px solid var(--border);
+    border-radius: 4px;
   }
+  .leg { display: flex; align-items: center; gap: 1mm; min-width: 0; }
+  .leg-dot { width: 2.3mm; height: 2.3mm; border-radius: 1px; flex-shrink: 0; }
+  .leg span { font-size: 5.9pt; color: var(--text-secondary); white-space: nowrap; }
 
   table {
     width: 100%;
@@ -145,219 +208,204 @@
   }
 
   thead th {
-    background: var(--text-primary);
-    color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 7pt;
-    font-weight: 700;
     padding: 4px 3px;
+    background: var(--text-primary);
+    color: white;
+    font-weight: 600;
+    font-size: 8pt;
+    border: 1px solid var(--border);
+  }
+  thead th.hd-time { font-family: 'DM Mono', monospace; font-size: 7pt; letter-spacing: 0.06em; font-weight: 400; }
+  thead th.hd-week-col { font-size: 7pt; font-weight: 400; }
+
+  tbody tr:not(.section-header-row) { height: 8.9mm; }
+
+  .sub-hd td {
+    background: var(--sub-hd);
+    color: var(--text-secondary);
+    font-size: 6.5pt;
+    font-weight: 700;
     text-align: center;
-    letter-spacing: 0.04em;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  thead th.th-time {
-    width: 22mm;
-    font-family: 'DM Mono', monospace;
-    font-size: 6pt;
-    background: #2a2a2a;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  thead th.th-week {
-    width: 12mm;
-    background: #3a3a3a;
-    font-size: 6pt;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    padding: 2px 0;
+    border: 1px solid var(--border);
   }
 
-  /* Section divider rows */
-  .sec-row td {
-    background: #f0eeea;
-    color: var(--text-secondary);
-    font-size: 6pt;
+  .section-header-row td {
+    background: var(--sec-row);
+    color: white;
+    font-size: 7pt;
     font-weight: 700;
     letter-spacing: 0.10em;
     text-transform: uppercase;
-    padding: 3px 8px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    font-family: 'DM Mono', monospace;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    height: 5.2mm;
+    padding: 0 8px;
+    box-sizing: border-box;
+    text-align: left;
+    border: 1px solid var(--border);
   }
 
-  td { border: 1px solid var(--border); vertical-align: middle; }
-
-  /* Time cell */
-  .tc {
-    text-align: center;
-    padding: 3px 3px;
-    background: #fafaf8;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  .tc .t {
-    display: block;
-    font-family: 'DM Mono', monospace;
-    font-size: 7pt;
-    font-weight: 500;
-    color: var(--text-primary);
-    line-height: 1.2;
-  }
-  .tc .dur {
-    display: block;
-    font-size: 5.5pt;
-    color: var(--text-muted);
-    margin-top: 1px;
-  }
-
-  /* Week cell */
-  .wc {
-    text-align: center;
-    padding: 3px 2px;
-    font-size: 5.8pt;
-    color: var(--text-muted);
-    font-family: 'DM Mono', monospace;
-    background: #fdfdfc;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  /* Class cell */
-  .cc {
-    padding: 2px 2px;
+  td {
+    border: 1px solid var(--border);
     text-align: center;
     vertical-align: middle;
+    overflow: hidden;
   }
+
+  .tc {
+    background: var(--time-bg);
+    font-family: 'DM Mono', monospace;
+    font-size: 7.5pt;
+    font-weight: 500;
+    padding: 5px 5px;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .tc .dur { display: block; font-size: 6pt; color: var(--text-muted); margin-top: 3px; }
+
+  .wc {
+    background: var(--sub-hd);
+    font-size: 6.5pt;
+    font-weight: 700;
+    color: var(--text-secondary);
+    padding: 0 2px;
+    width: 14mm;
+    height: 8.9mm;
+    box-sizing: border-box;
+    line-height: 1;
+  }
+
+  .cc { padding: 2px 2px; }
+
+  /* Whole-cell track color fill (2026-07 confirmed design) */
+  td.cc:has(.c-lv1) { background: var(--lv1-bg); }
+  td.cc:has(.c-lv2) { background: var(--lv2-bg); }
+  td.cc:has(.c-lv3) { background: var(--lv3-bg); }
+  td.cc:has(.c-lv4) { background: var(--lv4-bg); }
 
   .cb {
     display: block;
     padding: 2px 3px;
     border-radius: 3px;
-    font-size: 7pt;
-    font-weight: 700;
-    line-height: 1.2;
     max-width: 100%;
     box-sizing: border-box;
     overflow: hidden;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    font-size: 7.5pt;
+    font-weight: 700;
+    line-height: 1.15;
+    white-space: normal;
+    margin: 0 auto;
   }
+
   .inst {
     display: block;
-    font-size: 5.8pt;
-    color: var(--text-secondary);
-    margin-top: 1px;
-    font-family: 'DM Sans', sans-serif;
+    font-size: 6.5pt;
+    color: #555;
     font-weight: 500;
+    margin-top: 1px;
   }
 
-  .c-lv1 { background: var(--c-lv1-bg); color: var(--c-lv1-tx); }
-  .c-lv2 { background: var(--c-lv2-bg); color: var(--c-lv2-tx); }
-  .c-lv3 { background: var(--c-lv3-bg); color: var(--c-lv3-tx); }
-  .c-lv4 { background: var(--c-lv4-bg); color: var(--c-lv4-tx); }
+  .empty { color: #dedbd5; font-size: 7pt; }
 
-  /* empty cell */
-  .cc.empty { background: #fafafa; }
-
-  /* ── SATURDAY STRIP ── */
+  /* Saturday bottom strip */
   .sat-strip {
     margin-top: 5px;
     border: 1px solid var(--border);
     display: flex;
     align-items: stretch;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    flex-shrink: 0;
   }
   .sat-label {
     background: var(--text-primary);
-    color: #fff;
-    padding: 6px 7px;
-    font-size: 7.5pt;
+    color: white;
+    padding: 6px 10px;
+    font-size: 8pt;
     font-weight: 700;
-    letter-spacing: 0.06em;
-    display: flex; align-items: center; justify-content: center;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex-shrink: 0;
-    white-space: nowrap;
-    font-family: 'DM Sans', sans-serif;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
   }
-  .sat-group {
+  .sat-block {
     flex: 1;
+    min-width: 0;
     border-left: 1px solid var(--border);
-    padding: 5px 10px;
-    background: #fcfbfa;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    padding: 4px 6px;
+    background: var(--sat-bg);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
   }
-  .sat-wk-badge {
-    font-size: 6pt;
-    font-weight: 700;
-    color: #fff;
-    background: #5a6a80;
-    padding: 2px 6px;
-    margin-bottom: 5px;
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-  .sat-classes { display: flex; gap: 10px; }
-  .sat-item { }
-  .si-time {
-    font-size: 5.8pt;
-    color: var(--text-muted);
-    font-family: 'DM Mono', monospace;
-    margin-bottom: 2px;
-  }
-  .si-class {
+  .sat-wk {
     font-size: 6.5pt;
     font-weight: 700;
+    color: white;
+    background: var(--sat-wk);
+    padding: 2px 5px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .sat-session {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 0;
+    padding: 0;
+    white-space: nowrap;
+  }
+  .sat-session + .sat-session { margin-left: 5px; }
+  .sat-t {
+    font-family: 'DM Mono', monospace;
+    font-size: 6.2pt;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: transparent;
+    border: none;
+    padding: 0;
+    white-space: nowrap;
+  }
+  .sat-cb {
+    display: inline-block;
     padding: 2px 5px;
     border-radius: 3px;
-    display: inline-block;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    font-size: 7pt;
+    font-weight: 700;
   }
-  .si-inst {
-    font-size: 5.5pt;
+  .sat-inst {
+    margin-left: auto;
+    padding-left: 3px;
+    font-size: 6pt;
     color: var(--text-muted);
-    margin-top: 1px;
-    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
   }
   .sat-rules {
-    border-left: 1px solid var(--border);
-    padding: 5px 10px;
-    background: #f9f8f5;
-    flex-shrink: 0;
+    border-left: 1px solid #9aa7ba;
+    padding: 4px 6px;
+    background: #f4f7fb;
+    flex: 0 0 30mm;
+    box-sizing: border-box;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
   }
-  .sat-rules .r-title {
-    font-size: 6pt; font-weight: 700; color: var(--text-muted);
-    letter-spacing: 0.08em; text-transform: uppercase;
-    margin-bottom: 3px; font-family: 'DM Mono', monospace;
+  .sat-rules-title {
+    font-size: 6pt;
+    font-weight: 800;
+    color: #213047;
+    letter-spacing: 0.08em;
+    margin-bottom: 2px;
   }
-  .sat-rules .r-list {
-    font-size: 5.8pt; color: var(--text-muted); line-height: 1.8;
-  }
-
-  /* ── FOOTER ── */
-  .page-footer {
-    flex-shrink: 0;
-    margin-top: 1.5mm;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 6.5pt;
-    color: var(--text-muted);
-    font-family: 'DM Mono', monospace;
+  .sat-rules-body {
+    font-size: 5.5pt;
+    color: #4b596d;
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: normal;
   }
 
   @media print {
@@ -369,311 +417,270 @@
 </style>
 </head>
 <body>
+
 <div class="page">
 
-  <!-- HEADER -->
   <header class="page-header">
     <div class="header-top">
-      <h1>After Yoga Timetable <span>July 2026</span></h1>
-      <span class="badge">July 1 – 31, 2026</span>
+      <div class="title-group">
+        <span class="eyebrow">July 2026 · After Yoga</span>
+        <div class="title-line">
+          <h1>After Yoga Timetable</h1>
+          <div class="header-badge">Mon–Fri · 60 min (※ 80 min)</div>
+        </div>
+      </div>
     </div>
-    <p class="subtitle">
-      Reservations open 3 days in advance via StudioMate app &nbsp;·&nbsp; 010-4463-2297 &nbsp;·&nbsp; Classes: 60 min (Mon 10:30 Hatha: 80 min) &nbsp;·&nbsp; Late arrivals not permitted
-    </p>
-    <p class="week-guide">
-      Week 1: Jul 1–4 &nbsp;·&nbsp; Week 2: Jul 6–11 &nbsp;·&nbsp; Week 3: Jul 13–18 &nbsp;·&nbsp; Week 4: Jul 20–25 &nbsp;·&nbsp; Week 5: Jul 27–31 &nbsp;·&nbsp; Saturday classes: Weeks 2 &amp; 4 only
-    </p>
-    <div class="legend">
-      <div class="leg"><div class="leg-dot lv1"></div>Stretch / Relax / Calm</div>
-      <div class="leg"><div class="leg-dot lv2"></div>Posture / Balance / Flexibility</div>
-      <div class="leg"><div class="leg-dot lv3"></div>Core / Strength</div>
-      <div class="leg"><div class="leg-dot lv4"></div>Cardio / Fat Burn</div>
+    <p class="subtitle">Booking : reservations open 3 days in advance · StudioMate app or 010.4463.2297 · <span class="alert-text">Classes start on time · Late arrivals not permitted</span></p>
+    <div class="header-info">
+      <div class="week-guide" aria-label="Weeks">
+        <div class="week-title">Weeks</div>
+        <div class="week-list" style="grid-template-columns:repeat(5,minmax(0,1fr))"><div class="week-chip"><b>Wk 1</b><span>Jul 1–4</span></div><div class="week-chip"><b>Wk 2</b><span>Jul 6–11</span></div><div class="week-chip"><b>Wk 3</b><span>Jul 13–18</span></div><div class="week-chip"><b>Wk 4</b><span>Jul 20–25</span></div><div class="week-chip"><b>Wk 5</b><span>Jul 27–31</span></div></div>
+        <div class="week-note">Week 1 starts Jul 1 · Saturday classes on weeks 2 &amp; 4 only</div>
+      </div>
+
+      <div class="legend">
+        <div class="leg"><div class="leg-dot" style="background:var(--lv1-bg);border:1px solid var(--lv1-text);"></div><span>Relax / Calm</span></div>
+        <div class="leg"><div class="leg-dot" style="background:var(--lv2-bg);border:1px solid var(--lv2-text);"></div><span>Posture / Flexibility</span></div>
+        <div class="leg"><div class="leg-dot" style="background:var(--lv3-bg);border:1px solid var(--lv3-text);"></div><span>Core / Strength</span></div>
+        <div class="leg"><div class="leg-dot" style="background:var(--lv4-bg);border:1px solid var(--lv4-text);"></div><span>Cardio / Aerial</span></div>
+      </div>
     </div>
   </header>
 
-  <!-- BODY -->
   <main class="page-body">
-    <div class="table-wrap">
+
+    <div style="flex:1; min-width:0; min-height:0;">
       <table>
         <colgroup>
-          <col style="width:20mm">
-          <col style="width:11mm">
+          <col style="width: 17mm;">
+          <col style="width: 14mm;">
           <col><col><col><col><col>
         </colgroup>
         <thead>
           <tr>
-            <th class="th-time">TIME</th>
-            <th class="th-week">WEEK</th>
-            <th>MON</th>
-            <th>TUE</th>
-            <th>WED</th>
-            <th>THU</th>
-            <th>FRI</th>
+            <th class="hd-time" rowspan="2">TIME</th>
+            <th class="hd-week-col" rowspan="2">Week</th>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
           </tr>
         </thead>
         <tbody>
+          <tr class="section-header-row"><td colspan="7">AM &nbsp;·&nbsp; Morning</td></tr>
 
-          <!-- ── AM SECTION ── -->
-          <tr class="sec-row">
-            <td colspan="7">▸ Morning Classes</td>
-          </tr>
-
-          <!-- 10:00 AM — Bungee (Tue) -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">10:00 AM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">10:00 AM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc" rowspan="2"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
 
-          <!-- 10:30 AM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">10:30 AM</span><span class="dur">60 / 80 min</span></td>
+            <td class="tc" rowspan="2">10:30 AM<span class="dur">(60/80 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
-            <td class="cc"><span class="cb c-lv2">Hatha (80m)</span><span class="inst">Yaatra T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Yeollim T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv2">Alignment</span><span class="inst">Yeollim T</span></td>
+            <td class="cc" rowspan="2"><span class="cb c-lv2">Hatha</span><span class="inst">Yaatra T · 80 min</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc" rowspan="2"><span class="cb c-lv4">Vinyasa</span><span class="inst">Yeollim T</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc" rowspan="2"><span class="cb c-lv2">Alignment</span><span class="inst">Yeollim T</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
-            <td class="cc"><span class="cb c-lv2">Hatha (80m)</span><span class="inst">Yaatra T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Yeollim T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv2">Alignment</span><span class="inst">Yeollim T</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
 
-          <!-- 11:30 AM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">11:30 AM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">11:30 AM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv4">Ashtanga</span><span class="inst">Eunho T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv2">Inside Flow</span><span class="inst">Yaatra T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc" rowspan="2"><span class="cb c-lv2">Inside Flow</span><span class="inst">Yaatra T</span></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv2">Hatha Chakra</span><span class="inst">Eunho T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv2">Inside Flow</span><span class="inst">Yaatra T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
 
-          <!-- 12:10 PM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">12:10 PM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">12:10 PM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
             <td class="cc"><span class="cb c-lv2">Balance</span><span class="inst">Yaatra T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv1">Therapy</span><span class="inst">Yeollim T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="cb c-lv2">Therapy</span><span class="inst">Yeollim T</span></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv3">Mat Pilates</span><span class="inst">Yeollim T</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
             <td class="cc"><span class="cb c-lv1">Core Therapy</span><span class="inst">Yaatra T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv1">Flying Relax</span><span class="inst">Yeollim T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv3">Flying Pilates</span><span class="inst">Yeollim T</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="cb c-lv4">Flying Relax</span><span class="inst">Yeollim T</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="cb c-lv4">Flying Pilates</span><span class="inst">Yeollim T</span></td>
           </tr>
 
-          <!-- 1:00 PM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">1:00 PM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">1:00 PM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv1">Emboring</span><span class="inst">Yaatra T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv1">Aroma Healing</span><span class="inst">Yaatra T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
 
-          <!-- ── PM SECTION ── -->
-          <tr class="sec-row">
-            <td colspan="7">▸ Evening Classes</td>
-          </tr>
+          <tr class="section-header-row"><td colspan="7">PM &nbsp;·&nbsp; Evening</td></tr>
 
-          <!-- 6:40 PM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">6:40 PM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">6:40 PM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
             <td class="cc"><span class="cb c-lv1">Healing</span><span class="inst">Kyungjin T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv2">Hatha</span><span class="inst">Mona T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv2">Balance</span><span class="inst">Noah T</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
             <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Kyungjin T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv2">Today's Pose</span><span class="inst">Mona T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Noah T</span></td>
           </tr>
 
-          <!-- 7:00 PM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">7:00 PM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">7:00 PM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv4">Flying A</span><span class="inst">Sunha T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv3">Hip-up Pilates</span><span class="inst">Marisa T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv4">Flying G</span><span class="inst">Sunha T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv1">Emboring</span><span class="inst">Marisa T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
 
-          <!-- 8:00 PM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">8:00 PM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">8:00 PM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
             <td class="cc"><span class="cb c-lv4">Vinyasa</span><span class="inst">Kyungjin T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv1">Emboring</span><span class="inst">Mona T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv4">Vinyasa Basic</span><span class="inst">Noah T</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
             <td class="cc"><span class="cb c-lv2">Spine Therapy</span><span class="inst">Kyungjin T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv2">Hatha</span><span class="inst">Mona T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv1">Healing</span><span class="inst">Noah T</span></td>
           </tr>
 
-          <!-- 8:20 PM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">8:20 PM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">8:20 PM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv2">Hatha</span><span class="inst">Sunha T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv4">Flying G</span><span class="inst">Marisa T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv2">Evolution Flow</span><span class="inst">Sunha T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
             <td class="cc"><span class="cb c-lv4">Flying A</span><span class="inst">Marisa T</span></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
 
-          <!-- 9:10 PM -->
           <tr>
-            <td class="tc" rowspan="2"><span class="t">9:10 PM</span><span class="dur">60 min</span></td>
+            <td class="tc" rowspan="2">9:10 PM<span class="dur">(60 min)</span></td>
             <td class="wc">Wk 1,3,5</td>
             <td class="cc"><span class="cb c-lv4">Ashtanga Basic</span><span class="inst">Kyungjin T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc" rowspan="2"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
           <tr>
             <td class="wc">Wk 2,4</td>
             <td class="cc"><span class="cb c-lv2">Pelvic Therapy</span><span class="inst">Kyungjin T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc"><span class="cb c-lv4">Bungee</span><span class="inst">Wooho T</span></td>
-            <td class="cc empty"></td>
-            <td class="cc empty"></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
+            <td class="cc"><span class="empty">—</span></td>
           </tr>
-
         </tbody>
       </table>
-    </div><!-- /table-wrap -->
+    </div>
 
-    <!-- SATURDAY STRIP -->
     <div class="sat-strip">
       <div class="sat-label">SAT</div>
-
-      <!-- Week 2: Jul 11 -->
-      <div class="sat-group">
-        <div class="sat-wk-badge">Week 2 · Jul 11 (Sat)</div>
-        <div class="sat-classes">
-          <div class="sat-item">
-            <div class="si-time">10:30 – 11:30</div>
-            <div class="si-class c-lv1">Healing</div>
-            <div class="si-inst">Kyungseon T</div>
-          </div>
-          <div class="sat-item">
-            <div class="si-time">11:40 – 12:40</div>
-            <div class="si-class c-lv3">Barre</div>
-            <div class="si-inst">Kyungseon T</div>
-          </div>
-        </div>
+      <div class="sat-block">
+        <span class="sat-wk">Week 2 · Jul 11</span>
+        <span class="sat-session"><span class="sat-t">10:30–11:30</span><span class="sat-cb c-lv1">Healing</span></span>
+        <span class="sat-session"><span class="sat-t">11:40–12:40</span><span class="sat-cb c-lv3">Barre</span></span>
+        <span class="sat-inst">Kyungseon T</span>
       </div>
-
-      <!-- Week 4: Jul 25 -->
-      <div class="sat-group">
-        <div class="sat-wk-badge">Week 4 · Jul 25 (Sat)</div>
-        <div class="sat-classes">
-          <div class="sat-item">
-            <div class="si-time">10:30 – 11:30</div>
-            <div class="si-class c-lv2">Wheel Yoga</div>
-            <div class="si-inst">Kyungseon T</div>
-          </div>
-          <div class="sat-item">
-            <div class="si-time">11:40 – 12:40</div>
-            <div class="si-class c-lv4">Flying G</div>
-            <div class="si-inst">Kyungseon T</div>
-          </div>
-        </div>
+      <div class="sat-block">
+        <span class="sat-wk">Week 4 · Jul 25</span>
+        <span class="sat-session"><span class="sat-t">10:30–11:30</span><span class="sat-cb c-lv2">Wheel Yoga</span></span>
+        <span class="sat-session"><span class="sat-t">11:40–12:40</span><span class="sat-cb c-lv4">Flying G</span></span>
+        <span class="sat-inst">Kyungseon T</span>
       </div>
-
-      <!-- Rules -->
       <div class="sat-rules">
-        <div class="r-title">Class Rules</div>
-        <div class="r-list">
+        <div class="sat-rules-title">CLASS RULES</div>
+        <div class="sat-rules-body">
           · Classes start on time<br>
           · Late arrivals not permitted<br>
           · No phones inside studio
         </div>
       </div>
-    </div><!-- /sat-strip -->
+    </div>
 
   </main>
 
-  <!-- FOOTER -->
   <footer class="page-footer">
-    <span>After Yoga &amp; Pilates &nbsp;·&nbsp; July 2026 Yoga Timetable</span>
-    <span>Seoulsup · 010-4463-2297</span>
+    <span>After Yoga &amp; Pilates &nbsp;·&nbsp; Seoulsup &nbsp;·&nbsp; July 2026 Yoga Timetable</span>
+    <span>https://afteryogapilates.com/forest  ·  010.4463.2297</span>
   </footer>
 
 </div>
+
 </body>
 </html>
