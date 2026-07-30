@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>애프터 요가&필라테스 충무로역점 — 기업 임직원 건강 증진 프로그램 제안</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:      #0e0e0e;
+      --bg-elevated:  #161616;
+      --bg-overlay:   #1c1c1c;
+      --bg-subtle:    #242424;
+      --border:       rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --border-glow:  rgba(255,112,67,0.4);
+      --text-primary:   #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-tertiary:  #606060;
+      --accent:         #ff7043;
+      --accent-glow:    rgba(255,112,67,0.25);
+      --glow-sm:  0 0 8px rgba(255,112,67,0.3);
+      --glow-md:  0 0 20px rgba(255,112,67,0.25), 0 0 60px rgba(255,112,67,0.1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; word-break: keep-all; overflow-wrap: break-word; line-break: strict; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    .phone-frame {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(100vw, 56.25vh);
+      height: min(100vh, 177.78vw);
+      overflow: hidden;
+      background: var(--bg-base);
+    }
+
+    .deck { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 72px;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.45s cubic-bezier(.4,0,.2,1), transform 0.45s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+      z-index: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .slide.scrollable { justify-content: flex-start; }
+
+    .nav-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-dots { display: flex; gap: 6px; }
+
+    .nav-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-hover);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .nav-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: var(--glow-sm);
+      width: 18px;
+      border-radius: 3px;
+    }
+
+    .nav-hint {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 72px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .scroll-indicator.visible {
+      opacity: 1;
+      animation: scrollBounce 1.6s ease-in-out infinite;
+    }
+    .scroll-indicator.hidden { opacity: 0; }
+    .scroll-indicator svg {
+      width: 20px; height: 20px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 4px rgba(255,112,67,0.5));
+    }
+    .scroll-indicator span {
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0.8;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
+    .nav-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+    .nav-counter span { color: var(--accent); }
+
+    .slide-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 12px;
+    }
+
+    .slide-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ff7043 0%, #ff8a65 50%, #ffab91 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .slide-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-align: center;
+      max-width: 100%;
+      line-height: 1.7;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── HERO ── */
+    .hero-glow {
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(400px, 100%); height: min(300px, 80vw);
+      background: radial-gradient(ellipse, rgba(255,112,67,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px 4px 8px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.3);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      z-index: 2;
+    }
+
+    .hero-badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(255,112,67,0.8);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero-brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+    .brand-chip {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .brand-chip.accent {
+      color: var(--accent);
+      background: rgba(255,112,67,0.08);
+      border-color: rgba(255,112,67,0.3);
+    }
+    .brand-x {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 0;
+      margin-top: 36px;
+      z-index: 2;
+    }
+    .hero-stat {
+      padding: 0 18px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .hero-stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-unit {
+      color: var(--text-secondary);
+      font-size: 0.64em;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-left: 2px;
+      vertical-align: baseline;
+    }
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: 4px; font-weight: 500;
+    }
+
+    .hero-trusted {
+      margin-top: 24px;
+      text-align: center;
+      z-index: 2;
+    }
+    .trusted-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 6px;
+      position: relative;
+      display: inline-block;
+      padding: 0 12px;
+    }
+    .trusted-label::before,
+    .trusted-label::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 24px;
+      height: 1px;
+      background: var(--border);
+    }
+    .trusted-label::before { right: 100%; }
+    .trusted-label::after  { left: 100%; }
+    .trusted-line {
+      font-size: 11px;
+      color: var(--text-secondary);
+      letter-spacing: -0.01em;
+      font-weight: 500;
+    }
+
+    /* ── OVERVIEW ── */
+    .overview-content {
+      width: 100%;
+      margin-top: 24px;
+      text-align: left;
+    }
+    .overview-p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .infra-row {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .infra-key {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      min-width: 52px;
+      flex-shrink: 0;
+    }
+    .infra-val {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .branch-primary {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      margin-right: 4px;
+      border-radius: 999px;
+      background: rgba(255,112,67,0.12);
+      border: 1px solid rgba(255,112,67,0.34);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ── BENEFIT CARDS ── */
+    .benefit-layout {
+      width: 100%;
+      text-align: left;
+    }
+    .benefit-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .benefit-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 36px; font-weight: 500;
+      color: var(--accent);
+      text-shadow: var(--glow-sm);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .benefit-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+    .benefit-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.3;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .benefit-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── 강조 박스 ── */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(255,112,67,0.08) 0%, rgba(255,112,67,0.02) 100%);
+      border: 1px solid rgba(255,112,67,0.25);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+    .highlight-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(255,112,67,0.15);
+    }
+    .highlight-row:last-child { border-bottom: none; }
+    .highlight-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .highlight-val {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.03em;
+      text-shadow: var(--glow-sm);
+    }
+    .highlight-val .small {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    .info-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .info-card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .info-card-title::before {
+      content: '';
+      width: 4px; height: 4px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 6px rgba(255,112,67,0.6);
+    }
+    .info-card-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 6px;
+    }
+    .info-list li {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding-left: 12px;
+      position: relative;
+      line-height: 1.7;
+      margin-bottom: 2px;
+    }
+    .info-list u {
+      text-underline-offset: 3px;
+      text-decoration-thickness: 1px;
+    }
+    .info-list li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .ratio-bar-wrap {
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+    .ratio-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .ratio-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      min-width: 56px;
+      flex-shrink: 0;
+    }
+    .ratio-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-subtle);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+    }
+    .ratio-bar-yoga {
+      background: linear-gradient(90deg, #ff7043 0%, #ff8a65 100%);
+      height: 100%;
+    }
+    .ratio-bar-pilates {
+      background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.35) 100%);
+      height: 100%;
+    }
+    .ratio-percent {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-secondary);
+      min-width: 56px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .tag {
+      display: inline-flex;
+      padding: 3px 10px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .tag-accent {
+      background: rgba(255,112,67,0.1);
+      border-color: rgba(255,112,67,0.3);
+      color: var(--accent);
+    }
+
+    /* ── CONTACT ── */
+    .contact-col {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-top: 24px;
+    }
+    .contact-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    .contact-icon { font-size: 20px; margin-bottom: 6px; }
+    .contact-key {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 4px;
+    }
+    .contact-val {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+    .cta-line {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.7;
+      margin-top: 12px;
+    }
+    .footer-line {
+      margin-top: 24px;
+      font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── SUMMARY 슬라이드 ── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .summary-cell {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 96px;
+    }
+    .summary-cell-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0;
+    }
+    .summary-cell-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+    }
+    .summary-cell-desc {
+      font-size: 11px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: auto;
+    }
+
+    /* ── BONUS ── */
+    .bonus-mark {
+      font-family: 'JetBrains Mono', monospace !important;
+      font-size: 36px !important;
+      font-weight: 500 !important;
+      color: var(--accent);
+      letter-spacing: -0.04em !important;
+      opacity: 1 !important;
+      text-shadow: var(--glow-sm);
+    }
+    .bonus-banner {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 14px 0 15px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .bonus-banner-line {
+      position: relative;
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,112,67,0.58), transparent);
+    }
+    .bonus-banner-text {
+      position: relative;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: #ff9a78;
+      text-shadow: 0 0 10px rgba(255,112,67,0.42);
+      white-space: nowrap;
+    }
+    .bonus-hero {
+      position: relative;
+      isolation: isolate;
+      background: rgba(14,14,14,0.78);
+      border: 1px solid rgba(255,112,67,0.3);
+      border-radius: 14px;
+      padding: 22px 22px 20px;
+      margin-bottom: 16px;
+      min-height: 276px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 28px rgba(255,112,67,0.08);
+    }
+    .bonus-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background: none;
+      opacity: 0.72;
+      filter: saturate(1.02) contrast(0.96) brightness(0.94);
+    }
+    .bonus-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(14,14,14,0.58), rgba(14,14,14,0.18) 48%, rgba(14,14,14,0.54)),
+        linear-gradient(180deg, rgba(14,14,14,0.08), rgba(14,14,14,0.28));
+      pointer-events: none;
+    }
+    .bonus-hero-offer {
+      position: relative;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .bonus-hero-cond {
+      position: relative;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,245,245,0.68);
+      margin-bottom: 8px;
+    }
+    .bonus-hero-val {
+      position: relative;
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #ff8c66;
+      letter-spacing: -0.02em;
+      line-height: 1.35;
+      text-shadow: 0 0 12px rgba(14,14,14,0.8), 0 0 14px rgba(255,112,67,0.35);
+    }
+    .bonus-hero-info {
+      position: relative;
+      max-width: 94%;
+      padding-top: 4px;
+      text-align: left;
+    }
+    .bonus-hero-info .info-card-title {
+      margin-bottom: 8px;
+    }
+    .bonus-hero-info .info-card-desc {
+      color: rgba(245,245,245,0.76);
+      text-shadow: 0 0 12px rgba(14,14,14,0.85);
+    }
+    .bonus-hero-info .info-list {
+      margin-top: 4px;
+    }
+    .bonus-hero-info .info-list li {
+      color: rgba(245,245,245,0.8);
+      text-shadow: 0 0 12px rgba(14,14,14,0.85);
+    }
+    .summary-bonus {
+      position: relative;
+      width: min(420px, 100%);
+      margin: 18px auto 0;
+      padding: 0;
+      text-align: center;
+    }
+    .summary-bonus-head {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .summary-bonus-line {
+      display: block;
+      flex: 1;
+      height: 1px;
+      max-width: 122px;
+      background: linear-gradient(90deg, transparent, rgba(255,112,67,0.42), transparent);
+      opacity: 0.42;
+    }
+    .summary-bonus-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5px;
+      color: #ff9a78;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      flex-shrink: 0;
+      text-transform: uppercase;
+      text-shadow: 0 0 10px rgba(255,112,67,0.42);
+    }
+    .summary-bonus-body {
+      position: relative;
+      display: inline-grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+    .summary-bonus-mark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 29px;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      letter-spacing: -0.08em;
+      text-shadow: var(--glow-sm);
+    }
+    .summary-bonus-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+    .summary-bonus-kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      color: rgba(245,245,245,0.62);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .summary-bonus-text {
+      font-size: 14px;
+      font-weight: 800;
+      color: #ff8c66;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+      text-shadow: var(--glow-sm);
+    }
+
+    /* ── GALLERY SLIDES ── */
+    .gallery-slide {
+      padding: 32px 16px 72px;
+      justify-content: flex-start;
+      overflow-y: auto;
+    }
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    .gallery-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.25);
+      border-radius: 16px;
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .gallery-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .gallery-sub {
+      font-size: 12px;
+      color: var(--text-tertiary);
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      width: 100%;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      cursor: zoom-in;
+    }
+    .gallery-item.wide {
+      grid-column: span 2;
+      aspect-ratio: 2 / 1;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(20px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      font-size: 28px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      z-index: 510;
+      background: none; border: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* 소형 기기 대응 */
+    @media (max-width: 380px) {
+      .slide { padding: 36px 16px 64px; }
+      .slide-title { font-size: 24px; }
+      .stat-num { font-size: 20px; }
+      .benefit-num { font-size: 26px; }
+      .benefit-title { font-size: 18px; }
+      .gallery-title { font-size: 18px; }
+      .hero-stat { padding: 0 12px; }
+      .hero-stats { margin-top: 24px; }
+      .slide-sub { font-size: 12px; }
+      .highlight-val { font-size: 18px; }
+    }
+    @media (max-height: 680px) {
+      .slide { padding: 28px 20px 60px; }
+      .slide-title { font-size: 24px; margin-bottom: 10px; }
+      .hero-stats { margin-top: 20px; }
+      .overview-content { margin-top: 14px; }
+      .contact-col { margin-top: 14px; gap: 8px; }
+    }
+    @media (max-width: 320px) {
+      .slide { padding: 28px 12px 60px; }
+      .slide-title { font-size: 20px; }
+      .stat-num { font-size: 18px; }
+      .benefit-num { font-size: 22px; }
+      .hero-badge { font-size: 9px; }
+      .slide-sub { font-size: 11px; }
+    }
+
+    /* ── 충무로역점판 추가 컴포넌트 ── */
+    /* 1px 오버플로에도 뜨는 네이티브 스크롤바 숨김 (스크롤 안내는 scroll-indicator가 담당) */
+    .slide { scrollbar-width: none; -ms-overflow-style: none; }
+    .slide::-webkit-scrollbar { width: 0; height: 0; }
+
+    .mix-legend {
+      display: flex; justify-content: space-between;
+      margin-top: 8px; margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--text-tertiary);
+    }
+    .mix-legend b { color: var(--text-secondary); font-weight: 600; }
+    .mix-legend .pil { color: var(--text-secondary); }
+
+    .level-grid { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .level-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 9px 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .level-stars {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; letter-spacing: 0.12em;
+      color: var(--accent); flex-shrink: 0; min-width: 50px;
+    }
+    .level-name { font-size: 12px; color: var(--text-secondary); }
+
+    .count-hero {
+      text-align: center;
+      padding: 24px 16px 20px;
+      background: linear-gradient(135deg, rgba(255,112,67,0.08) 0%, rgba(255,112,67,0.02) 100%);
+      border: 1px solid rgba(255,112,67,0.25);
+      border-radius: 14px;
+      margin-bottom: 14px;
+    }
+    .count-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 52px; font-weight: 800;
+      letter-spacing: -0.05em; line-height: 1;
+      color: var(--accent);
+      text-shadow: var(--glow-md);
+    }
+    .count-num .u {
+      font-size: 17px; font-weight: 700;
+      color: var(--text-secondary);
+      margin-left: 5px; letter-spacing: -0.02em;
+    }
+    .count-cap {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: 10px;
+    }
+    .dot-grid {
+      display: flex; flex-wrap: wrap; gap: 7px;
+      justify-content: center; margin-top: 16px;
+    }
+    .dot-grid i {
+      display: block; width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: var(--glow-sm);
+      opacity: 0.85;
+    }
+
+    .fac-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; width: 100%; margin-bottom: 12px;
+    }
+    .fac-cell {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 12px;
+      text-align: center;
+    }
+    .fac-icon { font-size: 22px; margin-bottom: 8px; }
+    .fac-title {
+      font-size: 12px; font-weight: 700;
+      color: var(--text-primary); margin-bottom: 5px;
+    }
+    .fac-desc { font-size: 11px; color: var(--text-secondary); line-height: 1.55; }
+
+    .gallery-item.ph {
+      border: 1px dashed var(--border-hover);
+      background: var(--bg-overlay);
+      display: flex; align-items: center; justify-content: center;
+      cursor: default;
+    }
+    .gallery-item.ph span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px; letter-spacing: 0.05em;
+      color: var(--text-tertiary);
+      text-align: center; line-height: 1.6; padding: 0 8px;
+    }
+
+    /* 요약 카드의 한글 라벨은 모노 폰트 한글 폴백 대신 본문 폰트로 */
+    .summary-cell-num.num-ko {
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .tbd {
+      font-style: normal;
+      color: var(--text-tertiary);
+      border-bottom: 1px dashed var(--text-tertiary);
+      padding-bottom: 1px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone-frame">
+<div class="deck" id="deck">
+
+  <!-- SLIDE 0: HERO -->
+  <div class="slide active" data-index="0">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      Corporate Wellness Program
+    </div>
+    <!-- 기업 확정 시 아래 accent 칩을 해당 기업명으로 교체 -->
+    <div class="hero-brand-row">
+      <div class="brand-chip">After Yoga &amp; Pilates</div>
+      <div class="brand-x">&times;</div>
+      <div class="brand-chip accent">기업명</div>
+    </div>
+    <h1 class="slide-title" style="z-index:2;">
+      <div>임직원 건강 증진을 위한</div>
+      <div class="gradient-text">전용 웰니스 프로그램</div>
+    </h1>
+    <p class="slide-sub" style="z-index:2;">
+      애프터 요가&amp;필라테스 충무로역점이<br>
+      20가지 맞춤형 프로그램과 임직원 전용 혜택을 제안드립니다.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-num"><span>20</span><span class="stat-unit">가지</span></div>
+        <div class="stat-label">Programs</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num"><span>13</span><span class="stat-unit">명</span></div>
+        <div class="stat-label">Instructors</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num"><span>10+10</span><span class="stat-unit">%</span></div>
+        <div class="stat-label">Upgrade</div>
+      </div>
+    </div>
+    <div class="hero-trusted">
+      <div class="trusted-label">Trusted by</div>
+      <div class="trusted-line">Shokz &middot; 한국유방건강재단 &middot; 서울옥션 &middot; 동국대 &middot; 서울시청</div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: OVERVIEW -->
+  <div class="slide" data-index="1">
+    <div class="slide-label">Overview</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      애프터 요가<span class="gradient-text">&amp;</span>필라테스<br>충무로역점
+    </h2>
+    <p class="slide-sub" style="font-size:13px;">임직원 복지 프로그램은 충무로역점에서 운영·제안드립니다.</p>
+    <div class="overview-content">
+      <p class="overview-p">충무로역 도보권에 위치해 중구 오피스 밀집 지역 임직원분들이 출근 전·점심시간·퇴근 후 모두 이용하기 좋은 요가&amp;필라테스 전용 스튜디오입니다.</p>
+      <p class="overview-p">기업·기관·브랜드 협업 경험을 바탕으로, 임직원 대상 프로그램과 전용 혜택을 하나의 패키지로 설계했습니다.</p>
+      <div class="infra-row"><div class="infra-key">위치</div><div class="infra-val"><span class="branch-primary">충무로역점</span> 서울 중구 퇴계로 220, 5층</div></div>
+      <div class="infra-row"><div class="infra-key">프로그램</div><div class="infra-val">요가 16가지 &middot; 필라테스 4가지 &mdash; 총 20가지</div></div>
+      <div class="infra-row"><div class="infra-key">강사진</div><div class="infra-val">전문 강사 13명 &middot; 4단계 강도별 클래스 운영</div></div>
+      <div class="infra-row"><div class="infra-key">시설</div><div class="infra-val">운동복 무상 대여 &middot; 샤워실 &middot; 탈의실</div></div>
+      <div class="infra-row"><div class="infra-key">네트워크</div><div class="infra-val">충무로역점 &middot; 서울숲점 &middot; 매봉역점</div></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: POINT 01 — 20가지 프로그램 -->
+  <div class="slide" data-index="2">
+    <div class="benefit-layout">
+      <div class="benefit-head">
+        <div class="benefit-num">01</div>
+        <div>
+          <div class="benefit-tag">Program Lineup</div>
+          <h2 class="benefit-title">다양하고 전문적인<br>20가지 맞춤형 프로그램</h2>
+          <p class="benefit-desc">요가 16가지, 필라테스 4가지로 구성된 20가지 클래스를 운영합니다. 임직원 한 분 한 분의 체력과 목적에 맞는 수업을 고르실 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="ratio-bar-wrap">
+        <div class="ratio-row">
+          <div class="ratio-label">구성</div>
+          <div class="ratio-bar">
+            <div class="ratio-bar-yoga" style="width:80%;"></div>
+            <div class="ratio-bar-pilates" style="width:20%;"></div>
+          </div>
+          <div class="ratio-percent">16 : 4</div>
+        </div>
+        <div class="mix-legend">
+          <span><b>요가 16가지</b></span>
+          <span class="pil">필라테스 4가지</span>
+        </div>
+      </div>
+
+      <div class="info-card-title">4단계 운동 강도</div>
+      <div class="level-grid">
+        <div class="level-row"><div class="level-stars">&#9733;&#9734;&#9734;&#9734;</div><div class="level-name">입문 &mdash; 처음 시작하는 분, 회복 중심</div></div>
+        <div class="level-row"><div class="level-stars">&#9733;&#9733;&#9734;&#9734;</div><div class="level-name">기본 &mdash; 기본기 &middot; 자세 정렬 중심</div></div>
+        <div class="level-row"><div class="level-stars">&#9733;&#9733;&#9733;&#9734;</div><div class="level-name">중급 &mdash; 운동감 있는 수업</div></div>
+        <div class="level-row"><div class="level-stars">&#9733;&#9733;&#9733;&#9733;</div><div class="level-name">숙련 &mdash; 강한 운동감, 체력 향상</div></div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">기대할 수 있는 운동 효과</div>
+        <div class="tags-row" style="margin-top:10px;">
+          <span class="tag tag-accent">체형 교정</span>
+          <span class="tag tag-accent">유연성 향상</span>
+          <span class="tag">근력 강화</span>
+          <span class="tag">다이어트</span>
+          <span class="tag">스트레칭</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: POINT 02 — 13명 강사진 -->
+  <div class="slide" data-index="3">
+    <div class="benefit-layout">
+      <div class="benefit-head">
+        <div class="benefit-num">02</div>
+        <div>
+          <div class="benefit-tag">Instructors</div>
+          <h2 class="benefit-title">13명 베테랑 강사진의<br>전문적인 지도</h2>
+          <p class="benefit-desc">풍부한 현장 경험과 전문성을 갖춘 13명의 강사진이 수업을 진행합니다.</p>
+        </div>
+      </div>
+
+      <div class="count-hero">
+        <div class="count-num">13<span class="u">명</span></div>
+        <div class="count-cap">Professional Instructors</div>
+        <div class="dot-grid">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">지도 방식</div>
+        <ul class="info-list">
+          <li>안전하고 효과적인 동작을 위한 <strong style="color:var(--text-primary);">섬세하고 정확한 지도</strong></li>
+          <li>운동 경험이 없는 임직원도 무리 없이 따라올 수 있는 단계별 진행</li>
+          <li>수업 중 개별 자세 교정 &middot; 컨디션에 따른 동작 조절</li>
+        </ul>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag tag-accent">강사 13명</span>
+        <span class="tag tag-accent">4단계 강도</span>
+        <span class="tag">개별 자세 교정</span>
+        <span class="tag">입문자 케어</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: POINT 03 — 운동에만 집중할 수 있는 환경 -->
+  <div class="slide" data-index="4">
+    <div class="benefit-layout">
+      <div class="benefit-head">
+        <div class="benefit-num">03</div>
+        <div>
+          <div class="benefit-tag">Facility</div>
+          <h2 class="benefit-title">오직 운동에만<br>집중할 수 있는 환경</h2>
+          <p class="benefit-desc">준비물을 챙기지 않아도, 운동 후 일정이 있어도 부담 없이 오실 수 있도록 시설을 갖췄습니다.</p>
+        </div>
+      </div>
+
+      <div class="fac-grid">
+        <div class="fac-cell">
+          <div class="fac-icon">&#128085;</div>
+          <div class="fac-title">운동복 무상 대여</div>
+          <div class="fac-desc">준비물 없이<br>언제든 편하게 방문</div>
+        </div>
+        <div class="fac-cell">
+          <div class="fac-icon">&#128704;</div>
+          <div class="fac-title">샤워실 구비</div>
+          <div class="fac-desc">운동 후 개운하게<br>마무리</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">임직원 이용 시 이런 점이 편합니다</div>
+        <ul class="info-list">
+          <li>퇴근길에 빈손으로 들러 바로 수업 참여</li>
+          <li>운동 후 샤워하고 저녁 일정 그대로 소화</li>
+          <li>운동복 &middot; 수건을 사무실에 들고 다닐 필요 없음</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: BENEFIT 01 — 무료 체험권 -->
+  <div class="slide" data-index="5">
+    <div class="benefit-layout">
+      <div class="bonus-banner">
+        <span class="bonus-banner-line"></span>
+        <span class="bonus-banner-text">EXCLUSIVE BENEFITS</span>
+        <span class="bonus-banner-line"></span>
+      </div>
+      <div class="benefit-head">
+        <div class="benefit-num">01</div>
+        <div>
+          <div class="benefit-tag">Free Trial</div>
+          <h2 class="benefit-title">전 임직원 대상<br>1회 무료 체험권 제공</h2>
+          <p class="benefit-desc">등록을 결정하기 전에, 센터 프로그램과 시설을 직접 경험해 보실 수 있습니다. 전 임직원께 1회 무료 체험권을 드립니다.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-row">
+          <div class="highlight-label">전 임직원 체험 비용</div>
+          <div class="highlight-val">무료<span class="small">1회</span></div>
+        </div>
+        <div class="highlight-row">
+          <div class="highlight-label">이용 방식</div>
+          <div class="highlight-val" style="font-size:15px;">사전 예약제</div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">이용 방법</div>
+        <ul class="info-list">
+          <li>사내 안내를 통해 임직원께 체험권 안내</li>
+          <li>희망 수업 &middot; 시간을 정해 사전 예약</li>
+          <li>방문 시 임직원 확인 후 수업 참여 &mdash; <span class="tbd">확인 방법 협의 중</span></li>
+          <li>대상 수업 범위 &middot; 유효기간 &mdash; <span class="tbd">협의 후 확정</span></li>
+        </ul>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag tag-accent">전 임직원</span>
+        <span class="tag tag-accent">1회 무료</span>
+        <span class="tag">사전 예약제</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: BENEFIT 02 — 10% + 10% -->
+  <div class="slide" data-index="6">
+    <div class="benefit-layout">
+      <div class="benefit-head">
+        <div class="benefit-num">02</div>
+        <div>
+          <div class="benefit-tag">Upgrade</div>
+          <h2 class="benefit-title">정규 등록 시<br>&lsquo;10% + 10%&rsquo; 업그레이드</h2>
+          <p class="benefit-desc">체험 후 정규 등록하시는 임직원께는 운동 횟수와 이용 기간을 함께 늘려 드립니다. 같은 금액으로 더 많이, 더 길게 운동하실 수 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <div class="highlight-row">
+          <div class="highlight-label">운동 횟수 추가 증정</div>
+          <div class="highlight-val">+10<span class="small">%</span></div>
+        </div>
+        <div class="highlight-row">
+          <div class="highlight-label">운동 기간 연장</div>
+          <div class="highlight-val">+10<span class="small">%</span></div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">적용 예시</div>
+        <ul class="info-list">
+          <li>20회권 등록 시 &rarr; <strong style="color:var(--text-primary);">22회로 횟수 추가</strong></li>
+          <li>10회권 등록 시 &rarr; <strong style="color:var(--text-primary);">11회로 횟수 추가</strong></li>
+          <li>3개월권 등록 시 &rarr; <strong style="color:var(--text-primary);">이용 기간 약 3.3개월로 연장</strong></li>
+          <li>적용 회원권 범위 &middot; 혜택 기간 &mdash; <span class="tbd">협의 후 확정</span></li>
+        </ul>
+      </div>
+
+      <div class="tags-row">
+        <span class="tag tag-accent">횟수 +10%</span>
+        <span class="tag tag-accent">기간 +10%</span>
+        <span class="tag">정규 등록 임직원</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: SUMMARY -->
+  <div class="slide" data-index="7">
+    <div class="slide-label">Summary</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      <span class="gradient-text">임직원 프로그램</span> 한눈에
+    </h2>
+    <p class="slide-sub" style="font-size:13px;">프로그램 3가지 강점과 임직원 전용 혜택 2가지입니다.</p>
+
+    <div class="summary-grid">
+      <div class="summary-cell">
+        <div class="summary-cell-num">01</div>
+        <div class="summary-cell-title">20가지<br>맞춤형 프로그램</div>
+        <div class="summary-cell-desc">요가 16 &middot; 필라 4 &middot; 4단계 강도</div>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-cell-num">02</div>
+        <div class="summary-cell-title">13명<br>베테랑 강사진</div>
+        <div class="summary-cell-desc">섬세하고 정확한 지도</div>
+      </div>
+      <div class="summary-cell" style="grid-column: 1 / -1;">
+        <div class="summary-cell-num">03</div>
+        <div class="summary-cell-title">운동에만 집중할 수 있는 환경</div>
+        <div class="summary-cell-desc">운동복 무상 대여 &middot; 샤워실 구비 &mdash; 준비물 없이 방문</div>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-cell-num num-ko">혜택 01</div>
+        <div class="summary-cell-title">1회<br>무료 체험권</div>
+        <div class="summary-cell-desc">전 임직원 대상 &middot; 사전 예약제</div>
+      </div>
+      <div class="summary-cell">
+        <div class="summary-cell-num num-ko">혜택 02</div>
+        <div class="summary-cell-title">10% + 10%<br>업그레이드</div>
+        <div class="summary-cell-desc">횟수 추가 &middot; 기간 연장</div>
+      </div>
+    </div>
+
+    <p class="cta-line" style="margin-top:18px;">임직원의 건강과 활력은 곧 기업의 경쟁력입니다.</p>
+  </div>
+
+  <!-- SLIDE 8: GALLERY (사진 수령 후 교체) -->
+  <div class="slide gallery-slide" data-index="8">
+    <div class="gallery-header">
+      <div class="gallery-tag">Facility</div>
+      <div class="gallery-title">충무로역점 공간</div>
+      <div class="gallery-sub">사진 준비 중 &mdash; 수령 후 교체 예정</div>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item ph wide"><span>요가홀<br>가로형 1컷</span></div>
+      <div class="gallery-item ph"><span>필라테스룸</span></div>
+      <div class="gallery-item ph"><span>라운지 &middot; 데스크</span></div>
+      <div class="gallery-item ph"><span>샤워실 &middot; 탈의실</span></div>
+      <div class="gallery-item ph"><span>운동복 대여</span></div>
+      <div class="gallery-item ph wide"><span>수업 진행 장면<br>가로형 1컷</span></div>
+    </div>
+  </div>
+
+  <!-- SLIDE 9: CONTACT -->
+  <div class="slide" data-index="9">
+    <div class="slide-label">Contact</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      <span class="gradient-text">함께 시작하기</span>
+    </h2>
+    <p class="cta-line">인원 규모 &middot; 시기 &middot; 운영 방식 자유롭게 말씀 주세요.<br>임직원분들의 건강하고 활력 있는 일상을 함께 만들어가겠습니다.</p>
+    <div class="contact-col">
+      <div class="contact-card">
+        <div class="contact-icon">&#128222;</div>
+        <div class="contact-key">Phone</div>
+        <div class="contact-val">010-9527-2625</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">&#128205;</div>
+        <div class="contact-key">충무로역점</div>
+        <div class="contact-val">서울 중구 퇴계로 220, 5층</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">&#127970;</div>
+        <div class="contact-key">Branches</div>
+        <div class="contact-val">충무로역점 &middot; 서울숲점 &middot; 매봉역점</div>
+      </div>
+    </div>
+    <div class="footer-line">&copy; 2026 After Yoga &amp; Pilates &mdash; Chungmuro</div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- NAV BAR -->
+<div class="scroll-indicator" id="scrollIndicator">
+  <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  <span>scroll</span>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-dots" id="navDots"></div>
+  <div class="nav-hint">스와이프로 이동</div>
+  <div class="nav-counter"><span id="currentNum">1</span> / <span id="totalNum">10</span></div>
+</div>
+</div>
+
+<script>
+function openLightbox(img, e) {
+  if (e) e.stopPropagation();
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = img.src;
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const dotsWrap = document.getElementById('navDots');
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    d.dataset.idx = i;
+    d.addEventListener('click', function(e) {
+      e.stopPropagation();
+      goTo(parseInt(this.dataset.idx));
+    });
+    dotsWrap.appendChild(d);
+  }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total || idx === current) return;
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+
+    const dir = idx > current ? 1 : -1;
+    slides[current].classList.remove('active');
+    slides[current].style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+
+    current = idx;
+    slides[current].style.transform = dir > 0 ? 'translateX(40px)' : 'translateX(-40px)';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        slides[current].classList.add('active');
+        slides[current].style.transform = '';
+        slides[current].scrollTop = 0;
+        setTimeout(() => checkScrollable(slides[current]), 50);
+      });
+    });
+
+    setTimeout(() => {
+      slides.forEach((s, i) => {
+        if (i !== current) {
+          s.classList.remove('active');
+          s.style.transform = '';
+        }
+      });
+    }, 500);
+
+    updateUI();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function checkScrollable(slide) {
+    if (slide.scrollHeight > slide.clientHeight + 4) {
+      slide.classList.add('scrollable');
+    } else {
+      slide.classList.remove('scrollable');
+    }
+    slide.scrollTop = 0;
+    updateScrollIndicator();
+  }
+
+  function updateUI() {
+    document.getElementById('currentNum').textContent = current + 1;
+    dotsWrap.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    updateScrollIndicator();
+  }
+
+  const scrollIndicator = document.getElementById('scrollIndicator');
+
+  function updateScrollIndicator() {
+    const slide = slides[current];
+    const hasScroll = slide.scrollHeight > slide.clientHeight + 4;
+    const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 20;
+    if (hasScroll && !atBottom) {
+      scrollIndicator.classList.add('visible');
+      scrollIndicator.classList.remove('hidden');
+    } else {
+      scrollIndicator.classList.remove('visible');
+      scrollIndicator.classList.add('hidden');
+    }
+  }
+
+  slides.forEach(slide => {
+    slide.addEventListener('scroll', updateScrollIndicator);
+  });
+
+  document.getElementById('deck').addEventListener('click', function(e) {
+    if (e.target.closest('.nav-bar')) return;
+    if (e.target.closest('.gallery-item')) return;
+    if (e.target.closest('.lightbox')) return;
+    const x = e.clientX;
+    const w = window.innerWidth;
+    if (x < w * 0.3) prev();
+    else next();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'Escape') closeLightbox();
+      return;
+    }
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  let startX = 0;
+  document.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
+  document.addEventListener('touchend', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+  });
+
+  document.getElementById('totalNum').textContent = total;
+
+  setTimeout(() => checkScrollable(slides[current]), 100);
+})();
+</script>
+
+</body>
+</html>
