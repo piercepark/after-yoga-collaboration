@@ -499,6 +499,19 @@
       letter-spacing: 0.06em;
       text-transform: uppercase;
     }
+    .rental-link {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 9px 16px;
+      border: 1px solid var(--border-hover);
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .rental-link span { color: var(--accent); }
 
     /* ── GALLERY SLIDES ── */
     .gallery-slide {
@@ -919,6 +932,7 @@
         <div class="contact-val">서울숲점 · 매봉역점 · 충무로역점</div>
       </div>
     </div>
+    <a class="rental-link" href="rental.html">공간 대관 안내 <span>→</span></a>
     <div class="footer-line">© 2026 After Yoga &amp; Pilates</div>
   </div>
 
@@ -1047,6 +1061,7 @@ function closeLightbox() {
     if (e.target.closest('.nav-bar')) return;
     if (e.target.closest('.gallery-item')) return;
     if (e.target.closest('.lightbox')) return;
+    if (e.target.closest('a')) return;
     const x = e.clientX;
     const w = window.innerWidth;
     if (x < w * 0.3) prev();
