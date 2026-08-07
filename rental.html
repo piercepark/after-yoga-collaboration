@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>애프터 요가&필라테스 서울숲점 — 공간 대관 안내</title>
+  <meta name="description" content="서울숲·성수·뚝섬 최대 규모 요가&필라테스 복합 공간(346㎡) 시간 단위 대관. 요가홀 82㎡·필라테스룸 45㎡·PT룸 22㎡, 원데이 클래스·워크숍·촬영 가능.">
+  <meta property="og:title" content="애프터 요가&필라테스 서울숲점 — 공간 대관">
+  <meta property="og:description" content="서울숲·성수·뚝섬 최대 규모 스튜디오를 시간 단위로 대관합니다.">
+  <meta property="og:image" content="seoulforest/img/exterior.jpg">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base:      #0e0e0e;
+      --bg-elevated:  #161616;
+      --bg-overlay:   #1c1c1c;
+      --bg-subtle:    #242424;
+      --border:       rgba(255,255,255,0.08);
+      --border-hover: rgba(255,255,255,0.15);
+      --text-primary:   #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-tertiary:  #606060;
+      --accent:         #ff7043;
+      --glow-sm:  0 0 8px rgba(255,112,67,0.3);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; word-break: keep-all; overflow-wrap: break-word; line-break: strict; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--bg-base);
+      color: var(--text-primary);
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 999; opacity: 0.4;
+    }
+
+    /* ── 9:16 모바일 프레임 ── */
+    .phone-frame {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(100vw, 56.25vh);
+      height: min(100vh, 177.78vw);
+      overflow: hidden;
+      background: var(--bg-base);
+    }
+
+    .deck { width: 100%; height: 100%; position: relative; overflow: hidden; }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 24px 72px;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.45s cubic-bezier(.4,0,.2,1), transform 0.45s cubic-bezier(.4,0,.2,1);
+      pointer-events: none;
+      z-index: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .slide.scrollable { justify-content: flex-start; }
+
+    /* ── 하단 네비게이션 ── */
+    .nav-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(14,14,14,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-dots { display: flex; gap: 6px; }
+    .nav-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-hover);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .nav-dot.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: var(--glow-sm);
+      width: 18px;
+      border-radius: 3px;
+    }
+    .nav-hint { font-size: 10px; color: var(--text-tertiary); letter-spacing: 0.04em; }
+    .nav-counter {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+    }
+    .nav-counter span { color: var(--accent); }
+
+    /* ── 스크롤 인디케이터 ── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 72px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .scroll-indicator.visible { opacity: 1; animation: scrollBounce 1.6s ease-in-out infinite; }
+    .scroll-indicator.hidden { opacity: 0; }
+    .scroll-indicator svg {
+      width: 20px; height: 20px;
+      fill: none; stroke: var(--accent); stroke-width: 2;
+      filter: drop-shadow(0 0 4px rgba(255,112,67,0.5));
+    }
+    .scroll-indicator span {
+      font-size: 9px; color: var(--accent);
+      letter-spacing: 0.08em; text-transform: uppercase;
+      font-weight: 600; opacity: 0.8;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(5px); }
+    }
+
+    /* ── 공통 타이포 ── */
+    .slide-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-tertiary); margin-bottom: 12px;
+    }
+    .slide-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px; font-weight: 800;
+      letter-spacing: -0.04em; line-height: 1.15;
+      margin-bottom: 16px; text-align: center;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #ff7043 0%, #ff8a65 50%, #ffab91 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .slide-sub {
+      font-size: 14px; color: var(--text-secondary);
+      text-align: center; max-width: 100%;
+      line-height: 1.7; letter-spacing: -0.01em;
+    }
+    .sec-title {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px; font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1.25;
+      margin-bottom: 6px; text-align: center;
+    }
+    .sec-sub {
+      font-size: 12px; color: var(--text-tertiary);
+      text-align: center; margin-bottom: 18px;
+    }
+
+    /* ── HERO ── */
+    .hero-glow {
+      position: absolute; top: 8%; left: 50%;
+      transform: translateX(-50%);
+      width: min(400px, 100%); height: min(300px, 80vw);
+      background: radial-gradient(ellipse, rgba(255,112,67,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 100%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px 4px 8px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.3);
+      border-radius: 20px;
+      font-size: 10px; font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.04em; text-transform: uppercase;
+      margin-bottom: 28px; z-index: 2;
+    }
+    .hero-badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 6px rgba(255,112,67,0.8);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .hero-stats { display: flex; gap: 0; margin-top: 36px; z-index: 2; }
+    .hero-stat { padding: 0 18px; text-align: center; border-right: 1px solid var(--border); }
+    .hero-stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 26px; font-weight: 700;
+      letter-spacing: -0.04em; line-height: 1;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-unit { font-size: 13px; color: var(--text-secondary); font-weight: 500; }
+    .stat-label {
+      font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-tertiary); margin-top: 4px; font-weight: 500;
+    }
+
+    /* ── 공간 표 ── */
+    .block { width: 100%; text-align: left; }
+    .space-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 12px; padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .space-row.primary .space-name { color: var(--text-primary); font-weight: 600; }
+    .space-name { font-size: 13px; color: var(--text-secondary); }
+    .space-area {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px; color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+    .space-row.primary .space-area { color: var(--accent); }
+    .space-note {
+      font-size: 11px; color: var(--text-tertiary);
+      margin-top: 12px; line-height: 1.6;
+    }
+
+    /* ── 카드 ── */
+    .card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 10px;
+    }
+    .card-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-tertiary); margin-bottom: 4px;
+    }
+    .card-name { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+    .card-sub { font-size: 11px; color: var(--text-secondary); margin-bottom: 8px; }
+    .card-item {
+      font-size: 11.5px; color: var(--text-secondary);
+      padding-left: 10px; position: relative;
+      line-height: 1.6; margin-bottom: 3px; list-style: none;
+    }
+    .card-item::before {
+      content: '·'; position: absolute; left: 0;
+      color: var(--accent); font-weight: 700;
+    }
+    .card-accent { background: rgba(255,112,67,0.04); border-color: rgba(255,112,67,0.15); }
+
+    /* ── 가격 ── */
+    .price-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 14px 8px;
+      margin-bottom: 10px;
+    }
+    .price-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 8px; margin-bottom: 10px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+    .price-space { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .price-area {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px; color: var(--text-tertiary);
+    }
+    .price-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 6px 0;
+    }
+    .price-dur { font-size: 12px; color: var(--text-secondary); }
+    .price-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px; font-weight: 500; color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+    .price-row.highlight .price-dur { color: var(--accent); font-weight: 500; }
+    .price-row.highlight .price-val { color: var(--accent); }
+    .price-card.full { background: rgba(255,112,67,0.05); border-color: rgba(255,112,67,0.2); }
+    .vat-note {
+      font-size: 10.5px; color: var(--text-tertiary);
+      text-align: center; margin-bottom: 14px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── 환불 표 ── */
+    .refund-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 10px; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .refund-when { font-size: 12px; color: var(--text-secondary); }
+    .refund-val { font-size: 12px; font-weight: 600; flex-shrink: 0; }
+    .refund-full { color: var(--accent); }
+    .refund-half { color: var(--text-primary); }
+    .refund-none { color: var(--text-tertiary); }
+
+    /* ── 태그 ── */
+    .tags-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .tag {
+      display: inline-flex; padding: 3px 8px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-size: 11px; color: var(--text-secondary); font-weight: 500;
+    }
+    .tag-accent {
+      background: rgba(255,112,67,0.1);
+      border-color: rgba(255,112,67,0.3);
+      color: var(--accent);
+    }
+    .cap-label {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-tertiary); margin-bottom: 6px; margin-top: 14px;
+    }
+
+    /* ── 갤러리 ── */
+    .gallery-slide { padding: 32px 16px 72px; justify-content: flex-start; overflow-y: auto; }
+    .gallery-header { text-align: center; margin-bottom: 18px; flex-shrink: 0; }
+    .gallery-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 10px;
+      background: rgba(255,112,67,0.1);
+      border: 1px solid rgba(255,112,67,0.25);
+      border-radius: 16px;
+      font-size: 9px; font-weight: 600; color: var(--accent);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; width: 100%; }
+    .gallery-item {
+      position: relative; border-radius: 8px; overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+    }
+    .gallery-item.wide { grid-column: span 2; aspect-ratio: 2 / 1; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-cap {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      padding: 14px 8px 6px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      font-size: 10px; color: #fff; font-weight: 500;
+    }
+
+    /* lightbox */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(20px);
+      display: none; align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 95vw; max-height: 85vh; object-fit: contain; border-radius: 6px; }
+    .lightbox-close {
+      position: absolute; top: 16px; right: 16px;
+      font-size: 28px; color: var(--text-secondary);
+      cursor: pointer; z-index: 510;
+      background: none; border: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ── CONTACT ── */
+    .contact-col { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 20px; }
+    .contact-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px; text-align: center;
+    }
+    .contact-icon { font-size: 20px; margin-bottom: 6px; }
+    .contact-key {
+      font-size: 10px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-tertiary); margin-bottom: 4px;
+    }
+    .contact-val { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+    .cta-btn {
+      display: block; width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      border-radius: 10px;
+      text-align: center;
+      font-size: 14px; font-weight: 700; color: #14100e;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      box-shadow: 0 0 20px rgba(255,112,67,0.25);
+    }
+    .cta-line {
+      font-size: 13px; color: var(--text-secondary);
+      text-align: center; line-height: 1.7; margin-top: 12px;
+    }
+    .footer-line {
+      margin-top: 20px; font-size: 10px;
+      color: var(--text-tertiary);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      text-align: center;
+    }
+    .footer-link { color: var(--text-tertiary); text-decoration: none; border-bottom: 1px solid var(--border-hover); }
+
+    /* ── 반응형 ── */
+    @media (max-width: 380px) {
+      .slide { padding: 36px 16px 64px; }
+      .slide-title { font-size: 24px; }
+      .stat-num { font-size: 20px; }
+      .sec-title { font-size: 18px; }
+      .hero-stat { padding: 0 12px; }
+      .hero-stats { margin-top: 24px; }
+      .slide-sub { font-size: 12px; }
+      .price-val { font-size: 12px; }
+    }
+    @media (max-height: 680px) {
+      .slide { padding: 28px 20px 60px; }
+      .slide-title { font-size: 24px; margin-bottom: 10px; }
+      .hero-stats { margin-top: 20px; }
+      .contact-col { margin-top: 14px; gap: 8px; }
+    }
+    @media (max-width: 320px) {
+      .slide { padding: 28px 12px 60px; }
+      .slide-title { font-size: 20px; }
+      .stat-num { font-size: 18px; }
+      .hero-badge { font-size: 9px; }
+      .slide-sub { font-size: 11px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="phone-frame">
+<div class="deck" id="deck">
+
+  <!-- SLIDE 0: HERO -->
+  <div class="slide active" data-index="0">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Studio Rental
+    </div>
+    <h1 class="slide-title" style="z-index:2;">
+      서울숲·성수·뚝섬<br><span class="gradient-text">최대 규모</span> 스튜디오
+    </h1>
+    <p class="slide-sub" style="z-index:2;">
+      346㎡(104평) 복합 공간을<br>시간 단위로 대관합니다.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-num"><span>3</span></div>
+        <div class="stat-label">대여 공간</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num"><span>82</span><span class="stat-unit">㎡</span></div>
+        <div class="stat-label">대형 요가홀</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num"><span>1</span><span class="stat-unit">h~</span></div>
+        <div class="stat-label">시간 단위</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 1: 공간 구성 -->
+  <div class="slide" data-index="1">
+    <div class="slide-label">Spaces</div>
+    <h2 class="sec-title">공간 구성</h2>
+    <p class="sec-sub">총 346㎡ · 약 104평</p>
+    <div class="block">
+      <div class="space-row primary">
+        <span class="space-name">요가홀</span>
+        <span class="space-area">82㎡ · 24.9평</span>
+      </div>
+      <div class="space-row primary">
+        <span class="space-name">필라테스룸</span>
+        <span class="space-area">45㎡ · 13.6평</span>
+      </div>
+      <div class="space-row primary">
+        <span class="space-name">PT룸</span>
+        <span class="space-area">22㎡ · 6.8평</span>
+      </div>
+      <div class="space-row">
+        <span class="space-name">남·녀 락커룸</span>
+        <span class="space-area">18.5㎡ · 5.6평</span>
+      </div>
+      <div class="space-row">
+        <span class="space-name">샤워실 · 파우더룸</span>
+        <span class="space-area">10㎡ · 3.0평</span>
+      </div>
+      <div class="space-row">
+        <span class="space-name">상담실</span>
+        <span class="space-area">6.5㎡ · 2.0평</span>
+      </div>
+      <p class="space-note">
+        요가홀 · 필라테스룸 · PT룸을 개별 또는 전체로 대여할 수 있으며,<br>
+        락커룸 · 샤워실 · 파우더룸 이용은 대관료에 포함됩니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: 대상 & 시설 -->
+  <div class="slide" data-index="2">
+    <div class="slide-label">For Whom</div>
+    <h2 class="sec-title">이런 분들께</h2>
+    <p class="sec-sub">공간만 빌리셔도, 통째로 쓰셔도 됩니다</p>
+    <div class="block">
+      <div class="card">
+        <div class="card-eyebrow">Use · 01</div>
+        <div class="card-name">원데이 클래스 · 프라이빗 수업</div>
+        <div class="card-sub">요가·필라테스 강사, 트레이너</div>
+        <ul>
+          <li class="card-item">리포머·캐딜락·체어 등 전문 기구 완비</li>
+          <li class="card-item">매트·소도구·블루투스 스피커 기본 제공</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Use · 02</div>
+        <div class="card-name">워크숍 · 세미나 · 소규모 행사</div>
+        <div class="card-sub">기획자, 커뮤니티, 기업 단체</div>
+        <ul>
+          <li class="card-item">대형 요가홀 82㎡ 단일 공간 활용</li>
+          <li class="card-item">남·녀 샤워실, 파우더룸, 락커룸 완비</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Use · 03</div>
+        <div class="card-name">촬영 스튜디오</div>
+        <div class="card-sub">유튜브, 화보, 브랜드 콘텐츠</div>
+        <ul>
+          <li class="card-item">상업 촬영은 사전 협의 필요</li>
+        </ul>
+      </div>
+
+      <div class="cap-label">Facility</div>
+      <div class="tags-row">
+        <span class="tag tag-accent">마샬 블루투스 스피커</span>
+        <span class="tag">천장형 냉·난방</span>
+        <span class="tag">바닥 난방</span>
+        <span class="tag">샤워실 · 파우더룸</span>
+        <span class="tag">남녀 락커룸</span>
+        <span class="tag">지하주차장</span>
+      </div>
+
+      <div class="cap-label">Access</div>
+      <div class="tags-row">
+        <span class="tag">수인분당선 서울숲역</span>
+        <span class="tag">2호선 뚝섬역</span>
+        <span class="tag">2호선 성수역</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: 갤러리 -->
+  <div class="slide gallery-slide" data-index="3">
+    <div class="gallery-header">
+      <div class="gallery-tag">Gallery</div>
+      <h2 class="sec-title" style="margin-bottom:2px;">공간 둘러보기</h2>
+      <p class="gallery-sub" style="font-size:12px;color:var(--text-tertiary);">이미지를 누르면 크게 볼 수 있어요</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'))">
+        <img loading="lazy" src="seoulforest/img/exterior.jpg" alt="센터 외관">
+        <div class="gallery-cap">왕십리로 50 · 스타벅스 건물 B1</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+        <img loading="lazy" src="seoulforest/img/yoga-meditation.jpg" alt="요가홀">
+        <div class="gallery-cap">요가홀 82㎡</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+        <img loading="lazy" src="seoulforest/img/lounge.jpg" alt="라운지">
+        <div class="gallery-cap">라운지</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+        <img loading="lazy" src="seoulforest/img/reformer.jpg" alt="필라테스 리포머룸">
+        <div class="gallery-cap">필라테스룸 45㎡</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+        <img loading="lazy" src="seoulforest/img/cadillac.jpg" alt="캐딜락 기구">
+        <div class="gallery-cap">캐딜락 기구</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+        <img loading="lazy" src="seoulforest/img/pt.jpg" alt="PT룸">
+        <div class="gallery-cap">PT룸 22㎡</div>
+      </div>
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+        <img loading="lazy" src="seoulforest/img/shower.jpg" alt="샤워실">
+        <div class="gallery-cap">샤워실</div>
+      </div>
+      <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'))">
+        <img loading="lazy" src="seoulforest/img/locker.jpg" alt="락커룸">
+        <div class="gallery-cap">남·녀 락커룸</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 4: 가격 ① -->
+  <div class="slide" data-index="4">
+    <div class="slide-label">Pricing · 01</div>
+    <h2 class="sec-title">대관료</h2>
+    <p class="sec-sub">공간만 대여 · 강사 미포함</p>
+    <div class="block">
+      <div class="price-card">
+        <div class="price-head">
+          <span class="price-space">요가홀</span>
+          <span class="price-area">82㎡ · 24.9평</span>
+        </div>
+        <div class="price-row"><span class="price-dur">1시간</span><span class="price-val">150,000원</span></div>
+        <div class="price-row"><span class="price-dur">2시간</span><span class="price-val">250,000원</span></div>
+        <div class="price-row"><span class="price-dur">3시간</span><span class="price-val">330,000원</span></div>
+        <div class="price-row"><span class="price-dur">반일 (4시간)</span><span class="price-val">400,000원</span></div>
+        <div class="price-row highlight"><span class="price-dur">종일 (8시간)</span><span class="price-val">700,000원</span></div>
+      </div>
+      <div class="price-card">
+        <div class="price-head">
+          <span class="price-space">필라테스룸</span>
+          <span class="price-area">45㎡ · 13.6평</span>
+        </div>
+        <div class="price-row"><span class="price-dur">1시간</span><span class="price-val">100,000원</span></div>
+        <div class="price-row"><span class="price-dur">2시간</span><span class="price-val">170,000원</span></div>
+        <div class="price-row"><span class="price-dur">3시간</span><span class="price-val">230,000원</span></div>
+        <div class="price-row"><span class="price-dur">반일 (4시간)</span><span class="price-val">280,000원</span></div>
+        <div class="price-row highlight"><span class="price-dur">종일 (8시간)</span><span class="price-val">500,000원</span></div>
+      </div>
+      <p class="vat-note">VAT 별도 · 매트 · 소도구 · 스피커 기본 제공</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 5: 가격 ② -->
+  <div class="slide" data-index="5">
+    <div class="slide-label">Pricing · 02</div>
+    <h2 class="sec-title">대관료</h2>
+    <p class="sec-sub">PT룸 · 전체 대관 · 할인 기준</p>
+    <div class="block">
+      <div class="price-card">
+        <div class="price-head">
+          <span class="price-space">PT룸</span>
+          <span class="price-area">22㎡ · 6.8평</span>
+        </div>
+        <div class="price-row"><span class="price-dur">1시간</span><span class="price-val">60,000원</span></div>
+        <div class="price-row"><span class="price-dur">2시간</span><span class="price-val">100,000원</span></div>
+        <div class="price-row"><span class="price-dur">3시간</span><span class="price-val">130,000원</span></div>
+        <div class="price-row"><span class="price-dur">반일 (4시간)</span><span class="price-val">160,000원</span></div>
+        <div class="price-row highlight"><span class="price-dur">종일 (8시간)</span><span class="price-val">280,000원</span></div>
+      </div>
+      <div class="price-card full">
+        <div class="price-head">
+          <span class="price-space">전체 대관</span>
+          <span class="price-area">요가홀+필라+PT</span>
+        </div>
+        <div class="price-row"><span class="price-dur">1시간</span><span class="price-val">250,000원</span></div>
+        <div class="price-row"><span class="price-dur">2시간</span><span class="price-val">420,000원</span></div>
+        <div class="price-row"><span class="price-dur">3시간</span><span class="price-val">560,000원</span></div>
+        <div class="price-row"><span class="price-dur">반일 (4시간)</span><span class="price-val">680,000원</span></div>
+        <div class="price-row highlight"><span class="price-dur">종일 (8시간)</span><span class="price-val">1,200,000원</span></div>
+      </div>
+      <div class="card card-accent">
+        <div class="card-eyebrow">Adjustment</div>
+        <ul>
+          <li class="card-item">주말 · 공휴일 20% 할증</li>
+          <li class="card-item">정기 대관(월 4회 이상) 10% 할인</li>
+          <li class="card-item">촬영 목적 대관은 별도 협의</li>
+        </ul>
+      </div>
+      <p class="vat-note">모든 금액 VAT 별도 · 세금계산서 발행 가능</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 6: 이용 규칙 & 환불 -->
+  <div class="slide" data-index="6">
+    <div class="slide-label">Policy</div>
+    <h2 class="sec-title">이용 규칙</h2>
+    <p class="sec-sub">다음 이용자를 위한 최소한의 약속입니다</p>
+    <div class="block">
+      <div class="card">
+        <div class="card-eyebrow">Before you leave</div>
+        <div class="card-name">퇴실 전 필수</div>
+        <ul>
+          <li class="card-item">매트 · 소품 · 가구 원래 위치로 반환</li>
+          <li class="card-item">쓰레기 직접 수거 및 바닥 정리</li>
+          <li class="card-item">냉·난방기 전원 OFF (바닥 난방 포함)</li>
+          <li class="card-item">시설 파손 시 즉시 담당자에게 고지</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-eyebrow">Not allowed</div>
+        <div class="card-name">금지 사항</div>
+        <ul>
+          <li class="card-item">음식물 반입 · 음주 · 흡연</li>
+          <li class="card-item">외부인 무단 동반, 출입 정보 제3자 공유</li>
+          <li class="card-item">재대관 · 재판매</li>
+          <li class="card-item">사전 허가 없는 상업 촬영</li>
+        </ul>
+      </div>
+
+      <div class="cap-label">Cancellation</div>
+      <div class="refund-row">
+        <span class="refund-when">이용일 7일 전까지</span>
+        <span class="refund-val refund-full">전액 환불</span>
+      </div>
+      <div class="refund-row">
+        <span class="refund-when">이용일 3~6일 전</span>
+        <span class="refund-val refund-half">50% 환불</span>
+      </div>
+      <div class="refund-row">
+        <span class="refund-when">이용일 1~2일 전</span>
+        <span class="refund-val refund-none">환불 불가</span>
+      </div>
+      <div class="refund-row">
+        <span class="refund-when">당일 취소 · 노쇼</span>
+        <span class="refund-val refund-none">환불 불가</span>
+      </div>
+      <p class="space-note">센터 사정으로 취소될 경우 전액 환불하고 사전에 안내드립니다.</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 7: CONTACT -->
+  <div class="slide" data-index="7">
+    <div class="slide-label">Booking</div>
+    <h2 class="slide-title" style="font-size:26px;">
+      <span class="gradient-text">공간 예약하기</span>
+    </h2>
+    <p class="cta-line">희망 일시와 인원만 알려주세요.<br>가능 여부를 빠르게 확인해 드립니다.</p>
+    <div class="contact-col">
+      <a class="cta-btn" href="https://forms.gle/H28c4QWEGrKvVmF46" target="_blank" rel="noopener">대관 신청서 작성하기</a>
+      <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div class="contact-key">문의</div>
+        <div class="contact-val">02-2297-2025<br>담당자 010-4463-2297</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div class="contact-key">서울숲점</div>
+        <div class="contact-val">서울 성동구 왕십리로 50<br>스타벅스 건물 B1층</div>
+      </div>
+    </div>
+    <div class="footer-line">
+      <a class="footer-link" href="index.html">협업 제안 보기 →</a>
+    </div>
+    <div class="footer-line" style="margin-top:10px;">© 2026 After Yoga &amp; Pilates</div>
+  </div>
+
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<!-- NAV -->
+<div class="scroll-indicator" id="scrollIndicator">
+  <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+  <span>scroll</span>
+</div>
+
+<div class="nav-bar">
+  <div class="nav-dots" id="navDots"></div>
+  <div class="nav-hint">스와이프로 이동</div>
+  <div class="nav-counter"><span id="currentNum">1</span> / <span id="totalNum">8</span></div>
+</div>
+</div>
+
+<script>
+function openLightbox(img) {
+  event.stopPropagation();
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lightboxImg').src = img.src;
+  lb.classList.add('open');
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+(function() {
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let current = 0;
+
+  const dotsWrap = document.getElementById('navDots');
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    d.dataset.idx = i;
+    d.addEventListener('click', function(e) {
+      e.stopPropagation();
+      goTo(parseInt(this.dataset.idx));
+    });
+    dotsWrap.appendChild(d);
+  }
+
+  function goTo(idx) {
+    if (idx < 0 || idx >= total || idx === current) return;
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+
+    const dir = idx > current ? 1 : -1;
+    slides[current].classList.remove('active');
+    slides[current].style.transform = dir > 0 ? 'translateX(-40px)' : 'translateX(40px)';
+
+    current = idx;
+    slides[current].style.transform = dir > 0 ? 'translateX(40px)' : 'translateX(-40px)';
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        slides[current].classList.add('active');
+        slides[current].style.transform = '';
+        slides[current].scrollTop = 0;
+        setTimeout(() => checkScrollable(slides[current]), 50);
+      });
+    });
+
+    setTimeout(() => {
+      slides.forEach((s, i) => {
+        if (i !== current) {
+          s.classList.remove('active');
+          s.style.transform = '';
+        }
+      });
+    }, 500);
+
+    updateUI();
+  }
+
+  function next() { goTo(current + 1); }
+  function prev() { goTo(current - 1); }
+
+  function checkScrollable(slide) {
+    if (slide.scrollHeight > slide.clientHeight + 4) {
+      slide.classList.add('scrollable');
+    } else {
+      slide.classList.remove('scrollable');
+    }
+    slide.scrollTop = 0;
+    updateScrollIndicator();
+  }
+
+  function updateUI() {
+    document.getElementById('currentNum').textContent = current + 1;
+    dotsWrap.querySelectorAll('.nav-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+    updateScrollIndicator();
+  }
+
+  const scrollIndicator = document.getElementById('scrollIndicator');
+
+  function updateScrollIndicator() {
+    const slide = slides[current];
+    const hasScroll = slide.scrollHeight > slide.clientHeight + 4;
+    const atBottom = slide.scrollTop + slide.clientHeight >= slide.scrollHeight - 20;
+    if (hasScroll && !atBottom) {
+      scrollIndicator.classList.add('visible');
+      scrollIndicator.classList.remove('hidden');
+    } else {
+      scrollIndicator.classList.remove('visible');
+      scrollIndicator.classList.add('hidden');
+    }
+  }
+
+  slides.forEach(slide => {
+    slide.addEventListener('scroll', updateScrollIndicator);
+  });
+
+  document.getElementById('deck').addEventListener('click', function(e) {
+    if (e.target.closest('.nav-bar')) return;
+    if (e.target.closest('.gallery-item')) return;
+    if (e.target.closest('.lightbox')) return;
+    if (e.target.closest('a')) return;
+    const x = e.clientX;
+    const w = window.innerWidth;
+    if (x < w * 0.3) prev();
+    else next();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) {
+      if (e.key === 'Escape') closeLightbox();
+      return;
+    }
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); next(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  let startX = 0;
+  document.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; });
+  document.addEventListener('touchend', function(e) {
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+  });
+
+  document.getElementById('totalNum').textContent = total;
+
+  setTimeout(() => checkScrollable(slides[current]), 100);
+})();
+</script>
+
+</body>
+</html>
