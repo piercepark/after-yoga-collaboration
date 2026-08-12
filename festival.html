@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
 <title>국내 대표 웰니스 전문가들의 서울숲 웰니스 페스티벌!</title>
 <meta name="description" content="2026.10.03-10.05 서울숲에서 열리는 3일간의 웰니스 페스티벌. 강사·아티스트 참여 안내 — 프로그램, 타임테이블, 참가비, 운영 조건, 진행 일정.">
 <meta property="og:title" content="국내 대표 웰니스 전문가들의 서울숲 웰니스 페스티벌!">
@@ -15,46 +16,110 @@
 <style>
 /* ============================================================
    애프터요가 서울숲 웰니스 페스티벌 2026 · 참여 안내
-   톤: 딥 포레스트 + 금박 헤어라인의 에디토리얼 포스터
+   톤: 에디토리얼 포스터 — 두 가지 무드를 한 파일에서 토글
+     · LIGHT  크림 페이퍼 + 아침 해 + 테라코타
+     · DARK   딥 포레스트 + 달무리 + 금박
+   - 컬러는 전부 변수. 구조·타이포·여백은 두 톤이 동일하다
+   - 기본값은 방문자 OS 설정, 버튼 선택은 localStorage에 기억
    - 카드·그림자·라운드 박스 없음. 위계는 타이포 대비 / 헤어라인 / 여백으로만
-   - 액센트는 금(라인·라벨·숫자) 하나, 감(persimmon)은 신청·인장에만
-   - 배경 그레인 + 등고선으로 서울숲의 질감을 얇게 깔아둔다
    ============================================================ */
+
+/* ---------- LIGHT (기본) ---------- */
 :root{
-  --bg:      #0E1712;   /* near-black forest */
-  --bg-2:    #121E18;   /* band surface */
-  --ink:     #F4EFE3;   /* warm ivory */
-  --ink-2:   #C3CDBE;   /* soft sage text */
-  --ink-3:   #8A9B88;   /* muted label */
-  --gold:    #C6A667;   /* primary accent — rules, labels, numerals */
-  --gold-d:  rgba(198,166,103,0.32);
-  --spark:   #E0854A;   /* persimmon — seal, apply */
-  --hair:    rgba(244,239,227,0.10);
-  --hair-2:  rgba(244,239,227,0.18);
+  --bg:      #FAF6EC;   /* 크림 페이퍼 */
+  --bg-2:    #F4EDDD;   /* 한 톤 짙은 밴드 */
+  --ink:     #2A2118;   /* 본문·표제 (웜 블랙) */
+  --ink-2:   #5C5245;   /* 보조 본문 */
+  --ink-3:   #6F6455;   /* 라벨·메타 */
+  --dim:     rgba(111,100,85,0.32);   /* 타임테이블 빈칸 */
+  --accent:  #A8502B;   /* 테라코타 — 라인·라벨·숫자 */
+  --accent-d:rgba(168,80,43,0.30);
+  --dot:     #A8502B;   /* 마크 점·인장 연도 */
+  --halo:    #E8A24A;   /* 해무리 링 (배경 질감) */
+  --halo-o:  0.42;
+  --line:    #A8502B;   /* 등고선 */
+  --line-o:  0.20;
+  --line-o2: 0.13;
+  --hair:    rgba(42,33,24,0.13);
+  --hair-2:  rgba(42,33,24,0.22);
+  --bar:     rgba(250,246,236,0.92);
+  --seal-bg: rgba(255,253,247,0.55);
+  --glow-1:  radial-gradient(ellipse 980px 640px at 79% 12%, rgba(232,162,74,0.26), transparent 64%);
+  --glow-2:  radial-gradient(ellipse 1100px 700px at 6% 78%, rgba(168,80,43,0.10), transparent 62%);
+  --wash:    linear-gradient(180deg, rgba(255,252,244,0.85), rgba(250,246,236,0) 46%);
+  --grain-o: 0.42;
+  --grain-blend: multiply;
+  --w-body:  380;
+  --w-strong:600;
 
   --display: "Cormorant Garamond", "Noto Serif KR", serif;
   --serif:   "Noto Serif KR", serif;
   --mono:    "DM Mono", ui-monospace, monospace;
   --body:    "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
 
+  --print-text: #241C14;
   --wrap: 1180px;
   --pad: 44px;
+}
+
+/* ---------- DARK ---------- */
+:root[data-theme="dark"]{
+  --bg:      #0E1712;   /* near-black forest */
+  --bg-2:    #121E18;
+  --ink:     #F4EFE3;   /* warm ivory */
+  --ink-2:   #C3CDBE;
+  --ink-3:   #8A9B88;
+  --dim:     rgba(138,155,136,0.35);
+  --accent:  #C6A667;   /* 금박 */
+  --accent-d:rgba(198,166,103,0.32);
+  --dot:     #E0854A;   /* 감(persimmon) */
+  --halo:    #C6A667;
+  --halo-o:  0.16;
+  --line:    #C6A667;
+  --line-o:  0.16;
+  --line-o2: 0.10;
+  --hair:    rgba(244,239,227,0.10);
+  --hair-2:  rgba(244,239,227,0.18);
+  --bar:     rgba(14,23,18,0.90);
+  --seal-bg: transparent;
+  --glow-1:  radial-gradient(ellipse 1100px 620px at 78% 8%, rgba(224,133,74,0.13), transparent 62%);
+  --glow-2:  radial-gradient(ellipse 900px 600px at -8% 62%, rgba(147,174,134,0.10), transparent 60%);
+  --wash:    none;
+  --grain-o: 0.5;
+  --grain-blend: normal;
+  --w-body:  350;
+  --w-strong:500;
+}
+/* JS가 꺼져 있어도 OS 설정을 따른다 */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme]){
+    --bg:#0E1712; --bg-2:#121E18; --ink:#F4EFE3; --ink-2:#C3CDBE; --ink-3:#8A9B88;
+    --dim:rgba(138,155,136,0.35); --accent:#C6A667; --accent-d:rgba(198,166,103,0.32);
+    --dot:#E0854A; --halo:#C6A667; --halo-o:0.16; --line:#C6A667; --line-o:0.16; --line-o2:0.10;
+    --hair:rgba(244,239,227,0.10); --hair-2:rgba(244,239,227,0.18); --bar:rgba(14,23,18,0.90);
+    --seal-bg:transparent; --grain-o:0.5; --grain-blend:normal; --w-body:350; --w-strong:500;
+    --wash:none;
+    --glow-1:radial-gradient(ellipse 1100px 620px at 78% 8%, rgba(224,133,74,0.13), transparent 62%);
+    --glow-2:radial-gradient(ellipse 900px 600px at -8% 62%, rgba(147,174,134,0.10), transparent 60%);
+  }
 }
 
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth; -webkit-text-size-adjust:100%; overflow-x:clip;}
 body{
   margin:0; background:var(--bg); color:var(--ink);
-  font-family:var(--body); font-weight:350; font-size:15.5px; line-height:1.78;
+  font-family:var(--body); font-weight:var(--w-body); font-size:15.5px; line-height:1.8;
   -webkit-font-smoothing:antialiased; letter-spacing:0.005em;
+  transition:background .45s ease, color .45s ease;
   /* 한글·영문 단어 단위 줄바꿈 (글자마다 끊기지 않음). 긴 URL 등은 넘침 방지 */
   word-break:keep-all;
   overflow-wrap:break-word;
 }
 /* 종이 결 — 아주 얕은 그레인 */
 body::after{
-  content:""; position:fixed; inset:0; z-index:99; pointer-events:none; opacity:.5;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.05'/></svg>");
+  content:""; position:fixed; inset:0; z-index:99; pointer-events:none; opacity:var(--grain-o);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.05'/></svg>");
+  mix-blend-mode:var(--grain-blend);
 }
 a{color:inherit; text-decoration:none;}
 .wrap{max-width:var(--wrap); margin:0 auto; padding:0 var(--pad);}
@@ -66,80 +131,95 @@ a{color:inherit; text-decoration:none;}
   transition:background .35s, border-color .35s, backdrop-filter .35s;
   border-bottom:1px solid transparent;
 }
-.topbar.solid{background:rgba(14,23,18,0.90); backdrop-filter:blur(12px); border-bottom-color:var(--hair);}
-.topbar .wrap{display:flex; align-items:center; justify-content:space-between; height:66px; gap:28px;}
+.topbar.solid{background:var(--bar); backdrop-filter:blur(12px); border-bottom-color:var(--hair);}
+.topbar .wrap{display:flex; align-items:center; justify-content:space-between; height:66px; gap:22px;}
 .mark{
   font-family:var(--mono); font-size:11px; letter-spacing:0.26em; text-transform:uppercase;
   color:var(--ink-2); white-space:nowrap; display:flex; align-items:center; gap:11px;
 }
-.mark::before{content:""; width:5px; height:5px; background:var(--spark); border-radius:50%;}
+.mark::before{content:""; width:5px; height:5px; background:var(--dot); border-radius:50%;}
 .tnav{
-  display:flex; gap:26px; overflow-x:auto; scrollbar-width:none;
+  display:flex; gap:26px; overflow-x:auto; scrollbar-width:none; margin-left:auto;
   font-family:var(--mono); font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase;
 }
 .tnav::-webkit-scrollbar{display:none;}
 .tnav a{color:var(--ink-3); white-space:nowrap; padding:6px 0; transition:color .2s; position:relative;}
 .tnav a::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
-  background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .28s;
+  background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .28s;
 }
 .tnav a:hover{color:var(--ink);}
-.tnav a.on{color:var(--gold);}
+.tnav a.on{color:var(--accent);}
 .tnav a.on::after{transform:scaleX(1);}
+
+/* 톤 토글 — 모노 라벨 (지금 톤이 아니라 '바뀔 톤'을 표시) */
+.tone{
+  flex:0 0 auto; display:inline-flex; align-items:center; gap:8px;
+  font-family:var(--mono); font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--ink-3); background:transparent; border:1px solid var(--hair-2); border-radius:0;
+  padding:7px 13px; cursor:pointer; line-height:1;
+  transition:color .25s, border-color .25s;
+}
+.tone::before{content:""; width:7px; height:7px; border-radius:50%; background:var(--accent); opacity:.85;}
+.tone:hover{color:var(--ink); border-color:var(--accent-d);}
+.tone:focus-visible{outline:1px solid var(--accent); outline-offset:3px;}
 section[id]{scroll-margin-top:80px;}
 
 /* ---------- HERO ---------- */
 .hero{position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden;}
-.hero .contour{position:absolute; inset:0; width:100%; height:100%; opacity:.5;}
+.hero .contour{position:absolute; inset:0; width:100%; height:100%;}
+.hero .contour .halo{stroke:var(--halo);}
+.hero .contour .ridge{stroke:var(--line); opacity:var(--line-o);}
+.hero .contour .ridge-far{stroke:var(--line); opacity:var(--line-o2);}
 .hero::before{ /* 빛 번짐 */
   content:""; position:absolute; inset:0;
-  background:
-    radial-gradient(ellipse 1100px 620px at 78% 8%, rgba(224,133,74,0.13), transparent 62%),
-    radial-gradient(ellipse 900px 600px at -8% 62%, rgba(147,174,134,0.10), transparent 60%);
+  background:var(--glow-1), var(--glow-2), var(--wash);
 }
 .hero .wrap{position:relative; z-index:2; padding-top:96px; padding-bottom:44px;}
 .kicker{
   font-family:var(--mono); font-size:11px; letter-spacing:0.34em; text-transform:uppercase;
-  color:var(--gold); display:flex; align-items:center; gap:16px; margin-bottom:30px;
+  color:var(--accent); display:flex; align-items:center; gap:16px; margin-bottom:30px;
 }
-.kicker::before{content:""; width:64px; height:1px; background:var(--gold-d);}
+.kicker::before{content:""; width:64px; height:1px; background:var(--accent-d);}
 h1.title{
   margin:0; font-family:var(--serif); font-weight:600;
   font-size:clamp(34px,5.6vw,74px); line-height:1.24; letter-spacing:-0.03em;
   text-wrap:balance; word-break:keep-all;
 }
-h1.title em{font-style:normal; display:block; color:var(--ink);}
-h1.title .accent{color:var(--gold);}
+h1.title span{display:block; color:var(--ink);}
+h1.title .accent{color:var(--accent);}
 .hero-kr{
   margin:14px 0 0; font-family:var(--serif); font-weight:400;
-  font-size:clamp(15px,1.6vw,17.5px); line-height:1.8; color:var(--ink-3); max-width:520px;
+  font-size:clamp(15px,1.6vw,17.5px); line-height:1.8; color:var(--ink-2); max-width:520px;
 }
 .hero-meta{
   margin-top:40px; padding-top:20px; border-top:1px solid var(--hair-2);
   display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px;
 }
 .hero-meta div{font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3);}
-.hero-meta b{display:block; font-family:var(--body); font-weight:450; font-size:14.5px;
+.hero-meta b{display:block; font-family:var(--body); font-weight:var(--w-strong); font-size:14.5px;
   letter-spacing:0.01em; text-transform:none; color:var(--ink); margin-top:9px;}
 .seal{
   position:absolute; right:var(--pad); top:132px; z-index:2;
-  width:150px; height:150px; border:1px solid var(--gold-d); border-radius:50%;
-  display:flex; align-items:center; justify-content:center; color:var(--gold);
+  width:150px; height:150px; border:1px solid var(--accent-d); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; color:var(--accent);
+  background:var(--seal-bg);
 }
-.seal::before{content:""; position:absolute; inset:9px; border:1px dashed var(--gold-d); border-radius:50%;}
+.seal::before{content:""; position:absolute; inset:9px; border:1px dashed var(--accent-d); border-radius:50%;}
 .seal span{
   font-family:var(--mono); font-size:8px; letter-spacing:0.12em; line-height:1.95;
   text-align:center; text-transform:uppercase; transform:rotate(-7deg);
 }
-.seal span b{display:block; font-family:var(--display); font-weight:500; font-size:21px;
-  letter-spacing:0.02em; color:var(--spark); line-height:1;  margin-bottom:8px;}
+.seal span b{display:block; font-family:var(--display); font-weight:var(--w-strong); font-size:21px;
+  letter-spacing:0.02em; color:var(--dot); line-height:1; margin-bottom:8px;}
+
 /* ---------- 숫자 밴드 ---------- */
 .figures{border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); background:var(--bg-2);}
 .figures .wrap{display:grid; grid-template-columns:repeat(3,1fr); padding-top:0; padding-bottom:0;}
 .fig{padding:44px 0 40px; text-align:center; border-left:1px solid var(--hair);}
 .fig:first-child{border-left:none;}
-.fig b{display:block; font-family:var(--display); font-weight:400; font-size:clamp(40px,5vw,62px);
-  line-height:1; color:var(--gold); letter-spacing:-0.01em;}
+.fig b{display:block; font-family:var(--display); font-weight:var(--w-strong); font-size:clamp(40px,5vw,62px);
+  line-height:1; color:var(--accent); letter-spacing:-0.01em;}
 .fig span{display:block; margin-top:14px; font-family:var(--mono); font-size:10.5px;
   letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-3);}
 
@@ -149,9 +229,9 @@ section{padding:104px 0; border-bottom:1px solid var(--hair);}
   font-family:var(--mono); font-size:10.5px; letter-spacing:0.24em; text-transform:uppercase;
   color:var(--ink-3); margin-bottom:18px;
 }
-.eyebrow i{font-style:normal; color:var(--gold); margin-right:14px;}
+.eyebrow .num{color:var(--accent); font-weight:500; margin-right:14px;}
 h2{
-  margin:0 0 14px; font-family:var(--serif); font-weight:500;
+  margin:0 0 14px; font-family:var(--serif); font-weight:var(--w-strong);
   font-size:clamp(25px,3.3vw,38px); line-height:1.35; letter-spacing:-0.01em;
   text-wrap:balance; word-break:keep-all;
 }
@@ -159,38 +239,38 @@ h2{
 .note{margin:0 0 40px; color:var(--ink-3); font-size:14px; max-width:640px;}
 h3{
   margin:72px 0 0; font-family:var(--mono); font-weight:500; font-size:10.5px;
-  letter-spacing:0.24em; text-transform:uppercase; color:var(--gold);
-  padding-bottom:12px; border-bottom:1px solid var(--gold-d);
+  letter-spacing:0.24em; text-transform:uppercase; color:var(--accent);
+  padding-bottom:12px; border-bottom:1px solid var(--accent-d);
 }
 h2 + h3{margin-top:48px;}   /* 섹션 제목 바로 뒤에 올 때 */
 
 /* 행 그리드 — 카드 대체 */
 .rows{border-top:1px solid var(--hair);}
-h3 + .rows{border-top:none;}  /* 금박 규칙선과 겹치지 않게 */
+h3 + .rows{border-top:none;}  /* 액센트 규칙선과 겹치지 않게 */
 .row{
   display:grid; grid-template-columns:64px 1fr; gap:0 28px;
   padding:26px 0; border-bottom:1px solid var(--hair); align-items:baseline;
 }
-.row .idx{font-family:var(--mono); font-size:11px; letter-spacing:0.14em; color:var(--gold);}
-.row h4{margin:0 0 7px; font-family:var(--serif); font-weight:500; font-size:19px; letter-spacing:-0.005em;}
+.row .idx{font-family:var(--mono); font-size:11px; letter-spacing:0.14em; color:var(--accent);}
+.row h4{margin:0 0 7px; font-family:var(--serif); font-weight:var(--w-strong); font-size:19px; letter-spacing:-0.005em;}
 .row p{margin:0; color:var(--ink-2); font-size:14.8px;}
 .row.wide{grid-template-columns:200px 1fr;}
-.row.wide .lab{font-size:14.5px; font-weight:500; color:var(--ink); letter-spacing:0.01em;}
-.row.wide .lab em{font-style:normal; display:block; margin-top:5px; font-family:var(--mono);
-  font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-3);}
+.row.wide .lab{font-size:14.5px; font-weight:var(--w-strong); color:var(--ink); letter-spacing:0.01em;}
+.row.wide .lab .en{display:block; margin-top:5px; font-family:var(--mono);
+  font-size:10px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-3); font-weight:400;}
 .row.wide p{color:var(--ink-2);}
 .row .val{font-size:15px; color:var(--ink);}
 .row .val .sub{display:block; margin-top:4px; color:var(--ink-3); font-size:13.5px;}
-.row .fee{font-family:var(--mono); font-size:15px; color:var(--gold); letter-spacing:0.02em;}
+.row .fee{font-family:var(--mono); font-size:15px; color:var(--accent); letter-spacing:0.02em;}
 
 /* ---------- 타임테이블 ---------- */
 .day{margin-top:60px;}
 .day:first-of-type{margin-top:0;}
 .day-head{
   display:flex; align-items:baseline; gap:18px; flex-wrap:wrap;
-  padding-bottom:14px; border-bottom:1px solid var(--gold-d);
+  padding-bottom:14px; border-bottom:1px solid var(--accent-d);
 }
-.day-head .date{font-family:var(--display); font-weight:400; font-size:34px; line-height:1; letter-spacing:-0.01em;}
+.day-head .date{font-family:var(--display); font-weight:var(--w-strong); font-size:34px; line-height:1; letter-spacing:-0.01em;}
 .day-head .dow{font-family:var(--serif); font-size:15px; color:var(--ink-2);}
 .day-head .tag{margin-left:auto; font-family:var(--mono); font-size:10px; letter-spacing:0.22em;
   text-transform:uppercase; color:var(--ink-3);}
@@ -202,8 +282,8 @@ thead th{
 }
 tbody tr{border-bottom:1px solid var(--hair);}
 td{padding:15px 10px 15px 0; font-size:14.5px; vertical-align:top; overflow-wrap:anywhere; word-break:keep-all;}
-td.t{font-family:var(--mono); font-size:12.5px; letter-spacing:0.08em; color:var(--gold); padding-top:17px;}
-td.o{color:rgba(138,155,136,0.35);}
+td.t{font-family:var(--mono); font-size:12.5px; letter-spacing:0.08em; color:var(--accent); padding-top:17px;}
+td.o{color:var(--dim);}
 col.c-time{width:16%;}
 
 /* ---------- 인용 ---------- */
@@ -212,20 +292,20 @@ col.c-time{width:16%;}
   font-size:clamp(20px,2.6vw,27px); line-height:1.75; letter-spacing:-0.01em;
   color:var(--ink); max-width:820px;
 }
-.pull::before{content:""; display:block; width:64px; height:1px; background:var(--gold); margin-bottom:28px;}
+.pull::before{content:""; display:block; width:64px; height:1px; background:var(--accent); margin-bottom:28px;}
 
 /* ---------- 참여 신청 ---------- */
 .apply{padding:120px 0; text-align:center; border-bottom:1px solid var(--hair); background:var(--bg-2);}
 .apply h2{margin-bottom:16px;}
 .apply p{margin:0 auto 40px; color:var(--ink-2); max-width:520px;}
 .cta{
-  display:inline-block; padding:19px 44px; border:1px solid var(--gold);
+  display:inline-block; padding:19px 44px; border:1px solid var(--accent);
   font-family:var(--mono); font-size:11px; letter-spacing:0.24em; text-transform:uppercase;
-  color:var(--gold); transition:background .3s, color .3s;
+  color:var(--accent); transition:background .3s, border-color .3s;
 }
-.cta:hover{background:var(--gold); color:var(--bg);}
-.cta.pending{border-style:dashed; border-color:var(--gold-d); color:var(--ink-3); cursor:default;}
-.cta.pending:hover{background:transparent; color:var(--ink-3);}
+.cta:hover{background:color-mix(in srgb, var(--accent) 8%, transparent);}
+.cta.pending{border-style:dashed; border-color:var(--accent-d); color:var(--ink-3); cursor:default;}
+.cta.pending:hover{background:transparent;}
 .apply .tel{margin-top:34px; font-family:var(--mono); font-size:11px; letter-spacing:0.18em; color:var(--ink-3);}
 
 footer{padding:46px 0 56px;}
@@ -247,10 +327,15 @@ footer .wrap span:first-child{color:var(--ink-2);}
   .seal span{font-size:7px; letter-spacing:0.1em;}
   .seal span b{font-size:17px; margin-bottom:6px;}
 }
+@media (max-width:1080px){
+  .topbar .wrap{gap:16px;}
+  .tnav{gap:20px;}
+}
 @media (max-width:900px){
   :root{--pad:28px;}
   section{padding:76px 0;}
   .apply{padding:88px 0;}
+  .tnav{display:none;}     /* 좁아지면 내비를 먼저 접고 토글은 남긴다 */
   /* 인장 — 절대배치 대신 흐름에 넣어 상단바와 제목 사이 여백의 정중앙에 둔다
      (position:relative 유지 — static이면 ::before 점선원이 hero 전체로 퍼진다) */
   .hero{padding-top:84px;}
@@ -270,12 +355,13 @@ footer .wrap span:first-child{color:var(--ink-2);}
   .fig:first-child{border-top:none;}
   .fig span{margin-top:0;}
   .row.wide{grid-template-columns:1fr; gap:8px;}
-  .row.wide .lab em{display:inline; margin-left:10px;}
+  .row.wide .lab .en{display:inline; margin-left:10px;}
 }
 @media (max-width:560px){
   :root{--pad:20px;}
   body{font-size:15px;}
-  .tnav{display:none;}
+  .mark{font-size:10px; letter-spacing:0.18em;}
+  .tone{padding:6px 10px; letter-spacing:0.16em;}
   .row{grid-template-columns:44px 1fr; gap:0 16px; padding:22px 0;}
   td{font-size:13.5px; padding:13px 6px 13px 0;}
   td.t{font-size:11.5px;}
@@ -284,17 +370,38 @@ footer .wrap span:first-child{color:var(--ink-2);}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   .js .rise{opacity:1; transform:none; transition:none;}
+  body{transition:none;}
 }
+/* 인쇄는 톤 선택과 무관하게 항상 흰 종이 + 어두운 잉크 */
 @media print{
-  body{background:#fff; color:#141414;}
-  body::after, .topbar, .hero .contour{display:none;}
+  :root, :root[data-theme="dark"]{
+    --bg:#fff; --bg-2:#fff; --ink:var(--print-text); --ink-2:#463D33; --ink-3:#6F6455;
+    --dim:rgba(111,100,85,0.35); --accent:#A8502B; --accent-d:rgba(168,80,43,0.34);
+    --dot:#A8502B; --hair:rgba(42,33,24,0.16); --hair-2:rgba(42,33,24,0.26); --seal-bg:transparent;
+    --w-body:400; --w-strong:600;
+  }
+  body{background:#fff; color:var(--print-text);}
+  body::after, .topbar, .hero .contour, .hero::before{display:none;}
   .js .rise{opacity:1; transform:none;}
-  .hero{min-height:auto;}
+  .hero{min-height:auto; padding-top:0;}
   section, .row, table, .day{break-inside:avoid;}
-  *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  *{-webkit-print-color-adjust:exact; print-color-adjust:exact; box-shadow:none !important;}
 }
-a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
+a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
 </style>
+<script>
+/* 톤 결정 — 첫 페인트 전에 실행해 깜빡임을 막는다 */
+(function(){
+  var t = 'light';
+  try{
+    var saved = localStorage.getItem('afy-fest-tone');
+    t = (saved === 'dark' || saved === 'light')
+      ? saved
+      : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  }catch(e){}
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
 </head>
 <body>
 
@@ -311,24 +418,30 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
       <a href="#why">Why Join</a>
       <a href="#steps">Next Step</a>
     </nav>
+    <button class="tone" id="tone" type="button" aria-label="화면 톤 전환"><span id="toneLabel">Dark</span></button>
   </div>
 </div>
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
   <svg class="contour" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <g fill="none" stroke="#C6A667" stroke-width="1" opacity="0.16">
+    <!-- 해무리 · 달무리 — 톤에 따라 색과 농도가 바뀐다 -->
+    <g class="halo" fill="none" stroke-width="1">
+      <circle cx="1178" cy="250" r="76"  style="opacity:calc(var(--halo-o) * 1)"/>
+      <circle cx="1178" cy="250" r="122" style="opacity:calc(var(--halo-o) * 0.62)"/>
+      <circle cx="1178" cy="250" r="178" style="opacity:calc(var(--halo-o) * 0.38)"/>
+      <circle cx="1178" cy="250" r="244" style="opacity:calc(var(--halo-o) * 0.24)"/>
+    </g>
+    <!-- 서울숲 등고선 -->
+    <g class="ridge" fill="none" stroke-width="1">
       <path d="M-40 690 C 210 640, 300 560, 520 574 S 900 660, 1120 596 S 1400 500, 1500 520"/>
       <path d="M-40 742 C 190 700, 320 616, 546 630 S 906 716, 1132 650 S 1408 556, 1500 578"/>
       <path d="M-40 796 C 176 760, 342 674, 572 688 S 912 772, 1146 706 S 1416 612, 1500 636"/>
       <path d="M-40 852 C 160 820, 366 732, 598 746 S 918 828, 1160 762 S 1424 668, 1500 694"/>
+    </g>
+    <g class="ridge-far" fill="none" stroke-width="1">
       <path d="M-40 452 C 240 420, 386 330, 620 352 S 960 452, 1180 388 S 1420 296, 1500 318"/>
       <path d="M-40 512 C 224 476, 402 388, 640 410 S 966 508, 1194 444 S 1428 352, 1500 376"/>
-    </g>
-    <g fill="none" stroke="#C6A667" stroke-width="1" opacity="0.10">
-      <ellipse cx="1180" cy="250" rx="150" ry="86"/>
-      <ellipse cx="1180" cy="250" rx="214" ry="126"/>
-      <ellipse cx="1180" cy="250" rx="286" ry="170"/>
     </g>
   </svg>
 
@@ -339,8 +452,8 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
   <div class="wrap">
     <p class="kicker">Wellness Festival — 개천절 연휴 3일</p>
     <h1 class="title">
-      <em>국내 대표 웰니스 전문가들의</em>
-      <em class="accent">서울숲 웰니스 페스티벌!</em>
+      <span>국내 대표 웰니스 전문가들의</span>
+      <span class="accent">서울숲 웰니스 페스티벌!</span>
     </h1>
     <p class="hero-kr">움직이고, 감각을 깨우며, 지금을 경험하는 3일간의 휴식.</p>
 
@@ -364,7 +477,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= 01 OVERVIEW ================= -->
 <section id="overview">
   <div class="wrap rise">
-    <p class="eyebrow"><i>01</i>Overview</p>
+    <p class="eyebrow"><span class="num">01</span>Overview</p>
     <h2>서울숲에서 만나는 3일간의 웰니스</h2>
     <p class="lede">
       애프터요가 서울숲에서 요가와 필라테스를 중심으로 러닝, 명상, 싱잉볼, 아티스트 협업까지
@@ -373,19 +486,19 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
     </p>
     <div class="rows">
       <div class="row wide">
-        <div class="lab">기간<em>Date</em></div>
+        <div class="lab">기간<span class="en">Date</span></div>
         <div class="val">2026년 10월 3일(토) — 10월 5일(월 · 대체휴무)<span class="sub">개천절 연휴 3일간</span></div>
       </div>
       <div class="row wide">
-        <div class="lab">장소<em>Place</em></div>
+        <div class="lab">장소<span class="en">Place</span></div>
         <div class="val">애프터 요가&amp;필라테스 서울숲점<span class="sub">러닝 세션은 서울숲 야외 코스에서 진행합니다</span></div>
       </div>
       <div class="row wide">
-        <div class="lab">구성<em>Category</em></div>
+        <div class="lab">구성<span class="en">Category</span></div>
         <div class="val">요가 · 필라테스 · 러닝 · 명상 · 사운드 · 아트<span class="sub">6개 카테고리, 웰니스 클래스 33개 내외</span></div>
       </div>
       <div class="row wide">
-        <div class="lab">참여진<em>Lineup</em></div>
+        <div class="lab">참여진<span class="en">Lineup</span></div>
         <div class="val">다양한 분야의 강사와 아티스트<span class="sub">요가·필라테스 강사, 러닝 코치, 협업 아티스트</span></div>
       </div>
     </div>
@@ -395,7 +508,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= 02 PROGRAM ================= -->
 <section id="program">
   <div class="wrap rise">
-    <p class="eyebrow"><i>02</i>Program</p>
+    <p class="eyebrow"><span class="num">02</span>Program</p>
     <h2>다양한 방식으로 경험하는 웰니스</h2>
     <div class="rows" style="margin-top:8px;">
       <div class="row">
@@ -421,7 +534,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= 03 TIMETABLE ================= -->
 <section id="schedule">
   <div class="wrap rise">
-    <p class="eyebrow"><i>03</i>Timetable</p>
+    <p class="eyebrow"><span class="num">03</span>Timetable</p>
     <h2>3일간의 타임테이블</h2>
     <p class="note">약 30개 프로그램이 3일간 운영되며, 시간표는 사정에 따라 변동될 수 있습니다.</p>
 
@@ -486,7 +599,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= 04 YOUR CLASS ================= -->
 <section id="class">
   <div class="wrap rise">
-    <p class="eyebrow"><i>04</i>Your Class</p>
+    <p class="eyebrow"><span class="num">04</span>Your Class</p>
     <h2>당신의 수업을 제안해 주세요</h2>
     <p class="lede">
       원하시는 스타일의 수업이 있으시면 편히 제안 주세요.
@@ -498,7 +611,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= 05 TERMS ================= -->
 <section id="terms">
   <div class="wrap rise">
-    <p class="eyebrow"><i>05</i>Participation &amp; Terms</p>
+    <p class="eyebrow"><span class="num">05</span>Participation &amp; Terms</p>
     <h2>참가 방식과 운영 조건</h2>
 
     <h3>Class Fee</h3>
@@ -519,23 +632,23 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
     <h3>Operation</h3>
     <div class="rows">
       <div class="row wide">
-        <div class="lab">운영 수수료<em>Fee</em></div>
+        <div class="lab">운영 수수료<span class="en">Fee</span></div>
         <div class="val">예상 10%<span class="sub">행사 진행과 운영 인력 비용, 결제 시스템 수수료가 포함된 금액이며 이외 수수료는 발생하지 않습니다.</span></div>
       </div>
       <div class="row wide">
-        <div class="lab">대관비<em>Venue</em></div>
+        <div class="lab">대관비<span class="en">Venue</span></div>
         <div class="val">별도 없음<span class="sub">대관과 관련한 비용은 발생하지 않습니다.</span></div>
       </div>
       <div class="row wide">
-        <div class="lab">재료비<em>Material</em></div>
+        <div class="lab">재료비<span class="en">Material</span></div>
         <div class="val">개별 준비<span class="sub">클래스에 필요한 재료와 도구는 강사님께서 준비해 주세요.</span></div>
       </div>
       <div class="row wide">
-        <div class="lab">협찬<em>Sponsor</em></div>
+        <div class="lab">협찬<span class="en">Sponsor</span></div>
         <div class="val">사전 협의<span class="sub">브랜드 협찬이 필요한 경우 미리 상의해 주시면 함께 진행합니다.</span></div>
       </div>
       <div class="row wide">
-        <div class="lab">주차<em>Parking</em></div>
+        <div class="lab">주차<span class="en">Parking</span></div>
         <div class="val">3시간 지원<span class="sub">참가자와 강사분들 모두 지원됩니다.</span></div>
       </div>
     </div>
@@ -561,7 +674,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= 06 RECORD ================= -->
 <section id="record">
   <div class="wrap rise">
-    <p class="eyebrow"><i>06</i>Record</p>
+    <p class="eyebrow"><span class="num">06</span>Record</p>
     <h2>사진과 영상으로 남는 3일</h2>
     <p class="lede">
       촬영된 콘텐츠는 개인 SNS와 포트폴리오에 자유롭게 활용하실 수 있으며,
@@ -579,7 +692,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= 07 WHY JOIN ================= -->
 <section id="why">
   <div class="wrap rise">
-    <p class="eyebrow"><i>07</i>Why Join</p>
+    <p class="eyebrow"><span class="num">07</span>Why Join</p>
     <p class="pull">요가를 넘어 필라테스, 러닝, 음악, 미술, 명상까지.<br>각 분야의 선생님과 아티스트가 서울숲에서 3일간 함께 만듭니다.</p>
     <div class="rows" style="margin-top:56px;">
       <div class="row">
@@ -609,7 +722,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= 08 NEXT STEP ================= -->
 <section id="steps">
   <div class="wrap rise">
-    <p class="eyebrow"><i>08</i>Next Step</p>
+    <p class="eyebrow"><span class="num">08</span>Next Step</p>
     <h2>진행 일정</h2>
     <table style="margin-top:8px;">
       <colgroup><col style="width:20%"><col><col style="width:26%"></colgroup>
@@ -628,7 +741,7 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 <!-- ================= APPLY ================= -->
 <section class="apply">
   <div class="wrap rise">
-    <p class="eyebrow"><i>—</i>Apply</p>
+    <p class="eyebrow"><span class="num">—</span>Apply</p>
     <h2>참여 의사를 남겨주세요</h2>
     <p>신청 폼에 수업 정보를 입력해 주시면 접수됩니다. 이후 클래스와 일정은 개별로 조율해 드립니다.</p>
     <!-- 신청 폼 링크 확정 시 아래 한 줄을 <a class="cta" href="구글시트URL" target="_blank" rel="noopener">참여 신청서 작성</a> 로 교체 -->
@@ -646,6 +759,35 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
 
 <script>
 document.documentElement.classList.add('js');
+
+// ---------- 톤 토글 ----------
+const root = document.documentElement;
+const toneBtn = document.getElementById('tone');
+const toneLabel = document.getElementById('toneLabel');
+const syncTone = () => {
+  const dark = root.getAttribute('data-theme') === 'dark';
+  toneLabel.textContent = dark ? 'Light' : 'Dark';   // 바뀔 톤을 표시
+  toneBtn.setAttribute('aria-label', dark ? '밝은 톤으로 전환' : '어두운 톤으로 전환');
+};
+toneBtn.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  try { localStorage.setItem('afy-fest-tone', next); } catch (e) {}
+  syncTone();
+});
+syncTone();
+// 직접 고른 적이 없으면 OS 설정 변화를 그대로 따라간다
+if (window.matchMedia) {
+  const mq = window.matchMedia('(prefers-color-scheme: dark)');
+  const follow = (e) => {
+    let saved = null;
+    try { saved = localStorage.getItem('afy-fest-tone'); } catch (err) {}
+    if (saved) return;
+    root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    syncTone();
+  };
+  mq.addEventListener ? mq.addEventListener('change', follow) : mq.addListener(follow);
+}
 
 // 상단 바 배경 · 현재 섹션 표시
 const bar = document.getElementById('topbar');
