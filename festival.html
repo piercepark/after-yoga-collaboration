@@ -47,6 +47,9 @@ body{
   margin:0; background:var(--bg); color:var(--ink);
   font-family:var(--body); font-weight:350; font-size:15.5px; line-height:1.78;
   -webkit-font-smoothing:antialiased; letter-spacing:0.005em;
+  /* 한글·영문 단어 단위 줄바꿈 (글자마다 끊기지 않음). 긴 URL 등은 넘침 방지 */
+  word-break:keep-all;
+  overflow-wrap:break-word;
 }
 /* 종이 결 — 아주 얕은 그레인 */
 body::after{
@@ -156,7 +159,8 @@ section{padding:104px 0; border-bottom:1px solid var(--hair);}
 .eyebrow i{font-style:normal; color:var(--gold); margin-right:14px;}
 h2{
   margin:0 0 14px; font-family:var(--serif); font-weight:500;
-  font-size:clamp(25px,3.3vw,38px); line-height:1.35; letter-spacing:-0.01em; text-wrap:balance;
+  font-size:clamp(25px,3.3vw,38px); line-height:1.35; letter-spacing:-0.01em;
+  text-wrap:balance; word-break:keep-all;
 }
 .lede{margin:0 0 52px; color:var(--ink-2); max-width:640px; font-size:16px;}
 .note{margin:0 0 40px; color:var(--ink-3); font-size:14px; max-width:640px;}
