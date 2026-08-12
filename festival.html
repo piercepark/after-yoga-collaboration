@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="dark light">
 <title>국내 대표 웰니스 전문가들의 서울숲 웰니스 페스티벌!</title>
 <meta name="description" content="2026.10.03-10.05 서울숲에서 열리는 3일간의 웰니스 페스티벌. 강사·아티스트 참여 안내 — 프로그램, 타임테이블, 참가비, 운영 조건, 진행 일정.">
 <meta property="og:title" content="국내 대표 웰니스 전문가들의 서울숲 웰니스 페스티벌!">
@@ -17,65 +17,28 @@
 /* ============================================================
    애프터요가 서울숲 웰니스 페스티벌 2026 · 참여 안내
    톤: 에디토리얼 포스터 — 두 가지 무드를 한 파일에서 토글
+     · DARK   딥 포레스트 + 달무리 + 금박  ← 기본값
      · LIGHT  크림 페이퍼 + 아침 해 + 테라코타
-     · DARK   딥 포레스트 + 달무리 + 금박
    - 컬러는 전부 변수. 구조·타이포·여백은 두 톤이 동일하다
-   - 기본값은 방문자 OS 설정, 버튼 선택은 localStorage에 기억
+   - 기본값은 항상 다크(OS 설정과 무관), 버튼 선택만 localStorage에 기억
    - 카드·그림자·라운드 박스 없음. 위계는 타이포 대비 / 헤어라인 / 여백으로만
    ============================================================ */
 
-/* ---------- LIGHT (기본) ---------- */
+/* ---------- DARK (기본값) ---------- */
+/* 기본 톤은 다크. JS가 꺼져 있어도 이 값이 그대로 적용된다 */
 :root{
-  --bg:      #FAF6EC;   /* 크림 페이퍼 */
-  --bg-2:    #F4EDDD;   /* 한 톤 짙은 밴드 */
-  --ink:     #2A2118;   /* 본문·표제 (웜 블랙) */
-  --ink-2:   #5C5245;   /* 보조 본문 */
-  --ink-3:   #6F6455;   /* 라벨·메타 */
-  --dim:     rgba(111,100,85,0.32);   /* 타임테이블 빈칸 */
-  --accent:  #A8502B;   /* 테라코타 — 라인·라벨·숫자 */
-  --accent-d:rgba(168,80,43,0.30);
-  --dot:     #A8502B;   /* 마크 점·인장 연도 */
-  --halo:    #E8A24A;   /* 해무리 링 (배경 질감) */
-  --halo-o:  0.42;
-  --line:    #A8502B;   /* 등고선 */
-  --line-o:  0.20;
-  --line-o2: 0.13;
-  --hair:    rgba(42,33,24,0.13);
-  --hair-2:  rgba(42,33,24,0.22);
-  --bar:     rgba(250,246,236,0.92);
-  --seal-bg: rgba(255,253,247,0.55);
-  --glow-1:  radial-gradient(ellipse 980px 640px at 79% 12%, rgba(232,162,74,0.26), transparent 64%);
-  --glow-2:  radial-gradient(ellipse 1100px 700px at 6% 78%, rgba(168,80,43,0.10), transparent 62%);
-  --wash:    linear-gradient(180deg, rgba(255,252,244,0.85), rgba(250,246,236,0) 46%);
-  --grain-o: 0.42;
-  --grain-blend: multiply;
-  --w-body:  380;
-  --w-strong:600;
-
-  --display: "Cormorant Garamond", "Noto Serif KR", serif;
-  --serif:   "Noto Serif KR", serif;
-  --mono:    "DM Mono", ui-monospace, monospace;
-  --body:    "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
-
-  --print-text: #241C14;
-  --wrap: 1180px;
-  --pad: 44px;
-}
-
-/* ---------- DARK ---------- */
-:root[data-theme="dark"]{
   --bg:      #0E1712;   /* near-black forest */
-  --bg-2:    #121E18;
+  --bg-2:    #121E18;   /* band surface */
   --ink:     #F4EFE3;   /* warm ivory */
   --ink-2:   #C3CDBE;
   --ink-3:   #8A9B88;
-  --dim:     rgba(138,155,136,0.35);
-  --accent:  #C6A667;   /* 금박 */
+  --dim:     rgba(138,155,136,0.35);  /* 타임테이블 빈칸 */
+  --accent:  #C6A667;   /* 금박 — 라인·라벨·숫자 */
   --accent-d:rgba(198,166,103,0.32);
-  --dot:     #E0854A;   /* 감(persimmon) */
-  --halo:    #C6A667;
+  --dot:     #E0854A;   /* 감(persimmon) — 마크 점·인장 연도 */
+  --halo:    #C6A667;   /* 달무리 링 (배경 질감) */
   --halo-o:  0.16;
-  --line:    #C6A667;
+  --line:    #C6A667;   /* 등고선 */
   --line-o:  0.16;
   --line-o2: 0.10;
   --hair:    rgba(244,239,227,0.10);
@@ -89,19 +52,45 @@
   --grain-blend: normal;
   --w-body:  350;
   --w-strong:500;
+
+  /* 톤과 무관한 공통값 */
+  --display: "Cormorant Garamond", "Noto Serif KR", serif;
+  --serif:   "Noto Serif KR", serif;
+  --mono:    "DM Mono", ui-monospace, monospace;
+  --body:    "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
+
+  --print-text: #241C14;
+  --wrap: 1180px;
+  --pad: 44px;
 }
-/* JS가 꺼져 있어도 OS 설정을 따른다 */
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme]){
-    --bg:#0E1712; --bg-2:#121E18; --ink:#F4EFE3; --ink-2:#C3CDBE; --ink-3:#8A9B88;
-    --dim:rgba(138,155,136,0.35); --accent:#C6A667; --accent-d:rgba(198,166,103,0.32);
-    --dot:#E0854A; --halo:#C6A667; --halo-o:0.16; --line:#C6A667; --line-o:0.16; --line-o2:0.10;
-    --hair:rgba(244,239,227,0.10); --hair-2:rgba(244,239,227,0.18); --bar:rgba(14,23,18,0.90);
-    --seal-bg:transparent; --grain-o:0.5; --grain-blend:normal; --w-body:350; --w-strong:500;
-    --wash:none;
-    --glow-1:radial-gradient(ellipse 1100px 620px at 78% 8%, rgba(224,133,74,0.13), transparent 62%);
-    --glow-2:radial-gradient(ellipse 900px 600px at -8% 62%, rgba(147,174,134,0.10), transparent 60%);
-  }
+
+/* ---------- LIGHT (방문자가 토글로 고를 때만) ---------- */
+:root[data-theme="light"]{
+  --bg:      #FAF6EC;   /* 크림 페이퍼 */
+  --bg-2:    #F4EDDD;
+  --ink:     #2A2118;   /* 웜 블랙 */
+  --ink-2:   #5C5245;
+  --ink-3:   #6F6455;
+  --dim:     rgba(111,100,85,0.32);
+  --accent:  #A8502B;   /* 테라코타 */
+  --accent-d:rgba(168,80,43,0.30);
+  --dot:     #A8502B;
+  --halo:    #E8A24A;   /* 해무리 */
+  --halo-o:  0.42;
+  --line:    #A8502B;
+  --line-o:  0.20;
+  --line-o2: 0.13;
+  --hair:    rgba(42,33,24,0.13);
+  --hair-2:  rgba(42,33,24,0.22);
+  --bar:     rgba(250,246,236,0.92);
+  --seal-bg: rgba(255,253,247,0.55);
+  --glow-1:  radial-gradient(ellipse 980px 640px at 79% 12%, rgba(232,162,74,0.26), transparent 64%);
+  --glow-2:  radial-gradient(ellipse 1100px 700px at 6% 78%, rgba(168,80,43,0.10), transparent 62%);
+  --wash:    linear-gradient(180deg, rgba(255,252,244,0.85), rgba(250,246,236,0) 46%);
+  --grain-o: 0.42;
+  --grain-blend: multiply;
+  --w-body:  380;
+  --w-strong:600;
 }
 
 *{box-sizing:border-box;}
@@ -110,7 +99,7 @@ body{
   margin:0; background:var(--bg); color:var(--ink);
   font-family:var(--body); font-weight:var(--w-body); font-size:15.5px; line-height:1.8;
   -webkit-font-smoothing:antialiased; letter-spacing:0.005em;
-  transition:background .45s ease, color .45s ease;
+  transition:background-color .45s ease, color .45s ease;
   /* 한글·영문 단어 단위 줄바꿈 (글자마다 끊기지 않음). 긴 URL 등은 넘침 방지 */
   word-break:keep-all;
   overflow-wrap:break-word;
@@ -374,7 +363,7 @@ footer .wrap span:first-child{color:var(--ink-2);}
 }
 /* 인쇄는 톤 선택과 무관하게 항상 흰 종이 + 어두운 잉크 */
 @media print{
-  :root, :root[data-theme="dark"]{
+  :root, :root[data-theme="light"], :root[data-theme="dark"]{
     --bg:#fff; --bg-2:#fff; --ink:var(--print-text); --ink-2:#463D33; --ink-3:#6F6455;
     --dim:rgba(111,100,85,0.35); --accent:#A8502B; --accent-d:rgba(168,80,43,0.34);
     --dot:#A8502B; --hair:rgba(42,33,24,0.16); --hair-2:rgba(42,33,24,0.26); --seal-bg:transparent;
@@ -390,14 +379,13 @@ footer .wrap span:first-child{color:var(--ink-2);}
 a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
 </style>
 <script>
-/* 톤 결정 — 첫 페인트 전에 실행해 깜빡임을 막는다 */
+/* 톤 결정 — 첫 페인트 전에 실행해 깜빡임을 막는다.
+   기본은 다크. 방문자가 토글로 고른 적이 있을 때만 그 선택을 따른다 */
 (function(){
-  var t = 'light';
+  var t = 'dark';
   try{
     var saved = localStorage.getItem('afy-fest-tone');
-    t = (saved === 'dark' || saved === 'light')
-      ? saved
-      : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    if (saved === 'dark' || saved === 'light') t = saved;
   }catch(e){}
   document.documentElement.setAttribute('data-theme', t);
 })();
@@ -776,18 +764,6 @@ toneBtn.addEventListener('click', () => {
   syncTone();
 });
 syncTone();
-// 직접 고른 적이 없으면 OS 설정 변화를 그대로 따라간다
-if (window.matchMedia) {
-  const mq = window.matchMedia('(prefers-color-scheme: dark)');
-  const follow = (e) => {
-    let saved = null;
-    try { saved = localStorage.getItem('afy-fest-tone'); } catch (err) {}
-    if (saved) return;
-    root.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-    syncTone();
-  };
-  mq.addEventListener ? mq.addEventListener('change', follow) : mq.addListener(follow);
-}
 
 // 상단 바 배경 · 현재 섹션 표시
 const bar = document.getElementById('topbar');
