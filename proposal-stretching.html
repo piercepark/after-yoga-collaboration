@@ -147,8 +147,10 @@ p.lead b{color:var(--ink); font-weight:600;}
   .page{
     width:100%; height:auto; min-height:100svh; overflow:visible;
     padding:30px 20px 40px;
+    /* 한글·영문 모두 단어 단위 줄바꿈 (글자마다 끊기지 않음). 긴 URL 등은 넘침 방지로 예외 허용 */
+    word-break:keep-all;
+    overflow-wrap:break-word;
   }
-  h1, .tagline, .sec-head h2, .benefit h3{word-break:keep-all;}
 
   /* 머리 — 인장이 제목을 덮지 않도록 우측 여백 확보 */
   .seal{right:20px; top:22px; width:78px; height:78px;}
