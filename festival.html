@@ -133,13 +133,6 @@ h1.title .accent{color:var(--gold);}
 }
 .seal span b{display:block; font-family:var(--display); font-weight:500; font-size:21px;
   letter-spacing:0.02em; color:var(--spark); line-height:1;  margin-bottom:8px;}
-.scroll-cue{
-  position:absolute; right:var(--pad); bottom:56px; z-index:2;
-  writing-mode:vertical-rl; display:flex; align-items:center; gap:14px;
-  font-family:var(--mono); font-size:9.5px; letter-spacing:0.26em; color:var(--ink-3); text-transform:uppercase;
-}
-.scroll-cue::after{content:""; width:1px; height:52px; background:linear-gradient(var(--gold-d), transparent);}
-
 /* ---------- 숫자 밴드 ---------- */
 .figures{border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); background:var(--bg-2);}
 .figures .wrap{display:grid; grid-template-columns:repeat(3,1fr); padding-top:0; padding-bottom:0;}
@@ -294,7 +287,7 @@ footer .wrap span:first-child{color:var(--ink-2);}
 }
 @media print{
   body{background:#fff; color:#141414;}
-  body::after, .topbar, .hero .contour, .scroll-cue{display:none;}
+  body::after, .topbar, .hero .contour{display:none;}
   .js .rise{opacity:1; transform:none;}
   .hero{min-height:auto;}
   section, .row, table, .day{break-inside:avoid;}
@@ -357,7 +350,6 @@ a:focus-visible{outline:1px solid var(--gold); outline-offset:5px;}
       <div>Program <b>요가 · 필라테스 · 러닝 · 명상 · 사운드 · 아트</b></div>
     </div>
   </div>
-  <p class="scroll-cue">Scroll</p>
 </header>
 
 <!-- ================= 숫자 ================= -->
