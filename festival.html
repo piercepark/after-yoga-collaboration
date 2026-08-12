@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="light dark">
 <title>국내 대표 웰니스 전문가들의 서울숲 웰니스 페스티벌!</title>
 <meta name="description" content="2026.10.03-10.05 서울숲에서 열리는 3일간의 웰니스 페스티벌. 강사·아티스트 참여 안내 — 프로그램, 타임테이블, 참가비, 운영 조건, 진행 일정.">
 <meta property="og:title" content="국내 대표 웰니스 전문가들의 서울숲 웰니스 페스티벌!">
@@ -17,41 +17,62 @@
 /* ============================================================
    애프터요가 서울숲 웰니스 페스티벌 2026 · 참여 안내
    톤: 에디토리얼 포스터 — 두 가지 무드를 한 파일에서 토글
-     · DARK   딥 포레스트 + 달무리 + 금박  ← 기본값
-     · LIGHT  크림 페이퍼 + 아침 해 + 테라코타
+     · LIGHT  베이지 페이퍼 + 앰버·피치 노을 + 초콜릿  ← 기본값
+     · DARK   딥 올리브 + 앰버 달무리 + 초콜릿
+   팔레트 (2026-08-12 지정 — 첨부 컬러칩):
+     Chocolate  #D57530 / Peach Glow #FFBC92 / Beige #FBF8E0
+     Pale Amber #EEE47D / Muted Olive #9FB768
+     ※ 소형 텍스트·라인의 --accent는 Chocolate을 어둡게 조인 #BC601F.
+        원본 #D57530은 베이지 위에서 대비 3.08:1이라 10~11px 모노 라벨에 약하다.
+        큰 숫자·점·인장 등 대형 요소에만 원본을 --dot / --halo로 쓴다.
    - 컬러는 전부 변수. 구조·타이포·여백은 두 톤이 동일하다
-   - 기본값은 항상 다크(OS 설정과 무관), 버튼 선택만 localStorage에 기억
+   - 기본값은 라이트(OS 설정과 무관), 버튼 선택만 localStorage에 기억
    - 카드·그림자·라운드 박스 없음. 위계는 타이포 대비 / 헤어라인 / 여백으로만
    ============================================================ */
 
-/* ---------- DARK (기본값) ---------- */
-/* 기본 톤은 다크. JS가 꺼져 있어도 이 값이 그대로 적용된다 */
+/* ---------- LIGHT (기본값) ---------- */
+/* 기본 톤은 라이트. JS가 꺼져 있어도 이 값이 그대로 적용된다 */
 :root{
-  --bg:      #0E1712;   /* near-black forest */
-  --bg-2:    #121E18;   /* band surface */
-  --ink:     #F4EFE3;   /* warm ivory */
-  --ink-2:   #C3CDBE;
-  --ink-3:   #8A9B88;
-  --dim:     rgba(138,155,136,0.35);  /* 타임테이블 빈칸 */
-  --accent:  #C6A667;   /* 금박 — 라인·라벨·숫자 */
-  --accent-d:rgba(198,166,103,0.32);
-  --dot:     #E0854A;   /* 감(persimmon) — 마크 점·인장 연도 */
-  --halo:    #C6A667;   /* 달무리 링 (배경 질감) */
-  --halo-o:  0.16;
-  --line:    #C6A667;   /* 등고선 */
-  --line-o:  0.16;
-  --line-o2: 0.10;
-  --hair:    rgba(244,239,227,0.10);
-  --hair-2:  rgba(244,239,227,0.18);
-  --bar:     rgba(14,23,18,0.90);
-  --seal-bg: transparent;
-  --glow-1:  radial-gradient(ellipse 1100px 620px at 78% 8%, rgba(224,133,74,0.13), transparent 62%);
-  --glow-2:  radial-gradient(ellipse 900px 600px at -8% 62%, rgba(147,174,134,0.10), transparent 60%);
+  --bg:      #FBF8E0;   /* Beige */
+  --bg-2:    #F6F1CE;   /* band surface — 베이지를 한 단 조인 값 */
+  --ink:     #34301C;   /* 웜 다크 올리브 */
+  --ink-2:   #5E5936;
+  --ink-3:   #7C7752;
+  --dim:     rgba(124,119,82,0.34);   /* 타임테이블 빈칸 */
+  --accent:  #BC601F;   /* Chocolate(딥) — 라인·라벨·숫자 */
+  --title-accent:#9E4410;  /* 표제 액센트 행 — 마블 위 대비 확보용 딥 초콜릿 */
+  --accent-d:rgba(188,96,31,0.30);
+  --dot:     #D57530;   /* Chocolate — 마크 점·인장 연도 */
+  --halo:    #D57530;   /* 해무리 링 (배경 질감) */
+  --halo-o:  0.30;
+  --line:    #9FB768;   /* 등고선 — Muted Olive */
+  --line-o:  0.46;
+  --line-o2: 0.28;
+  --hair:    rgba(52,48,28,0.14);
+  --hair-2:  rgba(52,48,28,0.24);
+  --bar:     rgba(251,248,224,0.92);
+  /* 배경 색은 .marble SVG가 만든다(아래 §마블링). 여기 glow는 그 위에 얹는 얕은 빛만 */
+  --glow-1:  radial-gradient(ellipse 46% 34% at 96% 4%, rgba(255,253,240,0.34), transparent 62%);
+  --glow-2:  none;
   --wash:    none;
-  --grain-o: 0.5;
-  --grain-blend: normal;
-  --w-body:  350;
-  --w-strong:500;
+  /* 마블 잉크 — 레퍼런스 컬러칩 5색 */
+  --m-base:  #FBF8E0;
+  --m-amber: #EEE47D;
+  --m-peach: #FFBC92;
+  --m-choc:  #D57530;
+  --m-olive: #9FB768;
+  --m-o1: 0.92;  /* amber  */
+  --m-o2: 0.85;  /* peach  */
+  --m-o3: 0.62;  /* choc   */
+  --m-o4: 0.80;  /* olive  */
+  --m-vein: 0.30;
+  --veil:   rgba(251,248,224,0.74);
+  --scrim:  linear-gradient(180deg, rgba(251,248,224,0.80) 0%, rgba(251,248,224,0.36) 44%, rgba(251,248,224,0) 100%);
+  --scrim-b:linear-gradient(0deg, rgba(251,248,224,0.94) 0%, rgba(251,248,224,0.82) 32%, rgba(251,248,224,0.52) 62%, rgba(251,248,224,0.18) 84%, rgba(251,248,224,0) 100%);
+  --grain-o: 0.34;
+  --grain-blend: multiply;
+  --w-body:  380;
+  --w-strong:600;
 
   /* 톤과 무관한 공통값 */
   --display: "Cormorant Garamond", "Noto Serif KR", serif;
@@ -59,38 +80,53 @@
   --mono:    "DM Mono", ui-monospace, monospace;
   --body:    "Pretendard", "Noto Sans KR", -apple-system, sans-serif;
 
-  --print-text: #241C14;
+  --print-text: #2A2718;
   --wrap: 1180px;
   --pad: 44px;
 }
 
-/* ---------- LIGHT (방문자가 토글로 고를 때만) ---------- */
-:root[data-theme="light"]{
-  --bg:      #FAF6EC;   /* 크림 페이퍼 */
-  --bg-2:    #F4EDDD;
-  --ink:     #2A2118;   /* 웜 블랙 */
-  --ink-2:   #5C5245;
-  --ink-3:   #6F6455;
-  --dim:     rgba(111,100,85,0.32);
-  --accent:  #A8502B;   /* 테라코타 */
-  --accent-d:rgba(168,80,43,0.30);
-  --dot:     #A8502B;
-  --halo:    #E8A24A;   /* 해무리 */
-  --halo-o:  0.42;
-  --line:    #A8502B;
-  --line-o:  0.20;
+/* ---------- DARK (방문자가 토글로 고를 때만) ---------- */
+/* 같은 팔레트를 어둡게 뒤집는다 — 올리브 지면 + 앰버 광원 + 초콜릿 점 */
+:root[data-theme="dark"]{
+  --bg:      #141A0F;   /* 딥 올리브 */
+  --bg-2:    #1A2114;
+  --ink:     #FBF8E0;   /* Beige */
+  --ink-2:   #D3D5AE;
+  --ink-3:   #96A177;
+  --dim:     rgba(150,161,119,0.34);
+  --accent:  #EEE47D;   /* Pale Amber — 라인·라벨·숫자 */
+  --title-accent:#EEE47D;  /* 다크에선 액센트와 동일(어두운 지면이라 이미 충분) */
+  --accent-d:rgba(238,228,125,0.30);
+  --dot:     #D57530;   /* Chocolate */
+  --halo:    #EEE47D;
+  --halo-o:  0.20;
+  --line:    #9FB768;
+  --line-o:  0.22;
   --line-o2: 0.13;
-  --hair:    rgba(42,33,24,0.13);
-  --hair-2:  rgba(42,33,24,0.22);
-  --bar:     rgba(250,246,236,0.92);
-  --seal-bg: rgba(255,253,247,0.55);
-  --glow-1:  radial-gradient(ellipse 980px 640px at 79% 12%, rgba(232,162,74,0.26), transparent 64%);
-  --glow-2:  radial-gradient(ellipse 1100px 700px at 6% 78%, rgba(168,80,43,0.10), transparent 62%);
-  --wash:    linear-gradient(180deg, rgba(255,252,244,0.85), rgba(250,246,236,0) 46%);
-  --grain-o: 0.42;
-  --grain-blend: multiply;
-  --w-body:  380;
-  --w-strong:600;
+  --hair:    rgba(251,248,224,0.11);
+  --hair-2:  rgba(251,248,224,0.19);
+  --bar:     rgba(20,26,15,0.90);
+  --glow-1:  radial-gradient(ellipse 1100px 620px at 78% 8%, rgba(213,117,48,0.16), transparent 62%);
+  --glow-2:  none;
+  --wash:    none;
+  /* 같은 마블 구도를 어두운 잉크로 — 색상만 바꾸고 형태는 공유한다 */
+  --m-base:  #141A0F;
+  --m-amber: #4A4C1E;
+  --m-peach: #5B3418;
+  --m-choc:  #6B3410;
+  --m-olive: #2A3A1B;
+  --m-o1: 0.85;
+  --m-o2: 0.72;
+  --m-o3: 0.66;
+  --m-o4: 0.90;
+  --m-vein: 0.34;
+  --veil:   rgba(20,26,15,0.62);
+  --scrim:  linear-gradient(180deg, rgba(20,26,15,0.78) 0%, rgba(20,26,15,0.34) 44%, rgba(20,26,15,0) 100%);
+  --scrim-b:linear-gradient(0deg, rgba(20,26,15,0.92) 0%, rgba(20,26,15,0.78) 32%, rgba(20,26,15,0.48) 62%, rgba(20,26,15,0.16) 84%, rgba(20,26,15,0) 100%);
+  --grain-o: 0.5;
+  --grain-blend: normal;
+  --w-body:  350;
+  --w-strong:500;
 }
 
 *{box-sizing:border-box;}
@@ -132,7 +168,7 @@ a{color:inherit; text-decoration:none;}
   font-family:var(--mono); font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase;
 }
 .tnav::-webkit-scrollbar{display:none;}
-.tnav a{color:var(--ink-3); white-space:nowrap; padding:6px 0; transition:color .2s; position:relative;}
+.tnav a{color:var(--ink-2); white-space:nowrap; padding:6px 0; transition:color .2s; position:relative;}
 .tnav a::after{
   content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
   background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .28s;
@@ -155,16 +191,69 @@ a{color:inherit; text-decoration:none;}
 section[id]{scroll-margin-top:80px;}
 
 /* ---------- HERO ---------- */
-.hero{position:relative; min-height:100svh; display:flex; flex-direction:column; justify-content:flex-end; overflow:hidden;}
-.hero .contour{position:absolute; inset:0; width:100%; height:100%;}
+/* 100svh를 꽉 채우면 마스트헤드와 표제 사이 빈 공간이 그만큼 벌어진다.
+   높이를 내용에 가깝게 줄여 그 여백을 걷어낸다(아래 숫자 밴드가 살짝 보여 스크롤 단서도 된다) */
+.hero{position:relative; min-height:88svh; display:flex; flex-direction:column;
+  justify-content:space-between; overflow:hidden;}
+.hero .contour{position:absolute; inset:0; width:100%; height:100%; z-index:1;}
 .hero .contour .halo{stroke:var(--halo);}
 .hero .contour .ridge{stroke:var(--line); opacity:var(--line-o);}
 .hero .contour .ridge-far{stroke:var(--line); opacity:var(--line-o2);}
-.hero::before{ /* 빛 번짐 */
-  content:""; position:absolute; inset:0;
+.hero::before{ /* 빛 번짐 — 마블 위에 얹는 얕은 층 */
+  content:""; position:absolute; inset:0; z-index:1;
   background:var(--glow-1), var(--glow-2), var(--wash);
 }
-.hero .wrap{position:relative; z-index:2; padding-top:96px; padding-bottom:44px;}
+/* 스크림 2겹 — 마블이 진해지면 그 위 글자가 묻힌다. 바나 박스를 칠하지 않고
+   지면 쪽을 눌러 대비만 회복한다.
+   위: 투명 상단바의 내비용 / 아래: 표제·kicker·meta가 모두 앉는 하단 절반용.
+   세로 그라데이션이라 화면 폭이 바뀌어도 균일하게 걸린다(방사형만으론 좁은 폭에서 샜다) */
+.hero::after{
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:var(--scrim) top/100% 190px no-repeat,
+             var(--scrim-b) bottom/100% var(--scrim-b-h, 66%) no-repeat;
+}
+/* 히어로 안의 작은 활자는 마블 위라 액센트(초콜릿)로 두면 배경과 같은 계열이 되어 묻힌다.
+   ※ 실측 2026-08-12: kicker가 주황 마블 위에서 대비 1.47 — 배경에 스크림을 씌워도
+     소형 활자는 액센트로 살릴 수 없다. 잉크 계열로 내린다(표제처럼 큰 활자만 액센트 유지) */
+.hero .kicker{color:var(--ink);}
+.hero .hero-meta div{color:var(--ink-2);}
+/* width:100% 필수 — .wrap의 margin:0 auto가 세로 flex의 cross축 auto 마진이 되어
+   지정하지 않으면 항목이 stretch 대신 내용 너비로 줄고 가운데로 밀린다 */
+.hero .wrap{position:relative; z-index:2; width:100%; padding-top:96px; padding-bottom:44px;}
+
+/* 상단 마스트헤드 — 인장을 뺀 자리(2026-08-12). 배지를 다시 두지 않고
+   행사명 활자로만 채운다. 아래 국문 표제와 크기 차를 크게 벌려 경쟁하지 않게 한다 */
+.hero .wrap.hero-top{padding-top:84px; padding-bottom:0;}
+.masthead{
+  margin:0; font-family:var(--display); font-weight:300;
+  font-size:clamp(27px,4.3vw,56px); line-height:1.06; letter-spacing:0.05em;
+  text-transform:uppercase; color:var(--ink);
+}
+.masthead span{display:block; opacity:.55;}
+.masthead b{
+  display:block; margin-top:14px; font-family:var(--mono); font-weight:400;
+  font-size:10.5px; letter-spacing:0.28em; color:var(--ink-2); opacity:1;
+}
+
+/* ---------- 마블링 배경 ----------
+   컬러칩 5색을 넓은 타원으로 겹쳐 두고 feTurbulence로 밀어 섞는다.
+   블러 → 변위 → 미세 블러 순서라 경계가 물결처럼 늘어나며 결이 생긴다.
+   필터를 못 쓰는 환경에서도 색 덩어리는 그대로 남아 배경이 비지 않는다. */
+.marble{position:absolute; inset:-6% -8%; width:116%; height:112%; z-index:0; pointer-events:none;}
+.marble .m-base {fill:var(--m-base);}
+.marble .m-amber{fill:var(--m-amber); opacity:var(--m-o1);}
+.marble .m-peach{fill:var(--m-peach); opacity:var(--m-o2);}
+.marble .m-choc {fill:var(--m-choc);  opacity:var(--m-o3);}
+.marble .m-olive{fill:var(--m-olive); opacity:var(--m-o4);}
+.marble .vein   {stroke:var(--m-choc); opacity:var(--m-vein); fill:none;}
+
+/* 표제부 뒤 은은한 빛 — 마블이 진해져도 제목·액센트 행이 묻히지 않게 한다.
+   박스가 아니라 경계 없는 원형 광원이라 카드처럼 보이지 않는다 */
+.hero .wrap:not(.hero-top)::before{
+  content:""; position:absolute; z-index:-1; pointer-events:none;
+  left:-12%; right:-14%; top:-8%; bottom:-10%;
+  background:radial-gradient(ellipse 62% 76% at 26% 64%, var(--veil), transparent 72%);
+}
 .kicker{
   font-family:var(--mono); font-size:11px; letter-spacing:0.34em; text-transform:uppercase;
   color:var(--accent); display:flex; align-items:center; gap:16px; margin-bottom:30px;
@@ -176,7 +265,9 @@ h1.title{
   text-wrap:balance; word-break:keep-all;
 }
 h1.title span{display:block; color:var(--ink);}
-h1.title .accent{color:var(--accent);}
+/* 표제 액센트 행만 더 진한 초콜릿 — 마블의 주황 위에 앉아서, 일반 --accent(#BC601F)로는
+   좁은 화면에서 대비 2.7까지 떨어졌다(실측 2026-08-12). 큰 활자 기준 3:1을 넘기는 값 */
+h1.title .accent{color:var(--title-accent);}
 .hero-kr{
   margin:14px 0 0; font-family:var(--serif); font-weight:400;
   font-size:clamp(15px,1.6vw,17.5px); line-height:1.8; color:var(--ink-2); max-width:520px;
@@ -188,20 +279,6 @@ h1.title .accent{color:var(--accent);}
 .hero-meta div{font-family:var(--mono); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-3);}
 .hero-meta b{display:block; font-family:var(--body); font-weight:var(--w-strong); font-size:14.5px;
   letter-spacing:0.01em; text-transform:none; color:var(--ink); margin-top:9px;}
-.seal{
-  position:absolute; right:var(--pad); top:132px; z-index:2;
-  width:150px; height:150px; border:1px solid var(--accent-d); border-radius:50%;
-  display:flex; align-items:center; justify-content:center; color:var(--accent);
-  background:var(--seal-bg);
-}
-.seal::before{content:""; position:absolute; inset:9px; border:1px dashed var(--accent-d); border-radius:50%;}
-.seal span{
-  font-family:var(--mono); font-size:8px; letter-spacing:0.12em; line-height:1.95;
-  text-align:center; text-transform:uppercase; transform:rotate(-7deg);
-}
-.seal span b{display:block; font-family:var(--display); font-weight:var(--w-strong); font-size:21px;
-  letter-spacing:0.02em; color:var(--dot); line-height:1; margin-bottom:8px;}
-
 /* ---------- 숫자 밴드 ---------- */
 .figures{border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); background:var(--bg-2);}
 .figures .wrap{display:grid; grid-template-columns:repeat(3,1fr); padding-top:0; padding-bottom:0;}
@@ -284,7 +361,11 @@ col.c-time{width:16%;}
 .pull::before{content:""; display:block; width:64px; height:1px; background:var(--accent); margin-bottom:28px;}
 
 /* ---------- 참여 신청 ---------- */
-.apply{padding:120px 0; text-align:center; border-bottom:1px solid var(--hair); background:var(--bg-2);}
+.apply{padding:120px 0; text-align:center; border-bottom:1px solid var(--hair); background:var(--bg-2);
+  position:relative; overflow:hidden;}
+.apply .wrap{position:relative; z-index:2;}
+/* 마지막 단락에서 히어로의 마블을 옅게 되받아 페이지를 닫는다 */
+.marble.soft{opacity:.62;}
 .apply h2{margin-bottom:16px;}
 .apply p{margin:0 auto 40px; color:var(--ink-2); max-width:520px;}
 .cta{
@@ -309,12 +390,10 @@ footer .wrap span:first-child{color:var(--ink-2);}
 /* ---------- 반응형 ---------- */
 @media (min-width:900px) and (max-height:830px){
   .hero .wrap{padding-top:76px; padding-bottom:32px;}
+  .hero .wrap.hero-top{padding-top:72px;}
   h1.title{font-size:clamp(32px,4.6vw,60px);}
   .kicker{margin-bottom:22px;}
   .hero-meta{margin-top:28px;}
-  .seal{width:120px; height:120px; top:104px;}
-  .seal span{font-size:7px; letter-spacing:0.1em;}
-  .seal span b{font-size:17px; margin-bottom:6px;}
 }
 @media (max-width:1080px){
   .topbar .wrap{gap:16px;}
@@ -325,12 +404,12 @@ footer .wrap span:first-child{color:var(--ink-2);}
   section{padding:76px 0;}
   .apply{padding:88px 0;}
   .tnav{display:none;}     /* 좁아지면 내비를 먼저 접고 토글은 남긴다 */
-  /* 인장 — 절대배치 대신 흐름에 넣어 상단바와 제목 사이 여백의 정중앙에 둔다
-     (position:relative 유지 — static이면 ::before 점선원이 hero 전체로 퍼진다) */
-  .hero{padding-top:84px;}
-  .seal{position:relative; right:auto; top:auto; width:112px; height:112px; margin:auto; flex:0 0 auto;}
-  .seal span{font-size:7px; letter-spacing:0.1em;}
-  .seal span b{font-size:17px; margin-bottom:6px;}
+  /* 상단 여백은 마스트헤드가 직접 잡는다 — hero에 별도 padding을 더하면 두 배가 된다 */
+  .hero{min-height:auto;}   /* 좁은 화면에선 내용 높이로 — 세로가 길어 빈 공간이 크게 벌어진다 */
+  /* 좁을수록 표제 비중이 커져 스크림을 조금 더 끌어올린다.
+     단 과하게 올리면 마블이 통째로 씻겨 나가므로 대비 실측이 통과하는 선까지만(72%) */
+  :root{--scrim-b-h:72%;}
+  .hero .wrap.hero-top{padding-top:72px; padding-bottom:52px;}
   .hero .wrap{padding-top:30px;}
   .kicker{font-size:9.5px; letter-spacing:0.18em; gap:12px; margin-bottom:24px;}
   .kicker::before{width:32px;}
@@ -364,9 +443,9 @@ footer .wrap span:first-child{color:var(--ink-2);}
 /* 인쇄는 톤 선택과 무관하게 항상 흰 종이 + 어두운 잉크 */
 @media print{
   :root, :root[data-theme="light"], :root[data-theme="dark"]{
-    --bg:#fff; --bg-2:#fff; --ink:var(--print-text); --ink-2:#463D33; --ink-3:#6F6455;
-    --dim:rgba(111,100,85,0.35); --accent:#A8502B; --accent-d:rgba(168,80,43,0.34);
-    --dot:#A8502B; --hair:rgba(42,33,24,0.16); --hair-2:rgba(42,33,24,0.26); --seal-bg:transparent;
+    --bg:#fff; --bg-2:#fff; --ink:var(--print-text); --ink-2:#4A452C; --ink-3:#6E6845;
+    --dim:rgba(110,104,69,0.35); --accent:#A8511A; --accent-d:rgba(168,81,26,0.34);
+    --dot:#A8511A; --hair:rgba(42,39,24,0.16); --hair-2:rgba(42,39,24,0.26);
     --w-body:400; --w-strong:600;
   }
   body{background:#fff; color:var(--print-text);}
@@ -380,9 +459,9 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
 </style>
 <script>
 /* 톤 결정 — 첫 페인트 전에 실행해 깜빡임을 막는다.
-   기본은 다크. 방문자가 토글로 고른 적이 있을 때만 그 선택을 따른다 */
+   기본은 라이트. 방문자가 토글로 고른 적이 있을 때만 그 선택을 따른다 */
 (function(){
-  var t = 'dark';
+  var t = 'light';
   try{
     var saved = localStorage.getItem('afy-fest-tone');
     if (saved === 'dark' || saved === 'light') t = saved;
@@ -412,6 +491,49 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
 
 <!-- ================= HERO ================= -->
 <header class="hero" id="top">
+  <!-- 마블링 배경 — 컬러칩 5색을 난류로 밀어 섞는다 -->
+  <svg class="marble" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <filter id="marbleSwirl" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="34" result="soft"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.0042 0.0085" numOctaves="4" seed="11" result="noise"/>
+        <feDisplacementMap in="soft" in2="noise" scale="260" xChannelSelector="R" yChannelSelector="G" result="pushed"/>
+        <feGaussianBlur in="pushed" stdDeviation="12"/>
+      </filter>
+      <filter id="marbleVein" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.0075 0.013" numOctaves="3" seed="4" result="noise"/>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="190" xChannelSelector="R" yChannelSelector="G"/>
+        <feGaussianBlur stdDeviation="7"/>
+      </filter>
+    </defs>
+
+    <rect class="m-base" x="-200" y="-200" width="1840" height="1300"/>
+
+    <g filter="url(#marbleSwirl)">
+      <!-- 앰버 — 우상단에서 좌하로 흐르는 넓은 결 -->
+      <ellipse class="m-amber" cx="1210" cy="70"  rx="760" ry="360"/>
+      <ellipse class="m-amber" cx="330"  cy="250" rx="520" ry="250"/>
+      <!-- 피치 — 가운데를 가로지르는 밝은 층 -->
+      <ellipse class="m-peach" cx="900"  cy="300" rx="700" ry="230"/>
+      <ellipse class="m-peach" cx="1330" cy="700" rx="520" ry="300"/>
+      <!-- 초콜릿 — 좌상 → 우중을 잇는 진한 띠 (제목이 앉는 좌하단은 비운다) -->
+      <ellipse class="m-choc"  cx="120"  cy="40"  rx="520" ry="230"/>
+      <ellipse class="m-choc"  cx="620"  cy="210" rx="560" ry="190"/>
+      <ellipse class="m-choc"  cx="1120" cy="430" rx="600" ry="210"/>
+      <!-- 올리브 — 하단 전체를 받치는 결 -->
+      <ellipse class="m-olive" cx="180"  cy="880" rx="760" ry="330"/>
+      <ellipse class="m-olive" cx="1000" cy="960" rx="820" ry="320"/>
+      <ellipse class="m-olive" cx="1440" cy="420" rx="360" ry="240"/>
+    </g>
+
+    <!-- 결 — 난류로 늘어난 가는 선이 마블 특유의 물결 자국을 만든다 -->
+    <g class="vein" filter="url(#marbleVein)" stroke-width="2.5">
+      <path d="M-120 300 C 260 210, 520 400, 840 330 S 1300 190, 1560 260"/>
+      <path d="M-120 430 C 300 340, 560 540, 900 460 S 1320 320, 1560 400"/>
+      <path d="M-120 620 C 240 560, 600 720, 940 630 S 1340 520, 1560 590"/>
+    </g>
+  </svg>
+
   <svg class="contour" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
     <!-- 해무리 · 달무리 — 톤에 따라 색과 농도가 바뀐다 -->
     <g class="halo" fill="none" stroke-width="1">
@@ -433,12 +555,12 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
     </g>
   </svg>
 
-  <div class="seal" aria-hidden="true">
-    <span><b>2026</b>Seoul Forest<br>Oct 03&mdash;05</span>
+  <div class="wrap hero-top">
+    <p class="masthead">Seoul Forest<span>Wellness Festival</span></p>
   </div>
 
   <div class="wrap">
-    <p class="kicker">Wellness Festival — 개천절 연휴 3일</p>
+    <p class="kicker">개천절 연휴 3일</p>
     <h1 class="title">
       <span>국내 대표 웰니스 전문가들의</span>
       <span class="accent">서울숲 웰니스 페스티벌!</span>
@@ -448,7 +570,7 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
     <div class="hero-meta">
       <div>Date <b>2026. 10. 03 (토) — 10. 05 (월)</b></div>
       <div>Place <b>애프터 요가&amp;필라테스 서울숲점 · 서울숲</b></div>
-      <div>Program <b>요가 · 필라테스 · 러닝 · 명상 · 사운드 · 아트</b></div>
+      <div>Program <b>요가 · 필라테스 · 러닝 · 패시브스트레칭 · 명상 · 사운드 · 아트</b></div>
     </div>
   </div>
 </header>
@@ -458,7 +580,7 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
   <div class="wrap">
     <div class="fig"><b>3</b><span>Days</span></div>
     <div class="fig"><b>33</b><span>Wellness Class</span></div>
-    <div class="fig"><b>6</b><span>Categories</span></div>
+    <div class="fig"><b>7</b><span>Categories</span></div>
   </div>
 </div>
 
@@ -468,9 +590,10 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
     <p class="eyebrow"><span class="num">01</span>Overview</p>
     <h2>서울숲에서 만나는 3일간의 웰니스</h2>
     <p class="lede">
-      애프터요가 서울숲에서 요가와 필라테스를 중심으로 러닝, 명상, 싱잉볼, 아티스트 협업까지
+      서울숲에 위치한 대규모 웰니스 센터에서 러닝, 명상, 싱잉볼, 물리치료사, 아티스트 협업까지
       다양한 웰니스 콘텐츠를 한자리에서 경험하는 페스티벌입니다.
-      이 페이지는 함께해 주실 선생님 · 코치님 · 아티스트분들께 드리는 참여 안내입니다.
+      각 분야의 인플루언서급 전문가분들(도합 팔로워수 약 100만)로만 구성된
+      알차고 다양한 웰니스 클래스를 제공할 예정입니다.
     </p>
     <div class="rows">
       <div class="row wide">
@@ -483,7 +606,7 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
       </div>
       <div class="row wide">
         <div class="lab">구성<span class="en">Category</span></div>
-        <div class="val">요가 · 필라테스 · 러닝 · 명상 · 사운드 · 아트<span class="sub">6개 카테고리, 웰니스 클래스 33개 내외</span></div>
+        <div class="val">요가 · 필라테스 · 러닝 · 패시브스트레칭 · 명상 · 사운드 · 아트<span class="sub">7개 카테고리, 웰니스 클래스 33개 내외</span></div>
       </div>
       <div class="row wide">
         <div class="lab">참여진<span class="en">Lineup</span></div>
@@ -513,6 +636,10 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
       </div>
       <div class="row">
         <div class="idx">04</div>
+        <div><h4>패시브스트레칭</h4><p>물리치료사와 함께하는 1:1 이완과 가동성 회복 세션</p></div>
+      </div>
+      <div class="row">
+        <div class="idx">05</div>
         <div><h4>아티스트 협업</h4><p>마음챙김 저널링, 모빌 만들기와 시각 명상, 가이디드 메디테이션</p></div>
       </div>
     </div>
@@ -612,20 +739,28 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
     <h3>Capacity</h3>
     <div class="rows">
       <div class="row wide"><div class="lab">요가</div><div class="val fee">15 — 18명</div></div>
-      <div class="row wide"><div class="lab">필라테스</div><div class="val fee">5명</div></div>
+      <div class="row wide"><div class="lab">필라테스</div><div class="val fee">6명</div></div>
       <div class="row wide"><div class="lab">아티스트</div><div class="val fee">12 — 20명</div></div>
       <div class="row wide"><div class="lab">러닝</div><div class="val fee">15 — 20명</div></div>
     </div>
 
-    <h3>Operation</h3>
+    <h3>수익 분배 Revenue Share</h3>
     <div class="rows">
       <div class="row wide">
-        <div class="lab">운영 수수료<span class="en">Fee</span></div>
-        <div class="val">예상 10%<span class="sub">행사 진행과 운영 인력 비용, 결제 시스템 수수료가 포함된 금액이며 이외 수수료는 발생하지 않습니다.</span></div>
+        <div class="lab">강사 배분율<span class="en">Share</span></div>
+        <div class="val fee">운영비를 제외한 순수익의 100%</div>
       </div>
       <div class="row wide">
-        <div class="lab">대관비<span class="en">Venue</span></div>
-        <div class="val">별도 없음<span class="sub">대관과 관련한 비용은 발생하지 않습니다.</span></div>
+        <div class="lab">운영비<span class="en">Operating Cost</span></div>
+        <div class="val">최소화<span class="sub">강사님들께서 최대한의 수익을 가져가실 수 있도록 운영비를 최소화하였습니다. 운영비에는 행사 진행 인건비, 오붓 예약 수수료가 포함됩니다.</span></div>
+      </div>
+      <div class="row wide">
+        <div class="lab">대관료<span class="en">Venue</span></div>
+        <div class="val">없음<span class="sub">서울숲, 성수 일대 최대 규모의 애프터 요가&amp;필라테스 센터에서 장소를 무료로 협찬해 주셔서 대관료가 없습니다.</span></div>
+      </div>
+      <div class="row wide">
+        <div class="lab">주차<span class="en">Parking</span></div>
+        <div class="val">3시간 무료 지원<span class="sub">참가자와 강사분들 모두 지원됩니다.</span></div>
       </div>
       <div class="row wide">
         <div class="lab">재료비<span class="en">Material</span></div>
@@ -634,10 +769,6 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
       <div class="row wide">
         <div class="lab">협찬<span class="en">Sponsor</span></div>
         <div class="val">사전 협의<span class="sub">브랜드 협찬이 필요한 경우 미리 상의해 주시면 함께 진행합니다.</span></div>
-      </div>
-      <div class="row wide">
-        <div class="lab">주차<span class="en">Parking</span></div>
-        <div class="val">3시간 지원<span class="sub">참가자와 강사분들 모두 지원됩니다.</span></div>
       </div>
     </div>
 
@@ -665,15 +796,19 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
     <p class="eyebrow"><span class="num">06</span>Record</p>
     <h2>사진과 영상으로 남는 3일</h2>
     <p class="lede">
-      촬영된 콘텐츠는 개인 SNS와 포트폴리오에 자유롭게 활용하실 수 있으며,
-      애프터요가에서도 행사 기록 및 홍보 자료로 사용합니다.
+      행사 당일 최소 인원의 촬영 전문 인력만 투입될 예정입니다.
+      이에 따라 각 수업의 원활한 기록을 위해, 담당 강사님께서도 수업 모습을 함께 촬영하여 남겨주시면 감사하겠습니다.
     </p>
     <div class="rows">
       <div class="row"><div class="idx">01</div><div><p>수업 현장 촬영</p></div></div>
       <div class="row"><div class="idx">02</div><div><p>강사 및 참가자 이미지 촬영</p></div></div>
-      <div class="row"><div class="idx">03</div><div><p>행사 스케치 영상</p></div></div>
+      <div class="row"><div class="idx">03</div><div><p>행사 스케치 현장</p></div></div>
       <div class="row"><div class="idx">04</div><div><p>촬영본 강사 제공</p></div></div>
     </div>
+    <p class="note" style="margin:36px 0 0;">
+      촬영 팀(작가 및 어시스턴트)이 모든 수업을 촬영하지는 않으며, 사전 협의된 수업에 한해 참여할 예정입니다.
+      따라서 강사님들께서 개별적으로 촬영하신 자료는 추후 함께 공유해 주시면 감사하겠습니다.
+    </p>
   </div>
 </section>
 
@@ -685,21 +820,26 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
     <div class="rows" style="margin-top:56px;">
       <div class="row">
         <div class="idx">01</div>
+        <div><h4>총 팔로워수 약 100만명!</h4>
+        <p>다양한 웰니스 분야에서 두각을 나타내고 있는 인플루언서급 인원들이 30여개의 수업을 진행하며 소통할 수 있는 장을 열어드립니다.</p></div>
+      </div>
+      <div class="row">
+        <div class="idx">02</div>
         <div><h4>새로운 고객에게 나의 클래스를 소개</h4>
         <p>기존 회원뿐 아니라 서울숲이라는 공간에서 다양한 웰니스 관심층을 만날 수 있습니다.</p></div>
       </div>
       <div class="row">
-        <div class="idx">02</div>
+        <div class="idx">03</div>
         <div><h4>개인 채널을 통한 자유로운 홍보</h4>
         <p>직접 자신을 소개하고 참가자를 모으실 수 있습니다. 모집 방식에 제한을 두지 않습니다.</p></div>
       </div>
       <div class="row">
-        <div class="idx">03</div>
+        <div class="idx">04</div>
         <div><h4>전문 사진 · 영상 콘텐츠 제공</h4>
         <p>수업과 현장 콘텐츠를 개인 홍보 자료로 오래 활용하실 수 있습니다.</p></div>
       </div>
       <div class="row">
-        <div class="idx">04</div>
+        <div class="idx">05</div>
         <div><h4>다양한 분야와의 연결</h4>
         <p>서로 다른 무브먼트를 가진 분들과 한 공간에서 교류하는 자리가 됩니다.</p></div>
       </div>
@@ -728,6 +868,16 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
 
 <!-- ================= APPLY ================= -->
 <section class="apply">
+  <svg class="marble soft" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <rect class="m-base" x="-200" y="-200" width="1840" height="1300"/>
+    <g filter="url(#marbleSwirl)">
+      <ellipse class="m-olive" cx="180"  cy="120" rx="700" ry="300"/>
+      <ellipse class="m-amber" cx="1180" cy="60"  rx="640" ry="280"/>
+      <ellipse class="m-peach" cx="760"  cy="470" rx="720" ry="240"/>
+      <ellipse class="m-choc"  cx="1300" cy="760" rx="560" ry="240"/>
+      <ellipse class="m-olive" cx="60"   cy="820" rx="640" ry="280"/>
+    </g>
+  </svg>
   <div class="wrap rise">
     <p class="eyebrow"><span class="num">—</span>Apply</p>
     <h2>참여 의사를 남겨주세요</h2>
