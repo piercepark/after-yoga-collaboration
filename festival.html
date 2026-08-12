@@ -163,9 +163,11 @@ a{color:inherit; text-decoration:none;}
   color:var(--ink-2); white-space:nowrap; display:flex; align-items:center; gap:11px;
 }
 .mark::before{content:""; width:5px; height:5px; background:var(--dot); border-radius:50%;}
+/* 항목이 9개(+Venue)라 gap 26px·자간 0.18em이면 1180px 지면에서 마지막 항목이 잘린다.
+   스크롤은 되지만 잘린 글자가 보이므로 간격·자간을 조여 한 줄에 들어오게 한다 */
 .tnav{
-  display:flex; gap:26px; overflow-x:auto; scrollbar-width:none; margin-left:auto;
-  font-family:var(--mono); font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase;
+  display:flex; gap:20px; overflow-x:auto; scrollbar-width:none; margin-left:auto;
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.16em; text-transform:uppercase;
 }
 .tnav::-webkit-scrollbar{display:none;}
 .tnav a{color:var(--ink-2); white-space:nowrap; padding:6px 0; transition:color .2s; position:relative;}
@@ -360,6 +362,87 @@ col.c-time{width:16%;}
 }
 .pull::before{content:""; display:block; width:64px; height:1px; background:var(--accent); margin-bottom:28px;}
 
+/* ---------- 소개 영상 ----------
+   홈페이지(afteryogapilates.com/forest) 하단과 같은 영상. 다만 페이지를 열자마자
+   유튜브를 부르지 않는다 — 썸네일 한 장(≈74KB)만 깔아 두고, 섹션이 화면에 들어올 때
+   비로소 iframe으로 바꿔 음소거 자동재생·반복을 건다(모바일 데이터·초기 로딩 보호) */
+/* 원본이 세로 영상(1080×1920)이라 16:9 틀에 넣으면 좌우가 검게 남는다 — 9:16으로 맞춘다.
+   썸네일은 유튜브가 16:9 캔버스에 흐린 배경을 채워 내려주는데, object-fit:cover가
+   가운데 약 31%만 남기므로 결과적으로 영상 화면 그대로가 보인다(검은 여백 없음) */
+.vid{
+  position:relative; margin:36px auto 0; width:100%; max-width:348px; aspect-ratio:9/16;
+  background:var(--bg-2); overflow:hidden; cursor:pointer;
+}
+.vid img{width:100%; height:100%; object-fit:cover; display:block;}
+.vid iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
+.vid .play{
+  position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(180deg, rgba(20,26,15,0.08), rgba(20,26,15,0.30));
+  transition:background .3s;
+}
+.vid:hover .play{background:linear-gradient(180deg, rgba(20,26,15,0.04), rgba(20,26,15,0.22));}
+.vid .play i{
+  width:74px; height:74px; border:1px solid rgba(251,248,224,0.86); border-radius:50%;
+  display:flex; align-items:center; justify-content:center; backdrop-filter:blur(2px);
+}
+.vid .play i::before{
+  content:""; margin-left:5px;
+  border-left:15px solid rgba(251,248,224,0.94);
+  border-top:9.5px solid transparent; border-bottom:9.5px solid transparent;
+}
+.vid-cap{
+  max-width:348px; margin:11px auto 0; padding-top:9px; border-top:1px solid var(--hair);
+  font-size:12.5px; color:var(--ink-2); letter-spacing:0.01em; text-align:center;
+}
+.vid-cap b{font-family:var(--mono); font-weight:400; font-size:10.5px; letter-spacing:0.1em;
+  color:var(--accent); margin-left:9px;}
+
+/* ---------- 공간 사진 ----------
+   카드가 아니라 '판'이다 — 라운드·그림자 없이 사각 이미지와 헤어라인 캡션만 둔다.
+   높이를 고정(clamp)하고 object-fit:cover로 잘라, 2칸짜리 wide가 섞여도 행 높이가 어긋나지 않는다.
+   ※ 사진 경로가 절대 URL인 이유: 이 파일의 정본은 리포 밖(PROJECTS/…04_이벤트/)에 있고
+     이미지는 리포(seoulforest/img/fest/)에 있다. 상대경로면 정본 파일에서 깨진다 */
+.gal{display:grid; grid-template-columns:repeat(3,1fr); gap:22px 14px; margin:6px 0 0;}
+.shot{margin:0;}
+.shot .ph{
+  display:block; width:100%; padding:0; margin:0; border:0; background:none;
+  line-height:0; cursor:zoom-in; transition:opacity .3s;
+}
+.shot .ph:hover{opacity:.87;}
+.shot .ph:focus-visible{outline:1px solid var(--accent); outline-offset:4px;}
+.shot img{width:100%; height:clamp(176px,18.5vw,246px); object-fit:cover; display:block; background:var(--bg-2);}
+.shot figcaption{
+  margin-top:11px; padding-top:9px; border-top:1px solid var(--hair);
+  font-size:12.5px; color:var(--ink-2); letter-spacing:0.01em; line-height:1.5;
+}
+.shot figcaption b{
+  font-family:var(--mono); font-weight:400; font-size:10.5px; letter-spacing:0.1em;
+  color:var(--accent); margin-left:9px;
+}
+.shot.wide{grid-column:span 2;}
+.gal + h3{margin-top:64px;}
+.lnk{color:var(--accent); border-bottom:1px solid var(--accent-d); padding-bottom:1px;}
+.lnk:hover{border-bottom-color:var(--accent);}
+
+/* 사진 확대 — 스크린에서만. 배경은 지면색을 거의 불투명하게 눌러 사진만 남긴다 */
+.lbox{
+  position:fixed; inset:0; z-index:120; display:none; padding:40px 20px;
+  background:var(--bg); background:color-mix(in srgb, var(--bg) 91%, #000);
+  align-items:center; justify-content:center; flex-direction:column; gap:18px; cursor:zoom-out;
+}
+.lbox.on{display:flex;}
+.lbox img{max-width:min(1080px,92vw); max-height:78vh; object-fit:contain;}
+.lbox figcaption{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--ink-3); text-align:center;
+}
+.lbox .x{
+  position:absolute; top:16px; right:20px; padding:8px 12px; border:1px solid var(--hair-2);
+  background:none; color:var(--ink-2); font-family:var(--mono); font-size:11px; letter-spacing:0.2em;
+  cursor:pointer; line-height:1;
+}
+.lbox .x:hover{color:var(--ink); border-color:var(--accent-d);}
+
 /* ---------- 참여 신청 ---------- */
 .apply{padding:120px 0; text-align:center; border-bottom:1px solid var(--hair); background:var(--bg-2);
   position:relative; overflow:hidden;}
@@ -395,9 +478,10 @@ footer .wrap span:first-child{color:var(--ink-2);}
   .kicker{margin-bottom:22px;}
   .hero-meta{margin-top:28px;}
 }
-@media (max-width:1080px){
+@media (max-width:1180px){
   .topbar .wrap{gap:16px;}
-  .tnav{gap:20px;}
+  .tnav{gap:16px;}
+  .mark-sub{display:none;}   /* 지점명을 접어 내비에 폭을 넘긴다 */
 }
 @media (max-width:900px){
   :root{--pad:28px;}
@@ -424,8 +508,16 @@ footer .wrap span:first-child{color:var(--ink-2);}
   .fig span{margin-top:0;}
   .row.wide{grid-template-columns:1fr; gap:8px;}
   .row.wide .lab .en{display:inline; margin-left:10px;}
+  .gal{grid-template-columns:repeat(2,1fr); gap:18px 10px;}
+  .shot img{height:clamp(150px,29vw,210px);}
+  .shot figcaption{margin-top:9px; padding-top:8px; font-size:12px;}
+  .gal + h3{margin-top:52px;}
 }
 @media (max-width:560px){
+  .shot img{height:31vw;}
+  .shot figcaption b{display:block; margin:3px 0 0;}
+  .lbox{padding:24px 14px;}
+  .lbox img{max-height:72vh;}
   :root{--pad:20px;}
   body{font-size:15px;}
   .mark{font-size:10px; letter-spacing:0.18em;}
@@ -450,9 +542,14 @@ footer .wrap span:first-child{color:var(--ink-2);}
   }
   body{background:#fff; color:var(--print-text);}
   body::after, .topbar, .hero .contour, .hero::before{display:none;}
+  .lbox{display:none !important;}
   .js .rise{opacity:1; transform:none;}
   .hero{min-height:auto; padding-top:0;}
-  section, .row, table, .day{break-inside:avoid;}
+  section, .row, table, .day, .shot, .vid{break-inside:avoid;}
+  .shot .ph{cursor:default;}
+  .shot img{height:150px;}
+  .vid{max-width:210px;}          /* 종이에선 썸네일 한 장 크기로 */
+  .vid .play{display:none;}
   *{-webkit-print-color-adjust:exact; print-color-adjust:exact; box-shadow:none !important;}
 }
 a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
@@ -474,7 +571,7 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
 
 <div class="topbar" id="topbar">
   <div class="wrap">
-    <a href="#top" class="mark">After Yoga · Seoul Forest</a>
+    <a href="#top" class="mark">After Yoga<span class="mark-sub">&nbsp;· Seoul Forest</span></a>
     <nav class="tnav">
       <a href="#overview">Overview</a>
       <a href="#program">Program</a>
@@ -484,6 +581,7 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
       <a href="#record">Record</a>
       <a href="#why">Why Join</a>
       <a href="#steps">Next Step</a>
+      <a href="#venue">Venue</a>
     </nav>
     <button class="tone" id="tone" type="button" aria-label="화면 톤 전환"><span id="toneLabel">Dark</span></button>
   </div>
@@ -866,6 +964,113 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
   </div>
 </section>
 
+<!-- ================= 09 VENUE ================= -->
+<section id="venue">
+  <div class="wrap rise">
+    <p class="eyebrow"><span class="num">09</span>Venue</p>
+    <h2>페스티벌이 열리는 공간</h2>
+    <p class="lede">
+      서울숲·성수 일대에서 가장 큰 요가&amp;필라테스 복합 센터입니다.
+      총 346㎡(104평) 규모의 요가홀·필라테스룸·PT룸에서 세 개의 수업이 동시에 열리고,
+      러닝과 야외 세션은 바로 옆 서울숲으로 이어집니다.
+    </p>
+
+    <div class="vid" id="vid" data-yt="STmwvJi1u68" role="button" tabindex="0" aria-label="서울숲점 소개 영상 재생">
+      <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/STmwvJi1u68/maxresdefault.jpg" alt="애프터 요가&필라테스 서울숲점 소개 영상">
+      <span class="play" aria-hidden="true"><i></i></span>
+    </div>
+    <p class="vid-cap">서울숲점 소개 영상<b>1:09</b></p>
+    <noscript>
+      <iframe src="https://www.youtube-nocookie.com/embed/STmwvJi1u68" title="서울숲점 소개 영상"
+        style="width:100%;max-width:348px;aspect-ratio:9/16;border:0;margin:36px auto 0;display:block;" allowfullscreen></iframe>
+    </noscript>
+
+    <div class="gal">
+      <figure class="shot wide">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/exterior.jpg" alt="애프터 요가&필라테스 서울숲점 건물 외관">
+        </button>
+        <figcaption>센터 외관 · 스타벅스 건물 B1<b>왕십리로 50</b></figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/yoga-meditation.jpg" alt="요가홀에서 진행 중인 요가 수업">
+        </button>
+        <figcaption>요가홀<b>82㎡</b></figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/flying-yoga.jpg" alt="해먹을 이용한 플라잉 요가 수업">
+        </button>
+        <figcaption>플라잉 요가 해먹<b>상시 설치</b></figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/reformer.jpg" alt="리포머가 놓인 필라테스 기구룸">
+        </button>
+        <figcaption>필라테스룸<b>45㎡</b></figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/cadillac.jpg" alt="캐딜락 등 필라테스 대기구">
+        </button>
+        <figcaption>대기구 풀세트<b>리포머 · 캐딜락 · 체어</b></figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/bareun-room.jpg" alt="스트레칭 베드가 놓인 1:1 PT룸">
+        </button>
+        <figcaption>PT룸 · 패시브스트레칭<b>22㎡</b></figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/outdoor-yoga.jpg" alt="야외 테라스에서 진행하는 요가">
+        </button>
+        <figcaption>야외 테라스<b>Outdoor</b></figcaption>
+      </figure>
+      <figure class="shot">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/lounge.jpg" alt="센터 라운지와 대기 공간">
+        </button>
+        <figcaption>라운지 · 대기 공간<b>Lounge</b></figcaption>
+      </figure>
+      <!-- 샤워실이 락커룸(2칸)보다 앞 — 이 순서라야 3열(데스크톱)·2열(모바일) 모두 빈칸 없이 채워진다 -->
+      <figure class="shot">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/shower.jpg" alt="샤워실">
+        </button>
+        <figcaption>샤워실 · 파우더룸<b>Shower</b></figcaption>
+      </figure>
+      <figure class="shot wide">
+        <button class="ph" type="button">
+          <img loading="lazy" decoding="async" src="https://piercepark.github.io/after-yoga-collaboration/seoulforest/img/fest/locker.jpg" alt="남녀 락커룸">
+        </button>
+        <figcaption>남 · 녀 락커룸<b>Locker</b></figcaption>
+      </figure>
+    </div>
+
+    <h3>Space &amp; Access</h3>
+    <div class="rows">
+      <div class="row wide">
+        <div class="lab">규모<span class="en">Size</span></div>
+        <div class="val">총 346㎡ · 104평<span class="sub">서울숲·성수·뚝섬 일대 최대 규모의 요가&amp;필라테스 복합 공간</span></div>
+      </div>
+      <div class="row wide">
+        <div class="lab">수업 공간<span class="en">Rooms</span></div>
+        <div class="val">요가홀 82㎡ · 필라테스룸 45㎡ · PT룸 22㎡<span class="sub">필라테스 대기구 6대 풀세트, 요가 해먹, 매트·소도구·블루투스 스피커 제공</span></div>
+      </div>
+      <div class="row wide">
+        <div class="lab">편의 시설<span class="en">Facility</span></div>
+        <div class="val">남·녀 샤워실 · 파우더룸 · 락커룸 · 라운지<span class="sub">천장형 냉난방과 바닥 난방, 야외 테라스</span></div>
+      </div>
+      <div class="row wide">
+        <div class="lab">오시는 길<span class="en">Access</span></div>
+        <div class="val">서울 성동구 왕십리로 50, 스타벅스 건물 B1<span class="sub">수인분당선 서울숲역 · 2호선 뚝섬역 · 성수역 / 지하주차장 3시간 무료 · <a class="lnk" href="https://naver.me/x9BSBAKN" target="_blank" rel="noopener">네이버 지도</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= APPLY ================= -->
 <section class="apply">
   <svg class="marble soft" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -894,6 +1099,13 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
     <span>2026.10.03 — 10.05 · Seoul Forest, Seongsu</span>
   </div>
 </footer>
+
+<!-- 사진 확대 레이어 — JS가 열 때만 보인다 -->
+<div class="lbox" id="lbox" role="dialog" aria-modal="true" aria-label="사진 크게 보기">
+  <button class="x" id="lboxX" type="button" aria-label="닫기">Close</button>
+  <img id="lboxImg" alt="">
+  <figcaption id="lboxCap"></figcaption>
+</div>
 
 <script>
 document.documentElement.classList.add('js');
@@ -928,6 +1140,68 @@ const onScroll = () => {
 };
 document.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
+
+// ---------- 소개 영상 ----------
+// 썸네일 → 화면에 들어오면 플레이어로 교체(음소거 자동재생·반복). 누르면 즉시 교체된다.
+const vid = document.getElementById('vid');
+if (vid) {
+  let loaded = false;
+  const loadVid = () => {
+    if (loaded) return;
+    loaded = true;
+    const id = vid.dataset.yt;
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id +
+            '?autoplay=1&mute=1&loop=1&playlist=' + id + '&playsinline=1&rel=0&modestbranding=1';
+    f.title = '서울숲점 소개 영상';
+    f.allow = 'autoplay; encrypted-media; picture-in-picture';
+    f.allowFullscreen = true;
+    vid.innerHTML = '';
+    vid.appendChild(f);
+    vid.style.cursor = 'default';
+  };
+  vid.addEventListener('click', loadVid);
+  vid.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); loadVid(); } });
+  if ('IntersectionObserver' in window) {
+    const vio = new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { loadVid(); vio.disconnect(); } });
+    }, { threshold: 0.5 });
+    vio.observe(vid);
+  }
+}
+
+// ---------- 공간 사진 확대 ----------
+// 원본이 아니라 그리드에 쓰인 같은 파일을 띄운다(추가 다운로드 없음)
+const lbox = document.getElementById('lbox');
+const lboxImg = document.getElementById('lboxImg');
+const lboxCap = document.getElementById('lboxCap');
+let lastPh = null;
+const closeLbox = () => {
+  lbox.classList.remove('on');
+  document.body.style.overflow = '';
+  lboxImg.removeAttribute('src');
+  if (lastPh) lastPh.focus();
+};
+document.querySelectorAll('.shot .ph').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const img = btn.querySelector('img');
+    lastPh = btn;
+    lboxImg.src = img.currentSrc || img.src;
+    lboxImg.alt = img.alt;
+    // 캡션은 '설명 + 수치'가 붙어 있어 그대로 이으면 "요가홀82㎡"가 된다 — 가운뎃점으로 띄운다
+    const cap = btn.parentElement.querySelector('figcaption');
+    const capMeta = cap.querySelector('b');
+    lboxCap.textContent = [cap.childNodes[0].textContent.trim(), capMeta && capMeta.textContent.trim()]
+      .filter(Boolean).join(' · ');
+    lbox.classList.add('on');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lboxX').focus();
+  });
+});
+lbox.addEventListener('click', closeLbox);   // 배경·닫기 버튼·사진 어디를 눌러도 닫힌다
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && lbox.classList.contains('on')) closeLbox();
+});
 
 // 스크롤 등장 — 관찰이 안 되는 환경(구형 브라우저·PDF 변환기 등)에서는 3초 뒤 전부 노출
 const blocks = [...document.querySelectorAll('.rise')];
