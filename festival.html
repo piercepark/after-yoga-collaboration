@@ -331,6 +331,32 @@ h3 + .rows{border-top:none;}  /* 액센트 규칙선과 겹치지 않게 */
 .row .val{font-size:15px; color:var(--ink);}
 .row .val .sub{display:block; margin-top:4px; color:var(--ink-3); font-size:13.5px;}
 .row .fee{font-family:var(--mono); font-size:15px; color:var(--accent); letter-spacing:0.02em;}
+/* 05 참가 방식·운영 조건 — 읽고 판단할 실제 조건이라 본문보다 한 단계 크게 앉힌다 */
+#terms .row.wide .lab{font-size:16px;}
+#terms .row .val{font-size:17px;}
+#terms .row .fee{font-size:16.5px;}
+#terms .row .val .sub{margin-top:6px; font-size:15px; line-height:1.6;}
+#terms .row p{font-size:16px; line-height:1.65;}
+/* 수업료·정원처럼 숫자 하나로 끝나는 조건은 값을 크게 세워 오른쪽에 세로로 정렬한다 —
+   항목명(왼쪽)과 숫자(오른쪽)가 한 줄에서 마주보게 되어, 훑기만 해도 조건이 읽힌다.
+   좁은 화면에서도 이 두 칸 구조는 유지한다(.row.wide의 1단 전환보다 우선) */
+#terms .row.spec{grid-template-columns:1fr auto; gap:0 24px; padding:22px 0; align-items:baseline;}
+#terms .row.spec .fee{
+  font-size:clamp(24px,3.4vw,30px); line-height:1.15;
+  text-align:right; white-space:nowrap;
+}
+/* 아직 확정 전인 값은 조용히 — 확정된 숫자가 먼저 읽혀야 한다 */
+#terms .row.spec .fee.tbd{font-size:16px; color:var(--ink-3);}
+/* 문장 안에 박힌 숫자(배분율)도 같은 크기로 세운다 — 강사에게 가장 중요한 한 수 */
+#terms .val .big{
+  font-family:var(--mono); font-weight:400; letter-spacing:0.01em;
+  font-size:clamp(24px,3.4vw,30px); line-height:1; color:var(--accent);
+}
+/* 07 Why Join — 참여를 설득하는 대목. 표제를 한 단계 키우고 번호도 또렷하게 세운다 */
+#why .row{padding:32px 0;}
+#why .row .idx{font-size:12.5px; letter-spacing:0.12em;}
+#why .row h4{margin-bottom:10px; font-size:23px; line-height:1.45;}
+#why .row p{font-size:16px; line-height:1.7;}
 
 /* ---------- 타임테이블 ---------- */
 .day{margin-top:60px;}
@@ -468,9 +494,11 @@ col.c-time{width:16%;}
 .marble.soft{opacity:.62;}
 .apply h2{margin-bottom:16px;}
 .apply p{margin:0 auto 40px; color:var(--ink-2); max-width:520px;}
+/* 페이지가 요구하는 단 하나의 행동 — 다른 라벨(11px 모노)보다 눈에 띄게 크고 굵게 */
 .cta{
-  display:inline-block; padding:19px 44px; border:1px solid var(--accent);
-  font-family:var(--mono); font-size:11px; letter-spacing:0.24em; text-transform:uppercase;
+  display:inline-block; padding:23px 54px; border:1px solid var(--accent);
+  font-family:var(--mono); font-size:15px; font-weight:var(--w-strong);
+  letter-spacing:0.16em; text-transform:uppercase;
   color:var(--accent); transition:background .3s, border-color .3s;
 }
 .cta:hover{background:color-mix(in srgb, var(--accent) 8%, transparent);}
@@ -543,6 +571,8 @@ footer .wrap span:first-child{color:var(--ink-2);}
   td{font-size:13.5px; padding:13px 6px 13px 0;}
   td.t{font-size:11.5px;}
   .day-head .date{font-size:27px;}
+  /* 좁은 화면에서도 버튼 글자는 한 줄로 — 자간·좌우 여백만 줄이고 글자 크기는 지킨다 */
+  .cta{padding:20px 32px; letter-spacing:0.1em;}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
@@ -846,24 +876,24 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
 
     <h3>Class Fee</h3>
     <div class="rows">
-      <div class="row wide"><div class="lab">1 Class</div><div class="val fee">25,000원</div></div>
-      <div class="row wide"><div class="lab">3 Class Pass</div><div class="val fee">할인 예정</div></div>
-      <div class="row wide"><div class="lab">5 Class Pass</div><div class="val fee">할인 예정</div></div>
+      <div class="row wide spec"><div class="lab">1 Class</div><div class="val fee">25,000원</div></div>
+      <div class="row wide spec"><div class="lab">3 Class Pass</div><div class="val fee tbd">할인 예정</div></div>
+      <div class="row wide spec"><div class="lab">5 Class Pass</div><div class="val fee tbd">할인 예정</div></div>
     </div>
 
     <h3>Capacity</h3>
     <div class="rows">
-      <div class="row wide"><div class="lab">요가</div><div class="val fee">15 — 18명</div></div>
-      <div class="row wide"><div class="lab">필라테스</div><div class="val fee">6명</div></div>
-      <div class="row wide"><div class="lab">아티스트</div><div class="val fee">12 — 20명</div></div>
-      <div class="row wide"><div class="lab">러닝</div><div class="val fee">15 — 20명</div></div>
+      <div class="row wide spec"><div class="lab">요가</div><div class="val fee">15 — 18명</div></div>
+      <div class="row wide spec"><div class="lab">필라테스</div><div class="val fee">6명</div></div>
+      <div class="row wide spec"><div class="lab">아티스트</div><div class="val fee">12 — 20명</div></div>
+      <div class="row wide spec"><div class="lab">러닝</div><div class="val fee">15 — 20명</div></div>
     </div>
 
     <h3>수익 분배 Revenue Share</h3>
     <div class="rows">
       <div class="row wide">
         <div class="lab">강사 배분율<span class="en">Share</span></div>
-        <div class="val fee">운영비를 제외한 순수익의 100%</div>
+        <div class="val">운영비를 제외한 순수익의 <b class="big">100%</b></div>
       </div>
       <div class="row wide">
         <div class="lab">운영비<span class="en">Operating Cost</span></div>
@@ -875,7 +905,7 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
       </div>
       <div class="row wide">
         <div class="lab">주차<span class="en">Parking</span></div>
-        <div class="val">3시간 무료 지원<span class="sub">참가자와 강사분들 모두 지원됩니다.</span></div>
+        <div class="val">건물 지하주차장 이용</div>
       </div>
       <div class="row wide">
         <div class="lab">재료비<span class="en">Material</span></div>
@@ -1072,7 +1102,7 @@ a:focus-visible{outline:1px solid var(--accent); outline-offset:5px;}
     <div class="rows">
       <div class="row wide">
         <div class="lab">편의 시설<span class="en">Facility</span></div>
-        <div class="val">남·녀 샤워실 · 파우더룸 · 락커룸 · 라운지 · 지하주차장<span class="sub">주차 3시간 무료, 천장형 냉난방과 바닥 난방, 야외 테라스</span></div>
+        <div class="val">남·녀 샤워실 · 파우더룸 · 락커룸 · 라운지 · 지하주차장<span class="sub">천장형 냉난방과 바닥 난방, 야외 테라스</span></div>
       </div>
       <div class="row wide">
         <div class="lab">오시는 길<span class="en">Access</span></div>
@@ -1207,11 +1237,17 @@ if (vid) {
   const tap = () => { boot(); if (player && player.playVideo) { player.mute(); player.playVideo(); } };
   vid.addEventListener('click', tap);
   vid.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tap(); } });
+  // 스크롤하다 영상이 화면에 들어오면 자동으로 켜진다.
+  // 절반이 보일 때(threshold 0.5)까지 기다리면 늦다 — 유튜브 API를 받아 첫 프레임이
+  // 뜨기까지 1초 남짓 걸려서, 그 사이 썸네일만 지나간다.
+  // 화면에 닿기 300px 전부터 붙여 두면, 눈에 들어올 때는 이미 돌고 있다.
   if ('IntersectionObserver' in window) {
     const vio = new IntersectionObserver(es => {
       es.forEach(e => { if (e.isIntersecting) { boot(); vio.disconnect(); } });
-    }, { threshold: 0.5 });
+    }, { threshold: 0, rootMargin: '300px 0px' });
     vio.observe(vid);
+  } else {
+    boot();   // 관찰자가 없는 옛 브라우저에선 그냥 바로 붙인다
   }
 }
 
