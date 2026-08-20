@@ -8,8 +8,7 @@
 <meta property="og:description" content="이 수업이 뭘 하는 시간인지, 얼마나 힘든지. 8월 시간표에 있는 수업만 정리했습니다.">
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
+<style>:root{
   --paper:#fbfaf7; --ink:#151515; --sub:#4a4a47; --soft:#7a7770; --muted:#9c988f;
   --line:#ded9cf; --line-soft:#ebe6dc; --tint:#f3efe6; --warn:#a4304a; --warn-bg:#fdf2f4;
   --g-bg:#ddeedd; --g-ink:#3a6b4a; --b-bg:#dde4f5; --b-ink:#3a4f80;
@@ -94,10 +93,6 @@ h2{font-size:19px;font-weight:900;line-height:1.35;letter-spacing:-.02em;margin-
 .speclv span{font-size:10.5px;color:var(--soft);font-weight:700;line-height:1.35;display:block}
 .chips{flex:1;display:flex;flex-wrap:wrap;gap:5px}
 .chip{font-size:12px;font-weight:700;padding:4px 9px;border-radius:100px;line-height:1.4}
-.c-g{background:var(--g-bg);color:var(--g-ink)}
-.c-b{background:var(--b-bg);color:var(--b-ink)}
-.c-v{background:var(--v-bg);color:var(--v-ink)}
-.c-r{background:var(--r-bg);color:var(--r-ink)}
 
 /* ── 목적별 ── */
 .goal{display:grid;gap:10px}
@@ -134,450 +129,367 @@ details[open] summary::after{content:"−"}
 /* ── 안내 ── */
 .info{background:var(--tint);border-radius:12px;padding:15px}
 .info h3{font-size:14px;font-weight:900;margin-bottom:9px}
-.info dl{display:grid;grid-template-columns:74px 1fr;gap:7px 10px;font-size:13px}
-.info dt{color:var(--soft);font-weight:700}
-.info dd{color:var(--sub);line-height:1.6}
-.info dd b{color:var(--ink);font-weight:700}
+.info ul{list-style:none;display:grid;gap:6px}
+.info li{font-size:13px;color:var(--sub);line-height:1.6;padding-left:13px;position:relative}
+.info li::before{content:"";position:absolute;left:2px;top:9px;width:4px;height:4px;border-radius:50%;background:var(--muted)}
+.info li b{color:var(--ink);font-weight:700}
+.info h3+ul{margin-top:2px}
 footer{padding:22px 20px 34px;text-align:center;font-size:11.5px;color:var(--muted);line-height:1.7}
 </style>
 </head>
 <body>
 <div class="wrap">
-
 <header>
   <div class="brand mono">After Yoga &amp; Pilates · Seoul Forest</div>
   <h1>이 수업, <em>뭘 하는 시간</em>이고<br>얼마나 힘든가요?</h1>
   <p class="lede">이름이 비슷해서 헷갈리는 수업들을 먼저 정리했습니다. 색은 <b>운동 효과</b>, 막대는 <b>운동 강도</b>예요.</p>
   <div class="monthbadge"><span class="mono">2026</span> <b>8월 시간표에 있는 수업</b></div>
 </header>
-
-<!-- ═══ 1. 헷갈리는 수업 ═══ -->
 <section>
   <div class="sec-k mono">Which one?</div>
   <h2>해먹 수업, 4가지가 다 다릅니다</h2>
   <p class="sec-d">이름에 모두 '플라잉'이 붙지만 <b>몸이 어디에 있는지</b>가 완전히 다릅니다. 발이 바닥에 있는지, 공중에 뜨는지만 보셔도 됩니다.</p>
-
   <div class="fly">
-
-    <!-- 플라잉릴렉스 -->
     <div class="flycard">
       <div class="flytop">
-        <svg class="flysvg" viewBox="0 0 76 64" aria-hidden="true">
-          <line x1="6" y1="56" x2="70" y2="56" stroke="#ded9cf" stroke-width="2" stroke-linecap="round"/>
-          <line x1="24" y1="6" x2="24" y2="22" stroke="#3a4f80" stroke-width="1.6"/>
-          <line x1="52" y1="6" x2="52" y2="22" stroke="#3a4f80" stroke-width="1.6"/>
-          <path d="M24 22 Q38 46 52 22" fill="#dde4f5" stroke="#3a4f80" stroke-width="1.8" stroke-linejoin="round"/>
-          <circle cx="30" cy="30" r="4.6" fill="#3a4f80"/>
-          <path d="M34 33 Q42 37 49 31" stroke="#3a4f80" stroke-width="3.4" fill="none" stroke-linecap="round"/>
-        </svg>
+        <svg class="flysvg" viewBox="0 0 76 64" aria-hidden="true"><line x1="6" y1="56" x2="70" y2="56" stroke="#ded9cf" stroke-width="2" stroke-linecap="round"/>
+<line x1="24" y1="6" x2="24" y2="22" stroke="#3a4f80" stroke-width="1.6"/><line x1="52" y1="6" x2="52" y2="22" stroke="#3a4f80" stroke-width="1.6"/>
+<path d="M24 22 Q38 46 52 22" fill="#dde4f5" stroke="#3a4f80" stroke-width="1.8" stroke-linejoin="round"/>
+<circle cx="30" cy="30" r="4.6" fill="#3a4f80"/><path d="M34 33 Q42 37 49 31" stroke="#3a4f80" stroke-width="3.4" fill="none" stroke-linecap="round"/></svg>
         <div class="flyname">
           <h3>플라잉릴렉스</h3>
           <div class="flytag">해먹 안에 <b>누워서</b> 이완</div>
-          <div class="lvl" style="color:var(--b-ink);margin-top:5px">
-            <span class="gauge"><i class="on"></i><i class="on"></i><i></i><i></i></span>기본기 · 정렬
-          </div>
+          <div class="lvl" style="color:#3a4f80;margin-top:5px"><span class="gauge"><i class="on"></i><i class="on"></i><i></i><i></i></span>기본기 · 정렬 · 테라피</div>
         </div>
       </div>
       <div class="flybody">
         해먹에 몸을 맡기고 천천히 늘려주는 이완 중심의 공중 요가. 거꾸로 자세도 편안하게 진행돼 부담이 적습니다.
-        <b class="flykey" style="background:var(--b-bg);color:var(--b-ink)">🛏️ 해먹이 <u>침대</u>입니다 — 힘을 거의 안 씁니다</b>
+        <b class="flykey" style="background:#dde4f5;color:#3a4f80">🛏️ 해먹이 <u>침대</u>입니다 — 힘을 거의 안 씁니다</b>
         <div class="when"><b>8월</b> 수 12:10 (1·3·5주) 열림T</div>
       </div>
     </div>
-
-    <!-- 플라잉G -->
     <div class="flycard">
       <div class="flytop">
-        <svg class="flysvg" viewBox="0 0 76 64" aria-hidden="true">
-          <line x1="6" y1="56" x2="70" y2="56" stroke="#7a3a4f" stroke-width="2.6" stroke-linecap="round"/>
-          <line x1="26" y1="6" x2="26" y2="26" stroke="#7a3a4f" stroke-width="1.6"/>
-          <line x1="50" y1="6" x2="50" y2="26" stroke="#7a3a4f" stroke-width="1.6"/>
-          <path d="M26 26 Q38 34 50 26" fill="#f5dde4" stroke="#7a3a4f" stroke-width="1.8"/>
-          <circle cx="38" cy="34" r="4.6" fill="#7a3a4f"/>
-          <line x1="38" y1="39" x2="38" y2="48" stroke="#7a3a4f" stroke-width="3.2" stroke-linecap="round"/>
-          <line x1="38" y1="41" x2="30" y2="31" stroke="#7a3a4f" stroke-width="2.4" stroke-linecap="round"/>
-          <line x1="38" y1="41" x2="46" y2="31" stroke="#7a3a4f" stroke-width="2.4" stroke-linecap="round"/>
-          <line x1="38" y1="48" x2="32" y2="56" stroke="#7a3a4f" stroke-width="2.8" stroke-linecap="round"/>
-          <line x1="38" y1="48" x2="44" y2="56" stroke="#7a3a4f" stroke-width="2.8" stroke-linecap="round"/>
-        </svg>
+        <svg class="flysvg" viewBox="0 0 76 64" aria-hidden="true"><line x1="6" y1="56" x2="70" y2="56" stroke="#7a3a4f" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="26" y1="6" x2="26" y2="26" stroke="#7a3a4f" stroke-width="1.6"/><line x1="50" y1="6" x2="50" y2="26" stroke="#7a3a4f" stroke-width="1.6"/>
+<path d="M26 26 Q38 34 50 26" fill="#f5dde4" stroke="#7a3a4f" stroke-width="1.8"/>
+<circle cx="38" cy="34" r="4.6" fill="#7a3a4f"/><line x1="38" y1="39" x2="38" y2="48" stroke="#7a3a4f" stroke-width="3.2" stroke-linecap="round"/>
+<line x1="38" y1="41" x2="30" y2="31" stroke="#7a3a4f" stroke-width="2.4" stroke-linecap="round"/><line x1="38" y1="41" x2="46" y2="31" stroke="#7a3a4f" stroke-width="2.4" stroke-linecap="round"/>
+<line x1="38" y1="48" x2="32" y2="56" stroke="#7a3a4f" stroke-width="2.8" stroke-linecap="round"/><line x1="38" y1="48" x2="44" y2="56" stroke="#7a3a4f" stroke-width="2.8" stroke-linecap="round"/></svg>
         <div class="flyname">
           <h3>플라잉G</h3>
           <div class="flytag">발은 <b>바닥에</b>, 해먹은 손잡이</div>
-          <div class="lvl" style="color:var(--r-ink);margin-top:5px">
-            <span class="gauge"><i class="on"></i><i class="on"></i><i></i><i></i></span>기본기 · 정렬
-          </div>
+          <div class="lvl" style="color:#7a3a4f;margin-top:5px"><span class="gauge"><i class="on"></i><i class="on"></i><i></i><i></i></span>기본기 · 정렬 · 테라피</div>
         </div>
       </div>
       <div class="flybody">
         해먹을 보조 도구로 활용해 지면 동작과 결합. 거꾸로 자세나 해먹이 처음인 분께도 부담이 없습니다.
-        <b class="flykey" style="background:var(--r-bg);color:var(--r-ink)">🦶 <u>G = Ground(지면)</u> — 공중에 안 뜹니다. 해먹 입문용</b>
+        <b class="flykey" style="background:#f5dde4;color:#7a3a4f">🦶 <u>G = Ground(지면)</u> — 공중에 안 뜹니다. 해먹 입문용</b>
         <div class="when"><b>8월</b> 화 19:00 (1·3·5주) 선하T · 목 20:20 (2·4주) 마리사T · 토 8/22 경선T</div>
       </div>
     </div>
-
-    <!-- 플라잉필라테스 -->
     <div class="flycard">
       <div class="flytop">
-        <svg class="flysvg" viewBox="0 0 76 64" aria-hidden="true">
-          <line x1="6" y1="56" x2="70" y2="56" stroke="#7a3a4f" stroke-width="2.6" stroke-linecap="round"/>
-          <line x1="52" y1="6" x2="52" y2="30" stroke="#7a3a4f" stroke-width="1.6"/>
-          <line x1="62" y1="6" x2="62" y2="30" stroke="#7a3a4f" stroke-width="1.6"/>
-          <path d="M52 30 Q57 37 62 30" fill="#f5dde4" stroke="#7a3a4f" stroke-width="1.8"/>
-          <circle cx="18" cy="50" r="4.6" fill="#7a3a4f"/>
-          <line x1="23" y1="51" x2="40" y2="47" stroke="#7a3a4f" stroke-width="3.2" stroke-linecap="round"/>
-          <line x1="40" y1="47" x2="55" y2="33" stroke="#7a3a4f" stroke-width="2.8" stroke-linecap="round"/>
-        </svg>
+        <svg class="flysvg" viewBox="0 0 76 64" aria-hidden="true"><line x1="6" y1="56" x2="70" y2="56" stroke="#7a3a4f" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="52" y1="6" x2="52" y2="30" stroke="#7a3a4f" stroke-width="1.6"/><line x1="62" y1="6" x2="62" y2="30" stroke="#7a3a4f" stroke-width="1.6"/>
+<path d="M52 30 Q57 37 62 30" fill="#f5dde4" stroke="#7a3a4f" stroke-width="1.8"/>
+<circle cx="18" cy="50" r="4.6" fill="#7a3a4f"/><line x1="23" y1="51" x2="40" y2="47" stroke="#7a3a4f" stroke-width="3.2" stroke-linecap="round"/>
+<line x1="40" y1="47" x2="55" y2="33" stroke="#7a3a4f" stroke-width="2.8" stroke-linecap="round"/></svg>
         <div class="flyname">
           <h3>플라잉필라테스</h3>
           <div class="flytag">등은 <b>매트에</b>, 다리만 해먹에</div>
-          <div class="lvl" style="color:var(--r-ink);margin-top:5px">
-            <span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>운동감 있는 수업
-          </div>
+          <div class="lvl" style="color:#7a3a4f;margin-top:5px"><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>운동감 · 있는 수업</div>
         </div>
       </div>
       <div class="flybody">
         해먹을 지지대로 활용하는 필라테스. 코어를 계속 쓰면서도 관절 부담은 줄어 운동감이 선명합니다.
-        <b class="flykey" style="background:var(--r-bg);color:var(--r-ink)">🔥 <u>배에 계속 힘이 들어갑니다</u> — 요가보다 필라테스에 가까움</b>
+        <b class="flykey" style="background:#f5dde4;color:#7a3a4f">🔥 <u>배에 계속 힘이 들어갑니다</u> — 요가보다 필라테스에 가까움</b>
         <div class="when"><b>8월</b> 금 12:10 (1·3·5주) 열림T</div>
       </div>
     </div>
-
-    <!-- 플라잉A -->
     <div class="flycard">
       <div class="flytop">
-        <svg class="flysvg" viewBox="0 0 76 64" aria-hidden="true">
-          <line x1="6" y1="56" x2="70" y2="56" stroke="#ded9cf" stroke-width="2" stroke-linecap="round"/>
-          <line x1="28" y1="6" x2="28" y2="20" stroke="#7a3a4f" stroke-width="1.6"/>
-          <line x1="48" y1="6" x2="48" y2="20" stroke="#7a3a4f" stroke-width="1.6"/>
-          <path d="M28 20 Q38 28 48 20" fill="#f5dde4" stroke="#7a3a4f" stroke-width="1.8"/>
-          <line x1="38" y1="24" x2="38" y2="34" stroke="#7a3a4f" stroke-width="3.2" stroke-linecap="round"/>
-          <circle cx="38" cy="40" r="4.6" fill="#7a3a4f"/>
-          <line x1="38" y1="26" x2="30" y2="18" stroke="#7a3a4f" stroke-width="2.6" stroke-linecap="round"/>
-          <line x1="38" y1="26" x2="46" y2="18" stroke="#7a3a4f" stroke-width="2.6" stroke-linecap="round"/>
-          <line x1="34" y1="44" x2="30" y2="50" stroke="#7a3a4f" stroke-width="2.4" stroke-linecap="round"/>
-          <line x1="42" y1="44" x2="46" y2="50" stroke="#7a3a4f" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M20 52 L26 52 M50 52 L56 52" stroke="#c9c3b8" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
+        <svg class="flysvg" viewBox="0 0 76 64" aria-hidden="true"><line x1="6" y1="56" x2="70" y2="56" stroke="#ded9cf" stroke-width="2" stroke-linecap="round"/>
+<line x1="28" y1="6" x2="28" y2="20" stroke="#7a3a4f" stroke-width="1.6"/><line x1="48" y1="6" x2="48" y2="20" stroke="#7a3a4f" stroke-width="1.6"/>
+<path d="M28 20 Q38 28 48 20" fill="#f5dde4" stroke="#7a3a4f" stroke-width="1.8"/>
+<line x1="38" y1="24" x2="38" y2="34" stroke="#7a3a4f" stroke-width="3.2" stroke-linecap="round"/><circle cx="38" cy="40" r="4.6" fill="#7a3a4f"/>
+<line x1="38" y1="26" x2="30" y2="18" stroke="#7a3a4f" stroke-width="2.6" stroke-linecap="round"/><line x1="38" y1="26" x2="46" y2="18" stroke="#7a3a4f" stroke-width="2.6" stroke-linecap="round"/>
+<line x1="34" y1="44" x2="30" y2="50" stroke="#7a3a4f" stroke-width="2.4" stroke-linecap="round"/><line x1="42" y1="44" x2="46" y2="50" stroke="#7a3a4f" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M20 52 L26 52 M50 52 L56 52" stroke="#c9c3b8" stroke-width="1.4" stroke-linecap="round"/></svg>
         <div class="flyname">
           <h3>플라잉A</h3>
           <div class="flytag"><b>온몸이 공중에</b> 뜹니다</div>
-          <div class="lvl" style="color:var(--r-ink);margin-top:5px">
-            <span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>강한 운동감 · 체력 필요
-          </div>
+          <div class="lvl" style="color:#7a3a4f;margin-top:5px"><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>강한 운동감 · 체력 필요</div>
         </div>
       </div>
       <div class="flybody">
         공중 해먹에 몸을 맡기는 에어리얼 요가. 거꾸로 자세로 척추를 늘리고 코어로 균형을 잡는 수업.
-        <b class="flykey" style="background:var(--r-bg);color:var(--r-ink)">✈️ <u>A = Aerial(공중)</u> — 4가지 중 가장 강합니다. G와 정반대</b>
+        <b class="flykey" style="background:#f5dde4;color:#7a3a4f">✈️ <u>A = Aerial(공중)</u> — 4가지 중 가장 강합니다. G와 정반대</b>
         <div class="when"><b>8월</b> 화 19:00 (2·4주) 선하T · 목 20:20 (1·3·5주) 마리사T</div>
       </div>
     </div>
-
   </div>
-
   <div class="warn">
     <h4>⚠️ 같은 요일·같은 시간인데 주차마다 바뀝니다</h4>
-    <p>플라잉G와 플라잉A는 <b>같은 시간대를 주차별로 나눠 씁니다.</b> 강도가 ★★ ↔ ★★★★로 크게 차이 나니, 예약 전에 <b>몇 주차인지</b> 꼭 확인해 주세요.</p>
+    <p>아래 시간대는 <b>주차별로 다른 수업</b>이 들어갑니다. 강도 차이가 커서 예약 전에 <b>몇 주차인지</b> 꼭 확인해 주세요.</p>
     <table>
+      <tr><td>목 19:00</td><td>1·3·5주 = <b>엠보링</b> (★) &nbsp;/&nbsp; 2·4주 = <b>파워빈야사</b> (★★★★)</td></tr>
+      <tr><td>월 18:40</td><td>1·3·5주 = <b>빈야사</b> (★★★) &nbsp;/&nbsp; 2·4주 = <b>힐링</b> (★)</td></tr>
       <tr><td>화 19:00</td><td>1·3·5주 = <b>플라잉G</b> (★★) &nbsp;/&nbsp; 2·4주 = <b>플라잉A</b> (★★★★)</td></tr>
       <tr><td>목 20:20</td><td>1·3·5주 = <b>플라잉A</b> (★★★★) &nbsp;/&nbsp; 2·4주 = <b>플라잉G</b> (★★)</td></tr>
+      <tr><td>금 20:00</td><td>1·3·5주 = <b>힐링</b> (★) &nbsp;/&nbsp; 2·4주 = <b>빈야사 베이직</b> (★★★)</td></tr>
     </table>
+    <p style="margin-top:9px">이 밖에도 주차별로 수업이 바뀌는 시간대가 <b>12곳</b> 더 있습니다 — 강도 차이는 크지 않지만, 아래 <b>전체 수업</b>에서 요일·주차를 확인해 주세요.</p>
     <p style="margin-top:9px">해먹 수업은 <b>정원 12명</b>이고, 해먹 높이를 맞춰야 해서 <b>수업 시작 5~10분 전</b>에 도착해 주세요.</p>
   </div>
 </section>
-
-<!-- ═══ 2. 계열별 비교 ═══ -->
 <section>
   <div class="sec-k mono">Family guide</div>
   <h2>이름이 비슷한 나머지 수업들</h2>
   <p class="sec-d">같은 계열 안에서 무엇이 더 세고, 무엇이 다른지만 골라 담았습니다.</p>
-
   <div class="fam">
     <div class="famhead"><h3>빈야사 계열</h3><p>흐름(플로우) 요가 — 속도만 다릅니다</p></div>
-    <div class="famrow"><div class="famnm" style="color:var(--r-ink)">빈야사 베이직<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+    <div class="famrow"><div class="famnm" style="color:#7a3a4f">빈야사 베이직<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
       <div class="famtx">흐름을 <b>천천히 익히는 입문</b>. 동작을 끊어 알려주며 호흡 연결부터 배웁니다.</div></div>
-    <div class="famrow"><div class="famnm" style="color:var(--r-ink)">빈야사<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+    <div class="famrow"><div class="famnm" style="color:#7a3a4f">빈야사<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
       <div class="famtx">동작을 <b>끊김 없이</b> 연결하는 정통 빈야사. 자연스럽게 땀이 납니다.</div></div>
-    <div class="famrow"><div class="famnm" style="color:var(--r-ink)">파워빈야사<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+    <div class="famrow"><div class="famnm" style="color:#7a3a4f">파워빈야사<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
       <div class="famtx">같은 흐름을 <b>더 빠르고 강하게</b>. 짧은 시간에 땀을 확실히 빼고 싶을 때.</div></div>
   </div>
-
   <div class="fam">
     <div class="famhead"><h3>아쉬탕가 계열</h3><p>정해진 순서를 반복하는 요가</p></div>
-    <div class="famrow"><div class="famnm" style="color:var(--r-ink)">아쉬탕가 베이직<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+    <div class="famrow"><div class="famnm" style="color:#7a3a4f">아쉬탕가 베이직<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
       <div class="famtx"><b>입문 버전.</b> 같은 순서가 반복되어 동작이 점차 익숙해집니다.</div></div>
-    <div class="famrow"><div class="famnm" style="color:var(--r-ink)">아쉬탕가<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+    <div class="famrow"><div class="famnm" style="color:#7a3a4f">아쉬탕가<span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
       <div class="famtx">정해진 자세를 <b>빠르게 흐르는 고강도</b>. 체력·근력·집중력을 함께 끌어올립니다.</div></div>
   </div>
-
   <div class="fam">
     <div class="famhead"><h3>테라피 계열</h3><p>이름은 같아도 <b>푸는 부위</b>가 다릅니다 — 전부 ★★</p></div>
-    <div class="famrow"><div class="famnm" style="color:var(--b-ink)">척추테라피</div>
+    <div class="famrow"><div class="famnm" style="color:#3a4f80">척추테라피</div>
       <div class="famtx"><b>목·어깨·등</b> — 거북목, 라운드숄더. 사무직에게 가장 잘 맞습니다.</div></div>
-    <div class="famrow"><div class="famnm" style="color:var(--b-ink)">골반테라피</div>
+    <div class="famrow"><div class="famnm" style="color:#3a4f80">골반테라피</div>
       <div class="famtx"><b>골반·고관절</b> — 다리 꼬는 습관, 골반 비대칭, 좌우 다리 길이 차이.</div></div>
-    <div class="famrow"><div class="famnm" style="color:var(--g-ink)">코어테라피</div>
+    <div class="famrow"><div class="famnm" style="color:#3a6b4a">코어테라피</div>
       <div class="famtx"><b>허리 속근육</b> — 이름에 '코어'가 있지만 힘든 복근 운동이 아니라 <b>부드럽게 깨우는</b> 회복 수업입니다.</div></div>
-    <div class="famrow"><div class="famnm" style="color:var(--b-ink)">테라피</div>
+    <div class="famrow"><div class="famnm" style="color:#3a4f80">테라피</div>
       <div class="famtx"><b>부위 구분 없이</b> 굳은 곳을 풀고 정렬을 함께 잡습니다.</div></div>
   </div>
-
   <div class="fam">
     <div class="famhead"><h3>하타 계열</h3><p>한 자세씩 머무르는 정적인 요가 — 전부 ★★</p></div>
-    <div class="famrow"><div class="famnm" style="color:var(--b-ink)">하타</div>
-      <div class="famtx">요가의 <b>가장 기본</b>. 정확한 정렬과 호흡으로 기본기를 쌓습니다. <b>월 10:30은 80분</b> 수업입니다.</div></div>
-    <div class="famrow"><div class="famnm" style="color:var(--b-ink)">하타차크라</div>
+    <div class="famrow"><div class="famnm" style="color:#3a4f80">하타</div>
+      <div class="famtx">요가의 <b>가장 기본</b>. 정확한 정렬과 호흡으로 기본기를 쌓습니다.</div></div>
+    <div class="famrow"><div class="famnm" style="color:#3a4f80">하타차크라</div>
       <div class="famtx">하타에 <b>에너지 흐름·명상</b>을 더한 버전. 가장 정적입니다.</div></div>
-    <div class="famrow"><div class="famnm" style="color:var(--b-ink)">아헹가</div>
+    <div class="famrow"><div class="famnm" style="color:#3a4f80">아헹가</div>
       <div class="famtx"><b>블록·벨트 같은 도구</b>로 정확한 자세를 잡습니다. 유연성이 부족해도 도구가 받쳐줍니다.</div></div>
   </div>
 </section>
-
-<!-- ═══ 3. 강도 스펙트럼 ═══ -->
 <section>
   <div class="sec-k mono">Intensity</div>
   <h2>8월 요가 28개, 강도순으로</h2>
-  <p class="sec-d">처음이라면 위의 두 칸에서 고르시면 됩니다. 색은 운동 효과예요 — <b style="color:var(--g-ink)">회복</b> · <b style="color:var(--b-ink)">정렬</b> · <b style="color:var(--v-ink)">코어</b> · <b style="color:var(--r-ink)">유산소</b>.</p>
-
+  <p class="sec-d">처음이라면 위의 두 칸에서 고르시면 됩니다. 색은 운동 효과예요 — <b style="color:#3a6b4a">회복</b> · <b style="color:#3a4f80">정렬</b> · <b style="color:#553a7a">코어</b> · <b style="color:#7a3a4f">유산소</b>.</p>
   <div class="spec">
     <div class="specrow">
-      <div class="speclv" style="color:var(--g-ink)">
-        <span class="gauge"><i class="on"></i><i></i><i></i><i></i></span><span>가볍게 시작<br>회복</span></div>
-      <div class="chips">
-        <span class="chip c-g">힐링</span><span class="chip c-g">엠보링</span><span class="chip c-g">아로마힐링</span>
-      </div>
+      <div class="speclv" style="color:#3a6b4a"><span class="gauge"><i class="on"></i><i></i><i></i><i></i></span><span>가볍게 시작<br>회복</span></div>
+      <div class="chips"><span class="chip" style="background:#ddeedd;color:#3a6b4a">아로마힐링</span><span class="chip" style="background:#ddeedd;color:#3a6b4a">엠보링</span><span class="chip" style="background:#ddeedd;color:#3a6b4a">힐링</span></div>
     </div>
     <div class="specrow">
-      <div class="speclv" style="color:var(--b-ink)">
-        <span class="gauge"><i class="on"></i><i class="on"></i><i></i><i></i></span><span>기본기<br>정렬 · 테라피</span></div>
-      <div class="chips">
-        <span class="chip c-g">코어테라피</span><span class="chip c-b">하타</span><span class="chip c-b">하타차크라</span>
-        <span class="chip c-b">아헹가</span><span class="chip c-b">얼라인먼트</span><span class="chip c-b">척추테라피</span>
-        <span class="chip c-b">골반테라피</span><span class="chip c-b">테라피</span><span class="chip c-b">밸런스</span>
-        <span class="chip c-b">오늘의 자세</span><span class="chip c-b">휠요가</span><span class="chip c-b">플라잉릴렉스</span>
-        <span class="chip c-r">플라잉G</span>
-      </div>
+      <div class="speclv" style="color:#3a4f80"><span class="gauge"><i class="on"></i><i class="on"></i><i></i><i></i></span><span>기본기<br>정렬 · 테라피</span></div>
+      <div class="chips"><span class="chip" style="background:#ddeedd;color:#3a6b4a">코어테라피</span><span class="chip" style="background:#dde4f5;color:#3a4f80">골반테라피</span><span class="chip" style="background:#dde4f5;color:#3a4f80">밸런스</span><span class="chip" style="background:#dde4f5;color:#3a4f80">아헹가</span><span class="chip" style="background:#dde4f5;color:#3a4f80">얼라인먼트</span><span class="chip" style="background:#dde4f5;color:#3a4f80">오늘의 자세</span><span class="chip" style="background:#dde4f5;color:#3a4f80">척추테라피</span><span class="chip" style="background:#dde4f5;color:#3a4f80">테라피</span><span class="chip" style="background:#dde4f5;color:#3a4f80">플라잉릴렉스</span><span class="chip" style="background:#dde4f5;color:#3a4f80">하타</span><span class="chip" style="background:#dde4f5;color:#3a4f80">하타차크라</span><span class="chip" style="background:#dde4f5;color:#3a4f80">휠요가</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">플라잉G</span></div>
     </div>
     <div class="specrow">
-      <div class="speclv" style="color:var(--v-ink)">
-        <span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>운동감<br>있는 수업</span></div>
-      <div class="chips">
-        <span class="chip c-b">인사이드플로우</span><span class="chip c-b">에볼루션플로우</span>
-        <span class="chip c-v">매트필라테스</span><span class="chip c-v">바레</span>
-        <span class="chip c-r">빈야사 베이직</span><span class="chip c-r">빈야사</span>
-        <span class="chip c-r">아쉬탕가 베이직</span><span class="chip c-r">플라잉필라테스</span>
-      </div>
+      <div class="speclv" style="color:#553a7a"><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span><span>운동감<br>있는 수업</span></div>
+      <div class="chips"><span class="chip" style="background:#dde4f5;color:#3a4f80">에볼루션플로우</span><span class="chip" style="background:#dde4f5;color:#3a4f80">인사이드플로우</span><span class="chip" style="background:#e4ddf5;color:#553a7a">매트필라테스</span><span class="chip" style="background:#e4ddf5;color:#553a7a">바레</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">빈야사</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">빈야사 베이직</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">아쉬탕가 베이직</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">플라잉필라테스</span></div>
     </div>
     <div class="specrow">
-      <div class="speclv" style="color:var(--r-ink)">
-        <span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span>강한 운동감<br>체력 필요</span></div>
-      <div class="chips">
-        <span class="chip c-r">파워빈야사</span><span class="chip c-r">아쉬탕가</span>
-        <span class="chip c-r">플라잉A</span><span class="chip c-r">번지</span>
-      </div>
+      <div class="speclv" style="color:#7a3a4f"><span class="gauge"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span><span>강한 운동감<br>체력 필요</span></div>
+      <div class="chips"><span class="chip" style="background:#f5dde4;color:#7a3a4f">번지</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">아쉬탕가</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">파워빈야사</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">플라잉A</span></div>
     </div>
   </div>
 </section>
-
-<!-- ═══ 4. 목적별 ═══ -->
 <section>
   <div class="sec-k mono">By goal</div>
   <h2>이런 게 고민이라면</h2>
   <p class="sec-d">몸 상태·목적에서 바로 찾아보세요.</p>
   <div class="goal">
     <div class="goalcard">
-      <h3><span class="dot" style="background:var(--g-ink)"></span>피로가 크고 잠이 잘 안 와요</h3>
+      <h3><span class="dot" style="background:#3a6b4a"></span>피로가 크고 잠이 잘 안 와요</h3>
       <p>강한 동작 없이 풀어주는 회복·이완 수업입니다.</p>
-      <div class="chips"><span class="chip c-g">힐링</span><span class="chip c-g">엠보링</span><span class="chip c-g">아로마힐링</span><span class="chip c-b">플라잉릴렉스</span></div>
+      <div class="chips"><span class="chip" style="background:#ddeedd;color:#3a6b4a">아로마힐링</span><span class="chip" style="background:#ddeedd;color:#3a6b4a">엠보링</span><span class="chip" style="background:#ddeedd;color:#3a6b4a">힐링</span><span class="chip" style="background:#dde4f5;color:#3a4f80">플라잉릴렉스</span></div>
     </div>
     <div class="goalcard">
-      <h3><span class="dot" style="background:var(--b-ink)"></span>거북목·라운드숄더·굽은 등</h3>
+      <h3><span class="dot" style="background:#3a4f80"></span>거북목·라운드숄더·굽은 등</h3>
       <p>오래 앉아 일하시는 분께 가장 먼저 권하는 수업들입니다.</p>
-      <div class="chips"><span class="chip c-b">척추테라피</span><span class="chip c-b">휠요가</span><span class="chip c-b">테라피</span><span class="chip c-b">얼라인먼트</span></div>
+      <div class="chips"><span class="chip" style="background:#dde4f5;color:#3a4f80">얼라인먼트</span><span class="chip" style="background:#dde4f5;color:#3a4f80">척추테라피</span><span class="chip" style="background:#dde4f5;color:#3a4f80">테라피</span><span class="chip" style="background:#dde4f5;color:#3a4f80">휠요가</span></div>
     </div>
     <div class="goalcard">
-      <h3><span class="dot" style="background:var(--b-ink)"></span>허리가 자주 결려요</h3>
+      <h3><span class="dot" style="background:#3a4f80"></span>허리가 자주 결려요</h3>
       <p>허리를 받쳐주는 속근육부터 부드럽게 깨웁니다.</p>
-      <div class="chips"><span class="chip c-g">코어테라피</span><span class="chip c-v">매트필라테스</span><span class="chip c-b">골반테라피</span></div>
+      <div class="chips"><span class="chip" style="background:#dde4f5;color:#3a4f80">골반테라피</span><span class="chip" style="background:#ddeedd;color:#3a6b4a">코어테라피</span><span class="chip" style="background:#e4ddf5;color:#553a7a">매트필라테스</span></div>
     </div>
     <div class="goalcard">
-      <h3><span class="dot" style="background:var(--v-ink)"></span>하체·엉덩이 라인을 잡고 싶어요</h3>
+      <h3><span class="dot" style="background:#553a7a"></span>하체·엉덩이 라인을 잡고 싶어요</h3>
       <p>둔근과 하체를 반복 자극하는 수업입니다.</p>
-      <div class="chips"><span class="chip c-v">바레</span><span class="chip c-v">매트필라테스</span></div>
+      <div class="chips"><span class="chip" style="background:#e4ddf5;color:#553a7a">매트필라테스</span><span class="chip" style="background:#e4ddf5;color:#553a7a">바레</span></div>
     </div>
     <div class="goalcard">
-      <h3><span class="dot" style="background:var(--r-ink)"></span>땀 흘리고 체지방을 관리하고 싶어요</h3>
+      <h3><span class="dot" style="background:#7a3a4f"></span>땀 흘리고 체지방을 관리하고 싶어요</h3>
       <p>활동량이 큰 수업입니다. 컨디션을 먼저 확인해 주세요.</p>
-      <div class="chips"><span class="chip c-r">빈야사</span><span class="chip c-r">파워빈야사</span><span class="chip c-r">번지</span><span class="chip c-r">아쉬탕가</span></div>
+      <div class="chips"><span class="chip" style="background:#f5dde4;color:#7a3a4f">빈야사</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">번지</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">아쉬탕가</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">파워빈야사</span></div>
     </div>
     <div class="goalcard">
-      <h3><span class="dot" style="background:var(--b-ink)"></span>운동이 처음이라 부담돼요</h3>
+      <h3><span class="dot" style="background:#3a4f80"></span>운동이 처음이라 부담돼요</h3>
       <p>동작을 천천히 나눠 알려드리는 수업부터 시작하세요.</p>
-      <div class="chips"><span class="chip c-b">얼라인먼트</span><span class="chip c-g">힐링</span><span class="chip c-b">하타</span><span class="chip c-r">플라잉G</span></div>
+      <div class="chips"><span class="chip" style="background:#ddeedd;color:#3a6b4a">힐링</span><span class="chip" style="background:#dde4f5;color:#3a4f80">얼라인먼트</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">플라잉G</span><span class="chip" style="background:#dde4f5;color:#3a4f80">하타</span><span class="chip" style="background:#f5dde4;color:#7a3a4f">빈야사 베이직</span></div>
     </div>
   </div>
 </section>
-
-<!-- ═══ 5. 전체 사전 ═══ -->
 <section>
   <div class="sec-k mono">All classes</div>
   <h2>8월 요가 수업 전체</h2>
   <p class="sec-d">이번 달 시간표에 있는 28개 수업입니다.</p>
-
   <details>
-    <summary><span><span class="grp c-g">회복·이완</span> 4개</span></summary>
+    <summary><span><span class="grp" style="background:#ddeedd;color:#3a6b4a">회복·이완</span> 4개</span></summary>
     <div class="dict">
-      <div class="item"><div class="itop"><h4>힐링</h4><span class="gauge" style="color:var(--g-ink)"><i class="on"></i><i></i><i></i><i></i></span></div>
-        <p>전신 근육을 천천히 풀어주는 스트레칭 위주 수업. 강한 동작 없이 호흡과 함께 몸의 긴장을 내려놓습니다.</p>
-        <div class="when">월 18:40 (2·4주) · 금 20:00 (1·3·5주) · 토 8/8</div></div>
-      <div class="item"><div class="itop"><h4>엠보링</h4><span class="gauge" style="color:var(--g-ink)"><i class="on"></i><i></i><i></i><i></i></span></div>
-        <p>마사지볼·폼롤러로 어깨·등·종아리의 굳은 근막을 풀어주는 수업. 컴퓨터·휴대폰으로 굳은 몸에 효과적입니다.</p>
-        <div class="when">수 20:00 (2·4주) · 목 12:10 (2·4주) · 목 19:00 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>아로마힐링</h4><span class="gauge" style="color:var(--g-ink)"><i class="on"></i><i></i><i></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>아로마힐링</h4><span class="gauge" style="color:#3a6b4a"><i class="on"></i><i></i><i></i><i></i></span></div>
         <p>아로마 향과 함께 가벼운 스트레칭과 명상을 진행. 잠이 잘 안 오거나 마음이 복잡할 때 추천합니다.</p>
         <div class="when">목 12:10 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>코어테라피</h4><span class="gauge" style="color:var(--g-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>엠보링</h4><span class="gauge" style="color:#3a6b4a"><i class="on"></i><i></i><i></i><i></i></span></div>
+        <p>마사지볼·폼롤러로 어깨·등·종아리의 굳은 근막을 풀어주는 수업. 컴퓨터·휴대폰으로 굳은 몸에 효과적입니다.</p>
+        <div class="when">수 20:00 (2·4주) · 목 12:10 (2·4주) · 목 19:00 (1·3·5주)</div></div>
+      <div class="item"><div class="itop"><h4>힐링</h4><span class="gauge" style="color:#3a6b4a"><i class="on"></i><i></i><i></i><i></i></span></div>
+        <p>전신 근육을 천천히 풀어주는 스트레칭 위주 수업. 강한 동작 없이 호흡과 함께 몸의 긴장을 내려놓습니다.</p>
+        <div class="when">월 18:40 (2·4주) · 금 20:00 (1·3·5주) · 토 8/8</div></div>
+      <div class="item"><div class="itop"><h4>코어테라피</h4><span class="gauge" style="color:#3a6b4a"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
         <p>허리 안정에 중요한 심부 코어(복횡근·다열근)를 부드럽게 깨우는 수업. 허리가 자주 결리거나 약한 분께.</p>
         <div class="when">월 12:10 (1·3·5주)</div></div>
     </div>
   </details>
-
   <details>
-    <summary><span><span class="grp c-b">정렬·유연성</span> 13개</span></summary>
+    <summary><span><span class="grp" style="background:#dde4f5;color:#3a4f80">정렬·유연성</span> 13개</span></summary>
     <div class="dict">
-      <div class="item"><div class="itop"><h4>하타</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-        <p>요가의 가장 기본이 되는 정통 수업. 한 자세씩 정확한 정렬과 호흡으로 머무르며 기본기를 쌓아갑니다.</p>
-        <div class="when">월 10:30 (매주, <b>80분</b>) · 화 20:20 (2·4주) · 수 18:40 (2·4주) · 수 20:00 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>하타차크라</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-        <p>하타 동작에 차크라(에너지 흐름)를 더해 호흡·집중을 깊게 가져갑니다. 명상에 가까운 정적인 흐름.</p>
-        <div class="when">화 11:30 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>아헹가</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-        <p>블록·벨트 같은 도구로 정확한 자세를 잡는 정밀 정렬 수업. 자세가 자꾸 흔들리거나 유연성이 부족한 분께.</p>
-        <div class="when">화 11:30 (2·4주)</div></div>
-      <div class="item"><div class="itop"><h4>얼라인먼트</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-        <p>몸의 좌우 균형과 정렬을 하나씩 맞춰가는 자세교정 수업. 동작을 천천히 나눠 알려드려 처음이어도 따라오기 좋습니다.</p>
-        <div class="when">금 10:30 (매주)</div></div>
-      <div class="item"><div class="itop"><h4>척추테라피</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-        <p>거북목·라운드숄더·등 굳음 해소에 집중한 수업. 사무직·장시간 앉아 일하는 분께 가장 잘 맞습니다.</p>
-        <div class="when">월 20:00 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>골반테라피</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>골반테라피</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
         <p>골반·고관절 가동성에 집중한 수업. 다리 꼬는 습관, 골반 비대칭, 좌우 다리 길이 차이가 있는 분께 추천.</p>
         <div class="when">월 21:10 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>테라피</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-        <p>굳은 부위를 풀고 틀어진 정렬을 함께 잡아주는 수업. 뻐근함이 오래 남는 분께 잘 맞습니다.</p>
-        <div class="when">수 12:10 (2·4주)</div></div>
-      <div class="item"><div class="itop"><h4>밸런스</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>밸런스</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
         <p>한 다리로 서거나 균형 잡는 자세 위주로 진행. 발목·코어 안정력과 집중력을 함께 키워주는 수업.</p>
         <div class="when">월 12:10 (2·4주) · 금 18:40 (2·4주)</div></div>
-      <div class="item"><div class="itop"><h4>오늘의 자세</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>아헹가</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <p>블록·벨트 같은 도구로 정확한 자세를 잡는 정밀 정렬 수업. 자세가 자꾸 흔들리거나 유연성이 부족한 분께.</p>
+        <div class="when">화 11:30 (2·4주)</div></div>
+      <div class="item"><div class="itop"><h4>얼라인먼트</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <p>몸의 좌우 균형과 정렬을 하나씩 맞춰가는 자세교정 수업. 동작을 천천히 나눠 알려드려 처음이어도 따라오기 좋습니다.</p>
+        <div class="when">금 10:30 (매주)</div></div>
+      <div class="item"><div class="itop"><h4>오늘의 자세</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
         <p>매 수업 한 가지 테마 자세(다운독·비둘기·거꾸로 자세 등)를 깊이 있게 완성해가는 수업입니다.</p>
         <div class="when">수 18:40 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>휠요가</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
-        <p>요가휠 위에 등을 얹어 굽은 등과 가슴을 시원하게 열어주는 수업. 앞으로 말린 어깨와 굳은 척추에 효과적입니다.</p>
-        <div class="when">토 8/22</div></div>
-      <div class="item"><div class="itop"><h4>플라잉릴렉스</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>척추테라피</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <p>거북목·라운드숄더·등 굳음 해소에 집중한 수업. 사무직·장시간 앉아 일하는 분께 가장 잘 맞습니다.</p>
+        <div class="when">월 20:00 (1·3·5주)</div></div>
+      <div class="item"><div class="itop"><h4>테라피</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <p>굳은 부위를 풀고 틀어진 정렬을 함께 잡아주는 수업. 뻐근함이 오래 남는 분께 잘 맞습니다.</p>
+        <div class="when">수 12:10 (2·4주)</div></div>
+      <div class="item"><div class="itop"><h4>플라잉릴렉스</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
         <p>해먹에 몸을 맡기고 천천히 늘려주는 이완 중심의 공중 요가. 거꾸로 자세도 편안하게 진행돼 부담이 적습니다.</p>
         <div class="when">수 12:10 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>인사이드플로우</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
-        <p>음악의 흐름에 동작을 얹어 한 곡을 완성하듯 이어가는 수업. 움직임에 몰입하며 스트레스를 풀고 싶은 분께.</p>
-        <div class="when">목 10:30 (매주)</div></div>
-      <div class="item"><div class="itop"><h4>에볼루션플로우</h4><span class="gauge" style="color:var(--b-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>하타</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <p>요가의 가장 기본이 되는 정통 수업. 한 자세씩 정확한 정렬과 호흡으로 머무르며 기본기를 쌓아갑니다.</p>
+        <div class="when">월 10:30 (매주) · 화 20:20 (2·4주) · 수 18:40 (2·4주) · 수 20:00 (1·3·5주)</div></div>
+      <div class="item"><div class="itop"><h4>하타차크라</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <p>하타 동작에 차크라(에너지 흐름)를 더해 호흡·집중을 깊게 가져갑니다. 명상에 가까운 정적인 흐름.</p>
+        <div class="when">화 11:30 (1·3·5주)</div></div>
+      <div class="item"><div class="itop"><h4>휠요가</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+        <p>요가휠 위에 등을 얹어 굽은 등과 가슴을 시원하게 열어주는 수업. 앞으로 말린 어깨와 굳은 척추에 효과적입니다.</p>
+        <div class="when">토 8/22</div></div>
+      <div class="item"><div class="itop"><h4>에볼루션플로우</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
         <p>같은 동작을 단계별로 점진적으로 확장하는 시퀀스. 유연성과 가동 범위를 천천히 늘려가는 수업.</p>
         <div class="when">화 20:20 (1·3·5주)</div></div>
+      <div class="item"><div class="itop"><h4>인사이드플로우</h4><span class="gauge" style="color:#3a4f80"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+        <p>음악의 흐름에 동작을 얹어 한 곡을 완성하듯 이어가는 수업. 움직임에 몰입하며 스트레스를 풀고 싶은 분께.</p>
+        <div class="when">목 10:30 (매주)</div></div>
     </div>
   </details>
-
   <details>
-    <summary><span><span class="grp c-v">코어·근력</span> 2개</span></summary>
+    <summary><span><span class="grp" style="background:#e4ddf5;color:#553a7a">코어·근력</span> 2개</span></summary>
     <div class="dict">
-      <div class="item"><div class="itop"><h4>매트필라테스</h4><span class="gauge" style="color:var(--v-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>매트필라테스</h4><span class="gauge" style="color:#553a7a"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
         <p>매트 위에서 진행하는 필라테스 기본기. 호흡과 함께 딥코어·골반 안정에 집중하는 수업입니다.</p>
         <div class="when">금 12:10 (2·4주)</div></div>
-      <div class="item"><div class="itop"><h4>바레</h4><span class="gauge" style="color:var(--v-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>바레</h4><span class="gauge" style="color:#553a7a"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
         <p>발레 동작을 응용해 바를 잡고 진행하는 수업. 하체와 둔근을 반복 자극해 다리·엉덩이 라인을 정리합니다.</p>
         <div class="when">토 8/8</div></div>
     </div>
   </details>
-
   <details>
-    <summary><span><span class="grp c-r">유산소·다이어트</span> 9개</span></summary>
+    <summary><span><span class="grp" style="background:#f5dde4;color:#7a3a4f">유산소·다이어트</span> 9개</span></summary>
     <div class="dict">
-      <div class="item"><div class="itop"><h4>플라잉G</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>플라잉G</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i></i><i></i></span></div>
         <p>해먹을 보조 도구로 활용해 지면 동작과 결합. 거꾸로 자세나 해먹이 처음인 분께도 부담이 없습니다.</p>
         <div class="when">화 19:00 (1·3·5주) · 목 20:20 (2·4주) · 토 8/22</div></div>
-      <div class="item"><div class="itop"><h4>빈야사 베이직</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
-        <p>빈야사(흐름 요가) 입문 수업. 호흡과 동작을 연결하는 기본 시퀀스로 천천히 흐름을 익혀갑니다.</p>
-        <div class="when">금 20:00 (2·4주)</div></div>
-      <div class="item"><div class="itop"><h4>빈야사</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>빈야사</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
         <p>동작을 끊김 없이 흐름으로 연결하는 정통 빈야사. 자연스럽게 땀이 나며 유산소 효과까지 함께 얻습니다.</p>
         <div class="when">월 18:40 (1·3·5주) · 월 20:00 (2·4주) · 수 10:30 (매주) · 금 18:40 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>아쉬탕가 베이직</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>빈야사 베이직</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+        <p>빈야사(흐름 요가) 입문 수업. 호흡과 동작을 연결하는 기본 시퀀스로 천천히 흐름을 익혀갑니다.</p>
+        <div class="when">금 20:00 (2·4주)</div></div>
+      <div class="item"><div class="itop"><h4>아쉬탕가 베이직</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
         <p>정해진 시리즈로 진행하는 아쉬탕가의 입문 버전. 같은 순서가 반복되어 동작이 점차 익숙해집니다.</p>
         <div class="when">월 21:10 (2·4주)</div></div>
-      <div class="item"><div class="itop"><h4>플라잉필라테스</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
+      <div class="item"><div class="itop"><h4>플라잉필라테스</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span></div>
         <p>해먹을 지지대로 활용하는 필라테스. 코어를 계속 쓰면서도 관절 부담은 줄어 운동감이 선명합니다.</p>
         <div class="when">금 12:10 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>파워빈야사</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
-        <p>빈야사의 흐름을 더 빠르고 강하게 이어가는 수업. 짧은 시간에 땀을 확실히 빼고 싶은 분께 추천합니다.</p>
-        <div class="when">목 19:00 (2·4주)</div></div>
-      <div class="item"><div class="itop"><h4>아쉬탕가</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
-        <p>정해진 자세를 정해진 순서로 빠르게 흐르는 고강도 요가. 체력·근력·집중력을 한 번에 끌어올립니다.</p>
-        <div class="when">화 10:00 (2·4주)</div></div>
-      <div class="item"><div class="itop"><h4>플라잉A</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
-        <p>공중 해먹에 몸을 맡기는 에어리얼 요가. 거꾸로 자세로 척추를 늘리고 코어로 균형을 잡는 수업.</p>
-        <div class="when">화 19:00 (2·4주) · 목 20:20 (1·3·5주)</div></div>
-      <div class="item"><div class="itop"><h4>번지</h4><span class="gauge" style="color:var(--r-ink)"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+      <div class="item"><div class="itop"><h4>번지</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
         <p>번지 줄을 허리에 묶고 점프·러닝 동작 위주로 진행. 무릎 부담이 적으면서 유산소 효과가 강력합니다.</p>
         <div class="when">화 10:00 (1·3·5주) · 수 21:10 (2·4주)</div></div>
+      <div class="item"><div class="itop"><h4>아쉬탕가</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+        <p>정해진 자세를 정해진 순서로 빠르게 흐르는 고강도 요가. 체력·근력·집중력을 한 번에 끌어올립니다.</p>
+        <div class="when">화 10:00 (2·4주)</div></div>
+      <div class="item"><div class="itop"><h4>파워빈야사</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+        <p>빈야사의 흐름을 더 빠르고 강하게 이어가는 수업. 짧은 시간에 땀을 확실히 빼고 싶은 분께 추천합니다.</p>
+        <div class="when">목 19:00 (2·4주)</div></div>
+      <div class="item"><div class="itop"><h4>플라잉A</h4><span class="gauge" style="color:#7a3a4f"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
+        <p>공중 해먹에 몸을 맡기는 에어리얼 요가. 거꾸로 자세로 척추를 늘리고 코어로 균형을 잡는 수업.</p>
+        <div class="when">화 19:00 (2·4주) · 목 20:20 (1·3·5주)</div></div>
     </div>
   </details>
 </section>
-
-<!-- ═══ 6. 필라테스 ═══ -->
 <section>
   <div class="sec-k mono">Pilates</div>
   <h2>필라테스는 4가지 트랙</h2>
-  <p class="sec-d">매트 위에서 호흡과 함께 깊은 근육을 깨우는 <b>50분</b> 수업입니다. 네 트랙 모두 강도는 같고 <b>목적만 다릅니다</b> — 고민에 맞는 트랙을 고르시면 됩니다.</p>
-
+  <p class="sec-d">매트 위에서 호흡과 함께 깊은 근육을 깨우는 수업입니다. 네 트랙 모두 강도는 같고 <b>목적만 다릅니다</b> — 고민에 맞는 트랙을 고르시면 됩니다.</p>
   <div class="track">
-    <h3><span class="tno c-g">Track 1</span> 체형교정</h3>
+    <h3><span class="tno" style="background:#ddeedd;color:#3a6b4a">Track 1</span> 체형교정</h3>
     <p>굳은 자세 습관을 풀고 좌우 균형·정렬을 잡아주는 트랙. 거북목, 라운드숄더, 골반 틀어짐, 평발 등 자세 문제를 매트 동작으로 하나씩 풀어갑니다.</p>
     <div class="forwho"><b>이런 분께</b> — 오래 앉아 일하시는 분 · 어깨·등이 굳고 자세가 무너진 분 · 좌우 비대칭이 있는 분</div>
     <div class="when">월 19:00 · 화 10:30 · 수 21:00 · 목 18:40 · 금 12:40 · 금 20:00</div>
   </div>
   <div class="track">
-    <h3><span class="tno c-b">Track 2</span> 코어</h3>
+    <h3><span class="tno" style="background:#dde4f5;color:#3a4f80">Track 2</span> 코어</h3>
     <p>복부·허리 깊은 곳의 안정 근육(복횡근·다열근)을 깨우는 트랙. 호흡과 함께 척추를 안정시켜, 평소 자세를 받쳐주는 진짜 코어 힘을 만들어갑니다.</p>
     <div class="forwho"><b>이런 분께</b> — 허리가 자주 결리는 분 · 중심 잡기가 약한 분 · 모든 운동의 기반이 되는 코어를 만들고 싶은 분</div>
     <div class="when">월 12:40 · 화 12:30 · 화 18:40 · 화 19:40 · 수 11:30 · 목 11:40 · 목 20:40 · 금 19:00</div>
   </div>
   <div class="track">
-    <h3><span class="tno c-v">Track 3</span> 힙업</h3>
+    <h3><span class="tno" style="background:#e4ddf5;color:#553a7a">Track 3</span> 힙업</h3>
     <p>둔근(엉덩이)·뒷허벅지 라인에 집중한 트랙. 엉덩이를 위로 올려주는 자극 위주의 동작으로 하체 실루엣과 골반 정렬을 함께 잡아줍니다.</p>
     <div class="forwho"><b>이런 분께</b> — 엉덩이가 처진 느낌이 드는 분 · 하체 라인을 정리하고 싶은 분 · 골반 안정이 필요한 분</div>
     <div class="when">월 11:30 · 월 20:00 · 화 11:30 · 화 20:40 · 수 12:40 · 수 19:00 · 목 10:30 · 목 19:40</div>
   </div>
   <div class="track">
-    <h3><span class="tno c-r">Track 4</span> 다이어트</h3>
+    <h3><span class="tno" style="background:#f5dde4;color:#7a3a4f">Track 4</span> 다이어트</h3>
     <p>전신을 빠르게 자극하는 동적 시퀀스 위주의 트랙. 50분 안에 자연스럽게 땀이 나며 체지방 관리와 전신 라인 정리에 효과적입니다.</p>
     <div class="forwho"><b>이런 분께</b> — 땀나는 운동이 필요한 분 · 체중·체지방 관리가 목적인 분 · 짧은 시간에 효율적으로 운동하고 싶은 분</div>
     <div class="when">월 21:00 · 수 20:00 · 금 11:30</div>
   </div>
 </section>
-
-<!-- ═══ 7. 안내 ═══ -->
 <section style="border-bottom:none">
   <div class="sec-k mono">Before you book</div>
   <h2>예약 전에 확인해 주세요</h2>
   <div class="info" style="margin-top:14px">
-    <h3>공통 안내</h3>
-    <dl>
-      <dt>수업 시간</dt><dd>요가 <b>60분</b> (월 10:30 하타만 80분) · 필라테스 <b>50분</b></dd>
-      <dt>예약</dt><dd>수업 <b>3일 전</b>부터 스튜디오메이트 앱 (010-4463-2297)</dd>
-      <dt>운영</dt><dd>평일 월~금 · 토요일은 <b>8월 1·3주차(8/8·8/22)</b>만 · 일요일 휴무</dd>
-      <dt>해먹 수업</dt><dd>정원 <b>12명</b> · 해먹 세팅이 필요해 <b>시작 5~10분 전</b> 도착</dd>
-      <dt>주차 확인</dt><dd>같은 요일·시간이라도 <b>주차별로 수업이 다를 수 있습니다</b></dd>
-    </dl>
+    <h3>요가</h3><ul><li>수업 시간: 60분 (단, 월 10:30 하타는 80분)</li><li>예약: 수업 3일 전부터 스튜디오메이트 앱으로 예약 가능 (010.4463.2297)</li><li>평일(월~금) 운영. <b>여름휴가 8/14(금)~8/17(월) 휴무.</b> 토요일은 <b>8월 1·3주차(8/8·8/22) 2회</b> 운영, 일요일 휴무.</li></ul>
+    <h3 style="margin-top:12px">필라테스</h3><ul><li>주차 구분 없음 (매주 동일)</li><li>수업 시간: 50분</li><li>예약: 수업 3일 전부터 스튜디오메이트 앱으로 예약 가능 (010.4463.2297)</li><li>토요일/일요일 수업 없음, 공휴일 휴무 · <b>여름휴가 8/14(금)~8/17(월) 휴무</b></li></ul>
+    <h3 style="margin-top:12px">해먹 수업</h3><ul><li>정원 <b>12명</b> · 해먹 세팅이 필요해 <b>수업 시작 5~10분 전</b> 도착</li>
+    <li>같은 요일·시간이라도 <b>주차별로 수업이 다를 수 있습니다</b></li></ul>
   </div>
   <div class="warn" style="margin-top:14px">
     <h4>건강 상태가 있으시면 꼭 알려주세요</h4>
