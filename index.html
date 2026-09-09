@@ -517,7 +517,7 @@
     /* ── SEOUL FOREST SPACE ── */
     .space-slide {
       justify-content: flex-start;
-      padding: 32px 16px 88px;
+      padding: 32px 16px 72px;
     }
     .space-showcase { width: 100%; margin-top: 18px; flex-shrink: 0; }
     .space-stats {
@@ -546,32 +546,7 @@
       text-align: center;
       margin: 8px 0 10px;
     }
-    .space-photo-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      width: 100%;
-    }
-    .space-photo {
-      position: relative;
-      height: 220px;
-      border-radius: 12px;
-      overflow: hidden;
-      background: var(--bg-elevated);
-      border: 1px solid var(--border);
-    }
-    .space-photo.wide { grid-column: auto; height: 260px; }
-    .space-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .space-photo-cap {
-      position: absolute;
-      left: 0; right: 0; bottom: 0;
-      padding: 36px 14px 12px;
-      background: linear-gradient(to top, rgba(0,0,0,0.82), transparent);
-      font-size: 11px;
-      font-weight: 500;
-      color: #fff;
-    }
-    .space-showcase .rental-link { display: block; margin: 10px auto 0; text-align: center; }
+    .space-showcase .gallery-grid { margin-top: 4px; }
 
     /* ── GALLERY SLIDES ── */
     .gallery-slide {
@@ -634,6 +609,15 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+    .gallery-cap {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 14px 8px 6px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+      font-size: 10px;
+      color: #fff;
+      font-weight: 500;
     }
 
     /* lightbox */
@@ -781,10 +765,51 @@
         </div>
       </div>
       <div class="space-detail-line">PT룸 22㎡ · 바디측정실 약 21.5㎡ · 샤워실·락커룸 완비</div>
-      <div class="space-photo-grid">
-        <div class="space-photo wide"><img src="seoulforest/img/terrace.jpg" alt="서울숲점 야외 테라스" onclick="openLightbox(this)"><div class="space-photo-cap">야외 테라스 · 약 160㎡</div></div>
-        <div class="space-photo"><img src="seoulforest/img/yoga-meditation.jpg" alt="서울숲점 요가홀" onclick="openLightbox(this)"><div class="space-photo-cap">요가홀 · 82㎡</div></div>
-        <div class="space-photo"><img src="seoulforest/img/inbody.jpg" alt="서울숲점 바디측정실" onclick="openLightbox(this)"><div class="space-photo-cap">바디측정실 · 약 21.5㎡</div></div>
+      <div class="gallery-grid">
+        <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/exterior.jpg" alt="애프터 요가&필라테스 서울숲점 외관">
+          <div class="gallery-cap">왕십리로 50 · 스타벅스 건물 B1</div>
+        </div>
+        <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/terrace.jpg" alt="서울숲점 야외 테라스 전경">
+          <div class="gallery-cap">야외 테라스 약 160㎡ · 약 48평</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/outdoor-yoga.jpg" alt="야외 테라스 요가 수업">
+          <div class="gallery-cap">야외 테라스 · 야외 요가</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/yoga-meditation.jpg" alt="서울숲점 요가홀">
+          <div class="gallery-cap">요가홀 82㎡</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/lounge.jpg" alt="서울숲점 라운지">
+          <div class="gallery-cap">라운지</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/reformer.jpg" alt="필라테스 리포머룸">
+          <div class="gallery-cap">필라테스룸 45㎡</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/cadillac.jpg" alt="필라테스 캐딜락 기구">
+          <div class="gallery-cap">캐딜락 기구</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/bareun-room.jpg" alt="PT룸과 스트레칭룸">
+          <div class="gallery-cap">PT룸 22㎡</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/shower.jpg" alt="서울숲점 샤워실">
+          <div class="gallery-cap">샤워실</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/inbody.jpg" alt="서울숲점 바디측정실">
+          <div class="gallery-cap">바디측정실 약 21.5㎡</div>
+        </div>
+        <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'))">
+          <img loading="lazy" src="seoulforest/img/locker.jpg" alt="서울숲점 남녀 락커룸">
+          <div class="gallery-cap">남·녀 락커룸</div>
+        </div>
       </div>
     </div>
   </div>
