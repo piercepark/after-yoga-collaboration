@@ -610,6 +610,14 @@
       object-fit: cover;
       display: block;
     }
+    .gallery-item.original-ratio {
+      aspect-ratio: auto;
+      align-self: start;
+    }
+    .gallery-item.original-ratio img {
+      height: auto;
+      object-fit: contain;
+    }
     .gallery-cap {
       position: absolute;
       left: 0; right: 0; bottom: 0;
@@ -802,7 +810,7 @@
           <img loading="lazy" src="seoulforest/img/shower.jpg" alt="서울숲점 샤워실">
           <div class="gallery-cap">샤워실</div>
         </div>
-        <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+        <div class="gallery-item original-ratio" onclick="openLightbox(this.querySelector('img'))">
           <img loading="lazy" src="seoulforest/img/inbody.jpg" alt="서울숲점 바디측정실">
           <div class="gallery-cap">바디측정실 약 21.5㎡</div>
         </div>
