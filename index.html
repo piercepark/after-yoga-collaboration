@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>애프터 요가&필라테스 — 협업 제안</title>
+  <meta name="description" content="애프터 요가&필라테스의 기업·브랜드·강사 협업 제안. 서울숲점 실내 346㎡와 약 160㎡ 야외 테라스, 전문 요가·필라테스 시설을 활용할 수 있습니다.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+KR:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -513,6 +514,60 @@
     }
     .rental-link span { color: var(--accent); }
 
+    /* ── SEOUL FOREST SPACE ── */
+    .space-showcase { width: 100%; margin-top: 18px; }
+    .space-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .space-stat {
+      padding: 10px 12px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .space-stat-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 2px;
+    }
+    .space-stat-label { font-size: 10px; color: var(--text-tertiary); }
+    .space-detail-line {
+      font-size: 10px;
+      color: var(--text-tertiary);
+      text-align: center;
+      margin: 8px 0 10px;
+    }
+    .space-photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      width: 100%;
+    }
+    .space-photo {
+      position: relative;
+      height: 96px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+    }
+    .space-photo.wide { grid-column: span 2; height: 128px; }
+    .space-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .space-photo-cap {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      padding: 16px 8px 6px;
+      background: linear-gradient(to top, rgba(0,0,0,0.82), transparent);
+      font-size: 9px;
+      color: #fff;
+    }
+    .space-showcase .rental-link { display: block; margin: 10px auto 0; text-align: center; }
+
     /* ── GALLERY SLIDES ── */
     .gallery-slide {
       padding: 32px 16px 72px;
@@ -694,8 +749,44 @@
     </div>
   </div>
 
-  <!-- SLIDE 2: TYPE 1 — Corporate -->
+  <!-- SLIDE 2: SEOUL FOREST SPACE -->
   <div class="slide" data-index="2">
+    <div class="slide-label">Space · Seoul Forest</div>
+    <h2 class="slide-title" style="font-size:26px; margin-bottom:6px;">
+      협업을 담는 <span class="gradient-text">공간</span>
+    </h2>
+    <p class="slide-sub" style="font-size:12px;">클래스부터 브랜드 행사와 촬영까지 한 공간에서 운영합니다.</p>
+    <div class="space-showcase">
+      <div class="space-stats">
+        <div class="space-stat">
+          <div class="space-stat-value">346㎡</div>
+          <div class="space-stat-label">서울숲점 실내 · 약 104평</div>
+        </div>
+        <div class="space-stat">
+          <div class="space-stat-value">약 160㎡</div>
+          <div class="space-stat-label">야외 테라스 · 약 48평</div>
+        </div>
+        <div class="space-stat">
+          <div class="space-stat-value">82㎡</div>
+          <div class="space-stat-label">대형 요가홀 · 24.9평</div>
+        </div>
+        <div class="space-stat">
+          <div class="space-stat-value">45㎡</div>
+          <div class="space-stat-label">필라테스룸 · 13.6평</div>
+        </div>
+      </div>
+      <div class="space-detail-line">PT룸 22㎡ · 바디측정실 약 21.5㎡ · 샤워실·락커룸 완비</div>
+      <div class="space-photo-grid">
+        <div class="space-photo wide"><img src="seoulforest/img/terrace.jpg" alt="서울숲점 야외 테라스" onclick="openLightbox(this)"><div class="space-photo-cap">야외 테라스 · 약 160㎡</div></div>
+        <div class="space-photo"><img src="seoulforest/img/yoga-meditation.jpg" alt="서울숲점 요가홀" onclick="openLightbox(this)"><div class="space-photo-cap">요가홀 · 82㎡</div></div>
+        <div class="space-photo"><img src="seoulforest/img/inbody.jpg" alt="서울숲점 바디측정실" onclick="openLightbox(this)"><div class="space-photo-cap">바디측정실 · 약 21.5㎡</div></div>
+      </div>
+      <a class="rental-link" href="rental.html">공간 대관 상세 보기 <span>→</span></a>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: TYPE 1 — Corporate -->
+  <div class="slide" data-index="3">
     <div class="type-layout type-featured">
       <div class="type-head">
         <div class="type-num">01</div>
@@ -756,8 +847,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 3: TYPE 2 — Brand -->
-  <div class="slide" data-index="3">
+  <!-- SLIDE 4: TYPE 2 — Brand -->
+  <div class="slide" data-index="4">
     <div class="type-layout type-featured">
       <div class="type-head">
         <div class="type-num">02</div>
@@ -792,8 +883,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 4: TYPE 3 — Guest Class -->
-  <div class="slide" data-index="4">
+  <!-- SLIDE 5: TYPE 3 — Guest Class -->
+  <div class="slide" data-index="5">
     <div class="type-layout type-featured">
       <div class="type-head">
         <div class="type-num">03</div>
@@ -836,8 +927,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 5: GALLERY — 샥즈 -->
-  <div class="slide gallery-slide" data-index="5">
+  <!-- SLIDE 6: GALLERY — 샥즈 -->
+  <div class="slide gallery-slide" data-index="6">
     <div class="gallery-header">
       <div class="gallery-tag">Brand Collaboration</div>
       <div class="gallery-title">Shokz × 서울숲점</div>
@@ -855,8 +946,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 6: GALLERY — 한국유방건강재단 -->
-  <div class="slide gallery-slide" data-index="6">
+  <!-- SLIDE 7: GALLERY — 한국유방건강재단 -->
+  <div class="slide gallery-slide" data-index="7">
     <div class="gallery-header">
       <div class="gallery-tag">Corporate · Social</div>
       <div class="gallery-title">한국유방건강재단</div>
@@ -874,8 +965,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 7: GALLERY — 원더러스트 -->
-  <div class="slide gallery-slide" data-index="7">
+  <!-- SLIDE 8: GALLERY — 원더러스트 -->
+  <div class="slide gallery-slide" data-index="8">
     <div class="gallery-header">
       <div class="gallery-tag">Guest Class</div>
       <div class="gallery-title">원더러스트 원데이 체험 협업</div>
@@ -891,8 +982,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 8: GALLERY — 펑셔널 플로우 -->
-  <div class="slide gallery-slide" data-index="8">
+  <!-- SLIDE 9: GALLERY — 펑셔널 플로우 -->
+  <div class="slide gallery-slide" data-index="9">
     <div class="gallery-header">
       <div class="gallery-tag">Guest Class</div>
       <div class="gallery-title">펑셔널 플로우 요가 특강</div>
@@ -908,8 +999,8 @@
     </div>
   </div>
 
-  <!-- SLIDE 9: CONTACT -->
-  <div class="slide" data-index="9">
+  <!-- SLIDE 10: CONTACT -->
+  <div class="slide" data-index="10">
     <div class="slide-label">Contact</div>
     <h2 class="slide-title" style="font-size:26px;">
       <span class="gradient-text">함께 시작하기</span>
@@ -953,7 +1044,7 @@
 <div class="nav-bar">
   <div class="nav-dots" id="navDots"></div>
   <div class="nav-hint">스와이프로 이동</div>
-  <div class="nav-counter"><span id="currentNum">1</span> / <span id="totalNum">10</span></div>
+  <div class="nav-counter"><span id="currentNum">1</span> / <span id="totalNum">11</span></div>
 </div>
 </div>
 
