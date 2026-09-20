@@ -382,6 +382,17 @@
       font-size: 10px; color: #fff; font-weight: 500;
     }
 
+
+    /* 도면 기반 공간 배치 — 원본 비율 유지 */
+    .layout-slide { justify-content: flex-start; padding-top: 40px; }
+    .layout-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px 10px; width: 100%; margin-top: 10px; }
+    .layout-grid figure { min-width: 0; }
+    .layout-item { display: block; width: 100%; padding: 0; cursor: zoom-in; border-radius: 5px; }
+    .layout-item img { object-fit: contain; }
+    .layout-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .layout-grid figcaption { font-size: 10px; line-height: 1.5; color: var(--text-secondary); margin-top: 6px; text-align: center; }
+    .layout-note { font-size: 10px; line-height: 1.7; color: var(--text-secondary); text-align: center; margin-top: 20px; max-width: 300px; }
+
     /* lightbox */
     .lightbox {
       position: fixed; inset: 0; z-index: 500;
@@ -547,8 +558,42 @@
     </div>
   </div>
 
+  <!-- 도면 기반 공간 배치 -->
+  <div class="slide layout-slide" data-index="2" id="space-layout">
+    <div class="slide-label">Layout</div>
+    <h2 class="sec-title">공간 배치 한눈에</h2>
+    <p class="sec-sub">이미지를 누르면 크게 볼 수 있어요</p>
+    <div class="layout-grid">
+      <figure>
+        <button type="button" class="gallery-item layout-item" onclick="openLightbox(this.querySelector('img'), event)" aria-label="요가홀 · 테라스 방향 공간 배치 크게 보기">
+          <img loading="lazy" decoding="async" width="2000" height="2000" src="seoulforest/img/rental-layout/view-01.webp" alt="요가홀 · 테라스 방향에서 본 서울숲 센터의 3D 공간 배치">
+        </button>
+        <figcaption>요가홀 · 테라스 방향</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="gallery-item layout-item" onclick="openLightbox(this.querySelector('img'), event)" aria-label="요가홀 · 탈의실 방향 공간 배치 크게 보기">
+          <img loading="lazy" decoding="async" width="2000" height="2000" src="seoulforest/img/rental-layout/view-02.webp" alt="요가홀 · 탈의실 방향에서 본 서울숲 센터의 3D 공간 배치">
+        </button>
+        <figcaption>요가홀 · 탈의실 방향</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="gallery-item layout-item" onclick="openLightbox(this.querySelector('img'), event)" aria-label="라운지 · 바디측정실 방향 공간 배치 크게 보기">
+          <img loading="lazy" decoding="async" width="2000" height="2000" src="seoulforest/img/rental-layout/view-03.webp" alt="라운지 · 바디측정실 방향에서 본 서울숲 센터의 3D 공간 배치">
+        </button>
+        <figcaption>라운지 · 바디측정실 방향</figcaption>
+      </figure>
+      <figure>
+        <button type="button" class="gallery-item layout-item" onclick="openLightbox(this.querySelector('img'), event)" aria-label="라운지 · 테라스 방향 공간 배치 크게 보기">
+          <img loading="lazy" decoding="async" width="2000" height="2000" src="seoulforest/img/rental-layout/view-04.webp" alt="라운지 · 테라스 방향에서 본 서울숲 센터의 3D 공간 배치">
+        </button>
+        <figcaption>라운지 · 테라스 방향</figcaption>
+      </figure>
+    </div>
+    <p class="layout-note">공간 배치를 이해하기 위한 3D 안내도입니다.<br>실제 시설과 일부 차이가 있을 수 있습니다.</p>
+  </div>
+
   <!-- SLIDE 2: 대상 & 시설 -->
-  <div class="slide" data-index="2">
+  <div class="slide" data-index="3">
     <div class="slide-label">For Whom</div>
     <h2 class="sec-title">이런 분들께</h2>
     <p class="sec-sub">공간만 빌리셔도, 통째로 쓰셔도 됩니다</p>
@@ -601,50 +646,50 @@
   </div>
 
   <!-- SLIDE 3: 갤러리 -->
-  <div class="slide gallery-slide" data-index="3">
+  <div class="slide gallery-slide" data-index="4">
     <div class="gallery-header">
       <div class="gallery-tag">Gallery</div>
       <h2 class="sec-title" style="margin-bottom:2px;">공간 둘러보기</h2>
       <p class="gallery-sub" style="font-size:12px;color:var(--text-tertiary);">이미지를 누르면 크게 볼 수 있어요</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/exterior.jpg" alt="센터 외관">
         <div class="gallery-cap">왕십리로 50 · 스타벅스 건물 B1</div>
       </div>
-      <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/terrace.jpg" alt="야외 테라스 전경">
         <div class="gallery-cap">야외 테라스 약 160㎡ · 약 48평</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/outdoor-yoga.jpg" alt="야외 테라스 요가 수업">
         <div class="gallery-cap">야외 테라스 · 야외 요가</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/yoga-meditation.jpg" alt="요가홀">
         <div class="gallery-cap">요가홀 82㎡</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/lounge.jpg" alt="라운지">
         <div class="gallery-cap">라운지</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/reformer.jpg" alt="필라테스 리포머룸">
         <div class="gallery-cap">필라테스룸 45㎡</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/cadillac.jpg" alt="캐딜락 기구">
         <div class="gallery-cap">캐딜락 기구</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/bareun-room.jpg" alt="PT룸 · 스트레칭룸">
         <div class="gallery-cap">PT룸 22㎡</div>
       </div>
-      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/shower.jpg" alt="샤워실">
         <div class="gallery-cap">샤워실</div>
       </div>
-      <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'))">
+      <div class="gallery-item wide" onclick="openLightbox(this.querySelector('img'), event)">
         <img loading="lazy" src="seoulforest/img/locker.jpg" alt="락커룸">
         <div class="gallery-cap">남·녀 락커룸</div>
       </div>
@@ -652,7 +697,7 @@
   </div>
 
   <!-- SLIDE 4: 가격 ① -->
-  <div class="slide" data-index="4">
+  <div class="slide" data-index="5">
     <div class="slide-label">Pricing · 01</div>
     <h2 class="sec-title">대관료</h2>
     <p class="sec-sub">공간만 대여 · 강사 미포함</p>
@@ -686,7 +731,7 @@
   </div>
 
   <!-- SLIDE 5: 가격 ② -->
-  <div class="slide" data-index="5">
+  <div class="slide" data-index="6">
     <div class="slide-label">Pricing · 02</div>
     <h2 class="sec-title">대관료</h2>
     <p class="sec-sub">PT룸 · 전체 대관 · 할인 기준</p>
@@ -735,7 +780,7 @@
   </div>
 
   <!-- SLIDE 6: 강사 포함 패키지 -->
-  <div class="slide" data-index="6">
+  <div class="slide" data-index="7">
     <div class="slide-label">Pricing · 03</div>
     <h2 class="sec-title">강사 포함 패키지</h2>
     <p class="sec-sub">공간 + 전문 강사 + 매트·소도구 · 1회 60분</p>
@@ -788,7 +833,7 @@
   </div>
 
   <!-- SLIDE 7: 이용 규칙 & 환불 -->
-  <div class="slide" data-index="7">
+  <div class="slide" data-index="8">
     <div class="slide-label">Policy</div>
     <h2 class="sec-title">이용 규칙</h2>
     <p class="sec-sub">다음 이용자를 위한 최소한의 약속입니다</p>
@@ -836,7 +881,7 @@
   </div>
 
   <!-- SLIDE 8: CONTACT -->
-  <div class="slide" data-index="8">
+  <div class="slide" data-index="9">
     <div class="slide-label">Booking</div>
     <h2 class="slide-title" style="font-size:26px;">
       <span class="gradient-text">공간 예약하기</span>
@@ -878,15 +923,16 @@
 <div class="nav-bar">
   <div class="nav-dots" id="navDots"></div>
   <div class="nav-hint">스와이프로 이동</div>
-  <div class="nav-counter"><span id="currentNum">1</span> / <span id="totalNum">9</span></div>
+  <div class="nav-counter"><span id="currentNum">1</span> / <span id="totalNum">10</span></div>
 </div>
 </div>
 
 <script>
-function openLightbox(img) {
-  event.stopPropagation();
+function openLightbox(img, e) {
+  if (e) e.stopPropagation();
   const lb = document.getElementById('lightbox');
-  document.getElementById('lightboxImg').src = img.src;
+  document.getElementById('lightboxImg').src = img.currentSrc || img.src;
+  document.getElementById('lightboxImg').alt = img.alt;
   lb.classList.add('open');
 }
 function closeLightbox() {
