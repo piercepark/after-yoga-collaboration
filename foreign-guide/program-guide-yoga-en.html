@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>After Yoga — Program Guide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>After Yoga — September 2026 Program Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -41,6 +42,8 @@
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+
+  .page + .page { margin-top: 8mm; }
 
   /* ── HEADER ── */
   .page-header {
@@ -97,7 +100,8 @@
     min-height: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 4mm;
   }
 
   /* ── GROUP BLOCK ── */
@@ -310,8 +314,31 @@
   @media print {
     @page { size: A4 portrait; margin: 0; }
     html, body { background: white; }
-    .page { margin: 0; box-shadow: none; }
+    .page { margin: 0; box-shadow: none; page-break-after: always; }
+    .page:last-child { page-break-after: auto; }
     * { box-shadow: none !important; }
+  }
+
+  @media screen and (max-width: 820px) {
+    html, body { width: 100%; }
+    .page {
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      padding: 20px 16px;
+      overflow: visible;
+    }
+    .page + .page {
+      margin-top: 0;
+      border-top: 10px solid var(--bg);
+    }
+    .header-top { align-items: flex-start; gap: 12px; }
+    h1 { font-size: 17pt; }
+    .badge { white-space: normal; text-align: right; }
+    .class-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .bottom-row { flex-direction: column; }
+    .price-card { width: 100%; }
+    .page-footer { flex-wrap: wrap; gap: 8px; }
   }
 </style>
 </head>
@@ -322,13 +349,13 @@
   <header class="page-header">
     <div class="header-top">
       <div>
-        <div class="eyebrow">After Yoga &amp; Pilates — Seoulsup</div>
+        <div class="eyebrow">September 2026 · After Yoga &amp; Pilates — Seoulsup</div>
         <h1>Yoga Program Guide</h1>
       </div>
-      <span class="badge">60 min · All levels welcome</span>
+      <span class="badge">30 classes · Beginner-friendly options</span>
     </div>
     <p class="subtitle">
-      All classes are 60 minutes · Group classes (max 15 per session) · Reservations via StudioMate app, 3 days in advance · 010-4463-2297
+      September lineup · Most classes are 60 min (Mon 10:30 Hatha 80 min · Thu 20:20 Maha Hatha 70 min) · Aerial &amp; bungee classes: max 12 · Reservations open 3 days ahead in StudioMate
     </p>
   </header>
 
@@ -345,7 +372,7 @@
           <div class="card-body">
             <span class="card-tag tag-lv1">Healing</span>
             <div class="card-name">Healing Yoga</div>
-            <div class="card-desc">Gentle stretching and breathing to release daily tension. Perfect for beginners and those seeking relaxation.</div>
+            <div class="card-desc">Gentle stretching and breathing to release daily tension. Ideal for beginners and a quiet reset.</div>
           </div>
         </div>
 
@@ -354,25 +381,25 @@
           <div class="card-body">
             <span class="card-tag tag-lv1">Emboring</span>
             <div class="card-name">Emboring</div>
-            <div class="card-desc">Slow, mindful movement combining elements of Yin and restorative yoga. Deep muscle release and inner calm.</div>
+            <div class="card-desc">Massage balls and foam rollers release tight fascia in the shoulders, back and calves.</div>
           </div>
         </div>
 
         <div class="class-card">
           <div class="card-color-bar bar-lv1"></div>
           <div class="card-body">
-            <span class="card-tag tag-lv1">Core Therapy</span>
-            <div class="card-name">Core Therapy</div>
-            <div class="card-desc">Therapeutic core activation with a focus on alignment and breath. Low-impact, safe for all levels.</div>
+            <span class="card-tag tag-lv1">Aroma</span>
+            <div class="card-name">Aroma Healing</div>
+            <div class="card-desc">Gentle stretching and meditation with aromatherapy to calm the body and mind.</div>
           </div>
         </div>
 
         <div class="class-card">
           <div class="card-color-bar bar-lv1"></div>
           <div class="card-body">
-            <span class="card-tag tag-lv1">Today's Pose</span>
-            <div class="card-name">Today's Pose</div>
-            <div class="card-desc">Each session focuses on one signature pose with step-by-step guidance. Great for learning proper form.</div>
+            <span class="card-tag tag-lv1">Relax</span>
+            <div class="card-name">Relax Yoga</div>
+            <div class="card-desc">A slow evening wind-down using breath and stretching to ease tension before rest.</div>
           </div>
         </div>
 
@@ -381,7 +408,7 @@
 
     <!-- GROUP 2: Posture / Balance -->
     <div class="group-block">
-      <div class="sec-label">🔵 Posture · Balance · Flexibility</div>
+      <div class="sec-label">🔵 Alignment · Flexibility · Foundation</div>
       <div class="class-grid">
 
         <div class="class-card">
@@ -389,16 +416,52 @@
           <div class="card-body">
             <span class="card-tag tag-lv2">Hatha</span>
             <div class="card-name">Hatha Yoga</div>
-            <div class="card-desc">Classic yoga postures held with steady breath. Builds strength, flexibility, and body awareness systematically.</div>
+            <div class="card-desc">Classic yoga fundamentals: hold each pose with steady breath to build strength, flexibility and awareness.</div>
           </div>
         </div>
 
         <div class="class-card">
           <div class="card-color-bar bar-lv2"></div>
           <div class="card-body">
-            <span class="card-tag tag-lv2">Pelvic Therapy</span>
-            <div class="card-name">Pelvic Therapy</div>
-            <div class="card-desc">Targeted movement for pelvic floor and hip alignment. Effective for posture correction and low-back relief.</div>
+            <span class="card-tag tag-lv2">Hatha Flow</span>
+            <div class="card-name">Hatha Flow</div>
+            <div class="card-desc">Foundational Hatha poses linked gently with breath—more fluid than Hatha, slower than Vinyasa.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Iyengar</span>
+            <div class="card-name">Iyengar</div>
+            <div class="card-desc">Precise alignment with blocks and straps; props make poses accessible with limited flexibility.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Hatha Chakra</span>
+            <div class="card-name">Hatha Chakra</div>
+            <div class="card-desc">Hatha poses with deeper breath and concentration around energy flow; calm and meditative.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Alignment</span>
+            <div class="card-name">Alignment</div>
+            <div class="card-desc">Step-by-step posture correction for left-right balance; easy to follow for beginners.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Wheel</span>
+            <div class="card-name">Wheel Yoga</div>
+            <div class="card-desc">Uses a yoga wheel to open the chest and spine, especially for rounded shoulders and a stiff upper back.</div>
           </div>
         </div>
 
@@ -407,31 +470,97 @@
           <div class="card-body">
             <span class="card-tag tag-lv2">Balance</span>
             <div class="card-name">Balance Yoga</div>
-            <div class="card-desc">Standing and balancing poses to improve coordination, joint stability, and proprioception.</div>
+            <div class="card-desc">Standing balances improve coordination, ankle strength and full-body control.</div>
           </div>
         </div>
 
         <div class="class-card">
           <div class="card-color-bar bar-lv2"></div>
           <div class="card-body">
-            <span class="card-tag tag-lv2">Spine Therapy</span>
-            <div class="card-name">Spine Therapy</div>
-            <div class="card-desc">Focused on spinal mobility and decompression. Ideal for office workers and those with back discomfort.</div>
+            <span class="card-tag tag-lv2">Today's Pose</span>
+            <div class="card-name">Today's Pose</div>
+            <div class="card-desc">Explore one key pose in depth, learning its alignment and building confidence step by step.</div>
           </div>
         </div>
 
         <div class="class-card">
           <div class="card-color-bar bar-lv2"></div>
           <div class="card-body">
-            <span class="card-tag tag-lv2">Evolution Flow</span>
+            <span class="card-tag tag-lv2">Therapy</span>
+            <div class="card-name">Therapy</div>
+            <div class="card-desc">Releases tight areas while restoring alignment; suited to lingering stiffness and limited mobility.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Props</span>
+            <div class="card-name">Props Yoga</div>
+            <div class="card-desc">Blocks, straps and balls support stretching and alignment, making poses more accessible.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Maha Hatha</span>
+            <div class="card-name">Maha Hatha</div>
+            <div class="card-desc">A 70-minute Hatha class using the wall and props to support deeper, steadier holds.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Inside Flow</span>
+            <div class="card-name">Inside Flow</div>
+            <div class="card-desc">Builds a continuous sequence to music, combining rhythm, movement and concentration.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Evolution</span>
             <div class="card-name">Evolution Flow</div>
-            <div class="card-desc">Smooth transitions between postures with an emphasis on spinal articulation and body-mind connection.</div>
+            <div class="card-desc">Progressively expands the same movements step by step to improve flexibility and range.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv2"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv2">Flying Relax</span>
+            <div class="card-name">Flying Relax</div>
+            <div class="card-desc">Restorative aerial yoga with slow stretches and gentle inversions supported by the hammock.</div>
           </div>
         </div>
 
       </div>
     </div>
 
+  </main>
+
+  <footer class="page-footer">
+    <span>September 2026 &nbsp;·&nbsp; Yoga Program Guide</span>
+    <span>Page 1 / 2 &nbsp;·&nbsp; Seoulsup &nbsp;·&nbsp; 010-4463-2297</span>
+  </footer>
+</div>
+
+<div class="page">
+  <header class="page-header">
+    <div class="header-top">
+      <div>
+        <div class="eyebrow">September 2026 · After Yoga &amp; Pilates — Seoulsup</div>
+        <h1>Yoga Program Guide</h1>
+      </div>
+      <span class="badge">Core · Flow · Aerial</span>
+    </div>
+    <p class="subtitle">Choose by training goal, then check the September timetable for available dates and times.</p>
+  </header>
+
+  <main class="page-body">
     <!-- GROUP 3: Core / Strength -->
     <div class="group-block">
       <div class="sec-label">🟣 Core · Strength</div>
@@ -440,27 +569,18 @@
         <div class="class-card">
           <div class="card-color-bar bar-lv3"></div>
           <div class="card-body">
-            <span class="card-tag tag-lv3">Healing Vinyasa</span>
-            <div class="card-name">Healing Vinyasa</div>
-            <div class="card-desc">A gentler vinyasa flow that links breath and movement. Builds strength without overexertion.</div>
+            <span class="card-tag tag-lv3">Barre</span>
+            <div class="card-name">Barre</div>
+            <div class="card-desc">Ballet-inspired movements at the barre repeatedly target the legs, hips and glutes.</div>
           </div>
         </div>
 
         <div class="class-card">
           <div class="card-color-bar bar-lv3"></div>
           <div class="card-body">
-            <span class="card-tag tag-lv3">Hip-up Pilates</span>
-            <div class="card-name">Hip-up Pilates</div>
-            <div class="card-desc">Pilates-based hip and glute work woven into a yoga frame. Lifts and tones the lower body with controlled, low-impact movement.</div>
-          </div>
-        </div>
-
-        <div class="class-card">
-          <div class="card-color-bar bar-lv3"></div>
-          <div class="card-body">
-            <span class="card-tag tag-lv3">Core Yoga</span>
-            <div class="card-name">Core Yoga</div>
-            <div class="card-desc">Yoga poses selected specifically to activate deep core muscles. Builds a stable center for all movement.</div>
+            <span class="card-tag tag-lv3">Core Vinyasa</span>
+            <div class="card-name">Core Vinyasa</div>
+            <div class="card-desc">Activates the core before flowing through Vinyasa to build full-body stability and strength.</div>
           </div>
         </div>
 
@@ -469,7 +589,7 @@
           <div class="card-body">
             <span class="card-tag tag-lv3">Mat Pilates</span>
             <div class="card-name">Mat Pilates</div>
-            <div class="card-desc">Pilates-based floor work focusing on core, posture, and controlled breathing. No equipment needed.</div>
+            <div class="card-desc">Pilates fundamentals focused on deep-core control, pelvic stability and precise breathing.</div>
           </div>
         </div>
 
@@ -478,7 +598,7 @@
 
     <!-- GROUP 4: Cardio / Aerial -->
     <div class="group-block">
-      <div class="sec-label">🔴 Cardio · Fat Burn · Aerial</div>
+      <div class="sec-label">🔴 Flow · Aerial · High Energy</div>
       <div class="class-grid">
 
         <div class="class-card">
@@ -486,7 +606,7 @@
           <div class="card-body">
             <span class="card-tag tag-lv4">Vinyasa</span>
             <div class="card-name">Vinyasa Flow</div>
-            <div class="card-desc">Dynamic flow linking poses with breath. Elevates heart rate, burns calories, and builds lean muscle.</div>
+            <div class="card-desc">Continuous movement linked with breath for a warm, cardio-oriented flow.</div>
           </div>
         </div>
 
@@ -495,7 +615,7 @@
           <div class="card-body">
             <span class="card-tag tag-lv4">Vinyasa Basic</span>
             <div class="card-name">Vinyasa Basic</div>
-            <div class="card-desc">Introduction to vinyasa for those new to dynamic yoga. Learn sun salutations and foundational flows.</div>
+            <div class="card-desc">An accessible introduction to Vinyasa transitions, paced steadily for first-timers.</div>
           </div>
         </div>
 
@@ -504,16 +624,16 @@
           <div class="card-body">
             <span class="card-tag tag-lv4">Ashtanga</span>
             <div class="card-name">Ashtanga</div>
-            <div class="card-desc">Traditional sequential yoga series. Builds heat, strength, and focus through a fixed, progressive sequence.</div>
+            <div class="card-desc">A structured, athletic sequence practised in a set order to build stamina and discipline.</div>
           </div>
         </div>
 
         <div class="class-card">
           <div class="card-color-bar bar-lv4"></div>
           <div class="card-body">
-            <span class="card-tag tag-lv4">Flying A / G</span>
-            <div class="card-name">Flying (Aerial Yoga)</div>
-            <div class="card-desc">Supported by a silk hammock — decompress the spine, improve flexibility, and defy gravity. Truly unique experience.</div>
+            <span class="card-tag tag-lv4">Flying A</span>
+            <div class="card-name">Flying A</div>
+            <div class="card-desc">Full aerial yoga with the body supported off the floor for inversions, spinal length and balance.</div>
           </div>
         </div>
 
@@ -522,7 +642,43 @@
           <div class="card-body">
             <span class="card-tag tag-lv4">Bungee</span>
             <div class="card-name">Bungee Fitness</div>
-            <div class="card-desc">High-energy cardio using a bungee harness. Full-body workout that's equal parts fun and effective fat-burning.</div>
+            <div class="card-desc">High-energy cardio in a bungee harness—low-impact on joints and playful full-body training.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Flying A Stretch</span>
+            <div class="card-name">Flying A Stretch</div>
+            <div class="card-desc">An aerial introduction: learn hammock basics and supported inversions slowly and safely.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Flying G</span>
+            <div class="card-name">Flying G</div>
+            <div class="card-desc">Feet stay on the floor while the hammock supports movement—a beginner-friendly aerial option.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Flying Pilates</span>
+            <div class="card-name">Flying Pilates</div>
+            <div class="card-desc">Uses the hammock for supported Pilates, combining core work with reduced joint load.</div>
+          </div>
+        </div>
+
+        <div class="class-card">
+          <div class="card-color-bar bar-lv4"></div>
+          <div class="card-body">
+            <span class="card-tag tag-lv4">Ashtanga Vinyasa</span>
+            <div class="card-name">Ashtanga Vinyasa</div>
+            <div class="card-desc">A fixed sequence linked continuously with breath for heat, repetition and progression.</div>
           </div>
         </div>
 
@@ -538,11 +694,11 @@
         <div class="benefit-header">WHY AFTER YOGA</div>
         <div class="benefit-body">
           <div class="benefit-item">Expert instructors with professional certifications in each discipline</div>
-          <div class="benefit-item">Small group classes (max 15) for personalised attention</div>
-          <div class="benefit-item">18+ class types to keep your practice fresh and progressive</div>
+          <div class="benefit-item">Small-group classes with aerial &amp; bungee capped at 12</div>
+          <div class="benefit-item">30 class types in the September lineup</div>
           <div class="benefit-item">Flexible scheduling — morning &amp; evening slots, Mon–Fri + Sat</div>
           <div class="benefit-item">Combo membership: combine Yoga + Pilates in one pass</div>
-          <div class="benefit-item">Free trial class — fee applied toward membership on signup</div>
+          <div class="benefit-item">Trial class ₩30,000 — credited toward a 32+ class membership on signup</div>
         </div>
       </div>
 
@@ -566,7 +722,7 @@
             <div class="price-val">₩2,690,000</div>
           </div>
           <div class="price-note">
-            Trial class ₩30,000 (credited on signup)<br>
+            Trial class ₩30,000 (credited on 32+ class signup)<br>
             All plans include bonus sessions · Prices incl. VAT
           </div>
         </div>
@@ -578,8 +734,8 @@
 
   <!-- FOOTER -->
   <footer class="page-footer">
-    <span>After Yoga &amp; Pilates &nbsp;·&nbsp; Yoga Program Guide</span>
-    <span>Seoulsup &nbsp;·&nbsp; 010-4463-2297</span>
+    <span>September 2026 &nbsp;·&nbsp; Yoga Program Guide</span>
+    <span>Page 2 / 2 &nbsp;·&nbsp; Seoulsup &nbsp;·&nbsp; 010-4463-2297</span>
   </footer>
 
 </div>
