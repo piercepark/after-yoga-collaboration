@@ -68,7 +68,7 @@
     letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--ink);
-    padding-bottom: 4px;
+    padding: 12px 0 4px;
     border-bottom: 1px solid var(--ink);
     transition: color .2s ease, border-color .2s ease, gap .2s ease;
   }
@@ -129,6 +129,7 @@
   .nav-group { display: flex; gap: 36px; }
   .nav-group.right { justify-content: flex-end; }
   .nav-group a {
+    padding: 12px 0;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.18em;
@@ -729,13 +730,14 @@
     .header-inner { grid-template-columns: 1fr; padding: 14px 0 0; gap: 0; }
     .nav-group { display: none; }
     .brand-mark { font-size: 20px; }
-    .brand-sub { font-size: 8.5px; margin-top: 6px; }
+    .brand-sub { font-size: 9.5px; margin-top: 6px; }
+    .badge-best, .badge-promo { font-size: 10.5px; }
     .nav-mobile {
       display: flex;
       gap: 22px;
       overflow-x: auto;
       scrollbar-width: none;
-      padding: 14px 20px 12px;
+      padding: 0 20px;
       margin-top: 10px;
       border-top: 1px solid var(--line);
       -webkit-overflow-scrolling: touch;
@@ -743,6 +745,7 @@
     .nav-mobile::-webkit-scrollbar { display: none; }
     .nav-mobile a {
       flex-shrink: 0;
+      padding: 14px 0 13px;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.18em;
@@ -773,7 +776,7 @@
     .feature { grid-template-columns: 36px 1fr; padding: 24px 0; }
     .feature-title { font-size: 19px; }
 
-    .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; gap: 8px; }
+    .gallery { grid-template-columns: 1fr 1fr; grid-auto-rows: 130px; gap: 8px; grid-auto-flow: dense; }
 
     .program { margin-top: 80px; }
     .program-row, .program-row.reverse { grid-template-columns: 1fr; gap: 32px; }
@@ -838,6 +841,13 @@
 
     .footer { margin-top: 0; }
     .footer-links { gap: 14px 26px; }
+  }
+
+  @media (max-width: 380px) {
+    .pricing-head, .pricing-row { grid-template-columns: 1.75fr 0.85fr 1fr; padding: 16px 14px; gap: 8px; }
+    .p-per { font-size: 13px; }
+    .p-total { font-size: 15px; }
+    .presale-banner { padding: 18px 14px; }
   }
 </style>
 </head>
@@ -992,8 +1002,15 @@
         <div class="gal"><img src="../seoulforest/img/bungee.jpg" alt="Bungee fitness class" loading="lazy"></div>
         <div class="gal"><img src="../seoulforest/img/locker.jpg" alt="Locker room" loading="lazy"></div>
         <div class="gal wide"><img src="images/07.png" alt="Large group yoga class" loading="lazy"></div>
+        <div class="gal"><img src="images/02.png" alt="Small-group pilates on the cadillac with an instructor" loading="lazy"></div>
+        <div class="gal"><img src="images/12.png" alt="Plank hold during a core class" loading="lazy"></div>
+        <div class="gal tall"><img src="images/13.png" alt="Standing side stretch in yoga class" loading="lazy"></div>
+        <div class="gal big"><img src="../seoulforest/img/outdoor-yoga.jpg" alt="Outdoor yoga on the terrace" loading="lazy"></div>
         <div class="gal"><img src="../seoulforest/img/cadillac.jpg" alt="Cadillac and pilates equipment" loading="lazy"></div>
+        <div class="gal"><img src="images/11.png" alt="Group yoga class on the mat" loading="lazy"></div>
+        <div class="gal wide"><img src="images/08.png" alt="Mat pilates core work in a group class" loading="lazy"></div>
         <div class="gal"><img src="../seoulforest/img/shower.jpg" alt="Shower room" loading="lazy"></div>
+        <div class="gal"><img src="images/15.png" alt="Partner stretching in yoga class" loading="lazy"></div>
       </div>
     </div>
   </section>
