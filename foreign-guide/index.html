@@ -409,9 +409,9 @@
     margin-top: 64px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    gap: 40px 18px;
   }
-  .stretch-card-img { aspect-ratio: 4 / 5; overflow: hidden; background: var(--line); margin-bottom: 16px; }
+  .stretch-card-img { aspect-ratio: 16 / 10; overflow: hidden; background: var(--line); margin-bottom: 16px; }
   .stretch-card-img img { width: 100%; height: 100%; object-fit: cover; }
   .stretch-card-title { font-family: var(--serif); font-size: 17px; color: var(--ink); line-height: 1.3; margin-bottom: 6px; }
   .stretch-card-desc { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
@@ -798,7 +798,7 @@
       scrollbar-width: none;
     }
     .stretch-grid::-webkit-scrollbar { display: none; }
-    .stretch-card { flex: 0 0 62%; scroll-snap-align: start; }
+    .stretch-card { flex: 0 0 80%; scroll-snap-align: start; }
     .stretch-note { text-align: left; }
 
     .schedule-grid { grid-template-columns: 1fr; gap: 20px; }
@@ -1121,19 +1121,34 @@
 
         <div class="stretch-grid">
           <div class="stretch-card">
-            <div class="stretch-card-img"><img src="images/stretching/care-neck-shoulders.jpg" alt="Neck and shoulder stretching" loading="lazy"></div>
-            <div class="stretch-card-title">Neck &amp; Shoulders</div>
-            <div class="stretch-card-desc">Loosen up the stiffness from long hours at a desk.</div>
+            <div class="stretch-card-img"><img src="images/stretching/care-fatigue.jpg" alt="Upper-back, neck and shoulder release" loading="lazy"></div>
+            <div class="stretch-card-title">Tired, Tense Days</div>
+            <div class="stretch-card-desc">A calm, static release for built-up tension around the neck, shoulders and upper back.</div>
           </div>
           <div class="stretch-card">
-            <div class="stretch-card-img"><img src="images/stretching/care-hips-lowback.jpg" alt="Hip and lower-back stretching" loading="lazy"></div>
-            <div class="stretch-card-title">Hips &amp; Lower Back</div>
-            <div class="stretch-card-desc">Open up tight hips and a stiff lower back.</div>
+            <div class="stretch-card-img"><img src="images/stretching/care-posture.jpg" alt="Upper-body lengthening stretch" loading="lazy"></div>
+            <div class="stretch-card-title">Posture &amp; Body Balance</div>
+            <div class="stretch-card-desc">Carefully lengthens a tight upper body and opens rounded shoulders for a more balanced feel.</div>
           </div>
           <div class="stretch-card">
-            <div class="stretch-card-img"><img src="images/stretching/care-full-body.jpg" alt="Full-body stretching and relaxation" loading="lazy"></div>
-            <div class="stretch-card-title">Full-body Conditioning</div>
-            <div class="stretch-card-desc">Deep relaxation and recovery after a long week.</div>
+            <div class="stretch-card-img"><img src="images/stretching/care-prenatal.jpg" alt="Gentle hip and lower-back stretching" loading="lazy"></div>
+            <div class="stretch-card-title">Pregnancy &amp; Postpartum</div>
+            <div class="stretch-card-desc">Comfortable care around the hips and lower back, positioned so there is no pressure on the belly.</div>
+          </div>
+          <div class="stretch-card">
+            <div class="stretch-card-img"><img src="images/stretching/care-senior.jpg" alt="Gentle lower-body joint movement" loading="lazy"></div>
+            <div class="stretch-card-title">Seniors &amp; Gentle Movers</div>
+            <div class="stretch-card-desc">Moves the ankles, calves and knees gently — no strain on the joints.</div>
+          </div>
+          <div class="stretch-card">
+            <div class="stretch-card-img"><img src="images/stretching/care-flexibility.jpg" alt="Upper-back and shoulder opening stretch" loading="lazy"></div>
+            <div class="stretch-card-title">Stiff &amp; Inflexible</div>
+            <div class="stretch-card-desc">Opens up the upper back and shoulders — ranges that are hard to reach on your own.</div>
+          </div>
+          <div class="stretch-card">
+            <div class="stretch-card-img"><img src="images/stretching/care-junior.jpg" alt="Posture-awareness stretching for a teen" loading="lazy"></div>
+            <div class="stretch-card-title">Growing Kids &amp; Teens</div>
+            <div class="stretch-card-desc">Helps young bodies notice their posture and leaves them feeling loose and light.</div>
           </div>
         </div>
         <p class="stretch-note">All stretching sessions are private and 1-on-1. After Stretching is a wellness service, not medical treatment.</p>
