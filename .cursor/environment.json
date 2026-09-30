@@ -1,0 +1,16 @@
+{
+  "name": "after-yoga-collaboration",
+  "terminals": [
+    {
+      "name": "static-server",
+      "command": "python3 -m http.server 8000",
+      "description": "Serves the static site at http://localhost:8000. Open /index.html for the main proposal deck; other decks live at /festival.html, /rental.html, /xexymix.html, /foreign-guide/index.html, /seoulforest/index.html, etc."
+    }
+  ],
+  "ports": [
+    {
+      "name": "static site",
+      "port": 8000
+    }
+  ]
+}
